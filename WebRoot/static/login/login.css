@@ -1,0 +1,596 @@
+@charset "utf-8"; 
+
+html {
+	color: #000;
+	background: #fff;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section
+	{
+	margin: 0;
+	padding: 0
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section
+	{
+	display: block
+}
+
+audio,canvas,video {
+	display: inline-block; *
+	display: inline; *
+	zoom: 1
+}
+
+body,button,input,select,textarea {
+	font: 12px/ 1.5 tahoma, arial, "Hiragino Sans GB", \5b8b\4f53
+}
+
+input,select,textarea {
+	font-size: 100%
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+th {
+	text-align: inherit
+}
+
+fieldset,img {
+	border: 0
+}
+
+iframe {
+	display: block
+}
+
+abbr,acronym {
+	border: 0;
+	font-variant: normal
+}
+
+del {
+	text-decoration: line-through
+}
+
+address,caption,cite,code,dfn,em,th,var {
+	font-style: normal;
+	font-weight: 500
+}
+
+ol,ul {
+	list-style: none
+}
+
+caption,th {
+	text-align: left
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size: 100%;
+	font-weight: 500
+}
+
+q:before,q:after {
+	content: ''
+}
+
+sub,sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline
+}
+
+sup {
+	top: -.5em
+}
+
+sub {
+	bottom: -.25em
+}
+
+a:link {
+	color: #08c
+}
+
+a:hover {
+	color: #08c;
+	text-decoration: underline
+}
+
+ins,a {
+	text-decoration: none
+}
+
+.fn-clear:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0
+}
+
+body .fn-hide {
+	display: none
+}
+
+iframe,.iframe {
+	border: 0;
+	border: 0
+}
+
+.login {
+	width: 220px;
+	padding: 0 31px 0 33px;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #a7a7a7
+}
+
+.login a {
+	color: #08c
+}
+
+.login-modern {
+	border: 1px solid transparent;
+	background: rgba(0, 0, 0, .4);
+	_background: 0;
+	_border: 0;
+	filter: progid : DXImageTransform.Microsoft.Gradient ( GradientType = 0,
+		StartColorStr = '#66000000', EndColorStr = '#66000000' )
+}
+
+:root .login-modern {
+	filter: progid : DXImageTransform.Microsoft.Gradient ( GradientType = 0,
+		StartColorStr = '#00000000', EndColorStr = '#00000000' ) \9
+}
+
+.login-position {
+position: absolute;
+right: 200px;
+top: 150px;
+}
+
+.ui-form {
+	font-size: 12px;
+	line-height: 1.5;
+	position: relative;
+	zoom: 1
+}
+
+.ui-form,.ui-form * {
+	list-style: none
+}
+
+.ui-form fieldset {
+	border: 0;
+	zoom: 1
+}
+
+.ui-form-title {
+	font: 18px/ 28px tahoma, arial, "Hiragino Sans GB", "Microsoft Yahei",
+		\5b8b\4f53;
+	font-weight: 500;
+	font-weight: bold\0; *
+	font-weight: 700;
+	padding: 26px 0 16px;
+	width: 100%;
+	color: #4d4d4d
+}
+
+.login-modern .ui-form-title {
+	color: #fff
+}
+
+.login-sso .ui-form-title {
+	text-align: center
+}
+
+.ui-form-item:after {
+	clear: both;
+	content: '.';
+	display: block;
+	height: 0;
+	visibility: hidden
+}
+
+.ui-form-item {
+	padding: 0 0 10px;
+	zoom: 1;
+	position: relative
+}
+
+.ui-form-item-30pd {
+	padding-bottom: 28px
+}
+
+.ui-form-item input {
+	vertical-align: middle
+}
+
+.ui-form-other {
+	position: relative;
+	line-height: 18px;
+	padding-top: 7px;
+	height: 18px;
+	zoom: 1;
+	_width: 100%;
+	_overflow: hidden
+}
+
+.ui-form-other-fg {
+	padding-top: 4px
+}
+
+.ui-form-other .textlink-ml20 {
+	margin-left: 20px
+}
+
+.ui-form-other .forgot {
+	position: absolute;
+	right: 0;
+	top: 5px
+}
+
+.ui-form-other .register {
+	position: absolute;
+	right: 0;
+	top: 7px;
+	font-size: 12px;
+	color: #ff9800;
+	font-weight: 700
+}
+
+.ui-form-explain {
+	display: none;
+	height: 0;
+	overflow: hidden
+}
+
+.ui-form-text {
+	position: relative;
+	line-height: 18px;
+	height: 18px;
+	font-size: 14px;
+	padding-bottom: 10px;
+	color: #4d4d4d;
+	zoom: 1
+}
+
+.login-modern .ui-form-text {
+	color: #fff;
+	zoom: 1
+}
+
+.sl-delect {
+	cursor: pointer;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 10px;
+	right: 7px;
+	display: block;
+	line-height: 20px;
+	text-align: center;
+	font-size: 18px;
+	z-index: 2;
+	background: #fff
+}
+
+.sl-delect .iconfont {
+	width: 20px;
+	height: 20px;
+	font-size: 18px;
+	color: #ababab;
+	cursor: pointer;
+	line-height: 20px
+}
+
+.sl-delect:hover .iconfont,.sl-delect-hover .iconfont {
+	color: #6d6d6d
+}
+
+.login .ui-form .object-shim-class {
+	display: inline-block;
+	width: 177px;
+	_width: 175px;
+	height: 38px;
+	border: 1px solid #a7a7a7
+}
+
+.login-modern .ui-form-item .object-shim-class {
+	display: inline-block;
+	border: 0;
+	border: 1px solid #fff
+}
+
+.ui-form .object-shim-class .ui-input {
+	_width: 155px
+}
+
+.ui-label {
+	width: 39px;
+	height: 38px;
+	display: block;
+	float: left;
+	cursor: pointer
+}
+
+.login .ui-label {
+	border-top: 1px solid #a7a7a7;
+	border-bottom: 1px solid #a7a7a7;
+	border-left: 1px solid #a7a7a7
+}
+
+.login .ui-label:hover {
+	border-top: 1px solid #6d6d6d;
+	border-bottom: 1px solid #6d6d6d;
+	border-left: 1px solid #6d6d6d
+}
+
+.ui-label .ui-icon {
+	width: 39px;
+	height: 38px;
+	display: block;
+	text-indent: -9999em;
+	overflow: hidden;
+	background-color: #aaabab;
+	background-image:
+		url(icon1.png);
+	_background-image:
+		url(icon2.png);
+	background-repeat: no-repeat
+}
+
+.ui-label:hover .ui-icon,.ui-label-hover .ui-icon {
+	cursor: pointer;
+	background-color: #6d6d6d
+}
+
+.ui-icon-userDEF {
+	background-position: -2px 5px
+}
+
+.ui-icon-securityON {
+	background-position: -42px 5px
+}
+
+.ui-icon-securityOFF {
+	background-position: -84px 5px
+}
+
+.ui-icon-securityERR {
+	background-position: -250px 6px
+}
+
+.ui-icon-checkcodeT {
+	background-position: -126px 5px
+}
+
+.ui-icon-checkcodeV {
+	background-position: -167px 5px
+}
+
+.ui-input {
+	float: left;
+	position: relative;
+	padding: 9px;
+	line-height: 20px;
+	height: 20px;
+	color: #595959;
+	font-size: 12px;
+	vertical-align: middle; *
+	vertical-align: -5px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	box-shadow: none
+}
+
+.login .ui-input {
+	border: 1px solid #a7a7a7
+}
+
+.login-modern .ui-input {
+	border: 1px solid #fff
+}
+
+.ui-input-normal	{
+	width: 159px;
+	_width: 157px
+}
+
+.ui-input-checkcode {
+	width: 69px
+}
+
+.ui-input:hover,.ui-input-hover {
+	
+}
+
+.ui-input:focus,.ui-input-focus {
+	outline-style: none;
+	color: #595959
+}
+
+.ui-input[disabled] {
+	background: #f2f2f2
+}
+
+.ui-input:disabled {
+	background: #f2f2f2
+}
+
+.placeholder {
+	color: #ccc
+}
+
+.ui-input:-ms-input-placeholder {
+	color: #ccc
+}
+
+.login .textlink,.login .textlink:hover {
+	color: #888;
+	zoom: 1
+}
+
+.login-modern .textlink,.login-modern .textlink:hover {
+	color: #fff;
+	opacity: .6;
+	filter: alpha(opacity = 60);
+	zoom: 1
+}
+
+.ui-button * {
+	margin: 0;
+	padding: 0
+}
+
+.ui-button {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	cursor: pointer;
+	width: 219px;
+	padding: 0 20px;
+	font-size: 16px;
+	line-height: 40px;
+	height: 40px;
+	color: #fff; *
+	zoom: 1; *
+	overflow: visible;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, .2);
+	font-weight: 400;
+	font-weight: bold\0; *
+	font-weight: 700;
+	_font-weight: 700;
+	background-color: #e66e1e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffa800),
+		to(#e66e1e) );
+	background: -moz-linear-gradient(top, #ffa800, #e66e1e);
+	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
+		'#ffa800', endColorstr = '#e66e1e' );
+	background: -o-linear-gradient(top, #FFA600, #FE9200);
+	background: -ms-linear-gradient(top, #ffa800 0, #e66e1e 100%);
+	background: linear-gradient(top, #ffa800, #e66e1e);
+	border: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0
+}
+
+a.ui-button {
+	color: #fff;
+	width: 179px
+}
+
+.ui-button:hover,a.ui-button:hover {
+	text-decoration: none;
+	background-color: #f48f0d;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffb400),
+		to(#f48f0d) );
+	background: -moz-linear-gradient(top, #ffb400, #f48f0d);
+	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
+		'#ffb400', endColorstr = '#f48f0d' );
+	background: -o-linear-gradient(top, #FFB91C, #FFA700);
+	background: -ms-linear-gradient(top, #ffb400 0, #f48f0d 100%);
+	background: linear-gradient(top, #ffb400, #f48f0d)
+}
+
+.ui-button-disabled,a.ui-button-disabled,.ui-button-disabled:hover,a.ui-button-disabled:hover
+	{
+	color: #999;
+	background: #cacccd;
+	filter: none;
+	cursor: default;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, .4);
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0
+}
+
+.ui-form-text .icon-sso {
+	width: 18px;
+	height: 18px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image:
+		url(icon1.png);
+	_background-image:
+		url(icon2.png);
+	background-repeat: no-repeat
+}
+
+.ui-form-text .icon-sso-taobao {
+	background-position: -383px 1px
+}
+
+.ui-form-text .icon-sso-cbu,.ui-form-text .icon-sso-icbu {
+	background-position: -383px -40px
+}
+
+.ui-form-text .icon-sso-aliyun,.ui-form-text .icon-sso-aliyunOS {
+	background-position: -383px -20px
+}
+
+.ui-form-text .login-sso-username {
+	color: #FF9700;
+	word-break: break-all;
+	word-wrap: break-word;
+	font-size: 14px;
+	font-weight: 700;
+	padding-left: 20px
+}
+
+.hidden {
+	display: none
+}
+
+html {
+	background: 0
+}
+
+/**************** 第三方登陆 *****************/
+.ui-form-other .login_text {
+	float: left;
+	font-size: 12px;
+	color: #ff9800;
+	font-weight: 700;
+}
+
+.ui-form-other .login_qq {
+	display: block;
+	float: left;
+	margin-left:5px;
+	height:16px;
+	width:16px;
+	background:url(../oauth2/qq_logo.png);
+}
+
+.ui-form-other .login_baidu {
+	display: block;
+	float: left;
+	margin-left:5px;
+	height:16px;
+	width:16px;
+	background:url(../oauth2/baidu_logo.png);
+}
+
+.ui-form-other .login_sina {
+	display: block;
+	float: left;
+	margin-left:5px;
+	height:16px;
+	width:16px;
+	background:url(../oauth2/sina_logo.png);
+}

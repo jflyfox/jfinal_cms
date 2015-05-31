@@ -1,0 +1,85 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+	<tr>
+		<td>目录名称</td>
+		<td>${flyfox.selValue(folder_json,model.folder_id)  }</td>
+	</tr>
+	<tr>
+		<td>名称</td>
+		<td>${model.title}</td>
+	</tr>
+	<tr>
+		<td>排序</td>
+		<td>${model.sort}</td>
+	</tr>
+	<tr>
+		<td>状态</td>
+		<% var status_data = '[{"key":"1","value":"显示"},{"key":"2","value":"隐藏"}]'; %>
+		<td>${flyfox.radioValue(status_data,model.status!'')  }</td> 
+	</tr>
+	<tr>
+		<td>是否评论</td>
+		<% var is_comment_data = '[{"key":"1","value":"是"},{"key":"2","value":"否"}]'; %>
+		<td>${flyfox.radioValue(is_comment_data,model.is_comment!'')  }</td> 
+	</tr>
+	<tr>
+		<td>是否推荐</td>
+		<td>
+		<% var is_recommend_data = '[{"key":"1","value":"是"},{"key":"2","value":"否"}]'; %>
+		${flyfox.radioValue(is_recommend_data,model.is_recommend!'2')  }
+		</td>
+	</tr>
+	<tr>
+		<td>类型</td>
+		<td>${flyfox.dictValue(model.type )  }</td>
+			</tr>
+	<tr>
+	<tr>
+		<td>图片</td>
+		<td>
+			<% if(!strutil.isEmpty(model.image_url)){ %>
+				<a href="download/image_url/${model.image_url }" target="_blank" style="text-decoration:none;">
+					<img alt="图片" title="点击浏览" src="download/image_url/${model.image_url }" width="40" height="40">
+				</a>
+				<br />
+			<% } %>
+		</td>
+	</tr>
+	<tr>
+		<td>发布时间</td>
+		<td>${model.publish_time}</td>
+	</tr>
+	<tr>
+		<td>发布者</td>
+		<td>${model.publish_user}</td>
+	</tr>
+	<tr>
+		<td>开始时间</td>
+		<td>${model.start_time}</td>
+	</tr>
+	<tr>
+		<td>结束时间</td>
+		<td>${model.end_time}</td>
+	</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

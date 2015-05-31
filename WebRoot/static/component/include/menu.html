@@ -1,0 +1,66 @@
+<style>
+<!--
+body { padding-top: 60px; }
+-->
+</style>
+<script type="text/javascript">
+	function showMenu(id){
+		$("#"+id).addClass('active');
+	}
+</script>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Home</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<% for(item in session.menu[0]) { %>
+			<% if(session.menu[item.id].~size > 0) { %>
+			
+				<li id="page_${item.urlkey}" role="presentation" class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+				      ${item.name}<span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu" role="menu">
+				<%  for(item2 in session.menu[item.id]) { %>
+					<li id="page_${item2.urlkey}"><a role="menuitem"  href="${item2.url}">${item2.name}</a></li>
+				<% } %>
+					</ul>
+		  		</li>
+			<% } else { %>
+				<li id="page_${item.urlkey}"><a href="${item.url}">${item.name}</a></li>
+			<% } %>
+		<% } %>
+      
+      	
+      	<%  /*
+		<li id="page_contact"><a href="contact/list">联系人管理</a></li>
+		
+		<li id="page_system" role="presentation" class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+		      系统管理<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu" role="menu">
+		    	<li id="page_department"><a role="menuitem" href="department/list">部门管理</a></li>
+				<li id="page_user"><a role="menuitem" href="user/list">用户管理</a></li>
+				<li id="page_role"><a role="menuitem" href="role/list">角色管理</a></li>
+				<li id="page_menu"><a role="menuitem" href="menu/list">菜单管理</a></li>
+		     	<li id="page_dict"><a role="menuitem" href="dict/list">数据字典</a></li>
+		    </ul>
+  		</li>
+  		*/ %>
+  		
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right" style="margin-right: 2%">
+        <li><p class="navbar-text">${session.session_user.realname!session.session_user.username }，您好</p></li>
+        <li><button type="button" onclick="window.location.href='logout'" class="btn btn-default navbar-btn">退出</button></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

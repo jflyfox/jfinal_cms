@@ -1,0 +1,173 @@
+﻿.pager
+{
+    width: 100%;
+    height: 48px;
+    padding: 0;
+    margin: 0;
+    padding-top: 10px;
+}
+
+.pager div.short
+{
+    float: right;
+    margin: 0;
+    padding: 0;
+    margin-right: 10px;
+    width: 100px;
+}
+.pager div.short input
+{
+    width: 28px;
+    height: 28px;
+    border: none;
+    margin-left: 8px;
+    padding-left: 2px;
+    float: left;
+}
+.pager ul
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+.pager ul li
+{
+    display: inline;
+    margin-left: 2px;
+}
+.pager ul li a
+{
+    text-decoration: none;
+    display: inline-table;
+    width: 22px;
+    height: 20px;
+    text-align: center;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+.pager span
+{
+	margin-top:5px;
+    margin-left: 4px;
+    color: White;
+    float: left;
+    font-size: 16px;
+}
+.pager .btn
+{
+    display: block;
+    width: 35px;
+    height: 30px;
+    text-align: center;
+    float: left;
+    padding: 0;
+    margin: 0;
+    margin-left: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.pager .disabled
+{
+    color: #A0A0A0 !important;
+    text-shadow: 1px 1px 1px #FFFFFF;
+}
+/*green*/.green
+{
+    background-color: #4f7305;
+}
+.green.normal
+{
+    background-color: #588500;
+    color: White;
+    border: solid 1px #5f9000;
+}
+.green.active
+{
+    background-color: #344C00;
+    color: #F8EB00;
+    border: solid 1px #5f9000;
+}
+.pager.green .btn
+{
+    background-color: #588500;
+    color: White;
+    border: solid 1px #5f9000;
+}
+/*black*/.black
+{
+    background-color: #202020;
+}
+.black.normal
+{
+    background-color: #1d1d1d;
+    color: #B0D551;
+    border: solid 1px #000;
+}
+.black.active
+{
+    background-color: #333333;
+    color: White;
+    border: solid 1px #000;
+}
+.pager.black .btn
+{
+    background-color: #1d1d1d;
+    color: White;
+    border: solid 1px #000;
+}
+/*red*/.red
+{
+    background-color: #D50B07;
+}
+.red.normal
+{
+    background-color: #E71C18;
+    color: White;
+    border: solid 1px #F82723;
+}
+.red.active
+{
+    background-color: #C00D09;
+    color: White;
+    border: solid 1px #A90B08;
+}
+.pager.red .btn
+{
+    background-color: #E71C18;
+    color: White;
+    border: solid 1px #F82723;
+}
+/*blue*/.blue
+{
+    background-color: #76D3FF;
+}
+.blue.normal
+{
+    background-color: #00ABFE;
+    color: White;
+    border: solid 1px #009BE5;
+}
+.blue.active
+{
+    background-color: #0076B2;
+    color: White;
+    border: solid 1px #009BE5;
+}
+.pager.blue .btn
+{
+    background-color: #00ABFE;
+    color: White;
+    border: solid 1px #009BE5;
+}

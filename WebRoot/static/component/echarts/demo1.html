@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script language="javascript" type="text/javascript" src="../jquery/jquery-1.8.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="echarts-plain.js"></script>
+<script type="text/javascript">
+$(function() {
+
+	/**
+	 * echarts
+	 */
+	var myChart = echarts.init(document.getElementById('echarts'));
+
+	myChart.showLoading({
+	    text: '正在努力的读取数据中...'    //loading话术
+	});
+
+	// ajax return
+	myChart.hideLoading();
+
+	// 图表使用-------------------
+	option = {
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data:['金额']
+    },
+    toolbox: {
+        show : false,
+        feature : {
+            mark : true,
+            dataView : {readOnly: false},
+            magicType:['line', 'bar'],
+            restore : true,
+            saveAsImage : true
+        }
+    },
+    calculable : false,
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    xAxis : [
+        {
+            type : 'category',
+            data : ["预算-支出","预算","支出","收入"]
+        }
+    ],
+    series : [
+        {
+            name:'金额',
+            type:'bar',
+            stack: '总量',
+            itemStyle : { normal: {label : {show: true, position: 'inside'}}},
+            data:[-10000,40000,-50000,100000]
+        }
+    ]
+};
+
+	myChart.setOption(option);
+
+});
+
+</script>
+</head>
+<body>
+	<div id="echarts" style="height:700px;border:1px solid #ccc;padding:10px;"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<style>
+<!--
+body { padding-top: 60px; }
+-->
+</style>
+<script type="text/javascript">
+	function showMenu(id){
+		$("#"+id).addClass('active');
+	}
+</script>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Home</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<li id="page_folder"><a href="folder/list">目录管理</a></li>
+      	<li id="page_article"><a href="article/list">文章管理</a></li>
+		<li id="page_contact"><a href="contact/list">联系人管理</a></li>
+		<li id="page_friendlylink"><a href="friendlylink/list">友情链接</a></li>
+		<li id="page_dict"><a href="dict/list">数据字典</a></li>
+		<li id="page_user"><a href="user/list">用户管理</a></li>
+		<li id="page_pageview"><a href="pageview">访问量统计</a></li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right" style="margin-right: 2%">
+        <li><p class="navbar-text">${session.session_user.realname!session.session_user.username }，您好</p></li>
+        <li><button type="button" onclick="window.location.href='logout'" class="btn btn-default navbar-btn">退出</button></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

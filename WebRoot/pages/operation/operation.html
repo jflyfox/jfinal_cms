@@ -1,0 +1,56 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<script type="text/javascript">
+jQuery(function($) {
+	//显示Menu索引
+	showMenu('page_system');
+	showMenu('page_operation');
+});
+
+function updateCache(){
+	jQuery.ajax({
+		type:'POST',
+		url:'operation/updateCache',
+		success:function(data){
+			if(data.status==1){
+				Alert('更新成功');
+			} else {
+				Alert('更新失败');
+			}
+		},
+		error:function(html){
+			var flag = (typeof console != 'undefined');
+			if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+			Alert("服务器忙，提交数据失败，请联系管理员！");
+		}
+	});
+}
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	
+	<!-- 菜单 -->
+	<% include("/static/component/include/menu.html"){} %>
+		
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+	  	<div style="margin-top: 20px;">
+	  	<span style="color: green;">更新索引：更新用户回复未读数、前台文章展示、前台目录缓存</span>
+	  	</div>
+	  	<div style="margin-top: 10px;">
+		<button class="btn btn-primary" onclick="updateCache();return false;">更新索引</button>
+		</div>
+	  </div>
+	  
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+DIRECTIVE SAFE_OUTPUT_CLOSE;
+<%} %>

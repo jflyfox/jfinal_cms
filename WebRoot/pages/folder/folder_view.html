@@ -1,0 +1,56 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+	<tr>
+		<td>名称</td>
+		<td>${model.name}</td>
+	</tr>
+	<tr>
+		<td>排序</td>
+		<td>${model.sort}</td>
+	</tr>
+	<tr>
+		<td>状态</td>
+		<% var status_data = '[{"key":"1","value":"显示"},{"key":"2","value":"隐藏"}]'; %>
+		<td>${flyfox.radioValue(status_data,model.status!'')  }</td> 
+	</tr>
+	<tr>
+		<td>类型</td>
+		<td>${flyfox.dictValue(model.type )  }</td>
+	</tr>
+	<tr>
+		<td>地址</td>
+		<td>${model.jump_url}</td>
+	</tr>
+	<tr>
+		<td>说明</td>
+		<td title="${model.content}">
+			<% if (strutil.length(model.content) > 6) { %>
+				${strutil.subStringTo(model.content, 0, 6)}...
+			<%	} else {%>
+				${model.content }
+			<% } %>
+		</td>
+	</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id!'0'});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

@@ -1,0 +1,140 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<% include("/static/component/include/my97.html"){} %>
+
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			id = id || '0';
+			var url = 'article/save/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal"
+		enctype="multipart/form-data" role="form">
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<table class="table">
+		<% // 列表头部 %>
+			<tr>
+				<td>目录${folder_id}</td>
+				<td>
+					<select name="model.folder_id" class="form-control" valid="vselect" validname="目录">
+					<option value="-1">--请选择--</option>
+					${flyfox.sel(folder_json,model.folder_id!'')  }
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>名称</td>
+				<td>
+						<input class="form-control" type="text" name="model.title" value="${model.title}" 
+						valid="vtext" validname="名称" />
+				</td>
+			</tr>
+					<tr>
+				<td>排序</td>
+				<td>
+						<input class="form-control" type="text" name="model.sort" value="${model.sort!'10'}" 
+						valid="vnum_y" validname="排序" />
+				</td>
+			</tr>
+			<tr>
+				<td>状态</td>
+				<td>
+						<% var status_data = '[{"key":"1","value":"显示"},{"key":"2","value":"隐藏"}]'; %>
+						${flyfox.radio(status_data,'model.status',model.status!'1')  }
+				</td>
+			</tr>
+			<tr>
+				<td>是否评论</td>
+				<td>
+						<% var is_comment_data = '[{"key":"1","value":"是"},{"key":"2","value":"否"}]'; %>
+						${flyfox.radio(is_comment_data,'model.is_comment',model.is_comment!'1')  }
+				</td>
+			</tr>
+			<tr>
+				<td>是否推荐</td>
+				<td>
+						<% var is_recommend_data = '[{"key":"1","value":"是"},{"key":"2","value":"否"}]'; %>
+						${flyfox.radio(is_recommend_data,'model.is_recommend',model.is_recommend!'2')  }
+				</td>
+			</tr>
+			<tr>
+				<td>类型</td>
+				<td>
+					<select name="model.type" class="form-control" >
+					${flyfox.dictSelect('articleType' , model.type!'11')  }
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>图片
+					<% if(!strutil.isEmpty(model.image_url)){ %>
+						<a href="download/image_url/${model.image_url }" target="_blank" style="text-decoration:none;">
+							<img alt="图片" title="点击浏览" src="download/image_url/${model.image_url }" width="40" height="40">
+						</a>
+					<% } %></td>
+				<td>
+					<input type="file" accept="image/*" name="model.image_url" />
+				</td>
+			</tr>
+					<tr>
+				<td>发布时间</td>
+				<td>
+						<input class="form-control" type="text" name="model.publish_time" 
+						value="${model.publish_time!flyfox.getNow()}"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+				</td>
+			</tr>
+					<tr>
+				<td>发布者</td>
+				<td>
+					<% if(model.id!0 > 0) { %>
+						<input class="form-control" type="text" name="model.publish_user" value="${model.publish_user}"  />
+					<% } else { %>
+						<input class="form-control" type="text" name="model.publish_user" value="${session.session_user.realname!session.session_user.username }"  />
+					<% } %>
+				</td>
+			</tr>
+					<tr>
+				<td>开始时间</td>
+				<td>
+						<input class="form-control" type="text" name="model.start_time" 
+						value="${model.start_time}"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"  />
+				</td>
+			</tr>
+					<tr>
+				<td>结束时间</td>
+				<td>
+						<input class="form-control" type="text" name="model.end_time" 
+						value="${model.end_time}"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"  />
+				</td>
+			</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id!'0'});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+DIRECTIVE SAFE_OUTPUT_CLOSE;
+<%} %>
