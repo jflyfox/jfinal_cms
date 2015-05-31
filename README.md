@@ -1,6 +1,10 @@
 # 门头沟信息网 mtg
 ------------------------
 
+#### 网站地址：[http://www.jflyfox.com/mtg](http://www.jflyfox.com/mtg) ####
+#### 管理地址：http://yourip/admin  ####
+#### 测试账号: admin/admin123 或 test/123456  ####
+
 # 一、平台部署说明 #
 ------------------------
 > 1. 数据库配置文件：src/conf/db.properties
