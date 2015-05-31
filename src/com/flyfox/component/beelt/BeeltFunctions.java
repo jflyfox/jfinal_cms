@@ -2,7 +2,6 @@ package com.flyfox.component.beelt;
 
 import java.util.Date;
 
-import com.flyfox.component.util.JFlyFoxUtils;
 import com.flyfox.jfinal.template.TemplateFunctions;
 import com.flyfox.modules.article.TbArticle;
 import com.flyfox.modules.front.service.FrontCacheService;
@@ -51,30 +50,6 @@ public class BeeltFunctions extends TemplateFunctions {
 	public static int countComment(int articleId) {
 		TbArticle article = new FrontCacheService().getArticleCount(articleId);
 		return article == null ? 0 : article.getCountComment();
-	}
-
-	/**
-	 * 获取菜单，数字和字符串转换
-	 * 
-	 * 2015年5月26日 上午8:57:48 flyfox 330627517@qq.com
-	 * 
-	 * @param key
-	 * @return
-	 */
-	public static String getMenu(String key) {
-		return JFlyFoxUtils.getMenu(key);
-	}
-
-	/**
-	 * 获取菜单，数字和字符串转换
-	 * 
-	 * 2015年5月26日 上午8:57:48 flyfox 330627517@qq.com
-	 * 
-	 * @param key
-	 * @return
-	 */
-	public static String getMenu(int key) {
-		return JFlyFoxUtils.getMenu(key + "");
 	}
 
 	/**

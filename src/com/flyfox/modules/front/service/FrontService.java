@@ -10,42 +10,21 @@ import com.flyfox.modules.folder.FolderService;
 import com.flyfox.modules.folder.TbFolder;
 import com.flyfox.modules.front.Home;
 import com.flyfox.modules.tags.TbTags;
-import com.flyfox.util.NumberUtils;
 import com.jfinal.plugin.activerecord.Page;
 
 public class FrontService extends BaseService {
 
 	public void menu(BaseController controller) {
-		String folderStr = controller.getPara();
-		Integer folderId = TbFolder.ROOT;
-		if (folderStr != null) {
-			folderId = NumberUtils.parseInt(JFlyFoxUtils.getMenu(folderStr));
-		}
+		Integer folderId = controller.getParaToInt();
 		if (folderId == null || folderId <= 0) {
 			folderId = TbFolder.ROOT;
 		}
 		// 活动目录
 		controller.setAttr("folders_selected", folderId);
 
-		if (folderId == JFlyFoxUtils.MENU_HOME) {
+		if (folderId == TbFolder.ROOT) {
 			home(controller);
-		} else if (folderId == JFlyFoxUtils.MENU_NEWS) {
-			otherMenu(controller, folderId);
-		} else if (folderId == JFlyFoxUtils.MENU_FOOD) {
-			otherMenu(controller, folderId);
-		} else if (folderId == JFlyFoxUtils.MENU_TRAVEL) {
-			otherMenu(controller, folderId);
-		} else if (folderId == JFlyFoxUtils.MENU_EDUCATION) {
-			otherMenu(controller, folderId);
-		} else if (folderId == JFlyFoxUtils.MENU_PARK) {
-			otherMenu(controller, folderId);
-		} else if (folderId == JFlyFoxUtils.MENU_MARKET) {
-			otherMenu(controller, folderId);
-		} else if (folderId == JFlyFoxUtils.MENU_HOUSE) {
-			otherMenu(controller, folderId);
-		} else if (folderId == JFlyFoxUtils.MENU_OTHER) {
-			otherMenu(controller, folderId);
-		} else if (folderId == JFlyFoxUtils.MENU_ABOUT) {
+		} else if (folderId == 90) {
 			controller.redirect("/front/about");
 		} else {
 			// 其他
@@ -78,7 +57,7 @@ public class FrontService extends BaseService {
 		// seo：title优化
 		controller.setAttr(JFlyFoxUtils.TITLE_ATTR, folder.getStr("name") + " - " + JFlyFoxCache.getHeadTitle());
 
-		controller.renderAuto(Home.PATH + JFlyFoxUtils.getMenu(folderId + "") + ".html");
+		controller.renderAuto(Home.PATH + "common_menu.html");
 	}
 
 	/**
@@ -90,24 +69,23 @@ public class FrontService extends BaseService {
 	 */
 	protected void home(BaseController controller) {
 		// 首页图片 13
-		Page<TbArticle> topPics = new FrontCacheService().getArticle(new Paginator(1, 4), JFlyFoxUtils.MENU_TOPPIC);
+		Page<TbArticle> topPics = new FrontCacheService().getArticle(new Paginator(1, 4), 13);
 		controller.setAttr("topPics", topPics);
 
 		// 新闻 2
-		Page<TbArticle> news = new FrontCacheService().getArticle(new Paginator(1, 10), JFlyFoxUtils.MENU_NEWS);
+		Page<TbArticle> news = new FrontCacheService().getArticle(new Paginator(1, 10), 2);
 		controller.setAttr("news", news);
 
 		// 美食 3
-		Page<TbArticle> foods = new FrontCacheService().getArticle(new Paginator(1, 10), JFlyFoxUtils.MENU_FOOD);
+		Page<TbArticle> foods = new FrontCacheService().getArticle(new Paginator(1, 10), 3);
 		controller.setAttr("foods", foods);
 
 		// 旅游 4
-		Page<TbArticle> travels = new FrontCacheService().getArticle(new Paginator(1, 9), JFlyFoxUtils.MENU_TRAVEL);
+		Page<TbArticle> travels = new FrontCacheService().getArticle(new Paginator(1, 9), 4);
 		controller.setAttr("travels", travels);
 
 		// 教育 5
-		Page<TbArticle> educations = new FrontCacheService().getArticle(new Paginator(1, 10),
-				JFlyFoxUtils.MENU_EDUCATION);
+		Page<TbArticle> educations = new FrontCacheService().getArticle(new Paginator(1, 10), 5);
 		controller.setAttr("educations", educations);
 
 		// seo：title优化
