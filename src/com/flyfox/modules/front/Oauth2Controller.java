@@ -133,6 +133,7 @@ public class Oauth2Controller extends BaseController {
 			user.set("realname", username);
 			user.set("password", JFlyFoxUtils.getDefaultPassword());
 			user.set("usertype", 4); // 第三方用户
+			user.set("departid", JFlyFoxUtils.DEPART_THIRD_ID);
 			user.set("state", 1);
 			user.set("thirdid", openid);
 			user.put("create_time", getNow());

@@ -5,6 +5,22 @@ import com.flyfox.util.encrypt.DESUtils;
 public class JFlyFoxUtils {
 
 	public static final String TITLE_ATTR = "HEAD_TITLE";
+	
+	/**
+	 * 承建部门ID
+	 */
+	public static final int DEPART_BUILD_ID = 1;
+
+	/**
+	 * 注册用户部门ID
+	 */
+	public static final int DEPART_REGIST_ID = 2;
+
+	/**
+	 * 第三方Oauth2部门ID
+	 */
+	public static final int DEPART_THIRD_ID = 3;
+	
 	/**
 	 * session唯一Key
 	 */

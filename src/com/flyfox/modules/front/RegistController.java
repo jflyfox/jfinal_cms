@@ -86,7 +86,7 @@ public class RegistController extends BaseController {
 		user.set("username", key);
 		user.set("password", JFlyFoxUtils.passwordEncrypt(password));
 		user.set("usertype", 3);
-		user.set("departid", 2);
+		user.set("departid", JFlyFoxUtils.DEPART_REGIST_ID);
 		user.put("create_time", getNow());
 		user.put("create_id", 1);
 		user.save();

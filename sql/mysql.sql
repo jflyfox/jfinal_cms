@@ -300,7 +300,8 @@ CREATE TABLE `tb_contact` (
  */
 -- 部门
 INSERT INTO `sys_department` VALUES ('1', '系统承建单位', '99', 'system', '15888888888', '2016-06-06 06:06:06', '1');
-INSERT INTO `sys_department` VALUES ('2', '注册用户', '97', '无人', '15888888888', '2015-04-28 22:39:34', '1');
+INSERT INTO `sys_department` VALUES ('2', '注册用户', '88', '无人', '15888888888', '2015-04-28 22:39:34', '1');
+INSERT INTO `sys_department` VALUES ('3', '第三方用户', '90', '无', null, '2015-06-01 12:39:41', '1');
 
 -- 用户
 INSERT INTO `sys_user` VALUES ('1', 'admin', 'LHmWhtwF/dGhJxqKJ8QXRg==', '系统管理员', 1,1, 0, null, null, null, null, null, null, null, '2016-06-06 06:06:06',1);
