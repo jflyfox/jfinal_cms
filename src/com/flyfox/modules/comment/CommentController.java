@@ -24,6 +24,7 @@ public class CommentController extends BaseController {
 			// 查询条件
 			sql.whereLike("content", model.getStr("content"));
 		}
+		sql.append(" order by t.id desc ");
 
 		Page<TbComment> page = TbComment.dao.paginate(getPaginator(), "select t.*,a.title articleName ", //
 				sql.toString().toString());
