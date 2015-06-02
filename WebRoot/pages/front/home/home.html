@@ -49,7 +49,13 @@ var bodyContent = {
 					  <div class="carousel-inner" role="listbox">
 						<% for(item in topPics.list){ %>
 							<div style="height: 450px;" class="item ${itemLP.index==1?'active':''}">
-							  <img src="download/image_url/${item.image_url }" alt="${item.title}">
+							  	<% 
+							  	var imageUrl = item.image_net_url;
+							  	if(strutil.isEmpty(imageUrl)) { 
+							  		imageUrl = 'download/image_url/'+item.image_url;
+							  	} 
+							  	%>
+							   	<img src="${imageUrl}" alt="${item.title}">
 							  <div class="carousel-caption">
 								<h4></h4>
 								<p>${item.title}</p>
