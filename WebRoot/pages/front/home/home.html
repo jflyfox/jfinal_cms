@@ -140,7 +140,13 @@ var bodyContent = {
 			<div class="col-sm-6 col-md-4">
 		        <div class="thumbnail">
 		          <a href="front/article/${item.id}.html" target="_blank">
-		          <img alt="${item.title}" src="download/image_url/${item.image_url }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+		          	<% 
+				  	var imageUrl = item.image_net_url;
+				  	if(strutil.isEmpty(imageUrl)) { 
+				  		imageUrl = 'download/image_url/'+item.image_url;
+				  	} 
+				  	%>
+		          <img alt="${item.title}" src="${imageUrl }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 		          </a>
 		          <div class="caption">
 		            <a href="front/article/${item.id}.html" target="_blank">${item.title}</a>
@@ -187,7 +193,13 @@ var bodyContent = {
 			  	 <div class="col-md-6">
 					<div class="thumbnail">
 					  <a href="front/article/${item.id}.html" target="_blank">
-					  <img alt="${item.title}" src="download/image_url/${item.image_url }" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
+					 	<% 
+					  	var imageUrl = item.image_net_url;
+					  	if(strutil.isEmpty(imageUrl)) { 
+					  		imageUrl = 'download/image_url/'+item.image_url;
+					  	} 
+					  	%>
+					  <img alt="${item.title}" src="${imageUrl }" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
 					  </a>
 					  <div class="caption">
 						<a href="front/article/${item.id}.html" target="_blank">${item.title}</a>
@@ -234,7 +246,13 @@ var bodyContent = {
 			  	 <div class="col-md-6">
 					<div class="thumbnail">
 					  <a href="front/article/${item.id}.html" target="_blank">
-					  <img alt="${item.title}" src="download/image_url/${item.image_url }" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
+					  	<% 
+					  	var imageUrl = item.image_net_url;
+					  	if(strutil.isEmpty(imageUrl)) { 
+					  		imageUrl = 'download/image_url/'+item.image_url;
+					  	} 
+					  	%>
+					  <img alt="${item.title}" src="${imageUrl }" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
 					  </a>
 					  <div class="caption">
 						<a href="front/article/${item.id}.html" target="_blank">${item.title}</a>
