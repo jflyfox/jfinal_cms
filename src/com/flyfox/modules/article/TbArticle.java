@@ -22,6 +22,7 @@ public class TbArticle extends BaseModel<TbArticle> {
 	private String IS_RECOMMEND = "is_recommend"; // 是否推荐：2 否 1 是
 	private String SORT = "sort"; // 排序
 	private String IMAGE_URL = "image_url"; // 图片路径
+	private String IMAGE_NET_URL = "image_net_url"; // 网络图片路径
 	private String PUBLISH_TIME = "publish_time"; // 发布时间
 	private String PUBLISH_USER = "publish_user"; // 发布者
 	private String START_TIME = "start_time"; // 开始时间
@@ -136,6 +137,15 @@ public class TbArticle extends BaseModel<TbArticle> {
 
 	public java.lang.String getImageUrl() {
 		return get(IMAGE_URL);
+	}
+	
+	public TbArticle setImageNetUrl(java.lang.String value) {
+		set(IMAGE_NET_URL, value);
+		return this;
+	}
+
+	public java.lang.String getImageNetUrl() {
+		return get(IMAGE_NET_URL);
 	}
 
 	public TbArticle setPublishTime(java.lang.String value) {
