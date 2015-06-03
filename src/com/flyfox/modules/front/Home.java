@@ -19,7 +19,7 @@ public class Home extends BaseController {
 	public static final String PATH = "/pages/front/home/";
 
 	/**
-	 * 登陆
+	 * 登录
 	 */
 	public void login() {
 		setAttr("pre_page", getPrePage());

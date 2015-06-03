@@ -32,7 +32,7 @@ public class RegistController extends BaseController {
 		setAttr("pre_page", prePage);
 
 		SysUser user = getSessionAttr(Attr.SESSION_NAME);
-		// 如果已经登陆了~您就别注册啦
+		// 如果已经登录了~您就别注册啦
 		if (user != null) {
 			redirect(prePage);
 		} else {

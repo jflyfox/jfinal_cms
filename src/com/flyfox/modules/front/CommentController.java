@@ -23,7 +23,7 @@ public class CommentController extends BaseController {
 		SysUser user = getSessionAttr(Attr.SESSION_NAME);
 
 		if (user == null) {
-			json.put("msg", "没有登陆，无法进行删除！");
+			json.put("msg", "没有登录，无法进行删除！");
 			renderJson(json.toJSONString());
 			return;
 		}
@@ -61,7 +61,7 @@ public class CommentController extends BaseController {
 		SysUser user = getSessionAttr(Attr.SESSION_NAME);
 
 		if (user == null) {
-			json.put("msg", "没有登陆，无法进行评论！");
+			json.put("msg", "没有登录，无法进行评论！");
 			renderJson(json.toJSONString());
 			return;
 		}
@@ -100,7 +100,7 @@ public class CommentController extends BaseController {
 
 		SysUser user = getSessionAttr(Attr.SESSION_NAME);
 		if (user == null) {
-			json.put("msg", "没有登陆，无法获取评论数！");
+			json.put("msg", "没有登录，无法获取评论数！");
 			renderJson(json.toJSONString());
 			return;
 		}
@@ -108,7 +108,7 @@ public class CommentController extends BaseController {
 		// 获取未读数量
 		Object cnt = new CommentService().getCommentUnreadCount(user.getUserid());
 		if (cnt == null) {
-			json.put("msg", "没有登陆，评论数获取失败！");
+			json.put("msg", "没有登录，评论数获取失败！");
 			renderJson(json.toJSONString());
 			return;
 		}

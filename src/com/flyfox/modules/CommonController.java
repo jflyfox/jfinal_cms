@@ -49,7 +49,7 @@ public class CommonController extends BaseController {
 	}
 
 	/**
-	 * 登陆
+	 * 登录
 	 * 
 	 * @author flyfox 2013-11-11
 	 */
