@@ -34,7 +34,7 @@ var bodyContent = {
 				<td>
 					<select name="model.folder_id" class="form-control" valid="vselect" validname="目录">
 					<option value="-1">--请选择--</option>
-					${flyfox.sel(folder_json,model.folder_id!'')  }
+					${selectFolder }
 					</select>
 				</td>
 			</tr>
@@ -55,22 +55,34 @@ var bodyContent = {
 			<tr>
 				<td>状态</td>
 				<td>
-						<% var status_data = '[{"key":"1","value":"显示"},{"key":"2","value":"隐藏"}]'; %>
-						${flyfox.radio(status_data,'model.status',model.status!'1')  }
+					<label class="radio-inline">
+					  <input type="radio" name="model.status" id="" value="2"  ${model.status=='2'?"checked":"" } > 隐藏
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="model.status" id="" value="1"  ${model.status!='2'?"checked":"" } > 显示
+					</label>
 				</td>
 			</tr>
 			<tr>
 				<td>是否评论</td>
 				<td>
-						<% var is_comment_data = '[{"key":"1","value":"是"},{"key":"2","value":"否"}]'; %>
-						${flyfox.radio(is_comment_data,'model.is_comment',model.is_comment!'1')  }
+					<label class="radio-inline">
+					  <input type="radio" name="model.is_comment" id="" value="1"  ${model.is_comment!=2?"checked":"" } > 是
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="model.is_comment" id="" value="2"  ${model.is_comment==2?"checked":"" } > 否
+					</label>
 				</td>
 			</tr>
 			<tr>
 				<td>是否推荐</td>
 				<td>
-						<% var is_recommend_data = '[{"key":"1","value":"是"},{"key":"2","value":"否"}]'; %>
-						${flyfox.radio(is_recommend_data,'model.is_recommend',model.is_recommend!'2')  }
+					<label class="radio-inline">
+					  <input type="radio" name="model.is_recommend" id="" value="1"  ${model.is_recommend!=2?"checked":"" } > 是
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="model.is_recommend" id="" value="2"  ${model.is_recommend==2?"checked":"" } > 否
+					</label>
 				</td>
 			</tr>
 			<tr>
@@ -91,7 +103,7 @@ var bodyContent = {
 				<td>
 					<input type="text" class="form-control" name="model.image_net_url" 
 						value="${model.image_net_url}" placeholder="网络图片url" />
-					<input type="file" accept="image/*" name="model.image_url" />
+					<input type="file" accept="image/*" class="form-control" name="model.image_url" />
 				</td>
 			</tr>
 					<tr>

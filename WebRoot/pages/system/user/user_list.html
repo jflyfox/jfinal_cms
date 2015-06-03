@@ -70,7 +70,7 @@ var bodyContent = {
 			<%  //查询列表 %>
 			<div class="form-group">
 					<input class="form-control" type="text" name="attr.username" value="${attr.username!''}" 
-						placeholder="请输入登录名" required='required' />
+						placeholder="请输入登陆名" required='required' />
 			</div>
 				<div class="form-group">
 					<input class="form-control" type="text" name="attr.realname" value="${attr.realname!''}" 
@@ -114,9 +114,9 @@ var bodyContent = {
 					<th>序号</th>
 					<%  // 列表头部 %>
 					<th>部门</th> 
-					<th>登录名</th> 
+					<th>登陆名</th> 
 					<th>真实姓名</th> 
-					<th>状态</th> 
+					<th>类型</th> 
 					<th>Email</th> 
 					<th>手机号</th> 
  
@@ -131,8 +131,22 @@ var bodyContent = {
 					<td>${item.departname}</td> 
 					<td>${item.username}</td> 
 					<td>${item.realname}</td> 
-					<% var usertype_data = '[{"key":"1","value":"管理员"},{"key":"2","value":"普通用户"},{"key":"3","value":"前台用户"},{"key":"4","value":"第三方用户"},{"key":"9","value":"其他用户"}]'; %>
-					<td>${flyfox.selValue(usertype_data,item.usertype!'')  }
+					<td>
+					<% if(item.usertype==1) { %>
+					管理员
+					<%	} %>
+					<% if(item.usertype==2) { %>
+					普通用户
+					<%	} %>
+					<% if(item.usertype==3) { %>
+					前台用户
+					<%	} %>
+					<% if(item.usertype==4) { %>
+					第三方用户
+					<%	} %>
+					<% if(item.usertype==9) { %>
+					其他用户
+					<%	} %>
 					</td>
 					<td>${item.email}</td> 
 					<td>${item.tel}</td> 

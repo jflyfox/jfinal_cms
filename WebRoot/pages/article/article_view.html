@@ -11,7 +11,7 @@ var bodyContent = {
 		<%  // 列表头部 %>
 	<tr>
 		<td>目录名称</td>
-		<td>${flyfox.selValue(folder_json,model.folder_id)  }</td>
+		<td>${model.folderName  }</td>
 	</tr>
 	<tr>
 		<td>名称</td>
@@ -23,19 +23,35 @@ var bodyContent = {
 	</tr>
 	<tr>
 		<td>状态</td>
-		<% var status_data = '[{"key":"1","value":"显示"},{"key":"2","value":"隐藏"}]'; %>
-		<td>${flyfox.radioValue(status_data,model.status!'')  }</td> 
+		<td>
+			<% if(model.status=='2') { %>
+			隐藏
+			<%	} %>
+			<% if(model.status=='1') { %>
+			显示
+			<%	} %>
+		</td> 
 	</tr>
 	<tr>
 		<td>是否评论</td>
-		<% var is_comment_data = '[{"key":"1","value":"是"},{"key":"2","value":"否"}]'; %>
-		<td>${flyfox.radioValue(is_comment_data,model.is_comment!'')  }</td> 
+		<td>
+			<% if(model.is_comment==2) { %>
+			否
+			<%	} %>
+			<% if(model.is_comment==1) { %>
+			是
+			<%	} %>
+		</td> 
 	</tr>
 	<tr>
 		<td>是否推荐</td>
 		<td>
-		<% var is_recommend_data = '[{"key":"1","value":"是"},{"key":"2","value":"否"}]'; %>
-		${flyfox.radioValue(is_recommend_data,model.is_recommend!'2')  }
+			<% if(model.is_recommend==2) { %>
+			否
+			<%	} %>
+			<% if(model.is_recommend==1) { %>
+			是
+			<%	} %>
 		</td>
 	</tr>
 	<tr>

@@ -69,8 +69,8 @@ var bodyContent = {
 				<div class="form-group">
 					<select name="attr.status" class="form-control" >
 					<option value="-1">--请选择--</option>
-					<% var status_data = '[{"key":"1","value":"显示"},{"key":"2","value":"隐藏"}]'; %>
-					${flyfox.sel(status_data,attr.status!'')  }
+					<option value="1" ${attr.status=='1'?'selected':''}>显示</option>
+					<option value="2" ${attr.status=='2'?'selected':''}>隐藏</option>
 					</select>
 			</div>
 	 
@@ -111,8 +111,14 @@ var bodyContent = {
 					<td>${item.id}</td> 
 					<td>${item.name}</td> 
 					<td>${item.sort}</td>
-					<% var status_data = '[{"key":"1","value":"显示"},{"key":"2","value":"隐藏"}]'; %>
-					<td>${flyfox.radioValue(status_data,item.status!'')  }</td> 
+					<td>
+						<% if(item.status=='2') { %>
+						隐藏
+						<%	} %>
+						<% if(item.status=='1') { %>
+						显示
+						<%	} %>
+					</td> 
 					<td>${flyfox.dictValue(item.type!'' )  }</td>
 							<td>${item.jump_url}</td> 
 					<td title="${item.content}">

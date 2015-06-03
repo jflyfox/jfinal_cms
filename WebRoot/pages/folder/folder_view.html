@@ -19,8 +19,14 @@ var bodyContent = {
 	</tr>
 	<tr>
 		<td>状态</td>
-		<% var status_data = '[{"key":"1","value":"显示"},{"key":"2","value":"隐藏"}]'; %>
-		<td>${flyfox.radioValue(status_data,model.status!'')  }</td> 
+		<td>
+			<% if(model.status=='2') { %>
+			隐藏
+			<%	} %>
+			<% if(model.status=='1') { %>
+			显示
+			<%	} %>
+		</td> 
 	</tr>
 	<tr>
 		<td>类型</td>

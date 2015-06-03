@@ -44,8 +44,12 @@ var bodyContent = {
 		<tr>
 			<td>状态</td>
 			<td>
-					<% var status_data = '[{"key":"1","value":"显示"},{"key":"2","value":"隐藏"}]'; %>
-					${flyfox.radio(status_data,'model.status',model.status!'1')  }
+				<label class="radio-inline">
+				  <input type="radio" name="model.status" id="" value="2"  ${model.status=='2'?"checked":"" } > 隐藏
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="model.status" id="" value="1"  ${model.status!='2'?"checked":"" } > 显示
+				</label>
 			</td>
 		</tr>
 		<tr>

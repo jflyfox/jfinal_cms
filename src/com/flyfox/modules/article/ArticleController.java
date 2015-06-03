@@ -2,6 +2,7 @@ package com.flyfox.modules.article;
 
 import java.io.File;
 import java.security.SecureRandom;
+import java.util.List;
 
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.db.SQLUtils;
@@ -22,50 +23,39 @@ import com.jfinal.upload.UploadFile;
 public class ArticleController extends BaseController {
 
 	private static final String path = "/pages/article/article_";
+
 	/**
 	 * 图片目录
 	 */
-	private static final String upload_path = PathKit.getWebRootPath() + File.separator //
-			+ "download" + File.separator + "image_url";
+	public static final String IMAGE_PATH = "download" + File.separator + "image_url";
+	/**
+	 * 图片全目录
+	 */
+	public static final String UPLOAD_PATH = PathKit.getWebRootPath() + File.separator + IMAGE_PATH;
 
 	public void index() {
 		list();
 	}
 
-	@Override
-	public void render(String view) {
-		// 查询下拉框
-		setAttr("folder_json", selectFolderJson());
-		super.render(view);
-	}
-
-	/**
-	 * 目录复选框
-	 * 
-	 * 2015年1月28日 下午5:28:40 flyfox 330627517@qq.com
-	 * 
-	 * @return
-	 */
-	public String selectFolderJson() {
-		return getJsonData("select id,name from tb_folder where type = 1 order by sort,create_time desc ", "id", "name");
-	}
-
 	public void list() {
 		TbArticle model = getModelByAttr(TbArticle.class);
 
-		SQLUtils sql = new SQLUtils(" from tb_article t where 1=1 ");
+		SQLUtils sql = new SQLUtils(" from tb_article t " //
+				+ " left join tb_folder f on f.id = t.folder_id " + " where 1 = 1 ");
 		if (model.getAttrValues().length != 0) {
 			sql.setAlias("t");
 			sql.whereLike("title", model.getStr("title"));
 			sql.whereEquals("folder_id", model.getInt("folder_id"));
 			sql.whereEquals("status", model.getInt("status"));
 		}
-		sql.append(" order by folder_id,sort,create_time desc ");
+		sql.append(" order by t.folder_id,t.sort,t.create_time desc ");
 
-		Page<TbArticle> page = TbArticle.dao.paginate(getPaginator(), "select t.* ", //
+		Page<TbArticle> page = TbArticle.dao.paginate(getPaginator(), "select t.*,f.name as folderName ", //
 				sql.toString().toString());
 
 		// 查询下拉框
+		setAttr("selectFolder", selectFolder(model.getInt("folder_id")));
+
 		setAttr("page", page);
 		setAttr("attr", model);
 		render(path + "list.html");
@@ -75,12 +65,18 @@ public class ArticleController extends BaseController {
 		// 获取页面信息,设置目录传入
 		TbArticle attr = getModel(TbArticle.class);
 		setAttr("model", attr);
+		
+		// 查询下拉框
+		setAttr("selectFolder", selectFolder(0));
 
 		render(path + "add.html");
 	}
 
 	public void view() {
 		TbArticle model = TbArticle.dao.findById(getParaToInt());
+		TbFolder folder = TbFolder.dao.findById(model.getInt("folder_id"));
+		model.put("folderName", folder.getStr("name"));
+
 		setAttr("model", model);
 		render(path + "view.html");
 	}
@@ -94,11 +90,15 @@ public class ArticleController extends BaseController {
 	public void edit() {
 		TbArticle model = TbArticle.dao.findById(getParaToInt());
 		setAttr("model", model);
+
+		// 查询下拉框
+		setAttr("selectFolder", selectFolder(model.getInt("folder_id")));
+
 		render(path + "edit.html");
 	}
 
 	public void save() {
-		UploadFile uploadFile = getFile("model.image_url", upload_path, 10 * 1024 * 1024);
+		UploadFile uploadFile = getFile("model.image_url", UPLOAD_PATH, 10 * 1024 * 1024);
 
 		Integer pid = getParaToInt();
 		TbArticle model = getModel(TbArticle.class);
@@ -111,7 +111,7 @@ public class ArticleController extends BaseController {
 			}
 			String fileName = DateUtils.getNow("yyyyMMdd_HHmmss") + "_" + new SecureRandom().nextInt(999999) + suf;
 			// 改名,避免重复以及中文问题
-			uploadFile.getFile().renameTo(new File(upload_path + File.separator + fileName));
+			uploadFile.getFile().renameTo(new File(UPLOAD_PATH + File.separator + fileName));
 
 			model.set("image_url", fileName);
 			// model.set("image_url", uploadFile.getFileName());
@@ -186,5 +186,29 @@ public class ArticleController extends BaseController {
 		}
 
 		renderMessage("保存成功");
+	}
+	
+	/**
+	 * 目录复选框
+	 * 
+	 * 2015年1月28日 下午5:28:40 flyfox 330627517@qq.com
+	 * 
+	 * @return
+	 */
+	private String selectFolder(Integer selected) {
+		List<TbFolder> list = TbFolder.dao.find(" select id,name from tb_folder order by sort,create_time desc ");
+		StringBuffer sb = new StringBuffer("");
+		if (list != null && list.size() > 0) {
+			for (TbFolder folder : list) {
+				sb.append("<option value=\"");
+				sb.append(folder.getInt("id"));
+				sb.append("\" ");
+				sb.append(folder.getInt("id") == selected ? "selected" : "");
+				sb.append(">");
+				sb.append(folder.getStr("name"));
+				sb.append("</option>");
+			}
+		}
+		return sb.toString();
 	}
 }
