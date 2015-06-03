@@ -18,6 +18,9 @@
  3. [oschina](http://www.oschina.net/)
 
 # 更新说明
+>## 2015-06-04
+> 1. jflyfox_jfinal升级为2.1,全面去除模板，更简单易懂
+
 >## 2015-06-03 mtgxxw1.1
 > 1. 发布1.1版本，这次主要优化前台访问速度。
 > 2. 加入cdn，如果本地没有网络请修改/static/component/include/jquery.html和/static/component/include/bootstrap.html。
