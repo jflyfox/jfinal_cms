@@ -20,7 +20,7 @@
 # 更新说明
 >## 2015-06-03 mtgxxw1.1
 > 1. 发布1.1版本，这次主要优化前台访问速度。
-> 2. 加入cdn，如果本地没有网络请修改includes/jquery和boostrap。
+> 2. 加入cdn，如果本地没有网络请修改/static/component/include/jquery.html和/static/component/include/bootstrap.html。
 
 >## 2015-06-02
 > 1. 回复管理加入排序。
