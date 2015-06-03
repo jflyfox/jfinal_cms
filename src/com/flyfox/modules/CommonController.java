@@ -25,7 +25,7 @@ public class CommonController extends BaseController {
 
 	public static final String loginPage = "/login.html";
 	public static final String mainPage = "/article/list";
-	public static final String firstPage = "/home";
+	public static final String firstPage = "/";
 
 	/**
 	 * 首页，菜单
