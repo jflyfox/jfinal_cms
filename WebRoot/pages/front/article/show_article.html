@@ -25,7 +25,7 @@ var bodyContent = {
 			 <div class="panel-body" style="padding:0px;">
 			<ol class="breadcrumb" style="margin:0px;">
 			  <li><a href="home">首页</a></li>
-			  <li><a href="${flyfox.getMenu(folder.id)}">${folder.name}</a></li>
+			  <li><a href="${folder.id}">${folder.name}</a></li>
 			  <li class="active">文章</li>
 			</ol>
 			</div>
@@ -161,7 +161,7 @@ var bodyContent = {
 	
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			<h3 class="panel-title">相关文章<a class="more" href="${flyfox.getMenu(folder.id)}">更多</a></h3>
+			<h3 class="panel-title">相关文章<a class="more" href="${folder.id}">更多</a></h3>
 		  </div>
 		 	 <ul class="list-group">
 			  	<% for(item in articles.list){ %>
