@@ -305,7 +305,7 @@ INSERT INTO `sys_department` VALUES ('2', '注册用户', '88', '无人', '15888
 INSERT INTO `sys_department` VALUES ('3', '第三方用户', '90', '无', null, '2015-06-01 12:39:41', '1');
 
 -- 用户
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'LHmWhtwF/dGhJxqKJ8QXRg==', '系统管理员', 1,1, 0, null, null, null, null, null, null, null, '2016-06-06 06:06:06',1);
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'fermMZHOFmIGqw+NL0Ddcw==', '系统管理员', 1,1, 0, null, null, null, null, null, null, null, '2016-06-06 06:06:06',1);
 -- 数据字典
 INSERT INTO `sys_dict` VALUES ('2', '文章类型', 'articleType', null);
 INSERT INTO `sys_dict` VALUES ('11', '目录类型', 'folderType', null);
