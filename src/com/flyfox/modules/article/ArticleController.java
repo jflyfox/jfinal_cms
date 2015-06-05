@@ -67,7 +67,7 @@ public class ArticleController extends BaseController {
 		setAttr("model", attr);
 		
 		// 查询下拉框
-		setAttr("selectFolder", selectFolder(0));
+		setAttr("selectFolder", selectFolder(attr.getInt("folder_id")));
 
 		render(path + "add.html");
 	}
