@@ -55,7 +55,7 @@ var bodyContent = {
 							<time class="art-date" datetime="${item.publish_time!''}" title="${item.publish_time!''}">${item.publish_time!''}</time>
 							<span style="margin-left: 5px;">浏览（${item.count_view!'0'}）</span>
 							<% if(item.is_comment==1){ %>
-							<a style="margin-left: 5px;" href="front/article/${item.id}#article_comment" ><span id="count_comment_show">评论（${item.count_comment!'0'}）</span></a>
+							<a style="margin-left: 5px;" href="front/article/${item.id}.html#article_comment" ><span id="count_comment_show">评论（${item.count_comment!'0'}）</span></a>
 							<% } %>
 						</div>
 					</section>

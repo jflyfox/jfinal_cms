@@ -6,7 +6,7 @@
 	  	<% for(item in recommendArticles.list){ %>
 			<li class="list-group-item">
 				<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-				<a href="front/article/${item.id}" target="_blank" title="${item.title}">
+				<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
 				<% if (strutil.length(item.title) > 18) { %>
 					${strutil.subStringTo(item.title, 0, 18)}...
 				<% 	} else { %>
