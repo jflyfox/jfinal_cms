@@ -33,10 +33,10 @@ include("/pages/front/includes/header_menu.html"){} %>
 									src="${user.title_url!'static/images/user/user.png'}" /></a>
 								<a href="front/article/${comment.article_id}#article_comment" target="_blank" class="user-name">${comment.title}</a>
 								<span class="comment-txt">文章中</span>
-								<a href="front/article/user/${comment.create_id}" target="_blank" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
+								<a href="front/person/view/${comment.create_id}" target="_blank" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
 								<% if(comment.status > 20) { %>
 								<span class="comment-txt">回复</span>
-								<a href="front/article/user/${comment.reply_userid}" target="_blank" class="user-name">${flyfox.getUserName(comment.reply_userid)}</a>
+								<a href="front/person/view/${comment.reply_userid}" target="_blank" class="user-name">${flyfox.getUserName(comment.reply_userid)}</a>
 								<% } %>
 								<br>
 								<span>${comment.content}</span>

@@ -1,0 +1,136 @@
+<% 
+	var headContent = {
+%>
+	<% include("/pages/front/includes/header.html"){} %>
+	
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/pages/front/includes/header_menu.html"){} %>	
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-12">	
+	
+		<div class="panel panel-default">
+			 <div class="panel-body" style="padding:0px;">
+			<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="web">首页</a></li>
+			  <li><a href="front/person/view/${user.userid}">空间</a></li>
+			  <li class="active">${user.userName }</li>
+			</ol>
+			</div>
+		</div>
+	
+		</div>
+	</div>
+
+	<div class="row">
+	<!-- 文章 -->
+	<div class="col-md-4">	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">用户信息</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<form class="form-horizontal" name="form1" action="" method="post">
+						<input type="hidden" name="user.userid" value="${user.userid}" />
+						<div  class="form-group text-center">
+							<div class="col-sm-offset-2 col-sm-10">
+							<img id="title_pic" alt="头像"  width="64" height="64" 
+						 			class="img_radius" src="${user.title_url!'static/images/user/user.png'}">
+						 	</div>
+						</div>
+						  <div class="form-group">
+						    <label for="realname" class="col-sm-4 control-label">昵称</label>
+						    <div class="col-sm-8">
+						      ${user.realname!''}
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="remark" class="col-sm-4 control-label">介绍</label>
+						    <div class="col-sm-8" style="word-wrap: break-word;word-break: normal;">
+						    	${user.remark!''}
+						    </div>
+						  </div>
+						</form>
+		  </div>	 
+		</div>
+	</div>
+	
+	<!-- 标签 -->
+	<div class="col-md-4">	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">发布的文章</h3>
+		  </div>
+		 	 <ul class="list-group">
+			  	<% for(item in page.list){ %>
+					<li class="list-group-item">
+						<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
+						<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+						<% if (strutil.length(item.title) > 18) { %>
+							${strutil.subStringTo(item.title, 0, 18)}...
+						<% 	} else { %>
+							${item.title}
+						<%  } %>
+						</a>
+					</li>
+				<% } %>
+				<li class="list-group-item">
+					<%include("/pages/front/includes/paginator.html"){} %>
+				</li>
+			  </ul>
+		</div>
+	</div>
+	
+	<!-- 信息列表 -->
+	<div class="col-md-4">	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">其他标签<a class="more" href="front/tags/all">更多</a></h3>
+		  </div>
+		  <div class="panel-body">
+			<%  
+					if(taglist != null && taglist.~size > 0) {
+			%>
+				<ul class="q-taglist clearfix">
+					<li title="标签"><span class="q-icon"></span></li>
+				<%
+					for(tagitem in taglist){ 
+				%>
+					<li class="q-tagitem">
+					<a class="a-tagitem" href="front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+					</li>
+				<% 
+					}
+				%>
+				</ul>
+			<%
+			} 
+			%>
+		 </div>
+		</div>
+		
+		<!-- 推荐文章 -->
+		<%  include("/pages/front/includes/recommend.html"){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/pages/front/includes/friendly.html"){} %>
+	</div>
+	</div>
+
+</div>
+	
+<%  include("/pages/front/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

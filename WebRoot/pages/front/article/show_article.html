@@ -127,10 +127,10 @@ var bodyContent = {
 							<% var user = flyfox.getUser(comment.create_id);  %>
 							<a href="#"><img width="32" height="32" alt="头像" class="img_radius"
 								src="${user.title_url!'static/images/user/user.png'}" /></a>
-							<a href="front/article/user/${comment.create_id}" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
+							<a href="front/person/view/${comment.create_id}" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
 							<% if(comment.status > 20) { %>
 							<span class="comment-txt">回复</span>
-							<a href="front/article/user/${comment.reply_userid}" class="user-name">${flyfox.getUserName(comment.reply_userid)}</a>
+							<a href="front/person/view/${comment.reply_userid}" class="user-name">${flyfox.getUserName(comment.reply_userid)}</a>
 							<% } %>
 							<br>
 							<span>${comment.content}</span>

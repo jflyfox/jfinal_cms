@@ -1,16 +1,23 @@
 package com.flyfox.modules.front;
 
 import com.alibaba.fastjson.JSONObject;
+import com.flyfox.component.beelt.BeeltFunctions;
+import com.flyfox.component.util.JFlyFoxCache;
 import com.flyfox.component.util.JFlyFoxUtils;
 import com.flyfox.jfinal.base.BaseController;
+import com.flyfox.jfinal.base.Paginator;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.jfinal.component.util.Attr;
 import com.flyfox.modules.CommonController;
+import com.flyfox.modules.article.TbArticle;
 import com.flyfox.modules.front.interceptor.FrontInterceptor;
+import com.flyfox.modules.front.service.FrontCacheService;
+import com.flyfox.modules.tags.TbTags;
 import com.flyfox.system.user.SysUser;
 import com.flyfox.system.user.UserCache;
 import com.flyfox.util.StrUtils;
 import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Page;
 
 /**
  * 个人信息
@@ -89,5 +96,45 @@ public class PersonController extends BaseController {
 		json.put("status", 1);// 成功
 
 		renderJson(json.toJSONString());
+	}
+	
+	/**
+	 * 查看文章某用户发布文章
+	 * 
+	 * 2015年2月26日 下午1:46:14 flyfox 330627517@qq.com
+	 */
+	@Before(FrontInterceptor.class)
+	public void view() {
+		Integer userid = getParaToInt();
+
+		// 活动目录
+		setAttr("folders_selected", 0);
+
+		SysUser user = UserCache.getUser(userid);
+		setAttr("user", user);
+		
+		// 数据列表,只查询展示的和类型为11,12的
+		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), "select * ", //
+				" from tb_article where status = 1 and type in (11,12) " //
+						+ " and create_id = ? " //
+						+ " and folder_id != " + 13 // 不搜索首页图片
+						+ " order by sort,create_time desc", userid);
+		setAttr("page", articles);
+
+		// 显示50个标签
+		if (articles.getTotalRow() > 0) {
+			Page<TbTags> taglist = new FrontCacheService().getTagsByFolder(new Paginator(1, 50), articles.getList()
+					.get(0).getFolderId());
+			setAttr("taglist", taglist.getList());
+		} else {
+			Page<TbTags> taglist = new FrontCacheService().getTags(new Paginator(1, 50));
+			setAttr("taglist", taglist.getList());
+		}
+
+		// title展示
+		setAttr(JFlyFoxUtils.TITLE_ATTR, BeeltFunctions.getUserName(userid) + "的空间 - " + JFlyFoxCache.getHeadTitle());
+
+		renderAuto(path + "view_person.html");
+
 	}
 }
