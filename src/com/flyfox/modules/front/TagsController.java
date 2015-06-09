@@ -13,6 +13,7 @@ import com.flyfox.modules.article.TbArticle;
 import com.flyfox.modules.front.interceptor.FrontInterceptor;
 import com.flyfox.modules.front.service.FrontCacheService;
 import com.flyfox.modules.tags.TbTags;
+import com.flyfox.util.extend.HtmlUtils;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -32,6 +33,11 @@ public class TagsController extends BaseController {
 			e.printStackTrace();
 		}
 
+		// 去除标签
+		tagName = HtmlUtils.delHTMLTag(tagName);
+		// 更新tag
+		tagName = HtmlUtils.delSpecialCode(tagName);
+		
 		setAttr("tagName", tagName);
 
 		// 数据列表,只查询展示的和类型为11,12的
