@@ -130,6 +130,23 @@ public class FrontCacheService extends BaseService {
 	}
 
 	/**
+	 * 返回最新文章
+	 * 
+	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
+	 * 
+	 * @param paginator
+	 * @return
+	 */
+	public Page<TbArticle> getNewArticle(Paginator paginator) {
+		String key = ("newArticle_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		// 推荐文章列表
+		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_article where status = 1 and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
+						+ " order by publish_time desc,update_time desc");
+		return articles;
+	}
+	
+	/**
 	 * 返回对应文章
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com

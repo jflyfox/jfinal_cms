@@ -12,6 +12,23 @@
 		// js加载避免优先级问题
 		$('.more').css('float','right').css('font-size','12px').css('color','green');
 		
+		// 最新新闻
+		$("#new_news_tab").on('mousemove',function(){
+			$(this).parent('li').addClass('active');
+			$("#new_dynamic_tab").parent('li').removeClass('active');
+			$('#new_news').show();
+			$('#new_dynamic').hide();
+			return false;
+		});
+		
+		// 最新动态
+		$("#new_dynamic_tab").on('mousemove',function(){
+			$(this).parent('li').addClass('active');
+			$("#new_news_tab").parent('li').removeClass('active');
+			$('#new_dynamic').show();
+			$('#new_news').hide();
+			return false;
+		});
 	});
 //-->
 </script>
@@ -83,34 +100,60 @@ var bodyContent = {
 	  
 	  <!--  新闻 -->
 	  <div class="col-md-4">
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		  	<h3 class="panel-title">
-				<a href="2" target="_blank">最新动态</a>
-				<a class="more" href="2" target="_blank">更多</a>
-			</h3>
-		  </div>
-		   <!-- List group -->
-		  <ul class="list-group">
-		  	<% for(item in news.list){ %>
-				<li class="list-group-item">
-					<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-					<% if(itemLP.index <= 3) { %>
-					<span class="label label-success">${itemLP.index}</span>
-					<% } else { %>
-					<span class="label label-info">${itemLP.index}</span>
-					<% } %>
-					<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
-					<% if (strutil.length(item.title) > 16) { %>
-						${strutil.subStringTo(item.title, 0, 16)}...
-					<% 	} else { %>
-						${item.title}
-					<%  } %>
-					</a>
-				</li>
-			<% } %>
-		  </ul>
-		</div>
+		<ul class="nav nav-tabs">
+			  <li role="presentation" class="active" style="cursor: pointer;">
+			  	<a style="cursor:pointer;" href="#" onclick="return false;" id="new_news_tab">最新新闻</a>
+			  </li>
+			  <li role="presentation" >
+			  	<a style="cursor:pointer;" href="#"  onclick="return false;" id="new_dynamic_tab">最新动态</a>
+			  </li>
+			</ul>
+			<div id="new_news"  class="panel panel-default" 
+				style="border-top-width: 0px;border-radius:0px;border-bottom-right-radius:4px; border-bottom-left-radius: 4px;">
+			   <!-- List group -->
+			  <ul class="list-group">
+			  	<% for(item in news.list){ %>
+					<li class="list-group-item">
+						<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
+						<% if(itemLP.index <= 3) { %>
+						<span class="label label-success">${itemLP.index}</span>
+						<% } else { %>
+						<span class="label label-info">${itemLP.index}</span>
+						<% } %>
+						<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+						<% if (strutil.length(item.title) > 16) { %>
+							${strutil.subStringTo(item.title, 0, 16)}...
+						<% 	} else { %>
+							${item.title}
+						<%  } %>
+						</a>
+					</li>
+				<% } %>
+			  </ul>
+			</div>
+			<div id="new_dynamic" class="panel panel-default" 
+				style="border-top-width: 0px;border-radius:0px;border-bottom-right-radius:4px;border-bottom-left-radius: 4px;display: none;">
+			   <!-- List group -->
+			  <ul class="list-group">
+			  	<% for(item in newArticles.list){ %>
+					<li class="list-group-item">
+						<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
+						<% if(itemLP.index <= 3) { %>
+						<span class="label label-success">${itemLP.index}</span>
+						<% } else { %>
+						<span class="label label-info">${itemLP.index}</span>
+						<% } %>
+						<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+						<% if (strutil.length(item.title) > 16) { %>
+							${strutil.subStringTo(item.title, 0, 16)}...
+						<% 	} else { %>
+							${item.title}
+						<%  } %>
+						</a>
+					</li>
+				<% } %>
+			  </ul>
+			</div>
 	  
 	
 	  </div>

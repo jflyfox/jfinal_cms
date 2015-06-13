@@ -72,6 +72,10 @@ public class FrontService extends BaseService {
 		Page<TbArticle> topPics = new FrontCacheService().getArticle(new Paginator(1, 4), 13);
 		controller.setAttr("topPics", topPics);
 
+		// 最新动态
+		Page<TbArticle> newArticle = new FrontCacheService().getNewArticle(new Paginator(1, 10));
+		controller.setAttr("newArticles", newArticle);
+
 		// 新闻 2
 		Page<TbArticle> news = new FrontCacheService().getArticle(new Paginator(1, 10), 2);
 		controller.setAttr("news", news);
