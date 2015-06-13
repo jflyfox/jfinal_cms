@@ -29,7 +29,7 @@ include("/pages/front/includes/header_menu.html"){} %>
 							%>
 							<div class="item-top ${is_no_read ? 'comment-no-read':'' }" >
 								<% var user = flyfox.getUser(comment.create_id);  %>
-								<a href="front/person/view/${comment.create_id}"><img width="32" height="32" alt="头像" class="img_radius"
+								<a href="front/person/view/${comment.create_id}" target="_blank"><img width="32" height="32" alt="头像" class="img_radius"
 									src="${user.title_url!'static/images/user/user.png'}" /></a>
 								<a href="front/article/${comment.article_id}#article_comment" target="_blank" class="user-name">${comment.title}</a>
 								<span class="comment-txt">文章中</span>
