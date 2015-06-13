@@ -44,6 +44,13 @@ public class FrontService extends BaseService {
 	protected void otherMenu(BaseController controller, int folderId) {
 		// 当前目录
 		TbFolder folder = new FolderService().getFolder(folderId);
+
+		// 没有对应目录~返回首页吧
+		if (folder == null) {
+			home(controller);
+			return;
+		}
+
 		controller.setAttr("folder", folder);
 
 		// 列表数据
