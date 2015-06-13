@@ -18,6 +18,10 @@
  3. [oschina](http://www.oschina.net/)
 
 # 更新说明
+>## 2015-06-13 mtgxxw1.3
+> 1. 优化首页，加入最新新闻和最新动态切换。
+> 2. 优化头像点击展示。
+
 >## 2015-06-09 mtgxxw1.2
 > 1. 发布1.2版本，主要是bug修复。
 > 2. 感谢fxhover同学，修复漏洞：http://www.jflyfox.com/mtg/front/tags/%3Cimg%20%20src=%22xx%22%20onerror=%22alert%28111%29;%22%3E111
