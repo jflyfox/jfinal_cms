@@ -2,7 +2,19 @@
 	var headContent = {
 %>
 	<% include("/pages/front/includes/header.html"){} %>
-	
+
+<script type="text/javascript">
+<!--
+	function delblog(id) {
+		var url = 'front/person/delblog/'+id;
+		var title = '确认要删除该博文？';
+		Confirm(title, function() {
+			form1.action = url;
+			form1.submit();
+		});
+	}
+//-->
+</script>	
 <%
 };
 
@@ -12,6 +24,8 @@ var bodyContent = {
 
 <div class="container">
 
+	<form name="form1" action=""></form>
+	
 	<div class="row">
 		<div class="col-md-12">	
 	
@@ -51,7 +65,7 @@ var bodyContent = {
 					  </div>
 					  <div class="col-md-10">
 							<h4>
-							<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+							<a href="front/article/${item.id}" target="_blank" title="${item.title}">
 							<% if (strutil.length(item.title) > 18) { %>
 								${strutil.subStringTo(item.title, 0, 18)}...
 							<% 	} else { %>
@@ -66,10 +80,19 @@ var bodyContent = {
 							<% } %> 
 								<div class="pull-right" style="font-size:12px;">
 								<% if(item.is_comment==1){ %>
-								<a href="front/article/${item.id}.html#article_comment"  target="_blank"><span>评论(${flyfox.countComment(item.id)})</span></a>
+								<a href="front/article/${item.id}#article_comment"  target="_blank"><span>评论(${flyfox.countComment(item.id)})</span></a>
 								&nbsp;&nbsp;
 								<% } %>
 								<span>浏览量(${flyfox.countView(item.id)})</span>
+								
+								<!-- 编辑区 -->
+								&nbsp;&nbsp;
+								<span>
+								(
+									<a href="front/person/editblog/${item.id}" target="_blank"><span>编辑</span></a>
+								|
+									<a href="javascript:void(0);" onclick="delblog(${item.id});return false;"><span style="color: red;">删除</span></a>
+								)
 								</div>
 							</h4>
 							
@@ -83,7 +106,7 @@ var bodyContent = {
 									<small>发布时间：${item.publish_time }</small>
 								</div>
 								<div class="pull-right" >
-									<a href="front/article/${item.id}.html" target="_blank"><small>查看全部</small></a>
+									<a href="front/article/${item.id}" target="_blank"><small>查看全部</small></a>
 								</div>
 							</footer>
 					  </div>

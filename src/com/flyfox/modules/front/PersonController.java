@@ -15,8 +15,10 @@ import com.flyfox.modules.front.service.FrontCacheService;
 import com.flyfox.modules.tags.TbTags;
 import com.flyfox.system.user.SysUser;
 import com.flyfox.system.user.UserCache;
+import com.flyfox.util.DateUtils;
 import com.flyfox.util.StrUtils;
 import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 
 /**
@@ -91,6 +93,41 @@ public class PersonController extends BaseController {
 	}
 
 	/**
+	 * 跳转到编辑博文页面
+	 * 
+	 * 2015年6月17日 下午9:53:04 flyfox 330627517@qq.com
+	 */
+	@Before(FrontInterceptor.class)
+	public void editblog() {
+		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		setAttr("user", user);
+
+		// 活动目录
+		setAttr("folders_selected", "personhome");
+
+		TbArticle model = TbArticle.dao.findById(getParaToInt());
+		setAttr("model", model);
+		// 不是自己的文章也想修改,总有不怀好意的人哦
+		if (model.getCreateId() != user.getUserid()) {
+			System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		// 设置标签
+		String tags = Db.findFirst("select group_concat(tagname) tags " //
+				+ " from tb_tags where article_id = ? order by id", model.getInt("id")).getStr("tags");
+		setAttr("tags", tags);
+
+		renderAuto(path + "edit_blog.html");
+	}
+
+	/**
 	 * 保存博文
 	 * 
 	 * 2015年6月17日 下午10:12:18 flyfox 330627517@qq.com
@@ -106,21 +143,29 @@ public class PersonController extends BaseController {
 			return;
 		}
 
+		Integer pid = getParaToInt();
 		TbArticle model = getModel(TbArticle.class);
-		model.remove("id");
-		// TODO 验证题目，内容
+		// TODO 这里需要加入验证，小心有坏人
+		if (pid != null && pid > 0) { // 更新
+			model.update();
+		} else { // 新增
+			model.remove("id");
+			model.setFolderId(100); // 博文目录
+			model.setStatus("1"); // 显示
+			model.setType(11);
+			model.setIsComment(1); // 能评论
+			model.setIsRecommend(2);// 不推荐
+			model.setSort(20); // 排序
+			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
+			model.setPublishUser(user.getUserName()); // 发布人
+			model.setCreateId(getSessionUser().getUserID());
+			model.setCreateTime(getNow());
+			model.save();
+		}
 
-		model.setFolderId(100); // 博文目录
-		model.setStatus("1"); // 显示
-		model.setType(11);
-		model.setIsComment(1); // 能评论
-		model.setIsRecommend(2);// 不推荐
-		model.setSort(20); // 排序
-		model.setCreateId(getSessionUser().getUserID());
-		model.setCreateTime(getNow());
-		model.save();
-
+		// 保存tags
 		String tags = getPara("tags");
+		Db.update(" delete from tb_tags where article_id = ?", model.getInt("id"));
 		if (StrUtils.isNotEmpty(tags)) {
 			String[] tagsArr = tags.split(",");
 			for (int i = 0; i < tagsArr.length; i++) {
@@ -144,6 +189,35 @@ public class PersonController extends BaseController {
 
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
+	}
+
+	/**
+	 * 跳转到编辑博文页面
+	 * 
+	 * 2015年6月17日 下午9:53:04 flyfox 330627517@qq.com
+	 */
+	@Before(FrontInterceptor.class)
+	public void delblog() {
+		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		Integer id = getParaToInt();
+		if (user == null || id == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		TbArticle model = TbArticle.dao.findById(getParaToInt());
+		setAttr("model", model);
+		// 不是自己的文章也想修改,总有不怀好意的人哦
+		if (model.getCreateId() != user.getUserid()) {
+			System.err.println("####userid(" + user.getUserid() + ")非法编辑内容");
+			redirect(CommonController.firstPage);
+			return;
+		}
+		
+		// 删除文章
+		TbArticle.dao.deleteById(id);
+		
+		redirect("/front/person");
 	}
 	
 	/**
