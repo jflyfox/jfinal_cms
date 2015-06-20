@@ -68,11 +68,12 @@
 			<li><a href="web/login">登录</a></li>
 			<li class="${'regist'==folders_selected!''?'active':''}"><a href="front/regist" >注册</a></li>
 		<% } else { %>
+			<li class="${'personhome'==folders_selected!''?'active':''}"><a href="front/person" id="myhome" >我的空间</a></li>
 			<li class="${'message'==folders_selected!''?'active':''}"><a href="front/message" id="mymessage" >我的消息</a></li>
 			<li class="dropdown ${'person'==folders_selected!''?'active':''}">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">个人信息<span class="caret"></span></a>
 	          <ul class="dropdown-menu" role="menu">
-	            <li class="${'person'==folders_selected!''?'active':''}"><a href="front/person">个人设置</a></li>
+	            <li class="${'person'==folders_selected!''?'active':''}"><a href="front/person/profile">个人设置</a></li>
 	            <li class="divider"></li>
 	            <li><a href="web/logout">退出</a></li>
 	          </ul>
