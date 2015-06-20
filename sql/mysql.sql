@@ -1,4 +1,21 @@
 /**
+ * 异常数据记录表
+ */ 
+drop table if exists tb_error;
+
+CREATE TABLE tb_error (
+  id  int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  type int(11) DEFAULT NULL COMMENT '类型',
+  ip varchar(64) NOT NULL  COMMENT 'IP地址',
+  userid int(11) DEFAULT NULL COMMENT '用户ID',
+  content text comment '描述',
+  remark text comment '备注',
+  create_time  varchar(64) DEFAULT NULL COMMENT '创建时间',
+  create_id  int(11) DEFAULT 0 COMMENT '创建者',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='异常数据';
+
+/**
  * 访问量统计
  */ 
 drop table if exists tb_pageview;
