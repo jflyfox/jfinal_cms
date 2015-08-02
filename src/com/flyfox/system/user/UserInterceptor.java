@@ -84,7 +84,7 @@ public class UserInterceptor implements Interceptor {
 	protected boolean isAuth(String path_tmp) {
 		return StrUtils.isNotEmpty(path_tmp) //
 				&& path_tmp.indexOf("login") < 0 // 登录
-				&& !path_tmp.endsWith("trans") // 过期
+				&& !path_tmp.startsWith("trans") // 过期
 				&& !path_tmp.endsWith("logout") // 登出
 				&& !path_tmp.startsWith("admin") // 登录
 				&& !path_tmp.startsWith("web") // 首页
