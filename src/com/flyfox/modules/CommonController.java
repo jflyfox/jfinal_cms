@@ -21,9 +21,10 @@ import com.jfinal.aop.Before;
  * CommonController
  */
 @ControllerBind(controllerKey = "/")
+@Before(FrontInterceptor.class)
 public class CommonController extends BaseController {
 
-	public static final String loginPage = "/login.html";
+	public static final String loginPage = "/pages/front/login.html";
 	public static final String mainPage = "/article/list";
 	public static final String firstPage = "/";
 
@@ -33,7 +34,6 @@ public class CommonController extends BaseController {
 	 * 2015年5月25日 下午11:00:28
 	 * flyfox 330627517@qq.com
 	 */
-	@Before(FrontInterceptor.class)
 	public void index() {
 		new FrontService().menu(this);
 	}

@@ -8,12 +8,15 @@ import com.flyfox.component.util.ImageCode;
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.modules.CommonController;
+import com.flyfox.modules.front.interceptor.FrontInterceptor;
+import com.jfinal.aop.Before;
 
 /**
  * 
  * 2015年5月11日 下午4:11:02 flyfox 330627517@qq.com
  */
 @ControllerBind(controllerKey = "/web")
+@Before(FrontInterceptor.class)
 public class Home extends BaseController {
 
 	public static final String PATH = "/pages/front/home/";

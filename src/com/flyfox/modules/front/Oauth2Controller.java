@@ -12,11 +12,14 @@ import com.flyfox.jfinal.component.oauth.OauthSina;
 import com.flyfox.jfinal.component.oauth.util.TokenUtil;
 import com.flyfox.modules.CommonController;
 import com.flyfox.modules.article.TbArticle;
+import com.flyfox.modules.front.interceptor.FrontInterceptor;
 import com.flyfox.system.user.SysUser;
 import com.flyfox.system.user.UserCache;
 import com.flyfox.util.StrUtils;
+import com.jfinal.aop.Before;
 
 @ControllerBind(controllerKey = "/oauth2")
+@Before(FrontInterceptor.class)
 public class Oauth2Controller extends BaseController {
 
 	private static final String path = "/pages/oauth2/";
