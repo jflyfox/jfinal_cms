@@ -58,7 +58,13 @@ var bodyContent = {
 						  <img src="static/front/images/news.jpg" alt="${item.title}" height="85" 
 						  	 style="height: 85px; width: 100%; display: block;" >
 					  	  <% } else { %>	
-					  	  <img src="${flyfox.getArtImage(item)}"  alt="${item.title}" height="85"
+					  	  <% 
+						  	var imageUrl = item.image_net_url;
+						  	if(strutil.isEmpty(imageUrl)) { 
+						  		imageUrl = 'download/image_url/'+item.image_url;
+						  	} 
+						  	%>
+					  	  <img src="${imageUrl}"  alt="${item.title}" height="85"
 					  	  	data-holder-rendered="true" style="height: 85px; width: 100%; display: block;">
 						  <% } %>
 						</div>
