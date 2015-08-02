@@ -1,18 +1,13 @@
 package com.flyfox.modules;
 
-import java.util.List;
-import java.util.Map;
-
 import com.flyfox.component.util.JFlyFoxUtils;
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.modules.front.interceptor.FrontInterceptor;
 import com.flyfox.modules.front.service.FrontService;
 import com.flyfox.system.dict.DictCache;
-import com.flyfox.system.menu.SysMenu;
 import com.flyfox.system.user.SysUser;
 import com.flyfox.system.user.UserCache;
-import com.flyfox.system.user.UserSvc;
 import com.flyfox.util.Config;
 import com.flyfox.util.StrUtils;
 import com.jfinal.aop.Before;
@@ -79,18 +74,6 @@ public class CommonController extends BaseController {
 			render(loginPage);
 			return;
 		} else {
-			// 管理员，后台用才需要注册菜单
-			if (user.getInt("usertype") == 1 || user.getInt("usertype") == 2) {
-				Map<Integer, List<SysMenu>> map = new UserSvc().getAuthMap(user);
-				if (map == null) {
-					setAttr("msg", "没有权限，请联系管理员");
-					render(loginPage);
-					return;
-				}
-				// 注入菜单
-				setSessionAttr("menu", map);
-			}
-
 			setSessionUser(user);
 		}
 

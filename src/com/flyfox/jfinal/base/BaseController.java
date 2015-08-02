@@ -17,6 +17,7 @@
 package com.flyfox.jfinal.base;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.flyfox.jfinal.component.util.Attr;
+import com.flyfox.system.menu.SysMenu;
 import com.flyfox.system.user.SysUser;
+import com.flyfox.system.user.UserSvc;
 import com.flyfox.util.Config;
 import com.flyfox.util.DateUtils;
 import com.flyfox.util.NumberUtils;
@@ -173,7 +176,7 @@ public abstract class BaseController extends Controller {
 					String password = key.split(",")[1];
 					sysUser = SysUser.dao.findFirstByWhere(" where userid = ? and password = ? ", userid, password);
 					if (sysUser != null)
-						setSessionAttr(Attr.SESSION_NAME, sysUser);
+						setSessionUser(sysUser);
 				}
 			}
 		}
@@ -195,6 +198,12 @@ public abstract class BaseController extends Controller {
 		String key = sysUser.getUserid() + "," + user.getStr("password");
 		String cookieContent = COOKIE_DES.encryptString(key);
 		setCookie(Attr.SESSION_NAME, cookieContent, 7 * 24 * 60 * 60);
+		// 如果是管理员 设置菜单权限
+		if (user.getInt("usertype") == 1 || user.getInt("usertype") == 2) {
+			Map<Integer, List<SysMenu>> map = new UserSvc().getAuthMap(sysUser);
+			// 注入菜单
+			setSessionAttr("menu", map);
+		}
 		return user;
 	}
 
