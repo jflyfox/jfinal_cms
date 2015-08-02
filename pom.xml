@@ -4,7 +4,7 @@
 	<groupId>com.jflyfox</groupId>
 	<artifactId>jflyfox_mtgxxw</artifactId>
 	<packaging>war</packaging>
-	<version>1.4.0</version>
+	<version>1.4.1</version>
 
 	<dependencies>
 		<dependency>
