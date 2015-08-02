@@ -2,7 +2,6 @@ package com.flyfox.modules.front;
 
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
-import com.flyfox.jfinal.component.util.Attr;
 import com.flyfox.modules.CommonController;
 import com.flyfox.modules.comment.CommentService;
 import com.flyfox.modules.comment.TbComment;
@@ -29,7 +28,7 @@ public class MessageController extends BaseController {
 		// 活动目录
 		setAttr("folders_selected", "message");
 
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		if (user == null) {
 			redirect(CommonController.firstPage);
 			return;

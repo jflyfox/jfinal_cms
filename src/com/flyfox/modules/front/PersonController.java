@@ -7,7 +7,6 @@ import com.flyfox.component.util.JFlyFoxUtils;
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.base.Paginator;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
-import com.flyfox.jfinal.component.util.Attr;
 import com.flyfox.modules.CommonController;
 import com.flyfox.modules.article.TbArticle;
 import com.flyfox.modules.front.interceptor.FrontInterceptor;
@@ -36,7 +35,7 @@ public class PersonController extends BaseController {
 	 */
 	@Before(FrontInterceptor.class)
 	public void index() {
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		if (user == null) {
 			redirect(CommonController.firstPage);
 			return;
@@ -78,7 +77,7 @@ public class PersonController extends BaseController {
 	 */
 	@Before(FrontInterceptor.class)
 	public void newblog() {
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		if (user == null) {
 			redirect(CommonController.firstPage);
 			return;
@@ -99,7 +98,7 @@ public class PersonController extends BaseController {
 	 */
 	@Before(FrontInterceptor.class)
 	public void editblog() {
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		if (user == null) {
 			redirect(CommonController.firstPage);
 			return;
@@ -136,7 +135,7 @@ public class PersonController extends BaseController {
 		JSONObject json = new JSONObject();
 		json.put("status", 2);// 失败
 
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		if (user == null) {
 			json.put("msg", "没有登录，不能提交博文！");
 			renderJson(json.toJSONString());
@@ -198,7 +197,7 @@ public class PersonController extends BaseController {
 	 */
 	@Before(FrontInterceptor.class)
 	public void delblog() {
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		Integer id = getParaToInt();
 		if (user == null || id == null) {
 			redirect(CommonController.firstPage);
@@ -225,7 +224,7 @@ public class PersonController extends BaseController {
 	 */
 	@Before(FrontInterceptor.class)
 	public void profile() {
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		if (user == null) {
 			redirect(CommonController.firstPage);
 		} else {
@@ -245,7 +244,7 @@ public class PersonController extends BaseController {
 		JSONObject json = new JSONObject();
 		json.put("status", 2);// 失败
 
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		int userid = user.getInt("userid");
 		SysUser model = getModel(SysUser.class);
 

@@ -2,7 +2,6 @@ package com.flyfox.modules.operation;
 
 import com.alibaba.fastjson.JSONObject;
 import com.flyfox.jfinal.base.BaseController;
-import com.flyfox.jfinal.component.util.Attr;
 import com.flyfox.modules.comment.CommentService;
 import com.flyfox.modules.folder.FolderService;
 import com.flyfox.modules.front.service.FrontCacheService;
@@ -35,7 +34,7 @@ public class OperationController extends BaseController {
 		JSONObject json = new JSONObject();
 		json.put("status", 2);// 失败
 
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		if (user == null || user.getInt("usertype") != 1) {
 			json.put("msg", "您不是管理员，无法操作！");
 			renderJson(json.toJSONString());

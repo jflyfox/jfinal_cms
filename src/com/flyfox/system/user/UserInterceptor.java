@@ -2,6 +2,7 @@ package com.flyfox.system.user;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.util.Attr;
 import com.flyfox.util.StrUtils;
 import com.jfinal.aop.Interceptor;
@@ -40,8 +41,6 @@ public class UserInterceptor implements Interceptor {
 			path_tmp = path_tmp.substring(0, path_tmp.length() - 1);
 		}
 
-		SysUser user = controller.getSessionAttr(Attr.SESSION_NAME);
-
 //		if ((user == null || user.getUserid() <= 0) //
 //				&& JFinal.me().getConstants().getDevMode()) { // 开发模式
 //			user = SysUser.dao.findFirst("select * from sys_user where userid = 1");
@@ -49,6 +48,13 @@ public class UserInterceptor implements Interceptor {
 //		}
 
 		if (isAuth(path_tmp)) {
+			SysUser user = null;
+			if (controller instanceof BaseController) {
+				user = (SysUser) ((BaseController) controller).getSessionUser();
+			} else {
+				user = controller.getSessionAttr(Attr.SESSION_NAME);
+			}
+			
 			if (user == null || user.getUserid() <= 0) {
 				controller.redirect("/trans");
 				return;

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.jfinal.component.ueditor.Uploader;
 import com.flyfox.jfinal.component.umeditor.UmeditorController;
-import com.flyfox.jfinal.component.util.Attr;
 import com.flyfox.modules.error.TbError;
 import com.flyfox.system.user.SysUser;
 import com.flyfox.util.Config;
@@ -24,9 +23,14 @@ public class Umeditor extends UmeditorController {
 	 * @see 博文上传，必须严格限制
 	 * 
 	 */
+	/**
+	 * 
+	 * 2015年8月2日 下午4:37:43
+	 * flyfox 330627517@qq.com
+	 */
 	public void personimageup() {
 		// 文件限制处理
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		PersonFileLimit fileLimit = map.get(user.getUserid());
 		if (fileLimit == null) {
 			fileLimit = new PersonFileLimit();

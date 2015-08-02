@@ -5,7 +5,6 @@ import com.flyfox.component.util.ImageCode;
 import com.flyfox.component.util.JFlyFoxUtils;
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
-import com.flyfox.jfinal.component.util.Attr;
 import com.flyfox.modules.front.interceptor.FrontInterceptor;
 import com.flyfox.system.user.SysUser;
 import com.flyfox.system.user.UserCache;
@@ -31,7 +30,7 @@ public class RegistController extends BaseController {
 		}
 		setAttr("pre_page", prePage);
 
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		// 如果已经登录了~您就别注册啦
 		if (user != null) {
 			redirect(prePage);

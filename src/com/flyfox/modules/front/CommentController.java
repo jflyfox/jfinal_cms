@@ -3,7 +3,6 @@ package com.flyfox.modules.front;
 import com.alibaba.fastjson.JSONObject;
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
-import com.flyfox.jfinal.component.util.Attr;
 import com.flyfox.modules.comment.CommentService;
 import com.flyfox.modules.comment.TbComment;
 import com.flyfox.system.user.SysUser;
@@ -20,7 +19,7 @@ public class CommentController extends BaseController {
 		JSONObject json = new JSONObject();
 		json.put("status", 2);// 失败
 
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 
 		if (user == null) {
 			json.put("msg", "没有登录，无法进行删除！");
@@ -58,7 +57,7 @@ public class CommentController extends BaseController {
 		JSONObject json = new JSONObject();
 		json.put("status", 2);// 失败
 
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 
 		if (user == null) {
 			json.put("msg", "没有登录，无法进行评论！");
@@ -98,7 +97,7 @@ public class CommentController extends BaseController {
 		JSONObject json = new JSONObject();
 		json.put("status", 2);// 失败
 
-		SysUser user = getSessionAttr(Attr.SESSION_NAME);
+		SysUser user = (SysUser) getSessionUser();
 		if (user == null) {
 			json.put("msg", "没有登录，无法获取评论数！");
 			renderJson(json.toJSONString());
