@@ -171,8 +171,73 @@ comment = {
 			}
 		});
 		// 压力太大了就改大点
-		window.setTimeout('comment.count()',10000);
+		window.setTimeout('comment.count()',300000);
 	}
+	
+};
+
+
+/**
+ * 文章喜欢
+ */
+articlelike = {
+	click:function(article_id){
+		if($('#articlelike_'+article_id).hasClass('glyphicon-heart-empty')){
+			articlelike.yes(article_id);
+		} else {
+			articlelike.no(article_id);
+		}
+	}
+	/**
+	 * 喜欢
+	 * 
+	 * @param article_id
+	 */
+	,yes:function(article_id){
+		jQuery.ajax({
+			type:'POST',
+			url:'front/articlelike/yes/'+article_id,
+			success:function(data){
+				if(data.status==1){
+					$('#articlelike_'+article_id).removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
+					$('#articlelike_'+article_id).attr("title","取消喜欢");
+				} else {
+					alert('失败：'+data.msg);
+				}
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+	}
+
+	/**
+	 * 取消喜欢
+	 * 
+	 * @param article_id
+	 */
+	,no:function(article_id){
+		jQuery.ajax({
+			type:'POST',
+			url:'front/articlelike/no/'+article_id,
+			success:function(data){
+				if(data.status==1){
+					$('#articlelike_'+article_id).removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
+					$('#articlelike_'+article_id).attr("title","喜欢");
+				} else {
+					alert('失败：'+data.msg);
+				}
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+	}
+	
 	
 };
 

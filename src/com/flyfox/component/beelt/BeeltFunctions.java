@@ -2,6 +2,7 @@ package com.flyfox.component.beelt;
 
 import java.util.Date;
 
+import com.flyfox.front.articlelike.ArticleLikeCache;
 import com.flyfox.jfinal.template.TemplateFunctions;
 import com.flyfox.modules.article.TbArticle;
 import com.flyfox.modules.front.service.FrontCacheService;
@@ -52,6 +53,10 @@ public class BeeltFunctions extends TemplateFunctions {
 		return article == null ? 0 : article.getCountComment();
 	}
 
+	public static boolean isLike(int userId, int articleId) {
+		return new ArticleLikeCache().isLike(userId, articleId);
+	}
+	
 	/**
 	 * 字符串截取
 	 * 

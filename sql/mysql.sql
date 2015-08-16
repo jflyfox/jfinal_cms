@@ -154,6 +154,18 @@ create table tb_friendlylink
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='友情链接表';
 
+/**
+ * 喜欢的文章
+ */
+drop table if exists tb_articlelike;
+CREATE TABLE tb_articlelike
+(
+  id int(11) not null auto_increment comment 'id',
+  article_id int(11) DEFAULT NULL COMMENT '文章ID',
+  create_time  varchar(64) DEFAULT NULL COMMENT '创建时间',
+  create_id  int(11) DEFAULT 0 COMMENT '创建者',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='喜欢的文章';
 
 /************************ 系统表分界线 **********************************/
 /**

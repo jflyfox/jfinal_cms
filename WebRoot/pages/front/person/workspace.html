@@ -49,7 +49,10 @@ var bodyContent = {
 			<h3 class="panel-title">发布的文章</h3>
 		  </div>
 		 	 <ul class="list-group">
-		 	 	<% for(item in page.list){ %>
+		 	 	<% 
+		 	 		var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+		 	 		for(item in page.list){ 
+		 	 	%>
 		 	 	<li class="list-group-item">
 					<div class="row">
 					  <div class="col-md-2">
@@ -85,20 +88,22 @@ var bodyContent = {
 							<span class="label  label-success">推荐</span>
 							<% } %> 
 								<div class="pull-right" style="font-size:12px;">
-								<% if(item.is_comment==1){ %>
-								<a href="front/article/${item.id}#article_comment"  target="_blank"><span>评论(${flyfox.countComment(item.id)})</span></a>
-								&nbsp;&nbsp;
-								<% } %>
-								<span>浏览量(${flyfox.countView(item.id)})</span>
 								
 								<!-- 编辑区 -->
 								&nbsp;&nbsp;
+								<% if (sessionUserId==item.create_id) { %>
 								<span>
 								(
 									<a href="front/person/editblog/${item.id}" target="_blank"><span>编辑</span></a>
 								|
 									<a href="javascript:void(0);" onclick="delblog(${item.id});return false;"><span style="color: red;">删除</span></a>
+								|
+									<a href="front/article/${item.id}.html" target="_blank"><small>查看</small></a>
 								)
+								</span>
+								<% } else { %>
+									<a href="front/article/${item.id}.html" target="_blank"><span>查看全部</span></a>
+								<% } %>
 								</div>
 							</h4>
 							
@@ -112,7 +117,18 @@ var bodyContent = {
 									<small>发布时间：${item.publish_time }</small>
 								</div>
 								<div class="pull-right" >
-									<a href="front/article/${item.id}" target="_blank"><small>查看全部</small></a>
+									<% if(item.is_comment==1){ %>
+										<a href="front/article/${item.id}#article_comment"  target="_blank"><small>评论(${flyfox.countComment(item.id)})</small></a>
+									&nbsp;
+									<% } %>
+									<small>浏览量(${flyfox.countView(item.id)})</small>
+									&nbsp;
+									<% 
+										var isLike = (sessionUserId==0? flase: flyfox.isLike(sessionUserId,item.id)); 
+									%>
+									<span style="vertical-align: middle;cursor: pointer;"  id="articlelike_${item.id}" onclick="articlelike.click(${item.id});" 
+										class="glyphicon glyphicon-heart${isLike?'':'-empty'}"
+										title="${isLike?'取消':''}喜欢" aria-hidden="true"></span>
 								</div>
 							</footer>
 					  </div>
@@ -144,13 +160,25 @@ var bodyContent = {
 			      </div>
 			  	</div>
 			  	
-			  	<div class="btn-group btn-group-justified" role="group">
-				   <div class="btn-group" role="group">
-				    <a class="btn btn-success" href="front/person/newblog" role="button">发布博文</a>
-				  </div>
-				  <div class="btn-group" role="group">
-				  	<a class="btn btn-default" href="front/person/profile" role="button">编辑信息</a>
-				  </div>
+			  	<div class="list-group" role="group">
+				  <a href="front/person/newblog" class="list-group-item">
+				  	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+				  	发布博文
+				  </a>
+				  <a href="front/person" class="list-group-item">
+				  	<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+				  	<span class="badge">${userarticle!''}</span>
+				  	我的博文
+				  </a>
+				  <a href="front/person/articlelike" class="list-group-item">
+				  	<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+				  	<span class="badge">${userlike!''}</span>
+				  	喜欢博文
+				  </a>
+				  <a href="front/person/profile" class="list-group-item">
+				  	<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+				  	编辑信息
+				  </a>
 				</div>
 		  </div>	 
 		</div>

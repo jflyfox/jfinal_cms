@@ -327,4 +327,47 @@ public class PersonController extends BaseController {
 		renderAuto(path + "view_person.html");
 
 	}
+	
+	/**
+	 * 我喜欢的文章
+	 */
+	@Before(FrontInterceptor.class)
+	public void articlelike() {
+		SysUser user = (SysUser) getSessionUser();
+		if (user == null) {
+			redirect(CommonController.firstPage);
+			return;
+		}
+
+		// 活动目录
+		setAttr("folders_selected", "personhome");
+
+		setAttr("user", user);
+
+		// 数据列表,只查询展示的和类型为11,12的
+		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), "select t.* ", //
+				" from tb_article t " //
+				+ " left join tb_articlelike al on al.article_id = t.id"
+				+ " where t.status = 1 and t.type in (11,12) " //
+						+ " and al.create_id = ? " //
+						+ " and t.folder_id != 13 " // 不搜索首页图片
+						+ " order by t.sort,t.create_time desc", user.getUserid());
+		setAttr("page", articles);
+
+		// 显示50个标签
+		if (articles.getTotalRow() > 0) {
+			Page<TbTags> taglist = new FrontCacheService().getTagsByFolder(new Paginator(1, 50), articles.getList()
+					.get(0).getFolderId());
+			setAttr("taglist", taglist.getList());
+		} else {
+			Page<TbTags> taglist = new FrontCacheService().getTags(new Paginator(1, 50));
+			setAttr("taglist", taglist.getList());
+		}
+
+		// title展示
+		setAttr(JFlyFoxUtils.TITLE_ATTR,
+				"空间 - " + BeeltFunctions.getUserName(user.getUserid()) + " - " + JFlyFoxCache.getHeadTitle());
+
+		renderAuto(path + "articlelike.html");
+	}
 }

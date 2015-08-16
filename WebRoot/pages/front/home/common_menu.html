@@ -66,11 +66,7 @@ var bodyContent = {
 							<span class="label  label-success">推荐</span>
 							<% } %> 
 								<div class="pull-right" style="font-size:12px;">
-								<% if(item.is_comment==1){ %>
-								<a href="front/article/${item.id}.html#article_comment"  target="_blank"><span>评论(${flyfox.countComment(item.id)})</span></a>
-								&nbsp;&nbsp;
-								<% } %>
-								<span>浏览量(${flyfox.countView(item.id)})</span>
+								<a href="front/article/${item.id}.html" target="_blank"><small>查看全部</small></a>
 								</div>
 							</h4>
 							
@@ -84,7 +80,19 @@ var bodyContent = {
 									<small>发布时间：${item.publish_time }</small>
 								</div>
 								<div class="pull-right" >
-									<a href="front/article/${item.id}.html" target="_blank"><small>查看全部</small></a>
+									<% if(item.is_comment==1){ %>
+										<a href="front/article/${item.id}#article_comment"  target="_blank"><small>评论(${flyfox.countComment(item.id)})</small></a>
+									&nbsp;
+									<% } %>
+									<small>浏览量(${flyfox.countView(item.id)})</small>
+									&nbsp;
+									<% 
+										var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+										var isLike = (sessionUserId==0? flase: flyfox.isLike(sessionUserId,item.id)); 
+									%>
+									<span style="vertical-align: middle;cursor: pointer;"  id="articlelike_${item.id}" onclick="articlelike.click(${item.id});" 
+										class="glyphicon glyphicon-heart${isLike?'':'-empty'}"
+										title="${isLike?'取消':''}喜欢" aria-hidden="true"></span>
 								</div>
 							</footer>
 					  </div>
