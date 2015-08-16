@@ -26,7 +26,7 @@ public class JFlyFoxUtils {
 	 */
 	public static final String USER_KEY = "USER_KEY";
 
-	private static final DESUtils des = new DESUtils("flyoffox");
+	private static final DESUtils des = new DESUtils("xxxxxxxx");
 
 	// admin:LHmWhtwF/dHIwArTw+HUEg== test:qvPQPhVn96Lx80f7BIaVjA==
 	public static void main(String[] args) {
