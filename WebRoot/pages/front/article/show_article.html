@@ -51,12 +51,19 @@ var bodyContent = {
 							<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 						</div>
 						<div class="art-right">
-							<span class="art-author" title="${item.publish_user!''}">作者：${flyfox.suojin(item.publish_user!'',6)}</span> •
-							<time class="art-date" datetime="${item.publish_time!''}" title="${item.publish_time!''}">${item.publish_time!''}</time>
-							<span style="margin-left: 5px;">浏览（${item.count_view!'0'}）</span>
+							<span style="vertical-align: middle;" class="art-author" title="${item.publish_user!''}">作者：${flyfox.suojin(item.publish_user!'',6)}</span> •
+							<time style="vertical-align: middle;" class="art-date" datetime="${item.publish_time!''}" title="${item.publish_time!''}">${item.publish_time!''}</time>
+							<span style="vertical-align: middle;margin-left: 2px;">浏览（${item.count_view!'0'}）</span>
 							<% if(item.is_comment==1){ %>
-							<a style="margin-left: 5px;" href="front/article/${item.id}.html#article_comment" ><span id="count_comment_show">评论（${item.count_comment!'0'}）</span></a>
+							<a style="vertical-align: middle;margin-left: 2px;" href="front/article/${item.id}.html#article_comment" ><span id="count_comment_show">评论（${item.count_comment!'0'}）</span></a>
 							<% } %>
+							<% 
+								var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+								var isLike = (sessionUserId==0? flase: flyfox.isLike(sessionUserId,item.id)); 
+							%>
+							<span style="vertical-align: middle;cursor: pointer;"  id="articlelike_${item.id}" onclick="articlelike.click(${item.id});" 
+								class="glyphicon glyphicon-heart${isLike?'':'-empty'}"
+								title="${isLike?'取消':''}喜欢" aria-hidden="true"></span>
 						</div>
 					</section>
 					
