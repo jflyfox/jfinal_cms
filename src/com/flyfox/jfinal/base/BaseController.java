@@ -166,19 +166,24 @@ public abstract class BaseController extends Controller {
 	@SuppressWarnings("rawtypes")
 	public SessionUser getSessionUser() {
 		SysUser sysUser = getSessionAttr(Attr.SESSION_NAME);
-		// 如果session没有，cookie有~那么就设置到Session
-		if (sysUser == null) {
-			String cookieContent = getCookie(Attr.SESSION_NAME);
-			if (cookieContent != null) {
-				String key = COOKIE_DES.decryptString(cookieContent);
-				if (StrUtils.isNotEmpty(key) && key.split(",").length == 2) {
-					int userid = NumberUtils.parseInt(key.split(",")[0]);
-					String password = key.split(",")[1];
-					sysUser = SysUser.dao.findFirstByWhere(" where userid = ? and password = ? ", userid, password);
-					if (sysUser != null)
-						setSessionUser(sysUser);
+		try {
+			// 如果session没有，cookie有~那么就设置到Session
+			if (sysUser == null) {
+				String cookieContent = getCookie(Attr.SESSION_NAME);
+				if (cookieContent != null) {
+					String key = COOKIE_DES.decryptString(cookieContent);
+					if (StrUtils.isNotEmpty(key) && key.split(",").length == 2) {
+						int userid = NumberUtils.parseInt(key.split(",")[0]);
+						String password = key.split(",")[1];
+						sysUser = SysUser.dao.findFirstByWhere(" where userid = ? and password = ? ", userid, password);
+						if (sysUser != null)
+							setSessionUser(sysUser);
+					}
 				}
 			}
+		} catch (Exception e) {
+			log.error("cooke user异常:", e);
+			return null;
 		}
 		return sysUser;
 	}
