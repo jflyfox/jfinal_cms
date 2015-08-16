@@ -124,7 +124,7 @@ var bodyContent = {
 									<small>浏览量(${flyfox.countView(item.id)})</small>
 									&nbsp;
 									<% 
-										var isLike = (sessionUserId==0? flase: flyfox.isLike(sessionUserId,item.id)); 
+										var isLike = (sessionUserId==0? false: flyfox.isLike(sessionUserId,item.id)); 
 									%>
 									<span style="vertical-align: middle;cursor: pointer;"  id="articlelike_${item.id}" onclick="articlelike.click(${item.id});" 
 										class="glyphicon glyphicon-heart${isLike?'':'-empty'}"
