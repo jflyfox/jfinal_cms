@@ -18,6 +18,9 @@
  3. [oschina](http://www.oschina.net/)
 
 # 更新说明
+>## 2015-08-16
+> 1. 解决cookie访问异常，导致页面无法访问问题。
+
 >## 2015-08-04
 > 1. 感谢老李提醒，mysql5.1中group_concat可能到返回类型是blob而不能转换为String，mysql5.5没有这个问题。
 可以通过CAST(group_concat(tagname) AS CHAR)进行优化，未进行测试。
