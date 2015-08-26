@@ -378,5 +378,12 @@ INSERT INTO `tb_friendlylink` VALUES ('7', 'OsChina', 'http://www.oschina.net/',
 
 -- 目录数据
 INSERT INTO `tb_folder` VALUES ('1', '首页', '', '门头沟信息网', '1', '1', '1', null, '2015-01-28 16:54:03', '2015-01-30 13:24:58', '1');
+INSERT INTO `tb_folder` VALUES ('2', '新闻', '', null, '2', '1', '1', null, '2015-05-24 15:46:40', '2015-01-30 13:24:58', '1');
+INSERT INTO `tb_folder` VALUES ('3', '美食', '', null, '3', '1', '1', null, '2015-05-24 15:46:54', '2015-01-30 13:24:58', '1');
+INSERT INTO `tb_folder` VALUES ('4', '旅游', '', null, '5', '1', '1', null, '2015-05-24 15:47:43', '2015-05-24 15:47:43', '1');
+INSERT INTO `tb_folder` VALUES ('5', '教育', '', null, '7', '1', '1', null, '2015-05-24 15:47:55', '2015-05-24 15:47:55', '1');
 INSERT INTO `tb_folder` VALUES ('6', '后台管理', '', null, '90', '1', '3', 'admin', '2015-05-24 15:47:32', '2015-01-30 13:24:58', '1');
+INSERT INTO `tb_folder` VALUES ('7', '标签查询', '', null, '80', '1', '2', 'front/tags/all', '2015-05-27 23:34:38', '2015-05-18 09:12:57', '1');
+INSERT INTO `tb_folder` VALUES ('13', '首页图片', '', null, '101', '2', '1', null, '2015-05-24 16:33:06', '2015-05-24 16:33:06', '1');
 INSERT INTO `tb_folder` VALUES ('90', '关于我们', '', null, '81', '1', '1', null, '2015-05-26 16:40:46', '2015-05-26 10:36:30', '1');
+INSERT INTO `tb_folder` VALUES ('99', '其他咨询', '', null, '30', '1', '1', null, '2015-05-27 23:06:01', '2015-05-27 23:06:01', '1');
