@@ -157,6 +157,7 @@ public class PersonController extends BaseController {
 			model.setSort(20); // 排序
 			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
 			model.setPublishUser(user.getUserName()); // 发布人
+			model.setUpdateTime(getNow());
 			model.setCreateId(getSessionUser().getUserID());
 			model.setCreateTime(getNow());
 			model.save();
