@@ -7,6 +7,7 @@ import com.beetl.functions.BeetlStrUtils;
 import com.flyfox.component.beelt.BeeltFunctions;
 import com.flyfox.component.interceptor.CommonInterceptor;
 import com.flyfox.component.interceptor.PageViewInterceptor;
+import com.flyfox.component.interceptor.UpdateCacheInterceptor;
 import com.flyfox.component.interceptor.UserKeyInterceptor;
 import com.flyfox.component.util.JFlyFoxCache;
 import com.flyfox.jfinal.component.handler.HtmlHandler;
@@ -33,7 +34,7 @@ public class BaseConfig extends JflyfoxConfig {
 	public void configHandler(Handlers me) {
 		// Beelt
 		// me.add(new BeeltHandler());
-		me.add(new HtmlHandler());	
+		me.add(new HtmlHandler());
 		super.configHandler(me);
 	}
 
@@ -50,6 +51,8 @@ public class BaseConfig extends JflyfoxConfig {
 		me.add(new UserKeyInterceptor());
 		// page view 统计
 		me.add(new PageViewInterceptor());
+		// 缓存更新
+		me.add(new UpdateCacheInterceptor());
 		// 用户认证
 		me.add(new UserInterceptor());
 	}

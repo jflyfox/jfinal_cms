@@ -18,7 +18,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 
 /**
- * 联系人管理
+ * 文章管理
  * 
  * @author flyfox 2014-2-11
  */
