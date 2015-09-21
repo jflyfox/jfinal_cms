@@ -145,6 +145,7 @@ public class PersonController extends BaseController {
 		Integer pid = getParaToInt();
 		TbArticle model = getModel(TbArticle.class);
 		// TODO 这里需要加入验证，小心有坏人
+		model.setUpdateTime(getNow());
 		if (pid != null && pid > 0) { // 更新
 			model.update();
 		} else { // 新增
@@ -157,7 +158,6 @@ public class PersonController extends BaseController {
 			model.setSort(20); // 排序
 			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
 			model.setPublishUser(user.getUserName()); // 发布人
-			model.setUpdateTime(getNow());
 			model.setCreateId(getSessionUser().getUserID());
 			model.setCreateTime(getNow());
 			model.save();
