@@ -132,8 +132,8 @@ public class ArticleController extends BaseController {
 			model.set("file_name", oldFileName); //原文件名
 		} else {
 			//  删除标记
-			int file_flag = getParaToInt("file_url_flag");
-			if (file_flag==1) {
+			Integer file_flag = getParaToInt("file_url_flag");
+			if (file_flag != null && file_flag == 1) {
 				model.set("file_url", "");
 				model.set("file_name", "");
 			}
