@@ -68,6 +68,8 @@ CREATE TABLE tb_article
   sort  int(11) default '1' comment '排序',
   image_url varchar(256) default null comment '图片路径',
   image_net_url varchar(256) DEFAULT NULL COMMENT '网络图片路径',
+  file_url varchar(256) DEFAULT NULL COMMENT '附件路径',
+  file_name varchar(256) DEFAULT NULL COMMENT '附件原名称',
   publish_time varchar(64) DEFAULT NULL COMMENT '发布时间',
   publish_user varchar(64) DEFAULT '1' COMMENT '发布者',
   start_time varchar(64) DEFAULT NULL COMMENT '开始时间',

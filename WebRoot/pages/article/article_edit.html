@@ -106,6 +106,24 @@ var bodyContent = {
 					<input type="file" accept="image/*" class="form-control" name="model.image_url" />
 				</td>
 			</tr>
+			<tr>
+				<td>附件</td>
+				<td>
+					<% if(!strutil.isEmpty(model.file_url)){ %>
+					<div id="file_url_show" >
+						<a href="download/file_url/${model.file_url }" target="_blank" style="text-decoration:none;">
+							${model.file_name}
+						</a>
+						<a href="javascript:void(0);"  
+						onclick="$('#file_url_show').hide();$('#file_url_flag').val('1');"
+						style="color: red;">删除</a>
+					</div>
+					<% } %>
+					<!-- 删除标记 -->
+					<input type="hidden" id="file_url_flag" class="form-control" name="file_url_flag" />
+					<input type="file" accept="*/*" class="form-control" name="model.file_url" />
+				</td>
+			</tr>
 					<tr>
 				<td>发布时间</td>
 				<td>

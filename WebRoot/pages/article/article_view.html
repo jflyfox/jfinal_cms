@@ -71,6 +71,16 @@ var bodyContent = {
 		</td>
 	</tr>
 	<tr>
+		<td>附件</td>
+		<td>
+			<% if(!strutil.isEmpty(model.file_url)){ %>
+			<a href="download/file_url/${model.file_url }" target="_blank" style="text-decoration:none;">
+				${model.file_name}
+			</a>
+			<% } %>
+		</td>
+	</tr>
+	<tr>
 		<td>发布时间</td>
 		<td>${model.publish_time}</td>
 	</tr>

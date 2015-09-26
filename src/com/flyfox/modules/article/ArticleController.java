@@ -25,13 +25,25 @@ public class ArticleController extends BaseController {
 	private static final String path = "/pages/article/article_";
 
 	/**
+	 * 上传临时目录
+	 */
+	public static final String UPLOAD_TMP_PATH = PathKit.getWebRootPath() + File.separator + "download" + File.separator + "tmp";
+	/**
 	 * 图片目录
 	 */
 	public static final String IMAGE_PATH = "download" + File.separator + "image_url";
 	/**
 	 * 图片全目录
 	 */
-	public static final String UPLOAD_PATH = PathKit.getWebRootPath() + File.separator + IMAGE_PATH;
+	public static final String UPLOAD_IMAGE_PATH = PathKit.getWebRootPath() + File.separator + IMAGE_PATH;
+	/**
+	 * 文件目录
+	 */
+	public static final String FILE_PATH = "download" + File.separator + "file_url";
+	/**
+	 * 文件全目录
+	 */
+	public static final String UPLOAD_FILE_PATH = PathKit.getWebRootPath() + File.separator + FILE_PATH;
 
 	public void index() {
 		list();
@@ -98,23 +110,33 @@ public class ArticleController extends BaseController {
 	}
 
 	public void save() {
-		UploadFile uploadFile = getFile("model.image_url", UPLOAD_PATH, 10 * 1024 * 1024);
+		UploadFile uploadImage = getFile("model.image_url", UPLOAD_TMP_PATH, 10 * 1024 * 1024);
 
+		UploadFile uploadFile = getFile("model.file_url", UPLOAD_TMP_PATH, 10 * 1024 * 1024);
+		
 		Integer pid = getParaToInt();
 		TbArticle model = getModel(TbArticle.class);
 
-		// 附件
-		if (uploadFile != null) {
-			String suf = "";
-			if (uploadFile.getFileName().lastIndexOf(".") >= 0) {
-				suf = uploadFile.getFileName().substring(uploadFile.getFileName().lastIndexOf("."));
-			}
-			String fileName = DateUtils.getNow("yyyyMMdd_HHmmss") + "_" + new SecureRandom().nextInt(999999) + suf;
-			// 改名,避免重复以及中文问题
-			uploadFile.getFile().renameTo(new File(UPLOAD_PATH + File.separator + fileName));
-
+		// 图片附件
+		if (uploadImage != null) {
+			String fileName = renameFile(UPLOAD_IMAGE_PATH,uploadImage);
 			model.set("image_url", fileName);
 			// model.set("image_url", uploadFile.getFileName());
+		}
+		
+		// 文件附件
+		if (uploadFile != null) {
+			String oldFileName = uploadFile.getFileName();
+			String fileName = renameFile(UPLOAD_FILE_PATH, uploadFile);
+			model.set("file_url", fileName);
+			model.set("file_name", oldFileName); //原文件名
+		} else {
+			//  删除标记
+			int file_flag = getParaToInt("file_url_flag");
+			if (file_flag==1) {
+				model.set("file_url", "");
+				model.set("file_name", "");
+			}
 		}
 
 		model.put("update_time", getNow());
@@ -130,6 +152,30 @@ public class ArticleController extends BaseController {
 		}
 
 		renderMessage("保存成功");
+	}
+
+	/**
+	 * 重命名
+	 * 
+	 * 2015年9月25日 下午10:37:55
+	 * flyfox 330627517@qq.com
+	 * @param uploadFile
+	 * @return
+	 */
+	protected String renameFile(String path,UploadFile uploadFile) {
+		File uploadPath = new File(path);
+		if (!uploadPath.exists()) {
+			uploadPath.mkdirs();
+		}
+		
+		String suf = "";
+		if (uploadFile.getFileName().lastIndexOf(".") >= 0) {
+			suf = uploadFile.getFileName().substring(uploadFile.getFileName().lastIndexOf("."));
+		}
+		String fileName = DateUtils.getNow("yyyyMMdd_HHmmss") + "_" + new SecureRandom().nextInt(999999) + suf;
+		// 改名,避免重复以及中文问题
+		uploadFile.getFile().renameTo(new File(path + File.separator + fileName));
+		return fileName;
 	}
 
 	public void edit_content() {

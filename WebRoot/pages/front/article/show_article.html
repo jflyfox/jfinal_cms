@@ -77,6 +77,14 @@ var bodyContent = {
 				  	 </div>
 					 <% } %>
 					${item.content!'' }
+					<% if(strutil.isNotEmpty(item.file_url)) { %>
+						<div>
+						<span style="color: gray;">附件:</span>
+						<a href="download/file_url/${item.file_url }" target="_blank" style="text-decoration:none;">
+							${item.file_name}
+						</a>
+						</div>
+					<% } %>
 				</section>
 				
 
