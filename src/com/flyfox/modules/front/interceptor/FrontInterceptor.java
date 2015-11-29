@@ -9,7 +9,7 @@ import com.flyfox.modules.folder.TbFolder;
 import com.flyfox.modules.friendlylink.FriendlylinkCache;
 import com.flyfox.modules.front.service.FrontCacheService;
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -20,7 +20,7 @@ import com.jfinal.plugin.activerecord.Page;
  */
 public class FrontInterceptor implements Interceptor {
 
-	public void intercept(ActionInvocation ai) {
+	public void intercept(Invocation ai) {
 
 		Controller controller = ai.getController();
 

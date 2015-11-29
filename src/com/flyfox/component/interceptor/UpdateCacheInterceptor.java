@@ -5,7 +5,7 @@ import com.flyfox.modules.folder.FolderService;
 import com.flyfox.modules.front.service.FrontCacheService;
 import com.flyfox.util.Config;
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 
 /**
  * 缓存更新拦截器
@@ -21,7 +21,7 @@ public class UpdateCacheInterceptor implements Interceptor {
 
 	public static long lastUpdateTime = System.currentTimeMillis();
 
-	public void intercept(ActionInvocation ai) {
+	public void intercept(Invocation ai) {
 
 		// 如果想让体验更好，可以调用一遍所有缓存方法（比较麻烦）
 		long now = System.currentTimeMillis();

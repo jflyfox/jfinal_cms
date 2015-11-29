@@ -3,7 +3,7 @@ package com.flyfox.component.interceptor;
 import com.flyfox.component.util.JFlyFoxCache;
 import com.flyfox.component.util.JFlyFoxUtils;
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 
 /**
@@ -14,7 +14,7 @@ import com.jfinal.core.Controller;
 public class CommonInterceptor implements Interceptor {
 
 
-	public void intercept(ActionInvocation ai) {
+	public void intercept(Invocation ai) {
 
 		Controller controller = ai.getController();
 		

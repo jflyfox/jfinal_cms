@@ -6,7 +6,7 @@ import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.util.Attr;
 import com.flyfox.util.StrUtils;
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Logger;
 
@@ -19,7 +19,7 @@ public class UserInterceptor implements Interceptor {
 
 	private static final Logger log = Logger.getLogger(UserInterceptor.class);
 
-	public void intercept(ActionInvocation ai) {
+	public void intercept(Invocation ai) {
 
 		Controller controller = ai.getController();
 

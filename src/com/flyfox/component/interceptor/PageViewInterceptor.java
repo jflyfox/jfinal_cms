@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import com.flyfox.modules.pageview.PageViewCache;
 import com.flyfox.util.StrUtils;
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 
 /**
@@ -19,7 +19,7 @@ public class PageViewInterceptor implements Interceptor {
 
 	private final static Logger log = Logger.getLogger(PageViewInterceptor.class);
 
-	public void intercept(ActionInvocation ai) {
+	public void intercept(Invocation ai) {
 
 		Controller controller = ai.getController();
 
