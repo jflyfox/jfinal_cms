@@ -161,9 +161,11 @@ var bodyContent = {
 						</div>
 					</div>
 					<%  } %>
-				
+					
+					<div style="margin-left: 5px;margin-top: 5px;">
+					<%include("/pages/front/includes/paginator.html",{suffix:'#article_comment'}){} %>
+					</div>
 				</div>
-				<%include("/pages/front/includes/paginator.html",{suffix:'#article_comment'}){} %>
 			</div>
 					
 			<% } %>
