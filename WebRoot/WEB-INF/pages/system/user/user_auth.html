@@ -1,0 +1,68 @@
+<% 
+	var headContent = {
+	include("/pages/template/head.html"){}
+%>
+
+<script type="text/javascript">
+		$(function(){
+			// 初始化，设置被选中
+			var roleids = $("#roleids").val().split(",");
+			for(var i = 0 ; i < roleids.length ; i++){
+				if(roleids[i]!='') $("[id='roleid_"+roleids[i]+"']").attr("checked",true); 
+			}
+			
+		});
+		
+		function save(){
+			var ids = "";
+			$('input[name="roleid"]:checked').each(function() {
+				ids += $(this).val() + ',';
+			});
+			if (ids != "") {
+				ids = ids.substring(0, ids.length - 1);
+			}
+
+			$('[name="roleids"]').val(ids);
+			var url = 'system/user/auth_save';
+			form1.action = url;
+			form1.submit();
+		}
+</script>
+
+<%
+};
+
+var bodyContent = {
+%>
+	<form name="form1" action="" method="post"  class="form-inline" role="form">
+		<input name="userid" type="hidden" value="${userid}" >
+		<input id="roleids" name="roleids" type="hidden" value="${roleids!''}" >
+		<div style="margin-left: 20px;width: 90%;">
+			<ul class="list-group">
+			<% for(item in list) { %>
+			<li class="list-group-item">
+			  <div class="checkbox">
+			    <label>
+			      <input type="checkbox" name="roleid" id="roleid_${item.id}" value="${item.id}">&nbsp;&nbsp;&nbsp;&nbsp;${item.name}
+			    </label>
+			  </div>
+			</li>
+			<% } %>
+			</ul>
+		</div>
+		
+		<div style="height: 45px;clear: both;">
+		   	&nbsp;
+		</div>
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+		  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+			<button class="btn btn-primary" onclick="return save();">保 存</button>
+			<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+		  </div>
+		</nav>
+	</form>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

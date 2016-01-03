@@ -1,0 +1,112 @@
+<% 
+	var headContent = {
+	include("/pages/template/head.html"){}
+%>
+
+<script type="text/javascript">
+		$(function(){
+			// 初始化，设置被选中
+			var menus = $("#menus").val().split(",");
+			for(var i = 0 ; i < menus.length ; i++){
+				if(menus[i]!='') {
+					$("[id^='menu_"+menus[i]+"']").attr("checked","checked"); 
+					$("[id^='menu_"+menus[i]+"']").prop("checked","checked"); 
+				}
+			}
+			
+			// 复选框绑定点击事件
+			$("[id^='menu']").on("click",function(){
+				var arr = $(this).attr("id").split("_");
+				var parentid = arr[2];
+				var thisid = arr[1];
+				// 根目录
+				if(parentid==0) {
+					// 跟着根节点
+					$("[id^='menu'][id$='"+thisid+"']").attr("checked",$(this).is(":checked")); 
+					$("[id^='menu'][id$='"+thisid+"']").prop("checked",$(this).is(":checked")); 
+				}
+				
+				// 子节点被选中，根节点也需要被选择
+				if($(this).is(":checked") && parentid!=0) {
+					$("[id^='menu_"+ parentid +"']").attr("checked",$(this).is(":checked")); 
+					$("[id^='menu_"+ parentid +"']").prop("checked",$(this).is(":checked")); 
+				}
+			});
+			
+		});
+		
+		function save(){
+			var ids = "";
+			$('input[name="menu"]:checked').each(function() {
+				ids += $(this).val() + ',';
+			});
+			if (ids != "") {
+				ids = ids.substring(0, ids.length - 1);
+			}
+
+			$('[name="menus"]').val(ids);
+			var url = 'system/role/auth_save';
+			form1.action = url;
+			form1.submit();
+		}
+</script>
+
+<style>
+<!--
+.checkbox, .radio {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+-->
+</style>
+<%
+};
+
+var bodyContent = {
+%>
+	<form name="form1" action="" method="post"  class="form-inline" role="form">
+		<input name="roleid" type="hidden" value="${roleid}" >
+		<input id="menus" name="menus" type="hidden" value="${menus!''}" >
+		<div style="margin-left: 20px;width: 100%;">
+		<div style="width: 320px;float: left;">
+			<ul class="list-group">
+		<% for(item in rootList) { %>
+				<li class="list-group-item list-group-item-info">
+				  <div class="checkbox">
+				    <label>
+				      <input type="checkbox" name="menu" id="menu_${item.id}_0" value="${item.id}">&nbsp;&nbsp;&nbsp;&nbsp;${item.name}
+				    </label>
+				  </div>
+				</li>
+			<% if(map[item.id].~size > 0) { %>
+				<%  for(item2 in map[item.id]) { %>
+				<li class="list-group-item">
+				  <div class="checkbox" style="padding-left: 20px;">
+				    <label>
+					  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				      <input type="checkbox" name="menu" id="menu_${item2.id}_${item.id}" value="${item2.id}">&nbsp;&nbsp;&nbsp;&nbsp;${item2.name}
+				    </label>
+				  </div>
+				</li>
+				<% } %>
+			<% } %>
+		<% } %>
+		</ul>
+		</div>
+		</div>
+		
+		<div style="height: 40px;clear: both;">
+		   	&nbsp;
+		</div>
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+		  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+			<button class="btn btn-primary" onclick="return save();">保 存</button>
+			<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+		  </div>
+		</nav>
+	</form>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

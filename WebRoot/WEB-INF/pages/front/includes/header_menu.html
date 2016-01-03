@@ -1,0 +1,100 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href=""><img alt="Brand" width="20" height="20" src="static/front/logo.png"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<% if (!isEmpty(folders)){ %>
+			<% for(item in folders){ %>
+				<% // 如果是跳转到admin后台管理页面，那么必须是登录并且是管理员 %>
+				<% if (item.jump_url!='admin' || (item.jump_url=='admin' && !isEmpty(session.session_user) && session.session_user.usertype == 1) ) { %>
+				
+				<% if(item.type==1){ %>
+				<li class="${flyfox.isNew(item.update_time,7)?'q-newicon':''} ${item.id==folders_selected!''?'active':''} "><a href="${flyfox.getMenu(item.id)}">${item.name}</a></li>
+				<% } else if(item.type==2){ %>
+				<li class="${flyfox.isNew(item.update_time,7)?'q-newicon':''}  ${item.id==folders_selected!''?'active':''} "><a href="${item.jump_url}">${item.name}</a></li>
+				<% } else if(item.type==3){ %>
+				<li class="${flyfox.isNew(item.update_time,7)?'q-newicon':''}  ${item.id==folders_selected!''?'active':''} "><a href="${item.jump_url}" target="_blank">${item.name}</a></li>
+				<% } else if(item.type==4){ %>
+				${item.jump_url}
+				<% } %>
+				
+				<% } %>
+			<% } %>
+		<% } %>
+		<% if (!isEmpty(foldersOther)){ %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">其他 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+				<% for(item in foldersOther){ %>
+					<% // 如果是跳转到admin后台管理页面，那么必须是登录并且是管理员 %>
+					<% if (item.jump_url!='admin' || (item.jump_url=='admin' && !isEmpty(session.session_user) && session.session_user.usertype == 1) ) { %>
+					<% if(item.type==1){ %>
+					<li class="${flyfox.isNew(item.update_time,7)?'q-newicon':''} ${item.id==folders_selected!''?'active':''} "><a href="${flyfox.getMenu(item.id)}">${item.name}</a></li>
+					<% } else if(item.type==2){ %>
+					<li class="${flyfox.isNew(item.update_time,7)?'q-newicon':''}  ${item.id==folders_selected!''?'active':''} "><a href="${item.jump_url}">${item.name}</a></li>
+					<% } else if(item.type==3){ %>
+					<li class="${flyfox.isNew(item.update_time,7)?'q-newicon':''}  ${item.id==folders_selected!''?'active':''} "><a href="${item.jump_url}" target="_blank">${item.name}</a></li>
+					<% } else if(item.type==4){ %>
+					${item.jump_url}
+					<% } %>
+					
+					<% } %>
+				<% } %>
+          </ul>
+        </li>
+		<% } %>
+      </ul>
+      <form class="navbar-form navbar-left" role="search" name="search_form" method="post">
+		<div class="form-group input-group">
+		  <input type="text" class="form-control" name="search_header" placeholder="搜索...">
+		  <span class="input-group-btn">
+			<button class="btn btn-default" type="button" id="search_btn">查询</button>
+		  </span>
+		</div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+      	<% if(isEmpty(session.session_user)){ %>
+			<li><a href="oauth2/login?loin_type=baidu" class="navbar-brand" ><img alt="Brand" src="static/oauth2/baidu_login.png"></a></li>
+			<li><a href="oauth2/login?loin_type=qq" class="navbar-brand" ><img alt="Brand" src="static/oauth2/qq_login.png"></a></li>
+			<li><a href="front/login">登录</a></li>
+			<li class="${'regist'==folders_selected!''?'active':''}"><a href="front/regist" >注册</a></li>
+		<% } else { %>
+			<li class="${'personhome'==folders_selected!''?'active':''}"><a href="front/person" id="myhome" >我的空间</a></li>
+			<li class="${'message'==folders_selected!''?'active':''}"><a href="front/message" id="mymessage" >我的消息</a></li>
+			<li class="dropdown ${'person'==folders_selected!''?'active':''}">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">个人信息<span class="caret"></span></a>
+	          <ul class="dropdown-menu" role="menu">
+	            <li class="${'person'==folders_selected!''?'active':''}"><a href="front/person/profile">个人设置</a></li>
+	            <li class="divider"></li>
+	            <li><a href="front/logout">退出</a></li>
+	          </ul>
+	        </li>
+		<% } %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+	<!-- 固定导航 -->
+	<div class="row" style="height:60px;">
+	  <div class="col-md-12">
+			&nbsp;
+	  </div>
+	</div>
+</div>
+
+
+
+	

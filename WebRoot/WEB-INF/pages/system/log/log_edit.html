@@ -1,0 +1,81 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			id = id || '0';
+			var url = 'system/log/save/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal"
+		role="form" >
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<table class="table">
+		<%  // 列表头部%>
+								<tr>
+					<td>类型</td>
+					<td>
+					<input class="form-control" type="text" name="model.log_type" value="${model.log_type }"  valid='vnum_y' validname='类型'  />
+											</td>
+				</tr>
+								<tr>
+					<td>操作对象</td>
+					<td>
+					<input class="form-control" type="text" name="model.oper_object" value="${model.oper_object }"  valid='vtext' validname='操作对象'  />
+											</td>
+				</tr>
+								<tr>
+					<td>操作表</td>
+					<td>
+					<input class="form-control" type="text" name="model.oper_table" value="${model.oper_table }"  valid='vtext' validname='操作表'  />
+											</td>
+				</tr>
+								<tr>
+					<td>操作主键</td>
+					<td>
+					<input class="form-control" type="text" name="model.oper_id" value="${model.oper_id }"  valid='vnum' validname='操作主键'  />
+											</td>
+				</tr>
+								<tr>
+					<td>操作类型</td>
+					<td>
+					<input class="form-control" type="text" name="model.oper_type" value="${model.oper_type }"  />
+											</td>
+				</tr>
+								<tr>
+					<td>操作备注</td>
+					<td>
+					<input class="form-control" type="text" name="model.oper_remark" value="${model.oper_remark }"  />
+											</td>
+				</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%}
+DIRECTIVE SAFE_OUTPUT_CLOSE; 
+%>

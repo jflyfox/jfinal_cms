@@ -1,0 +1,44 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal">
+	<!-- 数据列表 -->
+		<table class="table">
+			<tr>
+				<td>类型</td>
+				<td>
+					<select disabled="disabled"  class="form-control">
+						${optionList }
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>名称</td>
+				<td>${item.detail_name}</td>
+			</tr>
+			<tr>
+				<td>编号</td>
+				<td>${item.detail_code}</td>
+			</tr>
+			<tr>
+				<td>排序号</td>
+				<td>${item.detail_sort!0}</td>
+			</tr>
+		</table>
+		
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

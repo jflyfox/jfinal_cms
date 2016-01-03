@@ -1,0 +1,109 @@
+<% 
+	var headContent = {
+%>
+	<% include("/pages/front/includes/header.html"){} %>
+
+<script type="text/javascript">
+<!--
+	function delblog(id) {
+		var url = 'front/person/delblog/'+id;
+		var title = '确认要删除该博文？';
+		Confirm(title, function() {
+			form1.action = url;
+			form1.submit();
+		});
+	}
+//-->
+</script>	
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/pages/front/includes/header_menu.html"){} %>	
+
+<div class="container">
+	
+	<form name="form1" action=""></form>
+	
+	<div class="row">
+		<div class="col-md-12">	
+	
+		<div class="panel panel-default">
+			 <div class="panel-body" style="padding:0px;">
+			<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="web">首页</a></li>
+			  <li><a href="front/person">我的空间</a></li>
+			  <li>我的博文</li>
+			</ol>
+			</div>
+		</div>
+	
+		</div>
+	</div>
+
+	<div class="row">
+	<!-- 文章 -->
+	<div class="col-md-8">	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">发布的文章</h3>
+		  </div>
+		  	 <!-- 文章列表 -->
+		 	 <% include("/pages/front/includes/articlelist.html",{articlelist:page.list}){} %>
+		</div>
+
+	</div>
+	
+	<!-- 信息列表 -->
+	<div class="col-md-4">	
+		<!-- 用户信息 -->
+		<%include("/pages/front/person/userinfo.html"){} %>
+		
+		
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">其他标签<a class="more" href="front/tags/all">更多</a></h3>
+		  </div>
+		  <div class="panel-body">
+			<%  
+					if(taglist != null && taglist.~size > 0) {
+			%>
+				<ul class="q-taglist clearfix">
+					<li title="标签"><span class="q-icon"></span></li>
+				<%
+					for(tagitem in taglist){ 
+				%>
+					<li class="q-tagitem">
+					<a class="a-tagitem" href="front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+					</li>
+				<% 
+					}
+				%>
+				</ul>
+			<%
+			} 
+			%>
+		 </div>
+		</div>
+		
+		<!-- 推荐文章 -->
+		<%  include("/pages/front/includes/recommend.html"){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/pages/front/includes/friendly.html"){} %>
+	</div>
+	</div>
+
+</div>
+	
+<%  include("/pages/front/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

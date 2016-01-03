@@ -1,0 +1,60 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+						<tr>
+				<td>类型</td>
+				<td>${model.log_type==1?"数据":"系统"}</td>
+			</tr>
+						<tr>
+				<td>操作对象</td>
+				<td>${model.oper_object}</td>
+			</tr>
+						<tr>
+				<td>操作表</td>
+				<td>${model.oper_table}</td>
+			</tr>
+						<tr>
+				<td>操作主键</td>
+				<td>${model.oper_id}</td>
+			</tr>
+						<tr>
+				<td>操作类型</td>
+				<td>${model.oper_type}</td>
+			</tr>
+						<tr>
+				<td>操作备注</td>
+				<td>${model.oper_remark}</td>
+			</tr>
+			<tr>
+				<td>操作时间</td>
+				<td>${model.create_time}</td>
+			</tr>
+			<tr>
+				<td>操作人</td>
+				<% if(isEmpty(flyfox.getUser(model.create_id))){ %>
+				<td></td>
+				<% } else { %>
+				<td>${flyfox.getUser(model.create_id).userName}</td>
+				<% } %>
+			</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

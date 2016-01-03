@@ -1,0 +1,74 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			id = id || '0';
+			var url = 'system/role/save/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal"
+		role="form" >
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<table class="table">
+		<%  // 列表头部%>
+								<tr>
+					<td>名称</td>
+					<td>
+					<input class="form-control" type="text" name="model.name" value="${model.name }"  valid='vtext' validname='名称'  />
+											</td>
+				</tr>
+								<tr>
+					<td>状态</td>
+					<td>
+						<label class="radio-inline">
+						  <input type="radio" name="model.status" id="" value="2"  ${model.status==2?"checked":"" } > 隐藏
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="model.status" id="" value="1"  ${model.status!=2?"checked":"" } > 显示
+						</label>
+					</td>
+				</tr>
+								<tr>
+					<td>排序</td>
+					<td>
+					<input class="form-control" type="text" name="model.sort" value="${model.sort }"  valid='vnum' validname='排序'  />
+											</td>
+				</tr>
+								<tr>
+					<td>说明</td>
+					<td>
+					<textarea class="form-control" rows="3" cols="30" name="model.remark" >${model.remark}</textarea>
+					</td>
+				</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id!'0'});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%}
+DIRECTIVE SAFE_OUTPUT_CLOSE; 
+%>

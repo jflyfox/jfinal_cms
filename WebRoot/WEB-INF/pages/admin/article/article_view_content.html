@@ -1,0 +1,61 @@
+<% 
+	var headContent = {
+%>
+	<base href="${BASE_PATH }">
+	<title>${HEAD_TITLE }</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.ico" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="keywords" content="${HEAD_TITLE }">
+	<meta http-equiv="description" content="${HEAD_TITLE }">
+
+	<link rel="stylesheet" href="static/web/home.css" type="text/css" media="screen, projection">
+
+	<!-- jquery -->
+	<% include("/static/component/include/jquery.html"){} %>
+	<!-- 高亮 -->
+	<% include("/static/component/include/ueditor_hightlighter.html"){} %>
+<%
+};
+
+var bodyContent = {
+%>
+	<div class="x-page-container">
+		<div class="mod-diary">
+			<div class="mod-diary-top"></div>
+			<div class="mod-diary-inner">
+				<div class="mod-diary-pen"></div>
+				<div class="mod-diary-nav"></div>
+				<div class="mod-diary-clip"></div>
+				<div class="mod-topspaceinfo">
+					<h1>
+						<a class="space-name" href="#">${model.content }</a>
+					</h1>
+				</div>
+
+				<div class="mod-bloglist">
+						<div class="mod-blogitem">
+							<div class="box-postdate">
+							${item.publish_time!''}
+							<p title="${item.publish_user!''}" >
+							<a class="box-postuser" href="javascript:void(0);">${flyfox.suojin(item.publish_user!'',6)}</a>
+							</p>
+							</div>
+							<div class="item-title">
+								<a href="javascript:void(0);">${item.title}</a>
+							</div>
+							<div class="item-content">${item.content!'' }</div>
+						</div>
+				</div>
+			</div>
+			<div class="mod-diary-bottom"></div>
+		</div>
+	</div>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

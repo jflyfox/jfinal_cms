@@ -1,0 +1,111 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			id = id || '0';
+			var url = 'system/user/save/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+	
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal"
+		role="form" >
+	<input type="hidden" name="model.userid" value="${model.userid}" />
+	<table class="table">
+		<% // 列表头部 %>
+			<tr>
+				<td>部门</td>
+				<td>
+					<select name="model.departid" class="form-control" valid="vselect" validname="部门">
+					<option value="-1">--请选择--</option>
+					${departSelect}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>登录名</td>
+				<td>
+					<input class="form-control" type="text" name="model.username" 
+						value="${model.username}" valid="vtext" validname="登录名" />
+				</td>
+			</tr>
+					<tr>
+				<td>真实姓名</td>
+				<td>
+						<input class="form-control" type="text" name="model.realname" 
+						value="${model.realname}" valid="vtext" validname="真实姓名"  />
+				</td>
+			</tr>
+					<tr>
+				<td>类型</td>
+				<td>
+					<select name="model.usertype" class="form-control" valid="vselect" validname="类型">
+						<option value="-1">--请选择--</option>
+						<option value="1" ${model.usertype==1?"selected":"" }>管理员</option>
+						<option value="2" ${model.usertype==2?"selected":"" }>普通用户</option>
+						<option value="3" ${model.usertype==3?"selected":"" }>前台用户</option>
+						<option value="4" ${model.usertype==4?"selected":"" }>第三方用户</option>
+						<option value="9" ${model.usertype==9?"selected":"" }>其他用户</option>
+					</select>
+				</td>
+			</tr>
+					<tr>
+				<td>Email</td>
+				<td>
+						<input class="form-control" type="text" name="model.email" value="${model.email}"  />
+				</td>
+			</tr>
+					<tr>
+				<td>手机号</td>
+				<td>
+						<input class="form-control" type="text" name="model.tel" value="${model.tel}"  />
+				</td>
+			</tr>
+					<tr>
+				<td>地址</td>
+				<td>
+						<input class="form-control" type="text" name="model.address" value="${model.address}"  />
+				</td>
+			</tr>
+					<tr>
+				<td>头像地址</td>
+				<td>
+						<input class="form-control" type="text" name="model.title_url" value="${model.title_url}"  />
+				</td>
+			</tr>
+					<tr>
+				<td>说明</td>
+				<td>
+					<textarea class="form-control" rows="3" cols="30" name="model.remark">${model.remark}</textarea>
+				</td>
+			</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.userid!'0'});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+DIRECTIVE SAFE_OUTPUT_CLOSE;
+<%} %>

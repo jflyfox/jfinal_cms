@@ -1,0 +1,112 @@
+<% 
+	var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<script type="text/javascript" src="static/component/echarts/echarts-plain.js"></script>
+<!-- 时间组件 -->
+<% include("/static/component/include/my97.html"){} %>
+
+<script type="text/javascript">
+$(function() {
+
+	/**
+	 * echarts
+	 */
+	var myChart = echarts.init(document.getElementById('echarts'));
+
+	myChart.showLoading({
+	    text: '正在努力的读取数据中...'    //loading话术
+	});
+
+	// ajax return
+	myChart.hideLoading();
+
+	// 图表使用-------------------
+	option = {
+	    tooltip : {
+	        trigger: 'axis',
+	    },
+	    legend: {
+	        data:['访问量']
+	    },
+	    toolbox: {
+	        show : false,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: false, readOnly: false},
+	            magicType : {show: false, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: false}
+	        }
+	    },
+	    calculable : true,
+	    xAxis : [
+	             {
+	                 type : 'category',
+	                 boundaryGap : false,
+	                 data : [${createDay}]
+	             }
+	         ],
+	    yAxis : [
+	        {
+	            type : 'value'
+	        }
+	    ],
+	    series : [
+	        {
+	            name:'访问量',
+	            type:'line',
+	            data:[${cnt}]
+	        }
+	    ]
+	};
+
+	myChart.setOption(option);
+
+	//显示Menu索引
+	showMenu('page_pageview');
+});
+	
+	function oper_list(){
+		form1.action = "pageview";
+		form1.submit();
+	}
+</script>
+
+<%
+};
+
+var bodyContent = {
+%>
+	<form name="form1" action="" method="post"  class="form-inline" role="form">
+		<!-- 菜单 -->
+		<% include("/static/component/include/menu.html"){} %>
+
+		<div class="tableSearch">
+			<div class="form-group">
+				<label class="sr-only">区间</label>
+				<input type="text" name="start_day" class="form-control" style="width: 140px;"
+					value="${start_day}" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+				-<input type="text" name="end_day" class="form-control" style="width: 140px;"
+					value="${end_day}"  placeholder="结束时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+			</div>
+			<button type="button" class="btn btn-default" onclick="oper_list();" name="search">
+			 		<span class="glyphicon glyphicon-search"></span> 查 询
+			</button>
+			<button type="button" class="btn btn-default" onclick="resetForm();">
+			 		<span class="glyphicon glyphicon-refresh"></span> 重 置
+			</button>
+		</div>
+		
+		<% if(cnt==''){ %>
+			<div style="text-align: center;font-size:24px;color: gray;font-weight: bold;">没有符合的数据</div>
+		<% } else { %>
+			<div id="echarts" style="height:450px;border:1px solid #ccc;padding:10px;"></div>
+		<% } %>
+		
+	</form>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

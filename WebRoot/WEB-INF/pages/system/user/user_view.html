@@ -1,0 +1,86 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+	<tr>
+		<td>部门</td>
+		<td>${model.departname}</td>
+	</tr>
+	<tr>
+		<td>登录名</td>
+		<td>${model.username}</td>
+	</tr>
+	<tr>
+		<td>真实姓名</td>
+		<td>${model.realname}</td>
+	</tr>
+	<tr>
+		<td>密码</td>
+		<td>${model.password}</td>
+	</tr>
+	<tr>
+		<td>类型</td>
+		<td>
+		<% if(model.usertype==1) { %>
+		管理员
+		<%	} %>
+		<% if(model.usertype==2) { %>
+		普通用户
+		<%	} %>
+		<% if(model.usertype==3) { %>
+		前台用户
+		<%	} %>
+		<% if(model.usertype==4) { %>
+		第三方用户
+		<%	} %>
+		<% if(model.usertype==9) { %>
+		其他用户
+		<%	} %>
+		</td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td>${model.email}</td>
+	</tr>
+	<tr>
+		<td>手机号</td>
+		<td>${model.tel}</td>
+	</tr>
+	<tr>
+		<td>地址</td>
+		<td>${model.address}</td>
+	</tr>
+	<tr>
+		<td>头像地址</td>
+		<td>${model.title_url}</td>
+	</tr>
+	<tr>
+		<td>说明</td>
+		<td title="${model.remark}">
+			<% if (strutil.length(model.remark) > 6) { %>
+				${strutil.subStringTo(model.remark, 0, 6)}...
+			<%	} else {%>
+				${model.remark }
+			<% } %>
+		</td>
+	</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

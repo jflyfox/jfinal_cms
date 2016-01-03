@@ -1,0 +1,75 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			id = id || '0';
+			var url = 'admin/comment/save/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal"
+		role="form" >
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<table class="table">
+		<%  // 列表头部%>
+				<tr>
+					<td>创建时间</td>
+					<td>${model.create_time}</td>
+				</tr>
+				<tr>
+					<td>回复人</td>
+					<td>${flyfox.getUserName(model.create_id)}</td>
+				</tr>
+				<tr>
+					<td>文章</td>
+					<td>${model.articleName}</td>
+				</tr>
+								<tr>
+					<td>内容</td>
+					<td>
+					<textarea class="form-control" rows="5" cols="30" name="model.content" 
+						valid='vtext' validname='内容'>${model.content }</textarea>
+					</td>
+				</tr>
+								<tr>
+					<td>状态</td>
+					<td>
+					<select name="model.status" class="form-control" >
+						<option value="11" ${model.status==11?"selected":"" }>评论未读</option>
+						<option value="12" ${model.status==12?"selected":"" }>评论已读</option>
+						<option value="21" ${model.status==21?"selected":"" }>回复未读</option>
+						<option value="22" ${model.status==22?"selected":"" }>回复已读</option>
+					</select>
+					</td>
+				</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%}
+DIRECTIVE SAFE_OUTPUT_CLOSE; 
+%>

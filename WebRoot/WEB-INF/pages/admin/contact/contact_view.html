@@ -1,0 +1,54 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+	<tr>
+		<td>姓名</td>
+		<td>${model.name}</td>
+	</tr>
+	<tr>
+		<td>手机号</td>
+		<td>${model.phone}</td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td>${model.email}</td>
+	</tr>
+	<tr>
+		<td>地址</td>
+		<td>${model.addr}</td>
+	</tr>
+	<tr>
+		<td>生日</td>
+		<td>${model.birthday}</td>
+	</tr>
+	<tr>
+		<td>说明</td>
+		<td title="${model.remark}">
+			<% if (strutil.length(model.remark) > 6) { %>
+				${strutil.subStringTo(model.remark, 0, 6)}...
+			<%	} else {%>
+				${model.remark }
+			<% } %>
+		</td>
+	</tr>
+	</table>
+
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
