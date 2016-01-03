@@ -29,25 +29,29 @@ CREATE TABLE tb_pageview (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='访问量统计';
 
-/**
- * 目录表
- */
-drop table if exists tb_folder;
-
-CREATE TABLE tb_folder (
-  id int(11) not null auto_increment comment '目录id',
-  name varchar(100) not null default '' comment '中文名',
-  path varchar(200) not null default '' comment '路径',
-  content text comment '描述',
-  sort  int(11) default '1' comment '排序',
-  status varchar(20) DEFAULT '1' comment '状态//radio/2,隐藏,1,显示',
-  type  int(11) DEFAULT '1' comment '类型//select/1,普通目录,2,a标签,3,a标签_blank,4,直接加载url信息',
-  jump_url varchar(200) DEFAULT NULL comment '跳转地址',
-  update_time varchar(64) DEFAULT NULL COMMENT '更新时间',
-  create_time  varchar(64) DEFAULT NULL COMMENT '创建时间',
-  create_id  int(11) DEFAULT 0 COMMENT '创建者',
-  primary key (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='目录';
+-- ----------------------------
+-- Table structure for `tb_folder`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_folder`;
+CREATE TABLE `tb_folder` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '目录id',
+  `parent_id` int(11) DEFAULT '0' COMMENT '父ID',
+  `name` varchar(100) NOT NULL DEFAULT '' COMMENT '中文名',
+  `key` varchar(100) DEFAULT '' COMMENT 'URL KEY',
+  `path` varchar(200) NOT NULL DEFAULT '' COMMENT '路径',
+  `content` text COMMENT '描述',
+  `sort` int(11) DEFAULT '1' COMMENT '排序',
+  `status` varchar(20) DEFAULT '1' COMMENT '状态//radio/2,隐藏,1,显示',
+  `type` int(11) DEFAULT '1' COMMENT '类型 1 普通目录 2 a标签 3 a标签_blank 4 直接加载url信息',
+  `jump_url` varchar(200) DEFAULT NULL COMMENT '跳转地址',
+  `head_keywords` varchar(200) DEFAULT NULL COMMENT 'SEO keywords',
+  `head_description` varchar(200) DEFAULT NULL COMMENT 'SEO description',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新人',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8 COMMENT='目录';
 
 /**
  * 文章表
@@ -325,6 +329,23 @@ CREATE TABLE `tb_contact` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='联系人';
 
+-- ----------------------------
+-- Table structure for `sys_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_log`;
+CREATE TABLE `sys_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `log_type` int(11) NOT NULL COMMENT '类型',
+  `oper_object` varchar(64) DEFAULT NULL COMMENT '操作对象',
+  `oper_table` varchar(64) NOT NULL COMMENT '操作表',
+  `oper_id` int(11) DEFAULT '0' COMMENT '操作主键',
+  `oper_type` varchar(64) DEFAULT NULL COMMENT '操作类型',
+  `oper_remark` varchar(100) DEFAULT NULL COMMENT '操作备注',
+  `create_time` varchar(64) NOT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10280 DEFAULT CHARSET=utf8 COMMENT='日志'
+
 /************************ 系统表分界线 **********************************/
 
 /**
@@ -338,7 +359,8 @@ INSERT INTO `sys_department` VALUES ('3', '第三方用户', '90', '无', null, 
 -- 用户
 INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', 1,1, 0, null, null, null, null, null, null, null, '2016-06-06 06:06:06',1);
 -- 数据字典
-INSERT INTO `sys_dict` VALUES ('2', '文章类型', 'articleType', null);
+INSERT INTO `sys_dict` VALUES ('1', '日志配置', 'systemLog', null);
+INSERT INTO `sys_dict` VALUES ('2', '目录类型', 'articleType', null);
 INSERT INTO `sys_dict` VALUES ('11', '目录类型', 'folderType', null);
 INSERT INTO `sys_dict` VALUES ('100', '系统参数', 'systemParam', null);
 INSERT INTO `sys_dict` VALUES ('101', '友情链接类型', 'friendlyLinkType', null);
@@ -352,22 +374,40 @@ INSERT INTO `sys_dict_detail` VALUES ('12', 'articleType', '预览', '2', '2', n
 INSERT INTO `sys_dict_detail` VALUES ('13', 'articleType', '程序', '3', '3', null, null, null, null, '2015-01-30', '1');
 INSERT INTO `sys_dict_detail` VALUES ('21', 'friendlyLinkType', '友情链接', null, '1', null, null, null, null, '2015-05-06 15:18:59', '1');
 INSERT INTO `sys_dict_detail` VALUES ('22', 'friendlyLinkType', '关于我们', null, '2', null, null, null, null, '2015-05-06 15:19:20', '1');
-INSERT INTO `sys_dict_detail` VALUES ('101', 'systemParam', 'FLY的狐狸', '1', '1', null, null, null, null, '2015-01-30', '1');
-INSERT INTO `sys_dict_detail` VALUES ('102', 'systemParam', 'Jflyfox博客', '2', '1', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('51', 'systemLog', 'sys_dict', '数据字典主表', '1', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('52', 'systemLog', 'sys_dict_detail', '数据字典', '2', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('53', 'systemLog', 'sys_menu', '菜单管理', '3', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('54', 'systemLog', 'sys_department', '组织机构', '4', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('55', 'systemLog', 'sys_user', '用户管理', '5', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('56', 'systemLog', 'sys_user_role', '用户角色授权', '6', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('57', 'systemLog', 'sys_role', '角色管理', '7', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('58', 'systemLog', 'sys_role_folder', '角色目录授权', '8', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('59', 'systemLog', 'sys_role_menu', '角色菜单授权', '9', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('60', 'systemLog', 'tb_folder', '目录管理', '10', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('61', 'systemLog', 'tb_article', '文章管理', '11', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('62', 'systemLog', 'tb_articlelike', '喜欢的文章管理', '12', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('63', 'systemLog', 'tb_comment', '评论管理', '13', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('64', 'systemLog', 'tb_tags', '标签管理', '14', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('65', 'systemLog', 'tb_contact', '联系人', '15', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('66', 'systemLog', 'tb_error', '错误管理', '16', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('67', 'systemLog', 'tb_friendlylink', '友情链接', '17', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('68', 'systemLog', 'tb_pageview', '访问量统计', '18', null, null, null, null, '2015-01-30', '1');
+INSERT INTO `sys_dict_detail` VALUES ('101', 'systemParam', '门头沟信息网', '1', '1', null, null, null, null, '2015-01-30', '1');
 -- 菜单
 INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', 'system', null, '1', '1', '99', '1', '2015-04-27 17:28:06', '1');
-INSERT INTO `sys_menu` VALUES ('2', '1', '组织机构', 'department', 'department/list', '1', '1', '10', '2', '2015-04-27 17:28:25', '1');
-INSERT INTO `sys_menu` VALUES ('3', '1', '用户管理', 'user', 'user/list', '1', '1', '12', '2', '2015-04-27 17:28:46', '1');
-INSERT INTO `sys_menu` VALUES ('4', '1', '角色管理', 'role', 'role/list', '1', '1', '14', '2', '2015-04-27 17:29:13', '1');
-INSERT INTO `sys_menu` VALUES ('5', '1', '菜单管理', 'menu', 'menu/list', '1', '1', '16', '2', '2015-04-27 17:29:43', '1');
-INSERT INTO `sys_menu` VALUES ('6', '1', '数据字典', 'dict', 'dict/list', '1', '1', '18', '2', '2015-04-27 17:30:05', '1');
-INSERT INTO `sys_menu` VALUES ('7', '0', '联系人管理', 'contact', 'contact/list', '1', '1', '19', '1', '2015-04-28 12:38:04', '1');
-INSERT INTO `sys_menu` VALUES ('8', '0', '目录管理', 'folder', 'folder/list', '1', '1', '10', '1', '2015-04-28 22:34:46', '1');
-INSERT INTO `sys_menu` VALUES ('9', '0', '文章管理', 'article', 'article/list', '1', '1', '12', '1', '2015-04-28 22:35:24', '1');
-INSERT INTO `sys_menu` VALUES ('10', '0', '友情链接', 'friendlylink', 'friendlylink/list', '1', '1', '14', '1', '2015-04-28 22:35:56', '1');
-INSERT INTO `sys_menu` VALUES ('11', '0', '访问量统计', 'pageview', 'pageview', '1', '1', '16', '1', '2015-04-28 22:36:34', '1');
-INSERT INTO `sys_menu` VALUES ('12', '0', '回复管理', 'comment', 'comment/list', '1', '1', '13', '1', '2015-04-28 22:36:34', '1');
-INSERT INTO `sys_menu` VALUES ('13', 1, '系统操作', 'operation', 'operation', '1', '1', '20', '2', '2015-05-06 11:41:33', '1');
+INSERT INTO `sys_menu` VALUES ('2', '1', '组织机构', 'department', 'system/department/list', '1', '1', '10', '2', '2015-04-27 17:28:25', '1');
+INSERT INTO `sys_menu` VALUES ('3', '1', '用户管理', 'user', 'system/user/list', '1', '1', '12', '2', '2015-04-27 17:28:46', '1');
+INSERT INTO `sys_menu` VALUES ('4', '1', '角色管理', 'role', 'system/role/list', '1', '1', '14', '2', '2015-04-27 17:29:13', '1');
+INSERT INTO `sys_menu` VALUES ('5', '1', '菜单管理', 'menu', 'system/menu/list', '1', '1', '16', '2', '2015-04-27 17:29:43', '1');
+INSERT INTO `sys_menu` VALUES ('6', '1', '数据字典', 'dict', 'system/dict/list', '1', '1', '18', '2', '2015-04-27 17:30:05', '1');
+INSERT INTO `sys_menu` VALUES ('7', '0', '联系人管理', 'contact', 'admin/contact/list', '1', '1', '19', '1', '2015-04-28 12:38:04', '1');
+INSERT INTO `sys_menu` VALUES ('8', '0', '目录管理', 'folder', 'admin/folder/list', '1', '1', '10', '1', '2015-04-28 22:34:46', '1');
+INSERT INTO `sys_menu` VALUES ('9', '0', '文章管理', 'article', 'admin/article/list', '1', '1', '12', '1', '2015-04-28 22:35:24', '1');
+INSERT INTO `sys_menu` VALUES ('10', '0', '友情链接', 'friendlylink', 'admin/friendlylink/list', '1', '1', '14', '1', '2015-04-28 22:35:56', '1');
+INSERT INTO `sys_menu` VALUES ('11', '0', '访问量统计', 'pageview', 'admin/pageview', '1', '1', '16', '1', '2015-04-28 22:36:34', '1');
+INSERT INTO `sys_menu` VALUES ('12', '0', '回复管理', 'comment', 'admin/comment/list', '1', '1', '13', '1', '2015-05-06 09:40:46', '1');
+INSERT INTO `sys_menu` VALUES ('13', '1', '系统操作', 'operation', 'admin/operation', '1', '1', '20', '2', '2015-05-06 11:41:33', '1');
+INSERT INTO `sys_menu` VALUES ('14', '1', '日志管理', 'log', 'system/log/list', '1', '1', '22', '2', '2016-01-03 18:09:18', '1');
 
 -- 友情链接
 INSERT INTO `tb_friendlylink` VALUES ('1', '网站首页', 'http://www.jflyfox.com/mtg', '1', '1', '22', null, '2015-04-24 15:03:02', '1');
@@ -379,13 +419,17 @@ INSERT INTO `tb_friendlylink` VALUES ('6', 'Beetl', 'http://www.ibeetl.com/', '1
 INSERT INTO `tb_friendlylink` VALUES ('7', 'OsChina', 'http://www.oschina.net/', '11', '1', '21', null, '2015-05-06 16:15:03', '1');
 
 -- 目录数据
-INSERT INTO `tb_folder` VALUES ('1', '首页', '', '门头沟信息网', '1', '1', '1', null, '2015-01-28 16:54:03', '2015-01-30 13:24:58', '1');
-INSERT INTO `tb_folder` VALUES ('2', '新闻', '', null, '2', '1', '1', null, '2015-05-24 15:46:40', '2015-01-30 13:24:58', '1');
-INSERT INTO `tb_folder` VALUES ('3', '美食', '', null, '3', '1', '1', null, '2015-05-24 15:46:54', '2015-01-30 13:24:58', '1');
-INSERT INTO `tb_folder` VALUES ('4', '旅游', '', null, '5', '1', '1', null, '2015-05-24 15:47:43', '2015-05-24 15:47:43', '1');
-INSERT INTO `tb_folder` VALUES ('5', '教育', '', null, '7', '1', '1', null, '2015-05-24 15:47:55', '2015-05-24 15:47:55', '1');
-INSERT INTO `tb_folder` VALUES ('6', '后台管理', '', null, '90', '1', '3', 'admin', '2015-05-24 15:47:32', '2015-01-30 13:24:58', '1');
-INSERT INTO `tb_folder` VALUES ('7', '标签查询', '', null, '80', '1', '2', 'front/tags/all', '2015-05-27 23:34:38', '2015-05-18 09:12:57', '1');
-INSERT INTO `tb_folder` VALUES ('13', '首页图片', '', null, '101', '2', '1', null, '2015-05-24 16:33:06', '2015-05-24 16:33:06', '1');
-INSERT INTO `tb_folder` VALUES ('90', '关于我们', '', null, '81', '1', '1', null, '2015-05-26 16:40:46', '2015-05-26 10:36:30', '1');
-INSERT INTO `tb_folder` VALUES ('99', '其他咨询', '', null, '30', '1', '1', null, '2015-05-27 23:06:01', '2015-05-27 23:06:01', '1');
+INSERT INTO `tb_folder` VALUES ('1', '0', '首页', 'home', '', '门头沟信息网', '1', '1', '1', null, null, null, '2015-01-28 16:54:03', '0', '2015-01-30 13:24:58', '1');
+INSERT INTO `tb_folder` VALUES ('2', '0', '新闻', 'news', '', null, '2', '1', '1', null, null, null, '2015-05-24 15:46:40', '0', '2015-01-30 13:24:58', '1');
+INSERT INTO `tb_folder` VALUES ('3', '0', '美食', 'food', '', null, '3', '1', '1', null, null, null, '2015-05-24 15:46:54', '0', '2015-01-30 13:24:58', '1');
+INSERT INTO `tb_folder` VALUES ('4', '0', '旅游', 'travel', '', null, '5', '1', '1', null, null, null, '2015-05-24 15:47:43', '0', '2015-05-24 15:47:43', '1');
+INSERT INTO `tb_folder` VALUES ('5', '0', '教育', 'education', '', null, '7', '1', '1', null, null, null, '2015-05-24 15:47:55', '0', '2015-05-24 15:47:55', '1');
+INSERT INTO `tb_folder` VALUES ('6', '0', '后台管理', '', '', null, '90', '1', '3', 'admin', null, null, '2015-05-24 15:47:32', '0', '2015-01-30 13:24:58', '1');
+INSERT INTO `tb_folder` VALUES ('7', '0', '标签查询', '', '', null, '80', '1', '2', 'front/tags/all', null, null, '2015-05-27 23:34:38', '0', '2015-05-18 09:12:57', '1');
+INSERT INTO `tb_folder` VALUES ('10', '0', '公园', 'park', '', null, '11', '1', '1', null, null, null, '2015-05-24 15:49:35', '0', '2015-05-24 15:49:11', '1');
+INSERT INTO `tb_folder` VALUES ('11', '0', '商场', 'market', '', null, '13', '1', '1', null, null, null, '2015-05-24 15:49:46', '0', '2015-05-24 15:49:46', '1');
+INSERT INTO `tb_folder` VALUES ('12', '0', '房产', 'house', '', null, '15', '1', '1', null, null, null, '2015-05-24 15:50:00', '0', '2015-05-24 15:50:00', '1');
+INSERT INTO `tb_folder` VALUES ('13', '0', '首页图片', 'topPic', '', null, '101', '2', '1', null, null, null, '2015-05-24 16:33:06', '0', '2015-05-24 16:33:06', '1');
+INSERT INTO `tb_folder` VALUES ('90', '0', '关于我们', 'about', '', null, '81', '1', '1', null, null, null, '2015-05-26 16:40:46', '0', '2015-05-26 10:36:30', '1');
+INSERT INTO `tb_folder` VALUES ('99', '0', '其他咨询', 'other', '', null, '30', '1', '1', null, null, null, '2015-05-27 23:06:01', '0', '2015-05-27 23:06:01', '1');
+INSERT INTO `tb_folder` VALUES ('100', '0', '博文目录', '', '', null, '99', '2', '1', null, null, null, '2015-06-17 22:29:44', '0', '2015-06-17 22:29:44', '2');
