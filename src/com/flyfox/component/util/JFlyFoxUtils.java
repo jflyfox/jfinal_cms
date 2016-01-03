@@ -50,7 +50,7 @@ public class JFlyFoxUtils {
 
 	private static final DESUtils des = new DESUtils("flyfoxxx");
 
-	// admin:LHmWhtwF/dHIwArTw+HUEg== test:qvPQPhVn96Lx80f7BIaVjA==
+	// admin:1RHFCLt64uOOViCTzgSaww== test:qvPQPhVn96Lx80f7BIaVjA==
 	public static void main(String[] args) {
 		String password = "admin123";
 		String tmp = passwordEncrypt(password);
