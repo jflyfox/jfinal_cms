@@ -1,11 +1,13 @@
 package com.flyfox.modules;
 
+import com.flyfox.component.util.ImageCode;
 import com.flyfox.component.util.JFlyFoxUtils;
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.modules.front.interceptor.FrontInterceptor;
 import com.flyfox.modules.front.service.FrontService;
 import com.flyfox.system.dict.DictCache;
+import com.flyfox.system.log.SysLog;
 import com.flyfox.system.user.SysUser;
 import com.flyfox.system.user.UserCache;
 import com.flyfox.util.Config;
@@ -16,23 +18,23 @@ import com.jfinal.aop.Before;
  * CommonController
  */
 @ControllerBind(controllerKey = "/")
-@Before(FrontInterceptor.class)
 public class CommonController extends BaseController {
 
 	public static final String loginPage = "/pages/front/login.html";
-	public static final String mainPage = "/article/list";
-	public static final String firstPage = "/";
+	public static final String mainPage = "/admin/article/list";
+	public static final String firstPage = "/home";
 
 	/**
 	 * 首页，菜单
 	 * 
-	 * 2015年5月25日 下午11:00:28
-	 * flyfox 330627517@qq.com
+	 * 2015年5月25日 下午11:00:28 flyfox 330627517@qq.com
 	 */
+	@Before(FrontInterceptor.class)
 	public void index() {
 		new FrontService().menu(this);
 	}
 
+	@Before(FrontInterceptor.class)
 	public void admin() {
 		if (getSessionUser() != null) {
 			// 如果session存在，不再验证
@@ -48,7 +50,18 @@ public class CommonController extends BaseController {
 	 * 
 	 * @author flyfox 2013-11-11
 	 */
+	@Before(FrontInterceptor.class)
 	public void login() {
+		// 获取验证码
+		String imageCode = getSessionAttr(ImageCode.class.getName());
+		String checkCode = this.getPara("imageCode");
+
+		if (StrUtils.isEmpty(imageCode) || !imageCode.equalsIgnoreCase(checkCode)) {
+			setAttr("msg", "验证码错误！");
+			render(loginPage);
+			return;
+		}
+
 		// 初始化数据字典Map
 		String username = getPara("username");
 		String password = getPara("password");
@@ -76,6 +89,11 @@ public class CommonController extends BaseController {
 		} else {
 			setSessionUser(user);
 		}
+		
+		// 添加日志
+		user.put("update_id", user.getUserid());
+		user.put("update_time", getNow());
+		saveLog(user, SysLog.SYSTEM_LOGIN);
 
 		redirect(toPage);
 	}
@@ -85,8 +103,18 @@ public class CommonController extends BaseController {
 	 * 
 	 * @author flyfox 2013-11-13
 	 */
+	@Before(FrontInterceptor.class)
 	public void logout() {
-		removeSessionUser();
+		SysUser user = (SysUser) getSessionUser();
+		if (user != null) {
+			// 添加日志
+			user.put("update_id", user.getUserid());
+			user.put("update_time", getNow());
+			saveLog(user, SysLog.SYSTEM_LOGOUT);
+			// 删除session
+			removeSessionUser();
+		}
+		
 		setAttr("msg", "您已退出");
 		render(loginPage);
 	}

@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
-import com.flyfox.modules.pageview.PageViewCache;
+import com.flyfox.modules.admin.pageview.PageViewCache;
 import com.flyfox.util.StrUtils;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;

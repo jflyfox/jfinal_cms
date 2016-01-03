@@ -15,8 +15,7 @@ import com.jfinal.aop.Before;
  * 
  * 2015年5月11日 下午4:11:02 flyfox 330627517@qq.com
  */
-@ControllerBind(controllerKey = "/web")
-@Before(FrontInterceptor.class)
+@ControllerBind(controllerKey = "/front")
 public class Home extends BaseController {
 
 	public static final String PATH = "/pages/front/home/";
@@ -24,6 +23,7 @@ public class Home extends BaseController {
 	/**
 	 * 登录
 	 */
+	@Before(FrontInterceptor.class)
 	public void login() {
 		setAttr("pre_page", getPrePage());
 		render(CommonController.loginPage);

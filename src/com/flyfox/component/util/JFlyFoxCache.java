@@ -2,10 +2,12 @@ package com.flyfox.component.util;
 
 import org.apache.log4j.Logger;
 
-import com.flyfox.modules.friendlylink.FriendlylinkCache;
-import com.flyfox.modules.pageview.PageViewCache;
+import com.flyfox.modules.admin.folder.FolderService;
+import com.flyfox.modules.admin.friendlylink.FriendlylinkCache;
+import com.flyfox.modules.admin.pageview.PageViewCache;
 import com.flyfox.system.dict.DictCache;
 import com.flyfox.system.dict.SysDictDetail;
+import com.flyfox.system.log.SysLog;
 import com.flyfox.system.user.UserCache;
 import com.flyfox.util.cache.Cache;
 import com.flyfox.util.cache.CacheManager;
@@ -28,6 +30,10 @@ public class JFlyFoxCache {
 		PageViewCache.init();
 		// 友情链接缓存
 		FriendlylinkCache.init();
+		// URL KEY初始化
+		FolderService.initMenuKey();
+		// 日志配置初始化
+		SysLog.init();
 		log.info("####缓存初始化结束......");
 	}
 

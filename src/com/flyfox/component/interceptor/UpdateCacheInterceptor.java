@@ -1,7 +1,7 @@
 package com.flyfox.component.interceptor;
 
-import com.flyfox.modules.comment.CommentService;
-import com.flyfox.modules.folder.FolderService;
+import com.flyfox.modules.admin.comment.CommentService;
+import com.flyfox.modules.admin.folder.FolderService;
 import com.flyfox.modules.front.service.FrontCacheService;
 import com.flyfox.util.Config;
 import com.jfinal.aop.Interceptor;

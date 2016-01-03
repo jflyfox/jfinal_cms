@@ -48,12 +48,13 @@ public class UserInterceptor implements Interceptor {
 		} else {
 			user = controller.getSessionAttr(Attr.SESSION_NAME);
 		}
-		
-//		if ((user == null || user.getUserid() <= 0) //
-//				&& JFinal.me().getConstants().getDevMode()) { // 开发模式
-//			user = SysUser.dao.findFirst("select * from sys_user where userid = 1");
-//			controller.setSessionAttr(Attr.SESSION_NAME, user);
-//		}
+
+		// if ((user == null || user.getUserid() <= 0) //
+		// && JFinal.me().getConstants().getDevMode()) { // 开发模式
+		// user =
+		// SysUser.dao.findFirst("select * from sys_user where userid = 1");
+		// controller.setSessionAttr(Attr.SESSION_NAME, user);
+		// }
 
 		if (isAuth(path_tmp)) {
 			if (user == null || user.getUserid() <= 0) {
@@ -82,14 +83,9 @@ public class UserInterceptor implements Interceptor {
 	 * @return
 	 */
 	protected boolean isAuth(String path_tmp) {
-		return StrUtils.isNotEmpty(path_tmp) //
-				&& path_tmp.indexOf("login") < 0 // 登录
-				&& !path_tmp.startsWith("trans") // 过期
-				&& !path_tmp.endsWith("logout") // 登出
-				&& !path_tmp.startsWith("admin") // 登录
-				&& !path_tmp.startsWith("web") // 首页
-				&& !path_tmp.startsWith("front") // 首页
-				&& !path_tmp.startsWith("oauth2") // oauth2认证
-		;
+		return StrUtils.isNotEmpty(path_tmp) // 空是首页
+				&& (path_tmp.startsWith("system/") // 系统管理
+				|| path_tmp.startsWith("admin/") // 后台管理
+				);
 	}
 }

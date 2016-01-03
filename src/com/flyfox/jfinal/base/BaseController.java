@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.flyfox.jfinal.component.util.Attr;
+import com.flyfox.system.log.SysLog;
 import com.flyfox.system.menu.SysMenu;
 import com.flyfox.system.user.SysUser;
 import com.flyfox.system.user.UserSvc;
@@ -35,6 +36,7 @@ import com.flyfox.util.StrUtils;
 import com.flyfox.util.encrypt.DESUtils;
 import com.flyfox.web.util.HandlerUtils;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Db;
 
 /**
  * Controller 不能初始化
@@ -225,6 +227,29 @@ public abstract class BaseController extends Controller {
 		removeCookie(Attr.SESSION_NAME);
 	}
 
+	/**
+	 * 用户登录，登出记录
+	 * 
+	 * 2015年10月16日 下午2:36:39 flyfox 330627517@qq.com
+	 * 
+	 * @param user
+	 * @param operType
+	 */
+	protected void saveLog(SysUser user, String operType) {
+		try {
+			String tableName = user.getTable().getName();
+			Integer updateId = user.getInt("update_id");
+			String updateTime = user.getStr("update_time");
+			String sql = "INSERT INTO `sys_log` ( `log_type`, `oper_object`, `oper_table`," //
+					+ " `oper_id`, `oper_type`, `oper_remark`, `create_time`, `create_id`) " //
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			Db.update(sql, SysLog.TYPE_SYSTEM, SysLog.getTableRemark(tableName), tableName, //
+					updateId, operType, "", updateTime, updateId);
+		} catch (Exception e) {
+			log.error("添加日志失败", e);
+		}
+	}
+	
 	public Paginator getPaginator() {
 		Paginator paginator = new Paginator();
 		Integer pageNo = getParaToInt("pageNo");

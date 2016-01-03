@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.flyfox.jfinal.base.BaseController;
+import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.jfinal.component.db.SQLUtils;
 import com.flyfox.system.menu.MenuSvc;
 import com.flyfox.system.menu.SysMenu;
-import com.flyfox.util.StrUtils;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 
 /**
@@ -16,6 +17,7 @@ import com.jfinal.plugin.activerecord.Page;
  * 
  * @author flyfox 2014-4-24
  */
+@ControllerBind(controllerKey = "/system/role")
 public class RoleController extends BaseController {
 
 	private static final String path = "/pages/system/role/role_";
@@ -30,7 +32,10 @@ public class RoleController extends BaseController {
 			sql.whereLike("name", model.getStr("name"));
 		}
 
-		Page<SysRole> page = SysRole.dao.paginate(getPaginator(), "select t.* ", //
+		String sqlSelect = "select t.* "
+				+ ",(select group_concat(m.name) from sys_role_menu rm left JOIN  sys_menu m ON rm.menuid = m.id where rm.roleid = t.id ) as menus ";
+
+		Page<SysRole> page = SysRole.dao.paginate(getPaginator(), sqlSelect, //
 				sql.toString().toString());
 
 		// 下拉框
@@ -50,7 +55,19 @@ public class RoleController extends BaseController {
 	}
 
 	public void delete() {
-		SysRole.dao.deleteById(getParaToInt());
+		Integer roleid = getParaToInt();
+		// 日志添加
+		SysRole model = new SysRole();
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
+
+		// 删除授权
+		Db.update("delete from sys_role_menu where roleid = ? ", roleid);
+		
+		model.deleteById(roleid);
+		
 		list();
 	}
 
@@ -63,12 +80,17 @@ public class RoleController extends BaseController {
 	public void save() {
 		Integer pid = getParaToInt();
 		SysRole model = getModel(SysRole.class);
+		// 日志添加
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
 		if (pid != null && pid > 0) { // 更新
 			model.update();
 		} else { // 新增
 			model.remove("id");
-			model.put("create_id", getSessionUser().getUserID());
-			model.put("create_time", getNow());
+			model.put("create_id", userid);
+			model.put("create_time", now);
 			model.save();
 		}
 		renderMessage("保存成功");
@@ -92,7 +114,7 @@ public class RoleController extends BaseController {
 
 		String menus = new RoleSvc().getMemus(roleid);
 		setAttr("roleid", roleid);
-		setAttr("menus",menus );
+		setAttr("menus", menus);
 		// 根结点
 		setAttr("rootList", rootList);
 		// 二级目录
@@ -109,12 +131,7 @@ public class RoleController extends BaseController {
 		int roleid = getParaToInt("roleid");
 		String menus = getPara("menus");
 
-		if (StrUtils.isNotEmpty(menus)) {
-			new RoleSvc().saveAuth(roleid, menus);
-		} else {
-			renderMessageByFailed("保存失败");
-			return;
-		}
+		new RoleSvc().saveAuth(roleid, menus, getSessionUser().getUserID());
 		renderMessage("保存成功");
 	}
 

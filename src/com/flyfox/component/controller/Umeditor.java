@@ -15,6 +15,13 @@ import com.flyfox.util.Config;
 @ControllerBind(controllerKey = "umeditor")
 public class Umeditor extends UmeditorController {
 
+	// 文件大小常量, 单位kb
+	private static final int MAX_SIZE = Config.getToInt("person.MaxSize");
+	// 文件类型限制
+	private static final String[] fileType = { ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
+	// 文件上传路径umeditor下
+	private static final String DIR = Config.getStr("person.SavePath");
+
 	private static final Map<Integer, PersonFileLimit> map = new HashMap<Integer, PersonFileLimit>();
 
 	/**
@@ -22,11 +29,6 @@ public class Umeditor extends UmeditorController {
 	 * 
 	 * @see 博文上传，必须严格限制
 	 * 
-	 */
-	/**
-	 * 
-	 * 2015年8月2日 下午4:37:43
-	 * flyfox 330627517@qq.com
 	 */
 	public void personimageup() {
 		// 文件限制处理
@@ -58,13 +60,14 @@ public class Umeditor extends UmeditorController {
 			String state = "上传文件过快或者过多,如有问题请联系管理员~！~";
 			result = "{\"state\": \"" + state + "\"}";
 		} else {
-			String[] fileType = { ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
-
 			Uploader up = new Uploader(getRequest());
+			// 获取前端提交的path路径
 			try {
-				up.setSavePath(Config.getStr("savePath"));
+				// 知道哪个用户传的便于垃圾数据清理
+				up.setPreFileName(user.getUserid() + "_");
+				up.setSavePath(DIR);
 				up.setAllowFiles(fileType);
-				up.setMaxSize(800); // 单位KB
+				up.setMaxSize(MAX_SIZE); // 单位KB
 				up.upload();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -72,7 +75,7 @@ public class Umeditor extends UmeditorController {
 			result = "{\"name\":\"" + up.getFileName() + "\", \"originalName\": \"" + up.getOriginalName()
 					+ "\", \"size\": \"" + up.getSize() + "\", \"state\": \"" + up.getState() + "\", \"type\": \""
 					+ up.getType() + "\", \"url\": \"" + up.getUrl() + "\"}";
-			result = result.replaceAll( "\\\\", "\\\\" );
+			result = result.replaceAll("\\\\", "\\\\");
 		}
 		renderHtml(result);
 	}

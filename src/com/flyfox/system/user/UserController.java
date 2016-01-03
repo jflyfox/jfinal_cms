@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.flyfox.component.util.JFlyFoxUtils;
 import com.flyfox.jfinal.base.BaseController;
+import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.jfinal.component.db.SQLUtils;
 import com.flyfox.system.department.DepartmentSvc;
 import com.flyfox.system.role.SysRole;
@@ -16,6 +17,7 @@ import com.jfinal.plugin.activerecord.Page;
  * 
  * @author flyfox 2014-2-11
  */
+@ControllerBind(controllerKey = "/system/user")
 public class UserController extends BaseController {
 
 	private static final String path = "/pages/system/user/user_";
@@ -62,9 +64,17 @@ public class UserController extends BaseController {
 
 	public void delete() {
 		int userid = getParaToInt();
-		SysUser.dao.deleteById(userid);
+		// 日志添加
+		SysUser model = new SysUser();
+		String now = getNow();
+		model.put("update_id", getSessionUser().getUserID());
+		model.put("update_time", now);
+
 		// 删除授权
 		Db.update("delete from sys_user_role where userid = ? ", userid);
+
+		model.deleteById(userid);
+
 		UserCache.init();
 		list();
 	}
@@ -81,6 +91,12 @@ public class UserController extends BaseController {
 	public void save() {
 		Integer pid = getParaToInt();
 		SysUser model = getModel(SysUser.class);
+
+		// 日志添加
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
 		if (pid != null && pid > 0) { // 更新
 			model.update();
 		} else { // 新增
@@ -88,8 +104,8 @@ public class UserController extends BaseController {
 			if (StrUtils.isEmpty(model.getStr("password"))) {
 				model.put("password", JFlyFoxUtils.getDefaultPassword());
 			}
-			model.put("create_id", getSessionUser().getUserID());
-			model.put("create_time", getNow());
+			model.put("create_id", userid);
+			model.put("create_time", now);
 			model.save();
 		}
 		UserCache.init();
@@ -122,14 +138,8 @@ public class UserController extends BaseController {
 		int userid = getParaToInt("userid");
 		String roleids = getPara("roleids");
 
-		if (StrUtils.isNotEmpty(roleids)) {
-			new UserSvc().saveAuth(userid, roleids);
-		} else {
-			renderMessageByFailed("保存失败");
-			return;
-		}
+		new UserSvc().saveAuth(userid, roleids, getSessionUser().getUserID());
 		renderMessage("保存成功");
 	}
 
-	
 }

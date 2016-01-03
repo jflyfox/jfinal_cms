@@ -1,6 +1,7 @@
 package com.flyfox.system.dict;
 
 import com.flyfox.jfinal.base.BaseController;
+import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.util.StrUtils;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -9,6 +10,7 @@ import com.jfinal.plugin.activerecord.Page;
  * 
  * @author flyfox 2014-2-11
  */
+@ControllerBind(controllerKey = "/system/dict")
 public class DictController extends BaseController {
 
 	private static final String path = "/pages/system/dict/dict_";
@@ -46,7 +48,15 @@ public class DictController extends BaseController {
 	}
 
 	public void delete() {
-		svc.deleteDetail(getParaToInt());
+		// 日志添加
+		SysDictDetail model = new SysDictDetail();
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
+
+		model.set("detail_id", getParaToInt());
+		svc.deleteDetail(model);
 		list();
 	}
 
@@ -59,14 +69,19 @@ public class DictController extends BaseController {
 
 	public void save() {
 		Integer pid = getParaToInt();
+
+		// 日志添加
+		SysDictDetail model = getModel(SysDictDetail.class);
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
 		if (pid != null && pid > 0) { // 更新
-			SysDictDetail model = getModel(SysDictDetail.class);
 			svc.updateDetail(model);
 		} else { // 新增
-			SysDictDetail model = getModel(SysDictDetail.class);
 			model.remove("detail_id");
-			model.put("create_id", getSessionUser().getUserID());
-			model.put("create_time", getNow());
+			model.put("create_id", userid);
+			model.put("create_time", now);
 			svc.addDetail(model);
 		}
 		renderMessage("保存成功");
@@ -82,17 +97,37 @@ public class DictController extends BaseController {
 		Integer pid = getParaToInt();
 		if (pid != null && pid > 0) { // 更新
 			SysDict model = getModel(SysDict.class);
+			// 日志添加
+			Integer userid = getSessionUser().getUserID();
+			String now = getNow();
+			model.put("update_id", userid);
+			model.put("update_time", now);
 			model.update();
 		} else { // 新增
 			SysDict model = getModel(SysDict.class, "model");
 			model.remove("dict_id");
+			// 日志添加
+			Integer userid = getSessionUser().getUserID();
+			String now = getNow();
+			model.put("update_id", userid);
+			model.put("update_time", now);
+
+			model.put("create_id", userid);
+			model.put("create_time", now);
 			model.save();
 		}
 		renderMessage("保存成功");
 	}
 
 	public void delete_dict() {
-		SysDict.dao.deleteById(getParaToInt());
+		// 日志添加
+		SysDict model = new SysDict();
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
+
+		model.deleteById(getParaToInt());
 		renderMessage("删除成功");
 	}
 }

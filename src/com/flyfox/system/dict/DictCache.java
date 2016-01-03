@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.flyfox.util.StrUtils;
 import com.flyfox.util.cache.Cache;
 import com.flyfox.util.cache.CacheManager;
 import com.jfinal.log.Logger;
@@ -116,6 +117,60 @@ public class DictCache {
 		}
 		SysDictDetail dict = getCacheMap().get(key);
 		return dict == null ? null : dict.getStr("detail_code");
+	}
+	
+	
+	/**
+	 * 获取下拉菜单 code:value形式
+	 * 
+	 * 2015年11月3日 上午9:46:55
+	 * flyfox 330627517@qq.com
+	 * @param type
+	 * @param selected_code
+	 * @return
+	 */
+	public static String getSelectByCode(String type, String selected_code) {
+		Map<Integer, SysDictDetail> map = DictCache.getCacheMap();
+		if (map == null || map.size() <= 0) {
+			return null;
+		}
+		StringBuffer sb = new StringBuffer();
+		for (Integer key : map.keySet()) {
+			SysDictDetail dict = map.get(key);
+			if (dict.getStr("dict_type").equals(type)) {
+				String code = dict.getStr("detail_code");
+				sb.append("<option value=\"");
+				sb.append(dict.getStr("detail_code"));
+				sb.append("\" ");
+				sb.append(StrUtils.isNotEmpty(code) && code.equals(selected_code) ? "selected" : "");
+				sb.append(">");
+				sb.append(dict.getStr("detail_name"));
+				sb.append("</option>");
+			}
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * 通过type和code获取Value值
+	 * 
+	 * 2015年11月3日 上午9:47:20
+	 * flyfox 330627517@qq.com
+	 * @param type
+	 * @param code
+	 * @return
+	 */
+	public static String getValueByCode(String type, String code) {
+		if (type == null || code == null) {
+			return null;
+		}
+		Map<Integer, SysDictDetail> map = getCacheMap();
+		for (SysDictDetail dict : map.values()) {
+			if (code.equals(dict.getStr("detail_code")) && type.equals(dict.getStr("dict_type"))) {
+				return dict.getStr("detail_name");
+			}
+		}
+		return null;
 	}
 
 }

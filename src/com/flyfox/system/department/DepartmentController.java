@@ -1,6 +1,7 @@
 package com.flyfox.system.department;
 
 import com.flyfox.jfinal.base.BaseController;
+import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.jfinal.component.db.SQLUtils;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -9,6 +10,7 @@ import com.jfinal.plugin.activerecord.Page;
  * 
  * @author flyfox 2014-4-24
  */
+@ControllerBind(controllerKey = "/system/department")
 public class DepartmentController extends BaseController {
 
 	private static final String path = "/pages/system/department/department_";
@@ -43,7 +45,15 @@ public class DepartmentController extends BaseController {
 	}
 
 	public void delete() {
-		SysDepartment.dao.deleteById(getParaToInt());
+
+		// 日志添加
+		SysDepartment model = new SysDepartment();
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
+
+		model.deleteById(getParaToInt());
 		list();
 	}
 
@@ -56,12 +66,18 @@ public class DepartmentController extends BaseController {
 	public void save() {
 		Integer pid = getParaToInt();
 		SysDepartment model = getModel(SysDepartment.class);
+
+		// 日志添加
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
 		if (pid != null && pid > 0) { // 更新
 			model.update();
 		} else { // 新增
 			model.remove("id");
-			model.put("create_id", getSessionUser().getUserID());
-			model.put("create_time", getNow());
+			model.put("create_id", userid);
+			model.put("create_time", now);
 			model.save();
 		}
 		renderMessage("保存成功");

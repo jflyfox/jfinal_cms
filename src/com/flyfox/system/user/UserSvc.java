@@ -7,12 +7,22 @@ import java.util.Map;
 import com.flyfox.jfinal.base.BaseService;
 import com.flyfox.system.menu.SysMenu;
 import com.flyfox.system.userrole.SysUserRole;
+import com.flyfox.util.DateUtils;
 import com.flyfox.util.NumberUtils;
+import com.flyfox.util.StrUtils;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
 public class UserSvc extends BaseService {
 
+	/**
+	 * 返回菜单权限
+	 * 
+	 * 2015年10月12日 下午3:22:00 flyfox 330627517@qq.com
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public Map<Integer, List<SysMenu>> getAuthMap(SysUser user) {
 		String menuids = "select menuid from sys_role_menu where roleid in"
 				+ " ( select roleid from sys_user_role where userid = ? ) group by menuid";
@@ -65,16 +75,23 @@ public class UserSvc extends BaseService {
 	 * @param userid
 	 * @param roleids
 	 */
-	public void saveAuth(int userid, String roleids) {
+	public void saveAuth(int userid, String roleids, int update_id) {
 		// 删除原有数据库
 		Db.update("delete from sys_user_role where userid = ? ", userid);
 
-		String[] arr = roleids.split(",");
-		for (String roleid : arr) {
-			SysUserRole userRole = new SysUserRole();
-			userRole.set("userid", userid);
-			userRole.set("roleid", NumberUtils.parseInt(roleid));
-			userRole.save();
+		if (StrUtils.isNotEmpty(roleids)) {
+			String[] arr = roleids.split(",");
+			for (String roleid : arr) {
+				SysUserRole userRole = new SysUserRole();
+				userRole.set("userid", userid);
+				userRole.set("roleid", NumberUtils.parseInt(roleid));
+
+				// 日志添加
+				userRole.put("update_id", update_id);
+				userRole.put("update_time", DateUtils.getNow(DateUtils.DEFAULT_REGEX_YYYY_MM_DD_HH_MIN_SS));
+				userRole.save();
+			}
 		}
 	}
+
 }

@@ -3,10 +3,10 @@ package com.flyfox.modules.front.interceptor;
 import java.util.List;
 
 import com.flyfox.jfinal.base.Paginator;
-import com.flyfox.modules.article.TbArticle;
-import com.flyfox.modules.folder.FolderService;
-import com.flyfox.modules.folder.TbFolder;
-import com.flyfox.modules.friendlylink.FriendlylinkCache;
+import com.flyfox.modules.admin.article.TbArticle;
+import com.flyfox.modules.admin.folder.FolderService;
+import com.flyfox.modules.admin.folder.TbFolder;
+import com.flyfox.modules.admin.friendlylink.FriendlylinkCache;
 import com.flyfox.modules.front.service.FrontCacheService;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;

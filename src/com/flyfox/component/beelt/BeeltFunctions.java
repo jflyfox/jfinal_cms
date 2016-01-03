@@ -1,10 +1,13 @@
 package com.flyfox.component.beelt;
 
+import java.io.File;
 import java.util.Date;
 
-import com.flyfox.front.articlelike.ArticleLikeCache;
 import com.flyfox.jfinal.template.TemplateFunctions;
-import com.flyfox.modules.article.TbArticle;
+import com.flyfox.modules.admin.article.ArticleController;
+import com.flyfox.modules.admin.article.TbArticle;
+import com.flyfox.modules.admin.folder.FolderService;
+import com.flyfox.modules.front.articlelike.ArticleLikeCache;
 import com.flyfox.modules.front.service.FrontCacheService;
 import com.flyfox.system.dict.DictCache;
 import com.flyfox.system.user.SysUser;
@@ -43,20 +46,84 @@ public class BeeltFunctions extends TemplateFunctions {
 	}
 
 	// //////////////////////自定义方法///////////////////////////
+	/**
+	 * 获取图片路径
+	 * 
+	 * 2015年6月2日 下午6:36:37 flyfox 330627517@qq.com
+	 * 
+	 * @param article
+	 * @return
+	 */
+	public static String getArtImage(TbArticle article) {
+		String imageUrl = article.getImageNetUrl();
+		if (StrUtils.isEmpty(imageUrl)) {
+			imageUrl = ArticleController.IMAGE_PATH + File.separator + article.getImageUrl();
+		}
+		return imageUrl;
+	}
+
+	/**
+	 * 获取浏览数
+	 * 
+	 * 2015年6月2日 下午6:30:56 flyfox 330627517@qq.com
+	 * 
+	 * @param articleId
+	 * @return
+	 */
 	public static int countView(int articleId) {
 		TbArticle article = new FrontCacheService().getArticleCount(articleId);
 		return article == null ? 0 : article.getCountView();
 	}
 
+	/**
+	 * 获取评论数
+	 * 
+	 * 2015年6月2日 下午6:30:56 flyfox 330627517@qq.com
+	 * 
+	 * @param articleId
+	 * @return
+	 */
 	public static int countComment(int articleId) {
 		TbArticle article = new FrontCacheService().getArticleCount(articleId);
 		return article == null ? 0 : article.getCountComment();
 	}
 
+	/**
+	 * 获取浏览数
+	 * 
+	 * 2015年6月2日 下午6:30:56 flyfox 330627517@qq.com
+	 * 
+	 * @param articleId
+	 * @return
+	 */
 	public static boolean isLike(int userId, int articleId) {
 		return new ArticleLikeCache().isLike(userId, articleId);
 	}
 	
+	/**
+	 * 获取菜单，数字和字符串转换
+	 * 
+	 * 2015年5月26日 上午8:57:48 flyfox 330627517@qq.com
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static String getMenu(String key) {
+		return FolderService.getMenu(key);
+	}
+
+	/**
+	 * 获取菜单，数字和字符串转换
+	 * 
+	 * 2015年5月26日 上午8:57:48 flyfox 330627517@qq.com
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static String getMenu(int key) {
+		return FolderService.getMenu(key + "");
+	}
+
 	/**
 	 * 字符串截取
 	 * 

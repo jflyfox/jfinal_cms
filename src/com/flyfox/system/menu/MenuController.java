@@ -1,6 +1,7 @@
 package com.flyfox.system.menu;
 
 import com.flyfox.jfinal.base.BaseController;
+import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.jfinal.component.db.SQLUtils;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -9,6 +10,7 @@ import com.jfinal.plugin.activerecord.Page;
  * 
  * @author flyfox 2014-4-24
  */
+@ControllerBind(controllerKey = "/system/menu")
 public class MenuController extends BaseController {
 
 	private static final String path = "/pages/system/menu/menu_";
@@ -23,6 +25,7 @@ public class MenuController extends BaseController {
 			// 查询条件
 			sql.whereLike("name", model.getStr("name"));
 		}
+		sql.append(" order by sort,id desc");
 
 		Page<SysMenu> page = SysMenu.dao.paginate(getPaginator(), "select t.*,ifnull(d.name,'根目录') as parentname ", //
 				sql.toString().toString());
@@ -48,7 +51,14 @@ public class MenuController extends BaseController {
 	}
 
 	public void delete() {
-		SysMenu.dao.deleteById(getParaToInt());
+		// 日志添加
+		SysMenu model = new SysMenu();
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
+
+		model.deleteById(getParaToInt());
 		list();
 	}
 
@@ -69,16 +79,20 @@ public class MenuController extends BaseController {
 			model.set("level", parentid == 0 ? 1 : 2);
 		}
 
+		// 日志添加
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
 		if (pid != null && pid > 0) { // 更新
 			model.update();
 		} else { // 新增
 			model.remove("id");
-			model.put("create_id", getSessionUser().getUserID());
-			model.put("create_time", getNow());
+			model.put("create_id", userid);
+			model.put("create_time", now);
 			model.save();
 		}
 		renderMessage("保存成功");
 	}
-	
-	
+
 }

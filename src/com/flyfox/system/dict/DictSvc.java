@@ -8,11 +8,9 @@ import com.flyfox.jfinal.base.BaseService;
 /**
  * 数据字典service
  * 
- * @author flyfox
- * 2014-2-11
+ * @author flyfox 2014-2-11
  */
 public class DictSvc extends BaseService {
-
 
 	/**
 	 * 通过Key获取数据字典名称
@@ -64,8 +62,8 @@ public class DictSvc extends BaseService {
 		DictCache.initDict();
 	}
 
-	public void deleteDetail(Integer detailId) {
-		SysDictDetail.dao.deleteById(detailId);
+	public void deleteDetail(SysDictDetail model) {
+		model.deleteById(model.getInt("detail_id"));
 		DictCache.initDict();
 	}
 

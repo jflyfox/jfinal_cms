@@ -3,7 +3,7 @@ package com.flyfox.component.util;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.flyfox.modules.article.TbArticle;
+import com.flyfox.modules.admin.article.TbArticle;
 
 /**
  * 浏览数量缓存

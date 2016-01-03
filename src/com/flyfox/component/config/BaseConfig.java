@@ -28,13 +28,14 @@ public class BaseConfig extends JflyfoxConfig {
 		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate;
 		groupTemplate.registerFunctionPackage("strutil", BeetlStrUtils.class);
 		groupTemplate.registerFunctionPackage("flyfox", BeeltFunctions.class);
+
 	};
 
 	@Override
 	public void configHandler(Handlers me) {
 		// Beelt
 		// me.add(new BeeltHandler());
-		me.add(new HtmlHandler());
+		me.add(new HtmlHandler());	
 		super.configHandler(me);
 	}
 

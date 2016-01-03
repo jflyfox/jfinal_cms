@@ -2,10 +2,11 @@ package com.flyfox.modules.front.service;
 
 import java.util.List;
 
+import com.flyfox.component.util.JFlyFoxUtils;
 import com.flyfox.jfinal.base.BaseService;
 import com.flyfox.jfinal.base.Paginator;
-import com.flyfox.modules.article.TbArticle;
-import com.flyfox.modules.tags.TbTags;
+import com.flyfox.modules.admin.article.TbArticle;
+import com.flyfox.modules.admin.tags.TbTags;
 import com.flyfox.util.cache.Cache;
 import com.flyfox.util.cache.CacheManager;
 import com.jfinal.plugin.activerecord.Page;
@@ -124,8 +125,9 @@ public class FrontCacheService extends BaseService {
 		String key = ("recommendArticle_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_article  where status = 1 and type in (11,12) " //
-						+ "and is_recommend = 1 " //
-						+ "order by sort,create_time desc");
+						+ " and is_recommend = 1 " // 推荐文章
+						+ " and folder_id != " + JFlyFoxUtils.MENU_TOPPIC // 不搜索首页图片
+						+ " order by sort,create_time desc");
 		return articles;
 	}
 
@@ -145,7 +147,7 @@ public class FrontCacheService extends BaseService {
 						+ " order by publish_time desc,update_time desc");
 		return articles;
 	}
-	
+
 	/**
 	 * 返回对应文章
 	 * 
@@ -159,7 +161,27 @@ public class FrontCacheService extends BaseService {
 		String key = ("article_" + folderId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		// 推荐文章列表
 		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_article  where status = 1 and type in (11,12) " //
+				, " from tb_article " //
+						+ " where status = 1 and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
+						+ " and folder_id =  ? " //
+						+ " order by sort,create_time desc", folderId);
+		return articles;
+	}
+
+	/**
+	 * 返回对应文章
+	 * 
+	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
+	 * 
+	 * @param paginator
+	 * @param folderId
+	 * @return
+	 */
+	public Page<TbArticle> getArticleByNoCache(Paginator paginator, int folderId) {
+		// 推荐文章列表
+		Page<TbArticle> articles = TbArticle.dao.paginate(paginator, "select * " //
+				, " from tb_article " //
+						+ " where status = 1 and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
 						+ " and folder_id =  ? " //
 						+ " order by sort,create_time desc", folderId);
 		return articles;

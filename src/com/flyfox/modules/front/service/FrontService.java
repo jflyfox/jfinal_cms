@@ -5,26 +5,47 @@ import com.flyfox.component.util.JFlyFoxUtils;
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.base.BaseService;
 import com.flyfox.jfinal.base.Paginator;
-import com.flyfox.modules.article.TbArticle;
-import com.flyfox.modules.folder.FolderService;
-import com.flyfox.modules.folder.TbFolder;
+import com.flyfox.modules.admin.article.TbArticle;
+import com.flyfox.modules.admin.folder.FolderService;
+import com.flyfox.modules.admin.folder.TbFolder;
+import com.flyfox.modules.admin.tags.TbTags;
 import com.flyfox.modules.front.Home;
-import com.flyfox.modules.tags.TbTags;
+import com.flyfox.util.NumberUtils;
 import com.jfinal.plugin.activerecord.Page;
 
 public class FrontService extends BaseService {
 
 	public void menu(BaseController controller) {
-		Integer folderId = controller.getParaToInt();
+		String folderStr = controller.getPara();
+		Integer folderId = TbFolder.ROOT;
+		if (folderStr != null) {
+			folderId = NumberUtils.parseInt(FolderService.getMenu(folderStr));
+		}
 		if (folderId == null || folderId <= 0) {
 			folderId = TbFolder.ROOT;
 		}
 		// 活动目录
 		controller.setAttr("folders_selected", folderId);
 
-		if (folderId == TbFolder.ROOT) {
+		if (folderId == JFlyFoxUtils.MENU_HOME) {
 			home(controller);
-		} else if (folderId == 90) {
+		} else if (folderId == JFlyFoxUtils.MENU_NEWS) {
+			otherMenu(controller, folderId);
+		} else if (folderId == JFlyFoxUtils.MENU_FOOD) {
+			otherMenu(controller, folderId);
+		} else if (folderId == JFlyFoxUtils.MENU_TRAVEL) {
+			otherMenu(controller, folderId);
+		} else if (folderId == JFlyFoxUtils.MENU_EDUCATION) {
+			otherMenu(controller, folderId);
+		} else if (folderId == JFlyFoxUtils.MENU_PARK) {
+			otherMenu(controller, folderId);
+		} else if (folderId == JFlyFoxUtils.MENU_MARKET) {
+			otherMenu(controller, folderId);
+		} else if (folderId == JFlyFoxUtils.MENU_HOUSE) {
+			otherMenu(controller, folderId);
+		} else if (folderId == JFlyFoxUtils.MENU_OTHER) {
+			otherMenu(controller, folderId);
+		} else if (folderId == JFlyFoxUtils.MENU_ABOUT) {
 			controller.redirect("/front/about");
 		} else {
 			// 其他
@@ -44,13 +65,12 @@ public class FrontService extends BaseService {
 	protected void otherMenu(BaseController controller, int folderId) {
 		// 当前目录
 		TbFolder folder = new FolderService().getFolder(folderId);
-
 		// 没有对应目录~返回首页吧
 		if (folder == null) {
 			home(controller);
 			return;
 		}
-
+		
 		controller.setAttr("folder", folder);
 
 		// 列表数据
@@ -64,7 +84,7 @@ public class FrontService extends BaseService {
 		// seo：title优化
 		controller.setAttr(JFlyFoxUtils.TITLE_ATTR, folder.getStr("name") + " - " + JFlyFoxCache.getHeadTitle());
 
-		controller.renderAuto(Home.PATH + "common_menu.html");
+		controller.renderAuto(Home.PATH + FolderService.getMenu(folderId + "") + ".html");
 	}
 
 	/**
@@ -76,7 +96,7 @@ public class FrontService extends BaseService {
 	 */
 	protected void home(BaseController controller) {
 		// 首页图片 13
-		Page<TbArticle> topPics = new FrontCacheService().getArticle(new Paginator(1, 4), 13);
+		Page<TbArticle> topPics = new FrontCacheService().getArticle(new Paginator(1, 4), JFlyFoxUtils.MENU_TOPPIC);
 		controller.setAttr("topPics", topPics);
 
 		// 最新动态
@@ -84,24 +104,25 @@ public class FrontService extends BaseService {
 		controller.setAttr("newArticles", newArticle);
 
 		// 新闻 2
-		Page<TbArticle> news = new FrontCacheService().getArticle(new Paginator(1, 10), 2);
+		Page<TbArticle> news = new FrontCacheService().getArticle(new Paginator(1, 10), JFlyFoxUtils.MENU_NEWS);
 		controller.setAttr("news", news);
 
 		// 美食 3
-		Page<TbArticle> foods = new FrontCacheService().getArticle(new Paginator(1, 10), 3);
+		Page<TbArticle> foods = new FrontCacheService().getArticle(new Paginator(1, 10), JFlyFoxUtils.MENU_FOOD);
 		controller.setAttr("foods", foods);
 
 		// 旅游 4
-		Page<TbArticle> travels = new FrontCacheService().getArticle(new Paginator(1, 9), 4);
+		Page<TbArticle> travels = new FrontCacheService().getArticle(new Paginator(1, 9), JFlyFoxUtils.MENU_TRAVEL);
 		controller.setAttr("travels", travels);
 
 		// 教育 5
-		Page<TbArticle> educations = new FrontCacheService().getArticle(new Paginator(1, 10), 5);
+		Page<TbArticle> educations = new FrontCacheService().getArticle(new Paginator(1, 10),
+				JFlyFoxUtils.MENU_EDUCATION);
 		controller.setAttr("educations", educations);
 
 		// seo：title优化
-		controller
-				.setAttr(JFlyFoxUtils.TITLE_ATTR, JFlyFoxCache.getHeadTitle() + " - " + "北京市门头沟区最全面的生活、新闻、美食、旅游、教育资讯");
+		controller.setAttr(JFlyFoxUtils.TITLE_ATTR, JFlyFoxCache.getHeadTitle() //
+				+ " - 北京市门头沟区最全面的生活、新闻、美食、旅游、教育资讯");
 
 		controller.renderAuto(Home.PATH + "home.html");
 	}
