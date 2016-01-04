@@ -119,7 +119,7 @@ var bodyContent = {
 					<th>类型</th> 
 					<th>Email</th> 
 					<th>手机号</th> 
- 
+					<th>创建时间</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -150,7 +150,7 @@ var bodyContent = {
 					</td>
 					<td>${item.email}</td> 
 					<td>${item.tel}</td> 
-	 
+					<td>${item.create_time}</td>
 					<td>
 					<a href="javascript:void(0);" class="btn btn-sm btn-success" onclick="oper.view(${item.userid});">查看</a> 
 					<a href="javascript:void(0);" class="btn btn-sm btn-primary" onclick="oper.edit(${item.userid});">修改</a> 
