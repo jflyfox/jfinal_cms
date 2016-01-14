@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jflyfox</groupId>
-	<artifactId>jflyfox_mtgxxw</artifactId>
+	<artifactId>jfinal_cms</artifactId>
 	<packaging>war</packaging>
-	<version>2.1.1</version>
+	<version>2.2.0</version>
 
 	<repositories>
 		<repository>
@@ -181,7 +181,7 @@
 				<version>1.1</version>
 				<configuration>
 					<port>80</port>
-					<path>/mtg</path>
+					<path>/jfinal_cms</path>
 					<warSourceDirectory>${basedir}/WebRoot</warSourceDirectory>
 				</configuration>
 			</plugin>
