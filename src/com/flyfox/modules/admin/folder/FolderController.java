@@ -1,5 +1,7 @@
 package com.flyfox.modules.admin.folder;
 
+import java.util.List;
+
 import com.flyfox.jfinal.base.BaseController;
 import com.flyfox.jfinal.component.annotation.ControllerBind;
 import com.flyfox.jfinal.component.db.SQLUtils;
@@ -28,7 +30,7 @@ public class FolderController extends BaseController {
 			sql.setAlias("t");
 			sql.whereLike("name", model.getStr("name"));
 			sql.whereEquals("status", model.getInt("status"));
-		} 
+		}
 
 		sql.append(" order by sort,id ");
 		Page<TbFolder> page = TbFolder.dao.paginate(getPaginator(), "select t.*,f.name as parentName ", //
@@ -41,6 +43,8 @@ public class FolderController extends BaseController {
 	}
 
 	public void add() {
+		setAttr("selectParentFolder", selectParentFolder(0, 0));
+		
 		render(path + "add.html");
 	}
 
@@ -59,10 +63,10 @@ public class FolderController extends BaseController {
 			list();
 			return;
 		}
-		
+
 		// 日志添加
 		TbFolder model = new TbFolder();
-		Integer userid= getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserID();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -78,16 +82,18 @@ public class FolderController extends BaseController {
 		TbFolder model = TbFolder.dao.findById(getParaToInt());
 		setAttr("model", model);
 
+		// 下拉框
+		setAttr("selectParentFolder", selectParentFolder(model.getParentId(), model.getId()));
+		
 		render(path + "edit.html");
 	}
 
 	public void save() {
 		Integer pid = getParaToInt();
 		TbFolder model = getModel(TbFolder.class);
-		
 
 		// 日志添加
-		Integer userid= getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserID();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -103,6 +109,31 @@ public class FolderController extends BaseController {
 		// 更新目录缓存
 		new FolderService().updateCache();
 		renderMessage("保存成功");
+	}
+
+	/**
+	 * 目录复选框
+	 * 
+	 * 2015年1月28日 下午5:28:40 flyfox 330627517@qq.com
+	 * 
+	 * @return
+	 */
+	private String selectParentFolder(Integer selected, Integer id) {
+		List<TbFolder> list = TbFolder.dao.find(" select id,name from tb_folder " //
+				+ " where id != ? order by sort,create_time desc ", id);
+		StringBuffer sb = new StringBuffer("");
+		if (list != null && list.size() > 0) {
+			for (TbFolder folder : list) {
+				sb.append("<option value=\"");
+				sb.append(folder.getInt("id"));
+				sb.append("\" ");
+				sb.append(folder.getInt("id") == selected ? "selected" : "");
+				sb.append(">");
+				sb.append(folder.getStr("name"));
+				sb.append("</option>");
+			}
+		}
+		return sb.toString();
 	}
 
 }
