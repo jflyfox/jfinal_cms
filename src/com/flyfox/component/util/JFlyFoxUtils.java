@@ -48,7 +48,7 @@ public class JFlyFoxUtils {
 	 */
 	public static final int MENU_BLOG = 100;
 
-	private static final DESUtils des = new DESUtils("flyfoxxx");
+	private static final DESUtils des = new DESUtils("flyoffox");
 
 	// admin:1RHFCLt64uOOViCTzgSaww== test:qvPQPhVn96Lx80f7BIaVjA==
 	public static void main(String[] args) {
