@@ -1,7 +1,7 @@
 package com.jflyfox.system.dict;
 
 import com.jfinal.plugin.activerecord.Page;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.util.StrUtils;
 
@@ -11,7 +11,7 @@ import com.jflyfox.util.StrUtils;
  * @author flyfox 2014-2-11
  */
 @ControllerBind(controllerKey = "/system/dict")
-public class DictController extends BaseController {
+public class DictController extends BaseProjectController {
 
 	private static final String path = "/pages/system/dict/dict_";
 	DictSvc svc = new DictSvc();

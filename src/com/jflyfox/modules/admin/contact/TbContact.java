@@ -1,10 +1,10 @@
 package com.jflyfox.modules.admin.contact;
 
-import com.jflyfox.jfinal.base.BaseModel;
+import com.jflyfox.component.base.BaseProjectModel;
 import com.jflyfox.jfinal.component.annotation.ModelBind;
 
 @ModelBind(table = "tb_contact")
-public class TbContact extends BaseModel<TbContact> {
+public class TbContact extends BaseProjectModel<TbContact> {
 
 	private static final long serialVersionUID = 1L;
 	public static final TbContact dao = new TbContact();

@@ -1,10 +1,10 @@
 package com.jflyfox.modules.admin.folder;
 
-import com.jflyfox.jfinal.base.BaseModel;
+import com.jflyfox.component.base.BaseProjectModel;
 import com.jflyfox.jfinal.component.annotation.ModelBind;
 
 @ModelBind(table = "tb_folder")
-public class TbFolder extends BaseModel<TbFolder> {
+public class TbFolder extends BaseProjectModel<TbFolder> {
 
 	private static final long serialVersionUID = 1L;
 	/**

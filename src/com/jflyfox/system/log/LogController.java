@@ -1,7 +1,7 @@
 package com.jflyfox.system.log;
 
 import com.jfinal.plugin.activerecord.Page;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 
@@ -11,7 +11,7 @@ import com.jflyfox.jfinal.component.db.SQLUtils;
  * @author flyfox 2014-4-24
  */
 @ControllerBind(controllerKey = "/system/log")
-public class LogController extends BaseController {
+public class LogController extends BaseProjectController {
 
 	private static final String path = "/pages/system/log/log_";
 

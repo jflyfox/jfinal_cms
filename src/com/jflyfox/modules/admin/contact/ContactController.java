@@ -1,7 +1,7 @@
 package com.jflyfox.modules.admin.contact;
 
 import com.jfinal.plugin.activerecord.Page;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 
@@ -11,7 +11,7 @@ import com.jflyfox.jfinal.component.db.SQLUtils;
  * @author flyfox 2014-2-11
  */
 @ControllerBind(controllerKey = "/admin/contact")
-public class ContactController extends BaseController {
+public class ContactController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/contact/contact_";
 

@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 
 import com.jfinal.aop.Before;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ImageCode;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.CommonController;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
@@ -16,7 +16,7 @@ import com.jflyfox.modules.front.interceptor.FrontInterceptor;
  * 2015年5月11日 下午4:11:02 flyfox 330627517@qq.com
  */
 @ControllerBind(controllerKey = "/front")
-public class Home extends BaseController {
+public class Home extends BaseProjectController {
 
 	public static final String PATH = "/pages/front/home/";
 

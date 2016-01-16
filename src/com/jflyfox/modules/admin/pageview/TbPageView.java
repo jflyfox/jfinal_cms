@@ -1,10 +1,10 @@
 package com.jflyfox.modules.admin.pageview;
 
-import com.jflyfox.jfinal.base.BaseModel;
+import com.jflyfox.component.base.BaseProjectModel;
 import com.jflyfox.jfinal.component.annotation.ModelBind;
 
 @ModelBind(table = "tb_pageview")
-public class TbPageView extends BaseModel<TbPageView> {
+public class TbPageView extends BaseProjectModel<TbPageView> {
 
 	private static final long serialVersionUID = 1L;
 

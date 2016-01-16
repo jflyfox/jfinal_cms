@@ -4,8 +4,8 @@ import java.io.UnsupportedEncodingException;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Before;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.oauth.OauthBaidu;
 import com.jflyfox.jfinal.component.oauth.OauthQQ;
@@ -20,7 +20,7 @@ import com.jflyfox.util.StrUtils;
 
 @ControllerBind(controllerKey = "/oauth2")
 @Before(FrontInterceptor.class)
-public class Oauth2Controller extends BaseController {
+public class Oauth2Controller extends BaseProjectController {
 
 	private static final String path = "/pages/oauth2/";
 	private static final int OAUTH_ID = 10;

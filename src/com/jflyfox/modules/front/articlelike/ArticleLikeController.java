@@ -1,7 +1,7 @@
 package com.jflyfox.modules.front.articlelike;
 
 import com.alibaba.fastjson.JSONObject;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.system.user.SysUser;
 
@@ -11,7 +11,7 @@ import com.jflyfox.system.user.SysUser;
  * @author flyfox 2015-08-16
  */
 @ControllerBind(controllerKey = "/front/articlelike")
-public class ArticleLikeController extends BaseController {
+public class ArticleLikeController extends BaseProjectController {
 
 	/**
 	 * 喜欢

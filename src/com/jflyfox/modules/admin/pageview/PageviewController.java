@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.util.DateUtils;
 import com.jflyfox.util.StrUtils;
@@ -15,7 +15,7 @@ import com.jflyfox.util.StrUtils;
  * @author flyfox 2014-2-11
  */
 @ControllerBind(controllerKey = "/admin/pageview")
-public class PageviewController extends BaseController {
+public class PageviewController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/pageview/";
 

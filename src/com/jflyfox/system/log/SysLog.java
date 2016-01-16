@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.jfinal.log.Log;
-import com.jflyfox.jfinal.base.BaseModel;
+import com.jflyfox.component.base.BaseProjectModel;
 import com.jflyfox.jfinal.component.annotation.ModelBind;
 import com.jflyfox.system.dict.SysDictDetail;
 
 @ModelBind(table = "sys_log")
-public class SysLog extends BaseModel<SysLog> {
+public class SysLog extends BaseProjectModel<SysLog> {
 
 	private static final long serialVersionUID = 1L;
 

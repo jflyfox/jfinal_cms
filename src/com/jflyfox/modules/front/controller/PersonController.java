@@ -5,10 +5,10 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.beelt.BeeltFunctions;
 import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.CommonController;
@@ -29,7 +29,7 @@ import com.jflyfox.util.extend.HtmlUtils;
  * 2015年3月10日 下午5:36:22 flyfox 330627517@qq.com
  */
 @ControllerBind(controllerKey = "/front/person")
-public class PersonController extends BaseController {
+public class PersonController extends BaseProjectController {
 
 	public static final String path = "/pages/front/person/";
 

@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ArticleCountCache;
 import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.admin.article.TbArticle;
@@ -23,7 +23,7 @@ import com.jflyfox.modules.front.service.FrontCacheService;
  * @author flyfox 2014-2-11
  */
 @ControllerBind(controllerKey = "/front/article")
-public class ArticleController extends BaseController {
+public class ArticleController extends BaseProjectController {
 
 	public static final String path = "/pages/front/article/";
 

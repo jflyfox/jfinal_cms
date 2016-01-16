@@ -8,7 +8,7 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.modules.admin.comment.CommentService;
@@ -23,7 +23,7 @@ import com.jflyfox.util.StrUtils;
  * @author flyfox 2014-2-11
  */
 @ControllerBind(controllerKey = "/admin/article")
-public class ArticleController extends BaseController {
+public class ArticleController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/article/article_";
 

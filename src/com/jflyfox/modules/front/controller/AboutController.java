@@ -2,9 +2,9 @@ package com.jflyfox.modules.front.controller;
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.admin.article.TbArticle;
@@ -17,7 +17,7 @@ import com.jflyfox.modules.front.service.FrontCacheService;
  * 2015年5月26日 上午10:42:54 flyfox 330627517@qq.com
  */
 @ControllerBind(controllerKey = "/front/about")
-public class AboutController extends BaseController {
+public class AboutController extends BaseProjectController {
 
 	public static final String path = "/pages/front/about/";
 

@@ -6,7 +6,7 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.util.Attr;
 import com.jflyfox.util.StrUtils;
 
@@ -43,8 +43,8 @@ public class UserInterceptor implements Interceptor {
 
 		// 每次访问获取session，没有可以从cookie取~
 		SysUser user = null;
-		if (controller instanceof BaseController) {
-			user = (SysUser) ((BaseController) controller).getSessionUser();
+		if (controller instanceof BaseProjectController) {
+			user = (SysUser) ((BaseProjectController) controller).getSessionUser();
 		} else {
 			user = controller.getSessionAttr(Attr.SESSION_NAME);
 		}

@@ -1,10 +1,10 @@
 package com.jflyfox.modules.front.articlelike;
 
-import com.jflyfox.jfinal.base.BaseModel;
+import com.jflyfox.component.base.BaseProjectModel;
 import com.jflyfox.jfinal.component.annotation.ModelBind;
 
 @ModelBind(table = "tb_articlelike")
-public class TbArticleLike extends BaseModel<TbArticleLike> {
+public class TbArticleLike extends BaseProjectModel<TbArticleLike> {
 
 	private static final long serialVersionUID = 1L;
 	public static final TbArticleLike dao = new TbArticleLike();

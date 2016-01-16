@@ -2,9 +2,9 @@ package com.jflyfox.modules.front.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Before;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ImageCode;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
 import com.jflyfox.system.user.SysUser;
@@ -12,7 +12,7 @@ import com.jflyfox.system.user.UserCache;
 import com.jflyfox.util.StrUtils;
 
 @ControllerBind(controllerKey = "/front/regist")
-public class RegistController extends BaseController {
+public class RegistController extends BaseProjectController {
 
 	public static final String path = "/pages/front/regist/";
 

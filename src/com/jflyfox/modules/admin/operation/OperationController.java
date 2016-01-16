@@ -1,7 +1,7 @@
 package com.jflyfox.modules.admin.operation;
 
 import com.alibaba.fastjson.JSONObject;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.admin.comment.CommentService;
 import com.jflyfox.modules.admin.folder.FolderService;
@@ -14,7 +14,7 @@ import com.jflyfox.system.user.SysUser;
  * @author flyfox 2014-4-24
  */
 @ControllerBind(controllerKey = "/admin/operation")
-public class OperationController extends BaseController {
+public class OperationController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/operation/";
 

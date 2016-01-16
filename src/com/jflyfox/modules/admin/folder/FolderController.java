@@ -3,7 +3,7 @@ package com.jflyfox.modules.admin.folder;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Page;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 
@@ -13,7 +13,7 @@ import com.jflyfox.jfinal.component.db.SQLUtils;
  * @author flyfox 2014-2-11
  */
 @ControllerBind(controllerKey = "/admin/folder")
-public class FolderController extends BaseController {
+public class FolderController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/folder/folder_";
 

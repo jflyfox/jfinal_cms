@@ -1,9 +1,9 @@
 package com.jflyfox.modules;
 
 import com.jfinal.aop.Before;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ImageCode;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
 import com.jflyfox.modules.front.service.FrontService;
@@ -18,7 +18,7 @@ import com.jflyfox.util.StrUtils;
  * CommonController
  */
 @ControllerBind(controllerKey = "/")
-public class CommonController extends BaseController {
+public class CommonController extends BaseProjectController {
 
 	public static final String loginPage = "/pages/front/login.html";
 	public static final String mainPage = "/admin/article/list";

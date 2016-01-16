@@ -1,7 +1,7 @@
 package com.jflyfox.modules.front.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.admin.comment.CommentService;
 import com.jflyfox.modules.admin.comment.TbComment;
@@ -10,7 +10,7 @@ import com.jflyfox.system.user.UserCache;
 import com.jflyfox.util.StrUtils;
 
 @ControllerBind(controllerKey = "/front/comment")
-public class CommentController extends BaseController {
+public class CommentController extends BaseProjectController {
 
 	/**
 	 * 删除评论

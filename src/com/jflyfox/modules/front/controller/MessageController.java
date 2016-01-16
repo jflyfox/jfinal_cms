@@ -2,7 +2,7 @@ package com.jflyfox.modules.front.controller;
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.CommonController;
 import com.jflyfox.modules.admin.comment.CommentService;
@@ -16,7 +16,7 @@ import com.jflyfox.system.user.SysUser;
  * 2015年3月10日 下午5:38:24 flyfox 330627517@qq.com
  */
 @ControllerBind(controllerKey = "/front/message")
-public class MessageController extends BaseController {
+public class MessageController extends BaseProjectController {
 
 	public static final String path = "/pages/front/message/";
 	

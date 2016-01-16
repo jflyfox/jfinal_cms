@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
-import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.system.menu.MenuSvc;
@@ -18,7 +18,7 @@ import com.jflyfox.system.menu.SysMenu;
  * @author flyfox 2014-4-24
  */
 @ControllerBind(controllerKey = "/system/role")
-public class RoleController extends BaseController {
+public class RoleController extends BaseProjectController {
 
 	private static final String path = "/pages/system/role/role_";
 

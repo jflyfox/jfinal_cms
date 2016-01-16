@@ -1,10 +1,10 @@
 package com.jflyfox.modules.error;
 
-import com.jflyfox.jfinal.base.BaseModel;
+import com.jflyfox.component.base.BaseProjectModel;
 import com.jflyfox.jfinal.component.annotation.ModelBind;
 
 @ModelBind(table = "tb_error")
-public class TbError extends BaseModel<TbError> {
+public class TbError extends BaseProjectModel<TbError> {
 
 	private static final long serialVersionUID = 1L;
 

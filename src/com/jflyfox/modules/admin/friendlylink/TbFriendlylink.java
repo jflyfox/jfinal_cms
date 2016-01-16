@@ -1,10 +1,10 @@
 package com.jflyfox.modules.admin.friendlylink;
 
-import com.jflyfox.jfinal.base.BaseModel;
+import com.jflyfox.component.base.BaseProjectModel;
 import com.jflyfox.jfinal.component.annotation.ModelBind;
 
 @ModelBind(table = "tb_friendlylink")
-public class TbFriendlylink extends BaseModel<TbFriendlylink> {
+public class TbFriendlylink extends BaseProjectModel<TbFriendlylink> {
 
 	private static final long serialVersionUID = 1L;
 	public static final TbFriendlylink dao = new TbFriendlylink();

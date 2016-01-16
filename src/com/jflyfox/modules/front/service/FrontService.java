@@ -1,9 +1,9 @@
 package com.jflyfox.modules.front.service;
 
 import com.jfinal.plugin.activerecord.Page;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.base.BaseService;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.modules.admin.article.TbArticle;
@@ -15,7 +15,7 @@ import com.jflyfox.util.NumberUtils;
 
 public class FrontService extends BaseService {
 
-	public void menu(BaseController controller) {
+	public void menu(BaseProjectController controller) {
 		String folderStr = controller.getPara();
 		Integer folderId = TbFolder.ROOT;
 		if (folderStr != null) {
@@ -62,7 +62,7 @@ public class FrontService extends BaseService {
 	 * @param controller
 	 * @param folderId
 	 */
-	protected void otherMenu(BaseController controller, int folderId) {
+	protected void otherMenu(BaseProjectController controller, int folderId) {
 		// 当前目录
 		TbFolder folder = new FolderService().getFolder(folderId);
 		// 没有对应目录~返回首页吧
@@ -94,7 +94,7 @@ public class FrontService extends BaseService {
 	 * 
 	 * @param controller
 	 */
-	protected void home(BaseController controller) {
+	protected void home(BaseProjectController controller) {
 		// 首页图片 13
 		Page<TbArticle> topPics = new FrontCacheService().getArticle(new Paginator(1, 4), JFlyFoxUtils.MENU_TOPPIC);
 		controller.setAttr("topPics", topPics);
