@@ -11,6 +11,7 @@ import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.system.menu.MenuSvc;
 import com.jflyfox.system.menu.SysMenu;
+import com.jflyfox.util.StrUtils;
 
 /**
  * 角色
@@ -30,6 +31,14 @@ public class RoleController extends BaseProjectController {
 			sql.setAlias("t");
 			// 查询条件
 			sql.whereLike("name", model.getStr("name"));
+		}
+		
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by sort,id desc");
+		} else {
+			sql.append(" order by ").append(orderBy);
 		}
 
 		String sqlSelect = "select t.* "

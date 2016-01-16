@@ -23,7 +23,15 @@ public class DictController extends BaseProjectController {
 		if (StrUtils.isNotEmpty(attrVal)) {
 			sql.append(" AND t.dict_type = '").append(attrVal).append("'");
 		}
-		sql.append(" order by t.dict_type,t.detail_id desc ");
+		
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by t.dict_type,t.detail_id desc ");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
+		
 		Page<SysDictDetail> page = SysDictDetail.dao
 				.paginate(getPaginator(), "select t.*,d.dict_name ", sql.toString());
 

@@ -4,6 +4,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
+import com.jflyfox.util.StrUtils;
 
 /**
  * 部门
@@ -25,6 +26,14 @@ public class DepartmentController extends BaseProjectController {
 			sql.whereLike("name", model.getStr("name"));
 		}
 
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by t.id desc ");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
+		
 		Page<SysDepartment> page = SysDepartment.dao.paginate(getPaginator(), "select t.* ", //
 				sql.toString().toString());
 

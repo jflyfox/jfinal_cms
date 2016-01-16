@@ -36,7 +36,14 @@ public class UserController extends BaseProjectController {
 			sql.whereEquals("departid", model.getInt("departid"));
 		}
 
-		sql.append(" order by userid ");
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by userid desc");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
+		
 		Page<SysUser> page = SysUser.dao.paginate(getPaginator(), "select t.*,d.name as departname ", sql.toString()
 				.toString());
 		// 下拉框

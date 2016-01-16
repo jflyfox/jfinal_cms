@@ -4,6 +4,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
+import com.jflyfox.util.StrUtils;
 
 /**
  * 菜单
@@ -25,7 +26,14 @@ public class MenuController extends BaseProjectController {
 			// 查询条件
 			sql.whereLike("name", model.getStr("name"));
 		}
-		sql.append(" order by sort,id desc");
+		
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by sort,id desc");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
 
 		Page<SysMenu> page = SysMenu.dao.paginate(getPaginator(), "select t.*,ifnull(d.name,'根目录') as parentname ", //
 				sql.toString().toString());

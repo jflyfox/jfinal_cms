@@ -4,6 +4,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
+import com.jflyfox.util.StrUtils;
 
 /**
  * 操作日志
@@ -24,7 +25,13 @@ public class LogController extends BaseProjectController {
 			// 查询条件
 			sql.whereEquals("log_type", model.getLogType());
 		}
-		sql.append(" order by id desc");
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by id desc");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
 
 		Page<SysLog> page = SysLog.dao.paginate(getPaginator(), "select t.* ", //
 				sql.toString().toString());
