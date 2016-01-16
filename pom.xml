@@ -116,7 +116,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		<dependency>
+		    <groupId>com.jfinal</groupId>
+		    <artifactId>cos</artifactId>
+		    <version>26Dec2008</version>
+		</dependency>
 
 		<!-- 数据库 -->
 		<dependency>
