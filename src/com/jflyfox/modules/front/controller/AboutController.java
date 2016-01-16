@@ -1,0 +1,49 @@
+package com.jflyfox.modules.front.controller;
+
+import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Page;
+import com.jflyfox.component.util.JFlyFoxCache;
+import com.jflyfox.component.util.JFlyFoxUtils;
+import com.jflyfox.jfinal.base.BaseController;
+import com.jflyfox.jfinal.base.Paginator;
+import com.jflyfox.jfinal.component.annotation.ControllerBind;
+import com.jflyfox.modules.admin.article.TbArticle;
+import com.jflyfox.modules.front.interceptor.FrontInterceptor;
+import com.jflyfox.modules.front.service.FrontCacheService;
+
+/**
+ * 关于我们
+ * 
+ * 2015年5月26日 上午10:42:54 flyfox 330627517@qq.com
+ */
+@ControllerBind(controllerKey = "/front/about")
+public class AboutController extends BaseController {
+
+	public static final String path = "/pages/front/about/";
+
+	/**
+	 * 关于我们
+	 */
+	@Before(FrontInterceptor.class)
+	public void index() {
+		Integer articleId = getParaToInt();
+
+		setAttr("folders_selected", JFlyFoxUtils.MENU_ABOUT);
+		
+		Page<TbArticle> pages = new FrontCacheService().getArticle(new Paginator(1, 100), JFlyFoxUtils.MENU_ABOUT);
+		setAttr("pages", pages);
+
+		TbArticle article = null;
+		if (articleId == null || articleId <= 0) {
+			article = pages.getList().get(0);
+		} else {
+			article = new FrontCacheService().getArticle(articleId);
+		}
+		setAttr("article", article);
+
+		// seo：title优化
+		setAttr(JFlyFoxUtils.TITLE_ATTR, article.getTitle() + " - " + "关于我们 - " + JFlyFoxCache.getHeadTitle());
+
+		renderAuto(path + "show_about.html");
+	}
+}

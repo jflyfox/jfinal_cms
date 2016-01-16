@@ -5,10 +5,10 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <dependent-module archiveName="jflyfox_jfinal-3.2.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jflyfox_jfinal/jflyfox_jfinal">
+        <dependent-module archiveName="jflyfox_jfinal-4.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jflyfox_jfinal/jflyfox_jfinal">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jflyfox_base-2.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jflyfox_base/jflyfox_base">
+        <dependent-module archiveName="jflyfox_base-3.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jflyfox_base/jflyfox_base">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/money/WebRoot/WEB-INF/classes"/>
