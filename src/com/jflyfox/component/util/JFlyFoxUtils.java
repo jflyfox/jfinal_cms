@@ -8,6 +8,8 @@ import com.jflyfox.util.encrypt.DESUtils;
 public class JFlyFoxUtils {
 
 	public static final String TITLE_ATTR = "HEAD_TITLE";
+	public static final String KEYWORDS_ATTR = "HEAD_KEYWORDS";
+	public static final String DESCRIPTION_ATTR = "HEAD_DESCRIPTION";
 
 	/**
 	 * 承建部门ID

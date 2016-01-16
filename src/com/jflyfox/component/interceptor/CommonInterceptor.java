@@ -20,6 +20,8 @@ public class CommonInterceptor implements Interceptor {
 		
 		// 设置公共属性
 		controller.setAttr(JFlyFoxUtils.TITLE_ATTR, JFlyFoxCache.getHeadTitle());
+		controller.setAttr(JFlyFoxUtils.KEYWORDS_ATTR, JFlyFoxCache.getHeadTitle());
+		controller.setAttr(JFlyFoxUtils.DESCRIPTION_ATTR, JFlyFoxCache.getHeadTitle());
 
 		ai.invoke();
 	}
