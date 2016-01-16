@@ -12,6 +12,11 @@ public class JFlyFoxUtils {
 	public static final String DESCRIPTION_ATTR = "HEAD_DESCRIPTION";
 
 	/**
+	 * 上传临时目录
+	 */
+	public static final String UPLOAD_TMP_PATH = "tmp";
+	
+	/**
 	 * 承建部门ID
 	 */
 	public static final int DEPART_BUILD_ID = 1;
@@ -52,7 +57,7 @@ public class JFlyFoxUtils {
 
 	private static final DESUtils des = new DESUtils("flyfoxxx");
 
-	// admin:1RHFCLt64uOOViCTzgSaww== test:qvPQPhVn96Lx80f7BIaVjA==
+	// admin:1RHFCLt64uOOViCTzgSaww== test:ldKI9edsQVM=
 	public static void main(String[] args) {
 		String password = "admin123";
 		String tmp = passwordEncrypt(password);

@@ -9,6 +9,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
 import com.jflyfox.component.base.BaseProjectController;
+import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.modules.admin.comment.CommentService;
@@ -27,10 +28,6 @@ public class ArticleController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/article/article_";
 
-	/**
-	 * 上传临时目录
-	 */
-	public static final String UPLOAD_TMP_PATH = PathKit.getWebRootPath() + File.separator + "download" + File.separator + "tmp";
 	/**
 	 * 图片目录
 	 */
@@ -130,9 +127,9 @@ public class ArticleController extends BaseProjectController {
 
 	public void save() {
 		
-		UploadFile uploadImage = getFile("model.image_url", UPLOAD_TMP_PATH, 10 * 1024 * 1024);
+		UploadFile uploadImage = getFile("model.image_url", JFlyFoxUtils.UPLOAD_TMP_PATH, 10 * 1024 * 1024);
 
-		UploadFile uploadFile = getFile("model.file_url", UPLOAD_TMP_PATH, 10 * 1024 * 1024);
+		UploadFile uploadFile = getFile("model.file_url", JFlyFoxUtils.UPLOAD_TMP_PATH, 10 * 1024 * 1024);
 		
 		Integer pid = getParaToInt();
 		TbArticle model = getModel(TbArticle.class);
