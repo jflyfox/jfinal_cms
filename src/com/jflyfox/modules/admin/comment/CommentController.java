@@ -7,6 +7,7 @@ import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.modules.admin.article.TbArticle;
+import com.jflyfox.util.StrUtils;
 
 /**
  * 评论
@@ -21,7 +22,8 @@ public class CommentController extends BaseProjectController {
 	public void list() {
 		TbComment model = getModelByAttr(TbComment.class);
 
-		SQLUtils sql = new SQLUtils(" from tb_comment t " + " left join tb_article a on a.id = t.article_id where 1=1 ");
+		SQLUtils sql = new SQLUtils(" from tb_comment t " //
+				+ " left join tb_article a on a.id = t.article_id where 1=1 ");
 		if (model.getAttrValues().length != 0) {
 			sql.setAlias("t");
 			// 查询条件
@@ -29,7 +31,14 @@ public class CommentController extends BaseProjectController {
 
 			sql.whereEquals("article_id", model.getInt("article_id"));
 		}
-		sql.append(" order by t.id desc ");
+
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by t.id desc ");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
 
 		Page<TbComment> page = TbComment.dao.paginate(getPaginator(), "select t.*,a.title articleName ", //
 				sql.toString().toString());

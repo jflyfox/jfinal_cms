@@ -63,7 +63,14 @@ public class ArticleController extends BaseProjectController {
 			sql.whereEquals("folder_id", model.getInt("folder_id"));
 			sql.whereEquals("status", model.getInt("status"));
 		}
-		sql.append(" order by t.folder_id,t.sort,t.create_time desc ");
+		
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by t.folder_id,t.sort,t.create_time desc ");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
 
 		Page<TbArticle> page = TbArticle.dao.paginate(getPaginator(), "select t.*,f.name as folderName ", //
 				sql.toString().toString());

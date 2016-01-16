@@ -12,27 +12,27 @@ jQuery(function($) {
 		height : 430,
 		form : document.form1,
 		list : function() {
-			var url = 'contact/list';
+			var url = 'admin/contact/list';
 			this.form.action = url;
 			this.form.submit();
 		},
 		view : function(id) {
-			var url = 'contact/view/'+id;
+			var url = 'admin/contact/view/'+id;
 			var title = '查看联系人';
 			Iframe(url, this.width, this.height, title, false, false, false, EmptyFunc);
 		},
 		add : function() {
-			var url = 'contact/add';
+			var url = 'admin/contact/add';
 			var title = '添加联系人';
 			Iframe(url, this.width, this.height, title);
 		},
 		edit : function(id) {
-			var url = 'contact/edit/'+id;
+			var url = 'admin/contact/edit/'+id;
 			var title = '修改联系人';
 			Iframe(url, this.width, this.height, title);
 		},
 		del : function(id) {
-			var url = 'contact/delete/'+id;
+			var url = 'admin/contact/delete/'+id;
 			var title = '确认要删除该联系人信息？';
 			Confirm(title, function() {
 				form1.action = url;
@@ -85,9 +85,9 @@ var bodyContent = {
 				<tr>
 					<th>序号</th>
 					<%  // 列表头部 %>
-					<th>姓名</th> 
-					<th>手机号</th> 
-					<th>Email</th> 
+					<th name="name" class="sorting">姓名</th> 
+					<th name="phone" class="sorting">手机号</th> 
+					<th name="email" class="sorting">Email</th> 
 					<th>说明</th> 
  
 					<th>操作</th>

@@ -4,6 +4,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
+import com.jflyfox.util.StrUtils;
 
 /**
  * 联系人管理
@@ -23,6 +24,14 @@ public class ContactController extends BaseProjectController {
 			sql.setAlias("t");
 			sql.whereLike("name", model.getStr("name"));
 			sql.whereEquals("type", model.getStr("type"));
+		}
+		
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by id desc ");
+		} else {
+			sql.append(" order by ").append(orderBy);
 		}
 
 		Page<TbContact> page = TbContact.dao.paginate(getPaginator(), "select t.* ", //
