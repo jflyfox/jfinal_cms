@@ -28,3 +28,28 @@ body {
 	/** bootstrap3 样式 **/
 	/** margin-bottom: 20px; **/
 }
+
+/************************ 排序样式 *****************************************/
+.sorting_desc {
+	cursor: pointer;
+	white-space:nowrap;
+	background-repeat: no-repeat;
+    background-position: center right;
+	background-image: url("../images/sort/sort_desc.png");
+}
+
+.sorting_asc {
+	cursor: pointer;
+	white-space:nowrap;
+	background-repeat: no-repeat;
+    background-position: center right;
+	background-image: url("../images/sort/sort_asc.png");
+}
+
+.sorting {
+	cursor: pointer;
+	white-space:nowrap;
+	background-repeat: no-repeat;
+    background-position: center right;
+	background-image: url("../images/sort/sort_both.png");
+}
