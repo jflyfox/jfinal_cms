@@ -63,7 +63,7 @@ var bodyContent = {
 							<% } %>
 							<% 
 								var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
-								var isLike = (sessionUserId==0? false: flyfox.isLike(sessionUserId,item.id)); 
+								var isLike = (sessionUserId==0? false: temp.isLike(sessionUserId,item.id)); 
 							%>
 							<span style="vertical-align: middle;cursor: pointer;"  id="articlelike_${item.id}" onclick="articlelike.click(${item.id});" 
 								class="glyphicon glyphicon-heart${isLike?'':'-empty'}"

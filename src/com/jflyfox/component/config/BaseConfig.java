@@ -14,6 +14,7 @@ import com.jflyfox.component.interceptor.UserKeyInterceptor;
 import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.jfinal.component.handler.HtmlHandler;
 import com.jflyfox.jfinal.config.JflyfoxConfig;
+import com.jflyfox.modules.front.template.TemplateService;
 import com.jflyfox.system.user.UserInterceptor;
 
 /**
@@ -28,7 +29,8 @@ public class BaseConfig extends JflyfoxConfig {
 		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate;
 		groupTemplate.registerFunctionPackage("strutil", BeetlStrUtils.class);
 		groupTemplate.registerFunctionPackage("flyfox", BeeltFunctions.class);
-
+		groupTemplate.registerFunctionPackage("temp", TemplateService.class);
+		
 	};
 
 	@Override

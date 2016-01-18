@@ -67,10 +67,10 @@ var bodyContent = {
 							<% } %> 
 								<div class="pull-right" style="font-size:12px;">
 								<% if(item.is_comment==1){ %>
-								<a href="front/article/${item.id}.html#article_comment"  target="_blank"><span>评论(${flyfox.countComment(item.id)})</span></a>
+								<a href="front/article/${item.id}.html#article_comment"  target="_blank"><span>评论(${temp.countComment(item.id)})</span></a>
 								&nbsp;&nbsp;
 								<% } %>
-								<span>浏览量(${flyfox.countView(item.id)})</span>
+								<span>浏览量(${temp.countView(item.id)})</span>
 								</div>
 							</h4>
 							

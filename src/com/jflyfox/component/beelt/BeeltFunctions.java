@@ -7,8 +7,6 @@ import com.jflyfox.jfinal.template.TemplateFunctions;
 import com.jflyfox.modules.admin.article.ArticleController;
 import com.jflyfox.modules.admin.article.TbArticle;
 import com.jflyfox.modules.admin.folder.FolderService;
-import com.jflyfox.modules.front.articlelike.ArticleLikeCache;
-import com.jflyfox.modules.front.service.FrontCacheService;
 import com.jflyfox.system.dict.DictCache;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
@@ -62,44 +60,6 @@ public class BeeltFunctions extends TemplateFunctions {
 		return imageUrl;
 	}
 
-	/**
-	 * 获取浏览数
-	 * 
-	 * 2015年6月2日 下午6:30:56 flyfox 330627517@qq.com
-	 * 
-	 * @param articleId
-	 * @return
-	 */
-	public static int countView(int articleId) {
-		TbArticle article = new FrontCacheService().getArticleCount(articleId);
-		return article == null ? 0 : article.getCountView();
-	}
-
-	/**
-	 * 获取评论数
-	 * 
-	 * 2015年6月2日 下午6:30:56 flyfox 330627517@qq.com
-	 * 
-	 * @param articleId
-	 * @return
-	 */
-	public static int countComment(int articleId) {
-		TbArticle article = new FrontCacheService().getArticleCount(articleId);
-		return article == null ? 0 : article.getCountComment();
-	}
-
-	/**
-	 * 获取浏览数
-	 * 
-	 * 2015年6月2日 下午6:30:56 flyfox 330627517@qq.com
-	 * 
-	 * @param articleId
-	 * @return
-	 */
-	public static boolean isLike(int userId, int articleId) {
-		return new ArticleLikeCache().isLike(userId, articleId);
-	}
-	
 	/**
 	 * 获取菜单，数字和字符串转换
 	 * 

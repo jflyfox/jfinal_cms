@@ -72,13 +72,13 @@
 					</div>
 					<div class="pull-right" >
 						<% if(item.is_comment==1){ %>
-						<a href="front/article/${item.id}.html#article_comment" style="vertical-align: middle;"   target="_blank"><small>评论(${flyfox.countComment(item.id)})</small></a>
+						<a href="front/article/${item.id}.html#article_comment" style="vertical-align: middle;"   target="_blank"><small>评论(${temp.countComment(item.id)})</small></a>
 						&nbsp;
 						<% } %>
-						<small style="vertical-align: middle;" >浏览量(${flyfox.countView(item.id)})</small>
+						<small style="vertical-align: middle;" >浏览量(${temp.countView(item.id)})</small>
 						&nbsp;
 						<% 
-							var isLike = (sessionUserId==0? false: flyfox.isLike(sessionUserId,item.id)); 
+							var isLike = (sessionUserId==0? false: temp.isLike(sessionUserId,item.id)); 
 						%>
 						<span style="vertical-align: middle;cursor: pointer;"  id="articlelike_${item.id}" onclick="articlelike.click(${item.id});" 
 							class="glyphicon glyphicon-heart${isLike?'':'-empty'}"
