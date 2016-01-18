@@ -13,13 +13,13 @@ import com.jflyfox.modules.front.service.FrontCacheService;
 /**
  * 模板方法
  * 
- * 2016年1月18日 下午6:05:54
- * flyfox 330627517@qq.com
+ * 2016年1月18日 下午6:05:54 flyfox 330627517@qq.com
  */
 public class TemplateService extends BaseService {
 
-	
 	private final static FrontCacheService service = new FrontCacheService();
+	
+	private final static ArticleLikeCache articleLikeservice = new ArticleLikeCache();
 	
 	/**
 	 * 获取浏览数
@@ -56,39 +56,39 @@ public class TemplateService extends BaseService {
 	 * @return
 	 */
 	public static boolean isLike(int userId, int articleId) {
-		return new ArticleLikeCache().isLike(userId, articleId);
+		return articleLikeservice.isLike(userId, articleId);
 	}
-	
-	
-	public List<TbTags> getTagsByArticle(int articleId) {
+
+	public List<TbTags> tagsListByArticle(int articleId) {
 		return service.getTagsByArticle(articleId);
 	}
-	public Page<TbTags> getTagsByFolder(Paginator paginator, int folderId) {
-		return service.getTagsByFolder(paginator, folderId);
+
+	public Page<TbTags> tagsPageByFolder(int pageNo, int pageSize, int folderId) {
+		return service.getTagsByFolder(new Paginator(pageNo, pageSize), folderId);
 	}
 
-	public Page<TbTags> getTags(Paginator paginator) {
-		return service.getTags(paginator);
+	public Page<TbTags> tagsPage(int pageNo, int pageSize) {
+		return service.getTags(new Paginator(pageNo, pageSize));
 	}
 
-	public Page<TbArticle> getRecommendArticle(Paginator paginator) {
-		return service.getRecommendArticle(paginator);
+	public Page<TbArticle> articlePageRecommend(int pageNo, int pageSize) {
+		return service.getRecommendArticle(new Paginator(pageNo, pageSize));
 	}
 
-	public Page<TbArticle> getNewArticle(Paginator paginator) {
-		return service.getNewArticle(paginator);
+	public Page<TbArticle> articlePageTop(int pageNo, int pageSize) {
+		return service.getNewArticle(new Paginator(pageNo, pageSize));
 	}
 
-	public Page<TbArticle> getArticle(Paginator paginator, int folderId) {
-		return service.getArticle(paginator, folderId);
+	public Page<TbArticle> articlePage(int pageNo, int pageSize, int folderId) {
+		return service.getArticle(new Paginator(pageNo, pageSize), folderId);
 	}
 
-	public Page<TbArticle> getArticleByNoCache(Paginator paginator, int folderId) {
-		return service.getArticleByNoCache(paginator, folderId);
+	public Page<TbArticle> articlePageNoCache(int pageNo, int pageSize, int folderId) {
+		return service.getArticleByNoCache(new Paginator(pageNo, pageSize), folderId);
 	}
 
-	public TbArticle getArticle(int articleId) {
+	public TbArticle article(int articleId) {
 		return service.getArticle(articleId);
 	}
-	
+
 }
