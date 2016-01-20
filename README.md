@@ -9,8 +9,10 @@
 ------------------------
 > 1. 数据库配置文件：src/conf/db.properties
 > 2. 安装mysql数据库，创建用户和数据库。
-> 3. 运行mysql.sql文件。
+> 3. 运行jfinal_cms.sql文件。
 > 4. 如需要oauth2的，设置src/conf/oauth.properties
+> 5. 通过config.properties的ATTR.PATH_PC=/template/mtg配置可以切换模板，记得数据库数据对应哦。
+> 6. 如果是/template/website模板，请运行jfinal_cms_website.sql脚本
 
 # 鸣谢
  1. [JFinal](http://www.oschina.net/p/jfinal)
@@ -18,6 +20,12 @@
  3. [oschina](http://www.oschina.net/)
 
 # 更新说明
+>## 2016-01-20 mtg2.4.0
+> 1. 升级为2.4.0。
+> 2. 项目前台页面全面重构，jfinal升级为2.2。
+> 3. 前台加入模板扩展功能，通过beetl functions获取后台数据。
+原有jfinal cms模板不变，加入website官网模板。
+
 >## 2016-01-19
 > 1. jfinal升级为2.2。
 

@@ -1,0 +1,39 @@
+<% if(page.totalPage > 1 && page.pageNumber <= page.totalPage && page.pageNumber > 0) { %>
+	<% 
+		var len = 10; // 长度
+		var topage = page.pageNumber; // 当前页
+		var totalpages = page.totalPage; // 总页数
+		var startIndex = 0;
+		var endIndex = 0;
+		var mid = len / 2;
+        if (len % 2 > 0) mid = (settings.length + 1) / 2;
+        if (topage >= mid) {
+             if (totalpages - topage > mid)
+                 startIndex = topage - (mid - 1);
+             else if (totalpages > len)
+                 startIndex = totalpages - len;
+   		}
+   		endIndex = (startIndex + len < totalpages) ? startIndex + len : totalpages;
+	%> 
+	
+	<nav>
+		<ul class="pagination" style="margin: 0px;">
+			<% if(page.pageNumber > 1) {%>
+			<li class="page pre"><a href="${CURRENT_PATH}?pageNo=${page.pageNumber-1}${suffix!''}">&lt;</a></li>
+			<% } %>
+			<% // 第一页 %>
+			<% if(startIndex > 1) {%>
+			<li class="page next"><a href="${CURRENT_PATH}?pageNo=1${suffix!''}">1</a></li>
+			<% } %>
+			<% for(var i = startIndex;i < endIndex ; i++ ) { %>
+			<li class="page ${(i+1==topage)?'active':''}"><a href="${CURRENT_PATH}?pageNo=${i+1}${suffix!''}">${i+1}</a></li>
+			<% } %>
+			<% if(endIndex + 1 < totalpages) { %>
+			<li class="page"><a href="${CURRENT_PATH}?pageNo=${totalpages}${suffix!''}">${totalpages}</a></li>
+			<% } %>
+			<% if(page.pageNumber < page.totalPage) {%>
+			<li class="page next"><a href="${CURRENT_PATH}?pageNo=${page.pageNumber+1}${suffix!''}">&gt;</a></li>
+			<% } %>
+		</ul>
+	</nav>
+<% } %>

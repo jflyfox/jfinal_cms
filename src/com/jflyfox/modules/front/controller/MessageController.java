@@ -18,7 +18,7 @@ import com.jflyfox.system.user.SysUser;
 @ControllerBind(controllerKey = "/front/message")
 public class MessageController extends BaseProjectController {
 
-	public static final String path = "/pages/front/message/";
+	public static final String path = "/message/";
 	
 	/**
 	 * 我的消息

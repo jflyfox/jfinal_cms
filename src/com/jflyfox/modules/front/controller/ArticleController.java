@@ -25,7 +25,7 @@ import com.jflyfox.modules.front.service.FrontCacheService;
 @ControllerBind(controllerKey = "/front/article")
 public class ArticleController extends BaseProjectController {
 
-	public static final String path = "/pages/front/article/";
+	public static final String path = "/article/";
 
 	/**
 	 * 查看文章

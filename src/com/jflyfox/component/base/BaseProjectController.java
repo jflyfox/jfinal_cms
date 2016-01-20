@@ -110,7 +110,7 @@ public abstract class BaseProjectController extends BaseController {
 		// 删除cookie
 		removeCookie(Attr.SESSION_NAME);
 	}
-
+	
 	/**
 	 * 用户登录，登出记录
 	 * 

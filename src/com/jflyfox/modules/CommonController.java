@@ -3,15 +3,19 @@ package com.jflyfox.modules;
 import com.jfinal.aop.Before;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ImageCode;
+import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
+import com.jflyfox.modules.admin.folder.FolderService;
+import com.jflyfox.modules.admin.folder.TbFolder;
+import com.jflyfox.modules.front.Home;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
-import com.jflyfox.modules.front.service.FrontService;
 import com.jflyfox.system.dict.DictCache;
 import com.jflyfox.system.log.SysLog;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
 import com.jflyfox.util.Config;
+import com.jflyfox.util.NumberUtils;
 import com.jflyfox.util.StrUtils;
 
 /**
@@ -20,7 +24,7 @@ import com.jflyfox.util.StrUtils;
 @ControllerBind(controllerKey = "/")
 public class CommonController extends BaseProjectController {
 
-	public static final String loginPage = "/pages/front/login.html";
+	public static final String loginPage = "/login.html";
 	public static final String mainPage = "/admin/article/list";
 	public static final String firstPage = "/home";
 
@@ -31,7 +35,28 @@ public class CommonController extends BaseProjectController {
 	 */
 	@Before(FrontInterceptor.class)
 	public void index() {
-		new FrontService().menu(this);
+		// new FrontService().menu(this);
+
+		String folderStr = getPara();
+		Integer folderId = TbFolder.ROOT;
+		if (folderStr != null) {
+			folderId = NumberUtils.parseInt(FolderService.getMenu(folderStr));
+		}
+		if (folderId == null || folderId <= 0) {
+			folderId = TbFolder.ROOT;
+		}
+		// 活动目录
+		setAttr("folders_selected", folderId);
+
+		TbFolder folder = new FolderService().getFolder(folderId);
+		setAttr("folder", folder);
+
+		setAttr("paginator", getPaginator());
+
+		// seo：title优化
+		setAttr(JFlyFoxUtils.TITLE_ATTR, folder.getStr("name") + " - " + JFlyFoxCache.getHeadTitle());
+
+		renderAuto(Home.PATH + FolderService.getMenu(folderId + "") + ".html");
 	}
 
 	@Before(FrontInterceptor.class)
@@ -40,7 +65,7 @@ public class CommonController extends BaseProjectController {
 			// 如果session存在，不再验证
 			redirect(mainPage);
 		} else {
-			render(loginPage);
+			renderAuto(loginPage);
 		}
 
 	}
@@ -58,7 +83,7 @@ public class CommonController extends BaseProjectController {
 
 		if (StrUtils.isEmpty(imageCode) || !imageCode.equalsIgnoreCase(checkCode)) {
 			setAttr("msg", "验证码错误！");
-			render(loginPage);
+			renderAuto(loginPage);
 			return;
 		}
 
@@ -73,23 +98,23 @@ public class CommonController extends BaseProjectController {
 
 		if (StrUtils.isEmpty(username)) {
 			setAttr("msg", "用户名不能为空");
-			render(loginPage);
+			renderAuto(loginPage);
 			return;
 		} else if (StrUtils.isEmpty(password)) {
 			setAttr("msg", "密码不能为空");
-			render(loginPage);
+			renderAuto(loginPage);
 			return;
 		}
 		String encryptPassword = JFlyFoxUtils.passwordEncrypt(password); // 加密
 		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? and password = ? ", username, encryptPassword);
 		if (user == null || user.getInt("userid") <= 0) {
 			setAttr("msg", "认证失败，请您重新输入。");
-			render(loginPage);
+			renderAuto(loginPage);
 			return;
 		} else {
 			setSessionUser(user);
 		}
-		
+
 		// 添加日志
 		user.put("update_id", user.getUserid());
 		user.put("update_time", getNow());
@@ -114,9 +139,9 @@ public class CommonController extends BaseProjectController {
 			// 删除session
 			removeSessionUser();
 		}
-		
+
 		setAttr("msg", "您已退出");
-		render(loginPage);
+		renderAuto(loginPage);
 	}
 
 	public void update_cache() {

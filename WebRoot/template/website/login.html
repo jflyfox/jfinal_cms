@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+<base href="${BASE_PATH }">
+<title>欢迎登录${HEAD_TITLE }</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- //favicon.ico小图标名称 -->
+<link rel="icon" href="favicon.ico"/>
+<link rel="shortcut icon" href="favicon.ico"/>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="欢迎登录${HEAD_TITLE }">
+<meta http-equiv="description" content="欢迎登录${HEAD_TITLE }">
+<!-- jquery -->
+<script type="text/javascript" src="static/component/jquery/jquery-1.8.2.min.js"></script>
+
+<link charset="utf-8" rel="stylesheet" href="static/login/login.css" media="all">
+
+<script type="text/javascript" src="static/oauth2/oauth2.js"></script>
+
+<script type="text/javascript">
+	function login() {
+		var username = $('[name="username"]').val();
+		if(username==''){
+			alert('用户名不能为空！');
+			return;
+		}
+		
+		var pwd = $('[name="password"]').val();
+		if(pwd==''){
+			alert('密码不能为空！');
+			return;
+		}
+		var imageCode = $('[name="imageCode"]').val();
+		if(imageCode==''){
+			alert('验证码不能为空！');
+			return;
+		}
+		if(imageCode.length != 4){
+			alert('验证码输入错误！');
+			return;
+		}
+		
+		form1.action = "login";
+		form1.submit();
+		// submit_js("login_login.action", "loginform");
+	}
+	
+	function loadPicimageCode() {
+		document.getElementById("picimageCode").src = 'front/image_code?ran=' + Math.random();
+	}
+	
+	<!-- jQuery 当键盘敲击【ENTER】键时，系统登录 -->
+	$(document).ready(function() {
+		$("body").keydown(function(event) {
+			if (event.which == 13) {
+				login();
+			}
+		});
+	});
+</script>
+
+<style type="text/css">
+body {
+	opacity: 1;
+	background-image: url(static/login/bg/bg${ flyfox.bgNum (1)}.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+}
+</style>
+
+</head>
+<body>
+
+<div class="login login-modern login-position">
+<form id="form1" action="" method="post" class="ui-form">
+<!-- enter back -->
+<input type="hidden" name="pre_page" value="/admin" />
+
+<fieldset>
+	<h2 class="ui-form-title">${HEAD_TITLE }</h2>
+
+	<div class="ui-form-item ui-form-item-focus">
+		<label class="ui-label">
+		<span class="ui-icon ui-icon-userDEF">账户名：</span> 
+		</label> 
+		<input type="text" class="ui-input ui-input-normal" name="username" autofocus="autofocus"
+		autocomplete="off" tabindex="1" value="" maxlength="100" placeholder="登录账号">
+	</div>
+
+	<div class="ui-form-item ui-form-item-focus" id="J-username">
+		<label class="ui-label">
+		<span class="ui-icon ui-icon-securityON">登录密码：</span>
+		</label> 
+		<input type="password" class="ui-input ui-input-normal" name="password" 
+		autocomplete="off" tabindex="2" value="" maxlength="100" placeholder="登录密码">
+	</div>
+	<div class="ui-form-item ui-form-item-focus" id="J-username">
+		<label class="ui-label">
+		<span class="ui-icon ui-icon-checkcodeT">验证码：</span>
+		</label> 
+		<input type="text" class="ui-input ui-input-normal" name="imageCode"  style="width: 90px;"
+		autocomplete="off" tabindex="2" value="" maxlength="100" placeholder="验证码">
+		<div class="input-group-addon" style="">
+     			<img id="picimageCode"  width="60" height="26"  
+     				 style="line-height: 50px;height: 40px;margin-left: 10px; cursor:pointer;"
+	 			 src="front/image_code" title="更换一张验证码图片" onclick="loadPicimageCode()"/>
+     	</div>
+	</div>
+
+	<div  class="ui-form-text" style="color: #FFCC00;font-weight:bold ;">
+	提示：${msg!}
+	</div>
+
+	<div class="ui-form-item ui-form-item-30pd">
+		<input type="button"  onclick="login();" value="登 录" class="ui-button" tabindex="3">
+	</div>
+</fieldset>
+</form>
+</div>
+
+</body>
+</html>
+

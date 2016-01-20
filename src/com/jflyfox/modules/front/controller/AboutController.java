@@ -19,7 +19,7 @@ import com.jflyfox.modules.front.service.FrontCacheService;
 @ControllerBind(controllerKey = "/front/about")
 public class AboutController extends BaseProjectController {
 
-	public static final String path = "/pages/front/about/";
+	public static final String path = "/about/";
 
 	/**
 	 * 关于我们

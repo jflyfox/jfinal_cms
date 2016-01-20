@@ -14,7 +14,7 @@ import com.jflyfox.util.StrUtils;
 @ControllerBind(controllerKey = "/front/regist")
 public class RegistController extends BaseProjectController {
 
-	public static final String path = "/pages/front/regist/";
+	public static final String path = "/regist/";
 
 	/**
 	 * 注册

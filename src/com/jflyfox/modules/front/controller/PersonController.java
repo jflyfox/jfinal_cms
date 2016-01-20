@@ -31,7 +31,7 @@ import com.jflyfox.util.extend.HtmlUtils;
 @ControllerBind(controllerKey = "/front/person")
 public class PersonController extends BaseProjectController {
 
-	public static final String path = "/pages/front/person/";
+	public static final String path = "/person/";
 
 	/**
 	 * 个人信息

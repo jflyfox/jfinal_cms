@@ -21,7 +21,7 @@ import com.jflyfox.util.extend.HtmlUtils;
 @ControllerBind(controllerKey = "/front/tags")
 public class TagsController extends BaseProjectController {
 
-	public static final String path = "/pages/front/tags/";
+	public static final String path = "/tags/";
 
 	@Before(FrontInterceptor.class)
 	public void index() {

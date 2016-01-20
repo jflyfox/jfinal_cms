@@ -1,0 +1,74 @@
+<% var headContent = { %>
+		<% include("/template/mtg/includes/header.html"){} %>
+		
+<% }; var bodyContent = { %> 
+
+<%  include("/template/mtg/includes/header_menu.html"){} %>	
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-12">	
+	
+		<div class="panel panel-default">
+			 <div class="panel-body" style="padding:0px;">
+			<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="web">首页</a></li>
+			  <li class="active">标签查询</li>
+			</ol>
+			</div>
+		</div>
+	
+		</div>
+	</div>
+
+	<div class="row">
+	<!-- 文章 -->
+	<div class="col-md-8">	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">所有标签</h3>
+		  </div>
+		  <div class="panel-body">
+			<%  
+				if(taglist != null && taglist.~size > 0) {
+			%>
+				<ul class="q-taglist clearfix">
+					<li title="标签"><span class="q-icon"></span></li>
+				<%
+					for(tagitem in taglist){ 
+				%>
+					<li class="q-tagitem">
+					<a class="a-tagitem" href="front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+					</li>
+				<% 
+					}
+				%>
+				</ul>
+			<%
+			} 
+			%>
+		 </div>
+		</div>
+	</div>
+	
+	<!-- 信息列表 -->
+	<div class="col-md-4">	
+	
+		<!-- 推荐文章 -->
+		<%  include("/template/mtg/includes/recommend.html"){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/template/mtg/includes/friendly.html"){} %>
+	</div>
+	</div>
+</div>
+	
+<%  include("/template/mtg/includes/footer.html"){} %>
+	
+<%}; %> 
+
+<%
+layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){
+%> 
+<%} %>

@@ -18,7 +18,7 @@ import com.jflyfox.modules.front.interceptor.FrontInterceptor;
 @ControllerBind(controllerKey = "/front")
 public class Home extends BaseProjectController {
 
-	public static final String PATH = "/pages/front/home/";
+	public static final String PATH = "/home/";
 
 	/**
 	 * 登录
@@ -26,7 +26,7 @@ public class Home extends BaseProjectController {
 	@Before(FrontInterceptor.class)
 	public void login() {
 		setAttr("pre_page", getPrePage());
-		render(CommonController.loginPage);
+		renderAuto(CommonController.loginPage);
 	}
 
 	/**

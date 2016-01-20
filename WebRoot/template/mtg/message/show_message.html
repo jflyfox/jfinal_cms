@@ -1,0 +1,106 @@
+<% var headContent = { %> <%
+include("/template/mtg/includes/header.html"){} %>
+
+<script type="text/javascript" src="template/mtg/message/show_message.js"></script>
+<% }; var bodyContent = { %> <%
+include("/template/mtg/includes/header_menu.html"){} %>
+
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-8">
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">我的消息</h3>
+		  </div>
+		   <div class="panel-body">
+		  
+				<div class="mod-blogcommentitem" >
+			
+					<div class="comment-list">
+					
+						<% for(comment in page.list){ %>
+						<div class="comment-item" id="comment_${comment.id}_${comment.article_id}">
+							<%  // 回复给当前用户 并且 未读的数据
+								var is_no_read = (session.session_user.userid==comment.reply_userid) 
+										&& (comment.status==11 || comment.status==21); 
+							%>
+							<div class="item-top ${is_no_read ? 'comment-no-read':'' }" >
+								<% var user = flyfox.getUser(comment.create_id);  %>
+								<a href="front/person/view/${comment.create_id}.html" target="_blank"><img width="32" height="32" alt="头像" class="img_radius"
+									src="${user.title_url!'static/images/user/user.png'}" /></a>
+								<a href="front/article/${comment.article_id}#article_comment" target="_blank" class="user-name">${comment.title}</a>
+								<span class="comment-txt">文章中</span>
+								<a href="front/person/view/${comment.create_id}.html" target="_blank" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
+								<% if(comment.status > 20) { %>
+								<span class="comment-txt">回复</span>
+								<a href="front/person/view/${comment.reply_userid}.html" target="_blank" class="user-name">${flyfox.getUserName(comment.reply_userid)}</a>
+								<% } %>
+								<br>
+								<span>${comment.content}</span>
+							</div>
+							
+							<div class="item-bottom">
+								<span>${comment.create_time}</span>
+								<% if(!isEmpty(session.session_user) && comment.create_id==session.session_user.userid){ %>
+									<a href="javascript:comment.oper_del(${comment.id},${comment.article_id});" style="float: right;">删除</a>
+								<% } %>
+								<% if(!isEmpty(session.session_user) && comment.create_id!=session.session_user.userid){ %>
+									<a href="javascript:show_reply_comment(${comment.id},${comment.article_id});" style="float: right;">回复</a>
+								<% } %>
+							</div>
+							
+							<div id="reply_${comment.id}_${comment.article_id}" class="comment-inner" style="display:none;">
+								<div>
+								<textarea class="comment-textarea" name="comment"></textarea>
+								</div>
+								<div class="comment-btn">
+									<input id="comment-btn" type="button" value="发  布"  
+										onclick="oper_reply_comment(${comment.id},${comment.article_id},${comment.create_id},${comment.article_create_id},'${comment.title}');"
+										class="btn btn-default" />
+								</div>
+							</div>
+						</div>
+						<%  } %>
+						
+						<% if(page.list == null || page.list.~size <=0) { %>
+							<div class="comment-item" style="margin-bottom: 20px;font-size: 14px;font-weight: bold;">
+								暂无消息
+							</div>
+						<% } %>
+						
+					</div>
+				
+					<div style="padding: 2px;margin: 5px;">
+					<%include("/template/mtg/includes/paginator.html"){} %>
+					</div>
+				</div>
+				
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<!-- 推荐文章 -->
+			<%  include("/template/mtg/includes/recommend.html"){} %>
+			
+			<!-- 友情链接 -->
+		  	<%  include("/template/mtg/includes/friendly.html"){} %>
+		</div>
+		
+	</div>
+</div>	
+
+		
+					
+				
+<%  include("/template/mtg/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
