@@ -2,6 +2,7 @@
 ------------------------
 
 #### 网站地址：[http://www.jflyfox.com/mtg](http://www.jflyfox.com/mtg) ####
+#### 网站地址模板2：[http://www.jflyfox.com/website](http://www.jflyfox.com/website) ####
 #### 管理地址：http://yourip/admin  ####
 #### 测试账号: admin/admin123 或 test/123456  ####
 
