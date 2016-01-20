@@ -56,7 +56,13 @@ public class CommonController extends BaseProjectController {
 		// seo：title优化
 		setAttr(JFlyFoxUtils.TITLE_ATTR, folder.getStr("name") + " - " + JFlyFoxCache.getHeadTitle());
 
-		renderAuto(Home.PATH + FolderService.getMenu(folderId + "") + ".html");
+		// 关于我们特殊处理
+		if (folderId == JFlyFoxUtils.MENU_ABOUT) {
+			redirect("/front/about");
+		} else {
+			renderAuto(Home.PATH + FolderService.getMenu(folderId + "") + ".html");
+		}
+		
 	}
 
 	@Before(FrontInterceptor.class)
