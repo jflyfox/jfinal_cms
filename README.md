@@ -2,9 +2,9 @@
 ------------------------
 
 #### 网站地址：[http://www.jflyfox.com/mtg](http://www.jflyfox.com/mtg) ####
-![网站](http://static.oschina.net/uploads/img/201601/21022316_Nk5M.gif "在这里输入图片标题")
+![网站](http://static.oschina.net/uploads/img/201601/21022316_Nk5M.gif "jfinal cms")
 #### 网站地址模板2：[http://www.jflyfox.com/website](http://www.jflyfox.com/website) ####
-![官网](http://static.oschina.net/uploads/img/201601/21022316_XkxY.gif "在这里输入图片标题")
+![官网](http://static.oschina.net/uploads/img/201601/21022316_XkxY.gif "jfinal cms")
 #### 管理地址：http://yourip/admin  ####
 #### 测试账号: admin/admin123 或 test/123456  ####
 
