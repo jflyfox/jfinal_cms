@@ -1,4 +1,4 @@
-﻿.pager
+﻿.smartpager
 {
     width: 100%;
     height: 48px;
@@ -7,7 +7,7 @@
     padding-top: 10px;
 }
 
-.pager div.short
+.smartpager div.short
 {
     float: right;
     margin: 0;
@@ -15,7 +15,7 @@
     margin-right: 10px;
     width: 100px;
 }
-.pager div.short input
+.smartpager div.short input
 {
     width: 28px;
     height: 28px;
@@ -24,7 +24,7 @@
     padding-left: 2px;
     float: left;
 }
-.pager ul
+.smartpager ul
 {
     list-style: none;
     padding: 0;
@@ -33,12 +33,12 @@
     margin-right: 4px;
     margin-left: 4px;
 }
-.pager ul li
+.smartpager ul li
 {
     display: inline;
     margin-left: 2px;
 }
-.pager ul li a
+.smartpager ul li a
 {
     text-decoration: none;
     display: inline-table;
@@ -47,9 +47,10 @@
     text-align: center;
     border-radius: 4px;
     -moz-border-radius: 4px;
+    padding: 5px 14px;
 }
 
-.pager span
+.smartpager span
 {
 	margin-top:5px;
     margin-left: 4px;
@@ -57,7 +58,7 @@
     float: left;
     font-size: 16px;
 }
-.pager .btn
+.smartpager .btn
 {
     display: block;
     width: 35px;
@@ -78,7 +79,7 @@
     -o-user-select: none;
     user-select: none;
 }
-.pager .disabled
+.smartpager .disabled
 {
     color: #A0A0A0 !important;
     text-shadow: 1px 1px 1px #FFFFFF;
@@ -99,7 +100,7 @@
     color: #F8EB00;
     border: solid 1px #5f9000;
 }
-.pager.green .btn
+.smartpager.green .btn
 {
     background-color: #588500;
     color: White;
@@ -121,7 +122,7 @@
     color: White;
     border: solid 1px #000;
 }
-.pager.black .btn
+.smartpager.black .btn
 {
     background-color: #1d1d1d;
     color: White;
@@ -143,7 +144,7 @@
     color: White;
     border: solid 1px #A90B08;
 }
-.pager.red .btn
+.smartpager.red .btn
 {
     background-color: #E71C18;
     color: White;
@@ -165,9 +166,41 @@
     color: White;
     border: solid 1px #009BE5;
 }
-.pager.blue .btn
+.smartpager.blue .btn
 {
     background-color: #00ABFE;
     color: White;
     border: solid 1px #009BE5;
+}
+
+/*default*/.default
+{
+    background-color: #e7e7e7;
+}
+.default.normal
+{
+    background-color: #e7e7e7;
+    color: #999;
+    border: solid 1px #ccc;
+}
+.default.active
+{
+    background-color: #dbdbdb;
+    color: #555;
+    border: solid 1px #ccc;
+}
+.smartpager.default .btn
+{
+	background-color:#e7e7e7;
+	color: #555;
+    border: solid 1px #999;
+}
+
+.smartpager.default span
+{
+	margin-top:5px;
+    margin-left: 4px;
+    color: #777;
+    float: left;
+    font-size: 16px;
 }

@@ -220,6 +220,7 @@ CREATE TABLE `sys_user` (
   `address` varchar(32) DEFAULT NULL COMMENT '地址',
   `title_url` varchar(200) DEFAULT NULL COMMENT '头像地址',
   `remark` varchar(1000) DEFAULT NULL COMMENT '说明',
+  `theme` varchar(64) DEFAULT 'default' COMMENT '主题',
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`userid`)

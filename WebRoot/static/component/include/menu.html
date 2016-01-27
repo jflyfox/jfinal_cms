@@ -1,11 +1,39 @@
 <style>
 <!--
-body { padding-top: 60px; }
+body { padding-top: 51px; }
 -->
 </style>
 <script type="text/javascript">
 	function showMenu(id){
 		$("#"+id).addClass('active');
+	}
+	
+	/**
+	 * 设置主题
+	 */
+	function oper_theme(theme){
+		jQuery.ajax({
+			type:'POST',
+			url:'admin/person/theme/'+theme,
+			success:function(data){
+				if(data.status==1){
+					Alert('设置成功.',function(){
+						if(typeof oper.list!='undefined'&&oper.list instanceof Function) {
+							oper.list()
+						} else if(form.search[0].getAttribute("onclick")!=null){
+							form.search[0].click();
+						};
+					});
+				} else {
+					Alert('保存失败：'+data.msg);
+				}
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
 	}
 </script>
 
@@ -58,8 +86,21 @@ body { padding-top: 60px; }
       </ul>
       
       <ul class="nav navbar-nav navbar-right" style="margin-right: 2%">
-        <li><p class="navbar-text">${session.session_user.realname!session.session_user.username }，您好</p></li>
-        <li><button type="button" onclick="window.location.href='logout'" class="btn btn-default navbar-btn">退出</button></li>
+       	<li>
+		 <div class="dropdown" style="margin-top: 6px;">
+		  <button class="btn btn-default dropdown-toggle" title="主题" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		    <span class="glyphicon glyphicon-th-list"></span> ${session.session_user.theme!'default'}
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		    <li><a href="#" onclick="oper_theme('default');return false;">主题：default</a></li>
+		    <li><a href="#" onclick="oper_theme('inverse');return false;">主题：inverse</a></li>
+		    <li><a href="#" onclick="oper_theme('flat-ui');return false;">主题：flat-ui</a></li>
+		  </ul>
+		</div>
+		</li>
+        <li><p class="navbar-text"><a href="admin/person">${session.session_user.realname!session.session_user.username }</a>，您好</p></li>
+        <li><p class="navbar-text"  style="margin-right: 10px;margin-left: 0px;"><a href="#"  onclick="window.location.href='logout';return false;">退出</a></p></li>
+       
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

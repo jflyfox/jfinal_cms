@@ -24,7 +24,7 @@
                 var totalpages = parseInt(settings.totalrecords / settings.recordsperpage);
                 if (settings.totalrecords % settings.recordsperpage > 0) totalpages++;
                 var initialized = false;
-                var container = $(this).addClass('pager').addClass(settings.theme);
+                var container = $(this).addClass('smartpager').addClass(settings.theme);
                 container.find('ul').remove();
                 container.find('div').remove();
                 container.find('span').remove();

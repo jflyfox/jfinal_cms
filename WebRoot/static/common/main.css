@@ -11,13 +11,15 @@ body {
 
 /***********************  table search ********************************/
 .tableSearch {
-	margin: 10px 15px 5px 15px;
 	padding: 5px 10px 5px 15px;
 	background-color: #E9E9E9;
+	/**
+	margin: 10px 15px 5px 15px;
 	-moz-border-radius: 15px;
 	-khtml-border-radius: 15px;
 	-webkit-border-radius: 15px;
 	border-radius: 15px;
+	**/
 }
 
 /************** 重写bootstrap3 样式 ********************************/

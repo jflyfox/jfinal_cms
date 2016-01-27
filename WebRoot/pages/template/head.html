@@ -9,6 +9,12 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="${HEAD_TITLE }">
 <meta http-equiv="description" content="${HEAD_TITLE }">
+
+<% var jflyfox_theme = session.session_user.theme!'default'; %>
+<script type="text/javascript">
+	var jflyfox_theme = "${session.session_user.theme!'default' }";
+</script>
+
 <!-- 弹出框 -->
 <% include("/static/component/include/ymprompt.html"){} %>
 <!-- jquery -->
@@ -26,3 +32,14 @@
 <script type="text/javascript" src="static/common/initJs.js"></script>
 <!-- 主样式 -->
 <link href="static/common/main.css" rel="stylesheet" type="text/css" />
+
+<!-- 系统样式 -->
+<% if(jflyfox_theme=='inverse') {
+		include("/static/theme/inverse.html"){}
+	}else if(jflyfox_theme=='flat-ui'){
+		include("/static/theme/flat-ui.html"){}
+	}else{
+		include("/static/theme/default.html"){}
+	}
+
+%>
