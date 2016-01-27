@@ -17,13 +17,17 @@ body { padding-top: 51px; }
 			url:'admin/person/theme/'+theme,
 			success:function(data){
 				if(data.status==1){
-					Alert('设置成功.',function(){
-						if(typeof oper.list!='undefined'&&oper.list instanceof Function) {
-							oper.list()
-						} else if(form.search[0].getAttribute("onclick")!=null){
-							form.search[0].click();
-						};
-					});
+					if(typeof oper=='undefined' && typeof form=='undefined') {
+						Alert('设置成功,请刷新页面');
+					} else {
+						Alert('设置成功.',function(){
+							if(typeof oper!='undefined'&&typeof oper.list!='undefined'&&oper.list instanceof Function) {
+								oper.list()
+							} else if(typeof form!='undefined'&&form.search[0].getAttribute("onclick")!=null){
+								form.search[0].click();
+							};
+						});
+					}
 				} else {
 					Alert('保存失败：'+data.msg);
 				}
