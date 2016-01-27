@@ -1,0 +1,58 @@
+<link rel="stylesheet" id='skin' type="text/css" href="static/theme/inverse/bootstrap-theme-inverse.css" />
+
+<style>
+<% // 分页  %>
+/*inverse*/.inverse
+{
+    background-color: #222;
+}
+.inverse.normal
+{
+    background-color: #222;
+    color: #9d9d9d;
+    border: solid 1px #909A9E;
+}
+.inverse.active
+{
+background-color: #676767;
+  color: #FFFFFF;
+  border: solid 1px #909A9E;
+}
+.smartpager.inverse .btn
+{
+    background-color: #222;
+    color: #9d9d9d;
+    border: solid 1px #909A9E;
+}
+.smartpager.inverse span
+{
+	margin-top:5px;
+    margin-left: 4px;
+    color: #9d9d9d;
+    float: left;
+    font-size: 16px;
+}
+
+/**** 退出按钮 *******/
+.navbar-text a{
+	color: #CCCACA;
+}
+
+/**** ym弹出框 *******/
+.ym-tl {
+    padding-left: 1px;
+    background: #222;
+}
+</style>
+
+<script type="text/javascript">
+
+jQuery(function($) {
+	$('.navbar.navbar-fixed-top').removeClass('navbar-default').addClass('navbar-inverse');
+	
+	$('.btn-success').removeClass('btn-success').addClass('btn-default').prepend('<span class="glyphicon glyphicon-search"></span>');
+	$('.btn-primary').removeClass('btn-primary').addClass('btn-default').prepend('<span class="glyphicon glyphicon-edit"></span>');
+	$('.btn-danger').removeClass('btn-danger').addClass('btn-default').prepend('<span class="glyphicon glyphicon-remove"></span>');
+});
+
+</script>

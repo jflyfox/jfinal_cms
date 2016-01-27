@@ -1,0 +1,75 @@
+<link rel="stylesheet" id='skin' type="text/css" href="static/theme/flat-ui/bootstrap-theme-flat-ui.css" />
+
+<!-- Loading Flat UI -->
+<link href="static/component/flat-ui/css/flat-ui.min.css" rel="stylesheet">
+<script src="static/component/flat-ui/js/vendor/video.js"></script>
+<script src="static/component/flat-ui/flat-ui.min.js"></script>
+
+
+<style>
+<% //分页  %>
+/*flat-ui*/ .flat-ui {
+	background-color: #1abc9c;
+}
+
+.flat-ui.normal {
+	background-color: #1abc9c;
+	color: #fff;
+	border: solid 1px #909A9E;
+}
+
+.flat-ui.active {
+	background-color: #21D3B0;
+	color: #006652;
+	border: solid 1px #909A9E;
+}
+
+.smartpager.flat-ui .btn {
+	background-color: #1abc9c;
+	color: #fff;
+	border: solid 1px #909A9E;
+}
+
+.smartpager.flat-ui span {
+	margin-top: 5px;
+	margin-left: 4px;
+	color: #fff;
+	float: left;
+	font-size: 16px;
+}
+
+.smartpager ul li a {
+	text-decoration: none;
+	display: inherit;
+	width: 22px;
+	height: 20px;
+	text-align: center;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	padding: 5px 14px;
+}
+
+/**** 退出按钮 *******/
+.navbar-inverse .navbar-text a {
+	color: #969494;
+}
+
+/**** ym弹出框 *******/
+.ym-tl {
+	padding-left: 1px;
+	background: #1abc9c;
+}
+</style>
+
+<script type="text/javascript">
+
+jQuery(function($) {
+	$('.navbar.navbar-fixed-top').removeClass('navbar-default').addClass('navbar-inverse navbar-embossed');
+	
+	$('.btn-primary').removeClass('btn-primary').addClass('btn-primary').prepend('<span class="glyphicon glyphicon-edit"></span>');
+	$('.btn-success').removeClass('btn-success').addClass('btn-primary').prepend('<span class="glyphicon glyphicon-search"></span>');
+	$('.btn-danger').removeClass('btn-danger').addClass('btn-primary').prepend('<span class="glyphicon glyphicon-remove"></span>');
+	$('.btn-default').removeClass('btn-default').addClass('btn-primary');
+});
+
+</script>
