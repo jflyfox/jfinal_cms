@@ -229,9 +229,9 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', '1', '1', '1', null, null, 'zcool321@sina.com', null, null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', '2016-06-06 06:06:06', '1');
-INSERT INTO `sys_user` VALUES ('2', 'test', 'ldKI9edsQVM=', '后台测试用户', '2', '1', '1', null, null, null, null, null, null, null, '2016-06-06 06:06:06', '1');
-INSERT INTO `sys_user` VALUES ('3', 'webtest', 'ldKI9edsQVM=', '前台测试用户', '2', '3', '1', null, null, null, null, null, null, null, '2016-06-06 06:06:06', '1');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', '1', '1', '1', null, null, 'zcool321@sina.com', null, null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', 'default', '2016-06-06 06:06:06', '1');
+INSERT INTO `sys_user` VALUES ('2', 'test', 'ldKI9edsQVM=', '后台测试用户', '2', '1', '1', null, null, null, null, null, null, null, 'default', '2016-06-06 06:06:06', '1');
+INSERT INTO `sys_user` VALUES ('3', 'webtest', 'ldKI9edsQVM=', '前台测试用户', '2', '3', '1', null, null, null, null, null, null, null, 'default', '2016-06-06 06:06:06', '1');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`
