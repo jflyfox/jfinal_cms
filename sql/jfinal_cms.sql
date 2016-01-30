@@ -585,6 +585,7 @@ CREATE TABLE `tb_folder_notice` (
 -- ----------------------------
 -- Records of tb_folder_notice
 -- ----------------------------
+INSERT INTO `tb_folder_notice` VALUES ('1', '2', '0', null, '测试公告', 'front/article/320.html', '20', '1', '1', '2016-01-31 05:09:12', '1', '2016-01-31 05:09:12', '1');
 
 -- ----------------------------
 -- Table structure for `tb_folder_roll_picture`
