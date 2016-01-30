@@ -7,6 +7,8 @@ import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.BaseService;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.modules.admin.article.TbArticle;
+import com.jflyfox.modules.admin.foldernotice.TbFolderNotice;
+import com.jflyfox.modules.admin.folderrollpicture.TbFolderRollPicture;
 import com.jflyfox.modules.admin.tags.TbTags;
 import com.jflyfox.util.cache.Cache;
 import com.jflyfox.util.cache.CacheManager;
@@ -201,6 +203,40 @@ public class FrontCacheService extends BaseService {
 		TbArticle articles = TbArticle.dao.findFirstCache(cacheName, key, //
 				"select * from tb_article where id = ?", articleId);
 		return articles;
+	}
+
+	/**
+	 * 获取栏目滚动图片
+	 * 
+	 * 2016年1月28日 下午5:28:25 flyfox 330627517@qq.com
+	 * 
+	 * @param folderId
+	 * @return
+	 */
+	public List<TbFolderRollPicture> getRollPicture(int folderId) {
+		String key = ("getRollPicture_" + folderId);
+		String sql = "select * from tb_folder_roll_picture t " //
+				+ " where is_deleted = " + JFlyFoxUtils.IS_DELETED_NO //
+				+ " and folder_id = ? order by sort,create_time desc";
+		List<TbFolderRollPicture> list = TbFolderRollPicture.dao.findCache(cacheName, key, sql, folderId);
+		return list;
+	}
+
+	/**
+	 * 获取公告信息
+	 * 
+	 * 2016年1月28日 下午5:29:47 flyfox 330627517@qq.com
+	 * 
+	 * @param folderId
+	 * @return
+	 */
+	public List<TbFolderNotice> getNotice(int folderId) {
+		String key = ("getNotice_" + folderId);
+		String sql = "select * from tb_folder_notice t " //
+				+ " where is_deleted = " + JFlyFoxUtils.IS_DELETED_NO  //
+				+ " and folder_id = ? order by sort,create_time desc";
+		List<TbFolderNotice> list = TbFolderNotice.dao.findCache(cacheName, key, sql, folderId);
+		return list;
 	}
 
 }

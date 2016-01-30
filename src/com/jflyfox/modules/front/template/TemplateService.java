@@ -6,6 +6,8 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.jfinal.base.BaseService;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.modules.admin.article.TbArticle;
+import com.jflyfox.modules.admin.foldernotice.TbFolderNotice;
+import com.jflyfox.modules.admin.folderrollpicture.TbFolderRollPicture;
 import com.jflyfox.modules.admin.tags.TbTags;
 import com.jflyfox.modules.front.articlelike.ArticleLikeCache;
 import com.jflyfox.modules.front.service.FrontCacheService;
@@ -18,9 +20,9 @@ import com.jflyfox.modules.front.service.FrontCacheService;
 public class TemplateService extends BaseService {
 
 	private final static FrontCacheService service = new FrontCacheService();
-	
+
 	private final static ArticleLikeCache articleLikeservice = new ArticleLikeCache();
-	
+
 	/**
 	 * 获取浏览数
 	 * 
@@ -89,6 +91,14 @@ public class TemplateService extends BaseService {
 
 	public TbArticle article(int articleId) {
 		return service.getArticle(articleId);
+	}
+
+	public List<TbFolderRollPicture> rollPicture(int folderId) {
+		return service.getRollPicture(folderId);
+	}
+
+	public List<TbFolderNotice> notice(int folderId) {
+		return service.getNotice(folderId);
 	}
 
 }
