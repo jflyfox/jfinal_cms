@@ -74,7 +74,7 @@ var bodyContent = {
 		<td>附件</td>
 		<td>
 			<% if(!strutil.isEmpty(model.file_url)){ %>
-			<a href="download/file_url/${model.file_url }" target="_blank" style="text-decoration:none;">
+			<a href="${model.file_url }" target="_blank" style="text-decoration:none;">
 				${model.file_name}
 			</a>
 			<% } %>

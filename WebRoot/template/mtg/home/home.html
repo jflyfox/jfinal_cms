@@ -1,6 +1,6 @@
 <%
 // 首页图片 13
-var topPics = temp.articlePage(1, 4, 13);
+var topPics = temp.rollPicture(1);
 
 // 最新动态
 var newArticles = temp.articlePageTop(1, 10);
@@ -16,6 +16,9 @@ var travels = temp.articlePage(1, 9, 4);
 
 // 教育 5
 var educations = temp.articlePage(1, 10,5);
+
+// 公告
+var noticeList = temp.notice(1);
 %>
 
 <% 
@@ -85,13 +88,13 @@ var bodyContent = {
 	
 					  <!-- Wrapper for slides -->
 					  <div class="carousel-inner" role="listbox">
-						<% for(item in topPics.list){ %>
+						<% for(item in topPics){ %>
 							<div style="height: 450px;" class="item ${itemLP.index==1?'active':''}">
-							  <% if(strutil.isNotEmpty(item.content)) { %>
-							  <a href="${flyfox.showHTML(item.content,100,'')}" target="_blank">
+							  <% if(strutil.isNotEmpty(item.url)) { %>
+							  <a href="${item.url}" target="_blank">
 							  <% } %>
 							   	<img src="${flyfox.getArtImage(item)}" alt="${item.title}">
-							  <% if(strutil.isNotEmpty(item.content)) { %>
+							  <% if(strutil.isNotEmpty(item.url)) { %>
 							  </a>
 							  <% } %>
 							  <div class="carousel-caption">
@@ -182,6 +185,26 @@ var bodyContent = {
 	<div class="row">
 	 	
 	  <div class="col-md-8">
+	  	<%  
+			if(noticeList != null && noticeList.~size > 0) {
+		%>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">首页公告</h3>
+		  </div>
+		  <div class="panel-body">
+			<%
+				for(item in noticeList){ 
+			%>
+			<p><span class="label label-info">${itemLP.index}</span> <a href="${item.url}" target="_blank">${item.content}</a></p>
+			<% 
+				}
+			%>
+		 </div>
+		</div>
+		<%
+			} 
+		%>
 	  	<!-- 旅游 -->
 	  	<div class="panel panel-default">
 		  <div class="panel-heading">

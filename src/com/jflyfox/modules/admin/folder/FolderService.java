@@ -131,4 +131,28 @@ public class FolderService extends BaseService {
 		}
 		cache.add("folderList_" + type, folders);
 	}
+	
+	/**
+	 * 目录复选框
+	 * 
+	 * 2015年1月28日 下午5:28:40 flyfox 330627517@qq.com
+	 * 
+	 * @return
+	 */
+	public String selectFolder(Integer selected) {
+		List<TbFolder> list = TbFolder.dao.find(" select id,name from tb_folder order by sort,create_time desc ");
+		StringBuffer sb = new StringBuffer("");
+		if (list != null && list.size() > 0) {
+			for (TbFolder folder : list) {
+				sb.append("<option value=\"");
+				sb.append(folder.getInt("id"));
+				sb.append("\" ");
+				sb.append(folder.getInt("id") == selected ? "selected" : "");
+				sb.append(">");
+				sb.append(folder.getStr("name"));
+				sb.append("</option>");
+			}
+		}
+		return sb.toString();
+	}
 }

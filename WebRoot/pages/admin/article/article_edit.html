@@ -30,9 +30,9 @@ var bodyContent = {
 	<table class="table">
 		<% // 列表头部 %>
 			<tr>
-				<td>目录</td>
+				<td>栏目</td>
 				<td>
-					<select name="model.folder_id" class="form-control" valid="vselect" validname="目录">
+					<select name="model.folder_id" class="form-control" valid="vselect" validname="栏目">
 					<option value="-1">--请选择--</option>
 					${selectFolder }
 					</select>
@@ -128,7 +128,7 @@ var bodyContent = {
 				<td>
 					<% if(!strutil.isEmpty(model.file_url)){ %>
 					<div id="file_url_show" >
-						<a href="download/file_url/${model.file_url }" target="_blank" style="text-decoration:none;">
+						<a href="${model.file_url }" target="_blank" style="text-decoration:none;">
 							${model.file_name}
 						</a>
 						<a href="javascript:void(0);"  

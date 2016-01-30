@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2016-01-20 17:41:01
+Date: 2016-01-31 04:39:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,7 +124,7 @@ CREATE TABLE `sys_log` (
   `create_time` varchar(64) NOT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10464 DEFAULT CHARSET=utf8 COMMENT='日志';
+) ENGINE=InnoDB AUTO_INCREMENT=10467 DEFAULT CHARSET=utf8 COMMENT='日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -147,25 +147,31 @@ CREATE TABLE `sys_menu` (
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='菜单';
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', 'system', null, '1', '1', '99', '1', '2015-04-27 17:28:06', '1');
-INSERT INTO `sys_menu` VALUES ('2', '1', '组织机构', 'department', 'system/department/list', '1', '1', '10', '2', '2015-04-27 17:28:25', '1');
-INSERT INTO `sys_menu` VALUES ('3', '1', '用户管理', 'user', 'system/user/list', '1', '1', '12', '2', '2015-04-27 17:28:46', '1');
-INSERT INTO `sys_menu` VALUES ('4', '1', '角色管理', 'role', 'system/role/list', '1', '1', '14', '2', '2015-04-27 17:29:13', '1');
-INSERT INTO `sys_menu` VALUES ('5', '1', '菜单管理', 'menu', 'system/menu/list', '1', '1', '16', '2', '2015-04-27 17:29:43', '1');
-INSERT INTO `sys_menu` VALUES ('6', '1', '数据字典', 'dict', 'system/dict/list', '1', '1', '18', '2', '2015-04-27 17:30:05', '1');
-INSERT INTO `sys_menu` VALUES ('7', '0', '联系人管理', 'contact', 'admin/contact/list', '1', '1', '19', '1', '2015-04-28 12:38:04', '1');
-INSERT INTO `sys_menu` VALUES ('8', '0', '目录管理', 'folder', 'admin/folder/list', '1', '1', '10', '1', '2015-04-28 22:34:46', '1');
-INSERT INTO `sys_menu` VALUES ('9', '0', '文章管理', 'article', 'admin/article/list', '1', '1', '12', '1', '2015-04-28 22:35:24', '1');
-INSERT INTO `sys_menu` VALUES ('10', '0', '友情链接', 'friendlylink', 'admin/friendlylink/list', '1', '1', '14', '1', '2015-04-28 22:35:56', '1');
-INSERT INTO `sys_menu` VALUES ('11', '0', '访问量统计', 'pageview', 'admin/pageview', '1', '1', '16', '1', '2015-04-28 22:36:34', '1');
-INSERT INTO `sys_menu` VALUES ('12', '0', '回复管理', 'comment', 'admin/comment/list', '1', '1', '13', '1', '2015-05-06 09:40:46', '1');
-INSERT INTO `sys_menu` VALUES ('13', '1', '系统操作', 'operation', 'admin/operation', '1', '1', '20', '2', '2015-05-06 11:41:33', '1');
-INSERT INTO `sys_menu` VALUES ('14', '1', '日志管理', 'log', 'system/log/list', '1', '1', '22', '2', '2016-01-03 18:09:18', '1');
+INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', 'system_root', null, '1', '1', '90', '1', '2015-04-27 17:28:06', '1');
+INSERT INTO `sys_menu` VALUES ('2', '1', '组织机构', 'department', 'system/department/list', '1', '1', '91', '2', '2015-04-27 17:28:25', '1');
+INSERT INTO `sys_menu` VALUES ('3', '1', '用户管理', 'user', 'system/user/list', '1', '1', '92', '2', '2015-04-27 17:28:46', '1');
+INSERT INTO `sys_menu` VALUES ('4', '1', '角色管理', 'role', 'system/role/list', '1', '1', '94', '2', '2015-04-27 17:29:13', '1');
+INSERT INTO `sys_menu` VALUES ('5', '1', '菜单管理', 'menu', 'system/menu/list', '1', '1', '96', '2', '2015-04-27 17:29:43', '1');
+INSERT INTO `sys_menu` VALUES ('6', '1', '数据字典', 'dict', 'system/dict/list', '1', '1', '97', '2', '2015-04-27 17:30:05', '1');
+INSERT INTO `sys_menu` VALUES ('7', '20', '联系人管理', 'contact', 'admin/contact/list', '1', '1', '38', '2', '2015-04-28 12:38:04', '1');
+INSERT INTO `sys_menu` VALUES ('8', '18', '栏目管理', 'folder', 'admin/folder/list', '1', '1', '11', '2', '2015-04-28 22:34:46', '1');
+INSERT INTO `sys_menu` VALUES ('9', '18', '文章管理', 'article', 'admin/article/list', '1', '1', '14', '2', '2015-04-28 22:35:24', '1');
+INSERT INTO `sys_menu` VALUES ('10', '20', '友情链接', 'friendlylink', 'admin/friendlylink/list', '1', '1', '32', '2', '2015-04-28 22:35:56', '1');
+INSERT INTO `sys_menu` VALUES ('11', '20', '访问量统计', 'pageview', 'admin/pageview', '1', '1', '33', '2', '2015-04-28 22:36:34', '1');
+INSERT INTO `sys_menu` VALUES ('12', '19', '回复管理', 'comment', 'admin/comment/list', '1', '1', '21', '2', '2015-05-06 09:40:46', '1');
+INSERT INTO `sys_menu` VALUES ('13', '20', '缓存更新', 'operation', 'admin/operation', '1', '1', '31', '2', '2015-05-06 11:41:33', '1');
+INSERT INTO `sys_menu` VALUES ('14', '1', '日志管理', 'log', 'system/log/list', '1', '1', '98', '2', '2016-01-03 18:09:18', '1');
+INSERT INTO `sys_menu` VALUES ('15', '19', '意见反馈', 'advicefeedback', 'admin/advicefeedback/list', '1', '1', '22', '2', '2016-01-29 01:06:46', '1');
+INSERT INTO `sys_menu` VALUES ('16', '18', '栏目公告', 'foldernotice', 'admin/foldernotice/list', '1', '1', '12', '2', '2016-01-29 01:07:35', '1');
+INSERT INTO `sys_menu` VALUES ('17', '18', '栏目滚动图片', 'folderrollpicture', 'admin/folderrollpicture/list', '1', '1', '13', '2', '2016-01-29 01:11:48', '1');
+INSERT INTO `sys_menu` VALUES ('18', '0', '内容管理', 'folder_root', null, '1', '1', '10', '1', '2016-01-29 04:24:45', '1');
+INSERT INTO `sys_menu` VALUES ('19', '0', '评论管理', 'comment_root', null, '1', '1', '20', '1', '2016-01-29 04:26:57', '1');
+INSERT INTO `sys_menu` VALUES ('20', '0', '其他管理', 'other_root', null, '1', '1', '30', '1', '2016-01-29 04:29:39', '1');
 
 -- ----------------------------
 -- Table structure for `sys_role`
@@ -249,6 +255,29 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `tb_advice_feedback`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_advice_feedback`;
+CREATE TABLE `tb_advice_feedback` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `userid` int(11) NOT NULL COMMENT '用户ID',
+  `username` varchar(32) NOT NULL COMMENT '用户名',
+  `qq` varchar(32) DEFAULT NULL COMMENT 'qq',
+  `email` varchar(64) DEFAULT NULL COMMENT 'email',
+  `telphone` varchar(32) DEFAULT NULL COMMENT '手机号',
+  `content` varchar(2000) DEFAULT NULL COMMENT '意见反馈内容',
+  `remark` varchar(2000) DEFAULT NULL COMMENT '备注',
+  `is_read` int(11) DEFAULT NULL COMMENT '是否已读',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='意见反馈';
+
+-- ----------------------------
+-- Records of tb_advice_feedback
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `tb_article`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_article`;
@@ -281,7 +310,7 @@ CREATE TABLE `tb_article` (
 -- ----------------------------
 -- Records of tb_article
 -- ----------------------------
-INSERT INTO `tb_article` VALUES ('1', '1', '英雄联盟', '<p>内容管理平台</p>', '124', '123', '12', '2', '1', '1', '1', '20150529_102007_298104.jpg', 'http://i4.tietuku.com/0bf9b53228782326.png', null, null, '2014-03-05', '系统管理员', '2015-01-29', '2015-01-23', '2015-01-28 17:29:55', '2015-01-28', '1');
+INSERT INTO `tb_article` VALUES ('1', '1', '英雄联盟', '<p>内容管理平台</p>', '124', '123', '12', '2', '1', '1', '1', 'download/image_url/20150529_102007_298104.jpg', 'http://i4.tietuku.com/0bf9b53228782326.png', null, null, '2014-03-05', '系统管理员', '2015-01-29', '2015-01-23', '2015-01-28 17:29:55', '2015-01-28', '1');
 INSERT INTO `tb_article` VALUES ('408', '1', '英雄联盟', '<p>&nbsp;</p>', '5', '0', '11', '1', '1', '2', '10', null, 'static/template/website/images/bg0.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:02:55', '2016-01-20 17:02:55', '1');
 INSERT INTO `tb_article` VALUES ('409', '1', '德玛西亚皇子', '<p>德玛西亚皇子,别名四阿哥,周杰伦,嘉文四世。</p><p>E-Q技能的存在为嘉文带来了不错的机动性，还附带三种控制技能让他成为一个让人十分头疼的坦克，</p><p>你无法在第一时间秒掉他，却也无法忽视他的存在，是一个团队价值非常高的英雄。</p>', '3', '0', '11', '1', '1', '2', '11', null, 'static/template/website/images/bg1.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:04:15', '2016-01-20 17:04:15', '1');
 INSERT INTO `tb_article` VALUES ('410', '1', '德邦总管', '<p>德邦总管,别名赵信,菊花信。</p><p>赵信很适合做团战发起人，第一时间冲锋加大招尽量多的造成伤害。</p><p>至少加1点战嚎来减少技能的冷却。对于赵信来说，攻速道具是收益最高的选择。缺点赵信是一个只进不退的英雄。</p>', '0', '0', '11', '1', '1', '2', '12', null, 'static/template/website/images/bg2.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:04:59', '2016-01-20 17:04:59', '1');
@@ -320,7 +349,7 @@ CREATE TABLE `tb_comment` (
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者 评论者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8 COMMENT='评论';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论';
 
 -- ----------------------------
 -- Records of tb_comment
@@ -362,7 +391,7 @@ CREATE TABLE `tb_error` (
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='异常数据';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='异常数据';
 
 -- ----------------------------
 -- Records of tb_error
@@ -400,6 +429,57 @@ INSERT INTO `tb_folder` VALUES ('6', '0', '后台管理', null, '', null, '90', 
 INSERT INTO `tb_folder` VALUES ('100', '0', '博文目录', '', '', null, '99', '2', '1', null, null, null, '2015-06-17 22:29:44', '0', '2015-06-17 22:29:44', '2');
 
 -- ----------------------------
+-- Table structure for `tb_folder_notice`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_folder_notice`;
+CREATE TABLE `tb_folder_notice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `folder_id` int(11) NOT NULL COMMENT '目录id',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '类型',
+  `icon` varchar(255) DEFAULT NULL COMMENT '图标',
+  `content` varchar(2000) DEFAULT NULL COMMENT '内容',
+  `url` varchar(255) DEFAULT NULL COMMENT '链接地址',
+  `sort` int(11) DEFAULT NULL COMMENT '排序',
+  `status` int(11) DEFAULT '1' COMMENT '状态//radio/2,隐藏,1,显示',
+  `is_deleted` int(11) NOT NULL DEFAULT '0' COMMENT '是否已删除',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新人',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='栏目公告';
+
+-- ----------------------------
+-- Records of tb_folder_notice
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_folder_roll_picture`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_folder_roll_picture`;
+CREATE TABLE `tb_folder_roll_picture` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `folder_id` int(11) NOT NULL COMMENT '目录id',
+  `title` varchar(200) DEFAULT '' COMMENT '题目',
+  `content` varchar(2000) DEFAULT NULL COMMENT '内容',
+  `sort` int(11) DEFAULT '1' COMMENT '排序',
+  `status` int(11) DEFAULT '1' COMMENT '状态//radio/2,隐藏,1,显示',
+  `image_url` varchar(256) DEFAULT NULL COMMENT '图片路径',
+  `image_net_url` varchar(256) DEFAULT NULL COMMENT '网络图片路径',
+  `url` varchar(255) DEFAULT NULL COMMENT '链接地址',
+  `is_deleted` int(11) NOT NULL DEFAULT '0' COMMENT '是否已删除',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新人',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='栏目轮播图';
+
+-- ----------------------------
+-- Records of tb_folder_roll_picture
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `tb_friendlylink`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_friendlylink`;
@@ -419,13 +499,13 @@ CREATE TABLE `tb_friendlylink` (
 -- ----------------------------
 -- Records of tb_friendlylink
 -- ----------------------------
-INSERT INTO `tb_friendlylink` VALUES ('1', '网站首页', 'web', '1', '1', '22', null, '2015-04-24 15:03:02', '1');
+INSERT INTO `tb_friendlylink` VALUES ('1', '意见反馈', 'advice', '16', '1', '22', null, '2015-04-24 15:03:02', '1');
 INSERT INTO `tb_friendlylink` VALUES ('2', '捐赠我们', 'front/about/351.html', '13', '1', '22', null, '2015-04-24 15:27:36', '1');
 INSERT INTO `tb_friendlylink` VALUES ('3', '关于我们', 'front/about/352.html', '2', '1', '22', null, '2015-04-24 15:28:56', '1');
 INSERT INTO `tb_friendlylink` VALUES ('4', '给我写信', 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=allcU1tTW15dWiobG0QJBQc', '15', '1', '22', null, '2015-04-24 15:29:12', '1');
-INSERT INTO `tb_friendlylink` VALUES ('5', '门头沟信息网', 'http://www.jflyfox.com/mtg/', '112', '1', '21', null, '2015-05-06 16:13:40', '1');
+INSERT INTO `tb_friendlylink` VALUES ('5', '大峪中学', 'http://www.dyzx-bj.com/', '112', '1', '21', null, '2015-05-06 16:13:40', '1');
 INSERT INTO `tb_friendlylink` VALUES ('6', 'Jflyfox博客', 'http://www.jflyfox.com/', '114', '1', '21', null, '2015-05-06 16:14:37', '1');
-INSERT INTO `tb_friendlylink` VALUES ('7', 'FLY的狐狸', 'http://www.jflyfox.com/', '111', '1', '21', null, '2015-05-06 16:15:03', '1');
+INSERT INTO `tb_friendlylink` VALUES ('7', '门头沟介绍', 'http://baike.baidu.com/view/193726.htm?fromtitle=%E9%97%A8%E5%A4%B4%E6%B2%9F&fromid=1055081&type=syn', '111', '1', '21', null, '2015-05-06 16:15:03', '1');
 INSERT INTO `tb_friendlylink` VALUES ('8', '联系我们', 'front/about/353.html', '3', '1', '22', null, '2015-05-26 11:26:57', '1');
 INSERT INTO `tb_friendlylink` VALUES ('9', '免责声明', 'front/about/354.html', '20', '1', '22', null, '2015-05-26 11:27:18', '1');
 INSERT INTO `tb_friendlylink` VALUES ('10', '广告服务', 'front/about/355.html', '11', '1', '22', null, '2015-05-26 11:28:42', '1');
@@ -441,7 +521,7 @@ CREATE TABLE `tb_pageview` (
   `create_day` varchar(64) NOT NULL COMMENT '创建时间到天',
   `create_time` varchar(64) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COMMENT='访问量统计';
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COMMENT='访问量统计';
 
 -- ----------------------------
 -- Records of tb_pageview
@@ -449,6 +529,7 @@ CREATE TABLE `tb_pageview` (
 INSERT INTO `tb_pageview` VALUES ('1', '127.0.0.1', '0', '2015-03-01', '2015-03-01 11:09:10');
 INSERT INTO `tb_pageview` VALUES ('66', '127.0.0.1', '0', '2016-01-17', '2016-01-17 00:40:53');
 INSERT INTO `tb_pageview` VALUES ('67', '127.0.0.1', '0', '2016-01-20', '2016-01-20 01:53:34');
+INSERT INTO `tb_pageview` VALUES ('68', '127.0.0.1', '0', '2016-01-21', '2016-01-21 01:55:59');
 
 -- ----------------------------
 -- Table structure for `tb_tags`

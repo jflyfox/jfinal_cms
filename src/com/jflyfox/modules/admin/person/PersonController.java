@@ -42,7 +42,7 @@ public class PersonController extends BaseController {
 	 */
 	public void save() {
 		JSONObject json = new JSONObject();
-		json.put("theme", 2);// 失败
+		json.put("status", 2);// 失败
 
 		SysUser user = (SysUser) getSessionUser();
 		int userid = user.getInt("userid");
@@ -124,5 +124,5 @@ public class PersonController extends BaseController {
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
 	}
-
+	
 }

@@ -171,7 +171,7 @@ comment = {
 			}
 		});
 		// 压力太大了就改大点
-		window.setTimeout('comment.count()',300000);
+		window.setTimeout('comment.count()',600000);
 	}
 	
 };

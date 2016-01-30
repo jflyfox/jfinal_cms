@@ -12,11 +12,6 @@ public class JFlyFoxUtils {
 	public static final String DESCRIPTION_ATTR = "HEAD_DESCRIPTION";
 
 	/**
-	 * 上传临时目录
-	 */
-	public static final String UPLOAD_TMP_PATH = "tmp";
-	
-	/**
 	 * 承建部门ID
 	 */
 	public static final int DEPART_BUILD_ID = 1;
@@ -55,6 +50,10 @@ public class JFlyFoxUtils {
 	 */
 	public static final int MENU_BLOG = 100;
 
+	public static final int IS_DELETED_NO = 1;
+	
+	public static final int IS_DELETED_YES = 2;
+	
 	private static final DESUtils des = new DESUtils("flyfoxxx");
 
 	// admin:1RHFCLt64uOOViCTzgSaww== test:ldKI9edsQVM=

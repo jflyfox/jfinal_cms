@@ -1,0 +1,105 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			id = id || '0';
+			var url = 'admin/advicefeedback/save/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal"
+		role="form" >
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<table class="table">
+		<%  // 列表头部%>
+				<% if(isEmpty(model.userid)) { %>
+				<tr>
+					<td>用户ID</td>
+					<td>
+					<input class="form-control" type="text" name="model.userid" value="${model.userid }"  valid='vtext' validname='用户ID'  />
+					</td>
+				</tr>
+				<tr>
+					<td>用户名</td>
+					<td>
+					<input class="form-control" type="text" name="model.username" value="${model.username }"  valid='vtext' validname='用户名'  />
+					</td>
+				</tr>
+				<% } else { %>
+				<tr>
+					<td>用户名</td>
+					<td>${model.username}（${model.userid}）</td>
+				</tr>
+				<% }  %>
+				<tr>
+					<td>qq</td>
+					<td>
+					<input class="form-control" type="text" name="model.qq" value="${model.qq }"  />
+					</td>
+				</tr>
+				<tr>
+					<td>email</td>
+					<td>
+					<input class="form-control" type="text" name="model.email" value="${model.email }"  />
+					</td>
+				</tr>
+				<tr>
+					<td>手机号</td>
+					<td>
+					<input class="form-control" type="text" name="model.telphone" value="${model.telphone }"  />
+					</td>
+				</tr>
+				<tr>
+					<td>意见反馈内容</td>
+					<td>
+					<textarea class="form-control" rows="3" cols="30" name="model.content">${model.content}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>备注</td>
+					<td>
+					<textarea class="form-control" rows="3" cols="30" name="model.remark">${model.remark}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>是否已读</td>
+					<td>
+					<label class="radio-inline">
+					  <input type="radio" name="model.is_read" id="" value="2"  ${model.is_read==2?"checked":"" } > 已读
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="model.is_read" id="" value="1"  ${model.is_read!=2?"checked":"" } > 未读
+					</label>
+					</td>
+				</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%}
+DIRECTIVE SAFE_OUTPUT_CLOSE; 
+%>

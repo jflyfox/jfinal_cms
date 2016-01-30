@@ -94,7 +94,7 @@ var bodyContent = {
 					<%  // 列表头部 %>
 					<th name="id" class="sorting">编号</th>
 					<th name="name" class="sorting">名称</th>
-					<th name="parent_id" class="sorting">父目录</th>
+					<th name="parent_id" class="sorting">父栏目</th>
 					<th name="`key`" class="sorting">urlkey</th> 
 					<th name="sort" class="sorting">排序</th> 
 					<th name="status" class="sorting">状态</th> 
@@ -112,7 +112,7 @@ var bodyContent = {
 					<%  // 列表内容 %>
 					<td>${item.id}</td> 
 					<td>${item.name}</td>
-					<td>${item.parentName!'根目录' }</td>
+					<td>${item.parentName!'根栏目' }</td>
 					<td>${item.key}</td>  
 					<td>${item.sort}</td>
 					<td>

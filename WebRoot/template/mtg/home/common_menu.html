@@ -3,7 +3,10 @@
 		var taglist = temp.tagsPageByFolder(1, 50, folder.id).list;
 		
 		// 列表数据
-		var page = temp.articlePage(1,20, folder.id);
+		var page = temp.articlePage(paginator.pageNo,paginator.pageSize, folder.id);
+		
+		// 公告
+		var noticeList = temp.notice(folder.id);
 %>
 
 <% 
@@ -50,9 +53,31 @@ var bodyContent = {
 	
 	<!-- 信息列表 -->
 	<div class="col-md-4">	
+			
+		<%  
+			if(noticeList != null && noticeList.~size > 0) {
+		%>
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			<h3 class="panel-title">其他标签<a class="more" href="front/tags/all">更多</a></h3>
+			<h3 class="panel-title">公告</h3>
+		  </div>
+		  <div class="panel-body">
+	  		<%
+				for(item in noticeList){ 
+			%>
+			<p><span class="label label-info">${itemLP.index}</span> <a href="${item.url}" target="_blank">${item.content}</a></p>
+			<% 
+				}
+			%>
+		 </div>
+		</div>
+		<%
+			} 
+		%>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">推荐标签<a class="more" href="front/tags/all">更多</a></h3>
 		  </div>
 		  <div class="panel-body">
 			<%  

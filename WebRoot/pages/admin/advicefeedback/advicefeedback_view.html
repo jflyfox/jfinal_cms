@@ -1,0 +1,49 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+			<tr>
+				<td>用户名</td>
+				<td>${model.username}（${model.userid}）</td>
+			</tr>
+			<tr>
+				<td>qq</td>
+				<td>${model.qq}</td>
+			</tr>
+			<tr>
+				<td>email</td>
+				<td>${model.email}</td>
+			</tr>
+			<tr>
+				<td>手机号</td>
+				<td>${model.telphone}</td>
+			</tr>
+			<tr>
+				<td>意见反馈内容</td>
+				<td>${model.content}</td>
+			</tr>
+			<tr>
+				<td>是否已读</td>
+				<td>${model.is_read==1?'未读':'已读'}</td>
+			</tr>
+		
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

@@ -81,7 +81,7 @@ var bodyContent = {
 				  	 </div>
 					<% } else if(strutil.isNotEmpty(item.image_url) ) { %>
 					<div class="thumbnail center-block" style="width:320px;">
-				  	  <img src="${ctx}download/image_url/${item.image_url }"  alt="${item.title}" class="img-rounded"
+				  	  <img src="${ctx}${item.image_url }"  alt="${item.title}" class="img-rounded"
 				  	  	data-holder-rendered="true" style="height: 200px; width: 320px; display: block;">
 				  	 </div>
 					 <% } %>
@@ -89,7 +89,7 @@ var bodyContent = {
 					<% if(strutil.isNotEmpty(item.file_url)) { %>
 						<div>
 						<span style="color: gray;">附件:</span>
-						<a href="download/file_url/${item.file_url }" target="_blank" style="text-decoration:none;">
+						<a href="${item.file_url }" target="_blank" style="text-decoration:none;">
 							${item.file_name}
 						</a>
 						</div>
