@@ -172,6 +172,7 @@ INSERT INTO `sys_menu` VALUES ('17', '18', '栏目滚动图片', 'folderrollpict
 INSERT INTO `sys_menu` VALUES ('18', '0', '内容管理', 'folder_root', null, '1', '1', '10', '1', '2016-01-29 04:24:45', '1');
 INSERT INTO `sys_menu` VALUES ('19', '0', '评论管理', 'comment_root', null, '1', '1', '20', '1', '2016-01-29 04:26:57', '1');
 INSERT INTO `sys_menu` VALUES ('20', '0', '其他管理', 'other_root', null, '1', '1', '30', '1', '2016-01-29 04:29:39', '1');
+INSERT INTO `sys_menu` VALUES ('21', '0', '首页', 'home', 'admin/home', '1', '1', '2', '1', '2015-04-27 17:28:06', '1');
 
 -- ----------------------------
 -- Table structure for `sys_role`

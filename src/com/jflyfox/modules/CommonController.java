@@ -25,7 +25,7 @@ import com.jflyfox.util.StrUtils;
 public class CommonController extends BaseProjectController {
 
 	public static final String loginPage = "/login.html";
-	public static final String mainPage = "/admin/article/list";
+	public static final String adminHomePage = "/admin/home";
 	public static final String firstPage = "/home";
 
 	/**
@@ -69,7 +69,7 @@ public class CommonController extends BaseProjectController {
 	public void admin() {
 		if (getSessionUser() != null) {
 			// 如果session存在，不再验证
-			redirect(mainPage);
+			redirect(adminHomePage);
 		} else {
 			renderAuto(loginPage);
 		}
