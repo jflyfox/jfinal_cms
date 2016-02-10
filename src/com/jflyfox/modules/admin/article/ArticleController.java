@@ -117,8 +117,8 @@ public class ArticleController extends BaseProjectController {
 
 		// 图片附件
 		if (uploadImage != null) {
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.UPLOAD_IMAGE_PATH, uploadImage);
-			model.set("image_url", JFlyfoxUpload.IMAGE_PATH + File.separator + fileName);
+			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.UPLOAD_ARICLE_PATH, uploadImage);
+			model.set("image_url", JFlyfoxUpload.ARICLE_PATH + File.separator + fileName);
 			// model.set("image_url", uploadFile.getFileName());
 		}
 

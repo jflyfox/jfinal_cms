@@ -1,0 +1,135 @@
+<% 
+	var headContent = {
+	include("/pages/template/head.html"){}
+%>
+
+<script type="text/javascript">
+		
+	var oper;
+	jQuery(function($) {
+		// 页面方法
+		oper = {
+			width : 800,
+			height : 520,
+			form : document.form1,
+			list : function() {
+				var url = 'admin/imageshow/edit/'+$('#album_id').val();
+				this.form.action = url;
+				this.form.submit();
+			},
+			view : function(id) {
+				var url = 'admin/image/view/'+id;
+				var title = '查看图片';
+				Iframe(url, this.width, this.height, title, false, false, false, EmptyFunc);
+			},
+			add : function() {
+				var url = 'admin/image/add?model.album_id='+$('#album_id').val();
+				var title = '添加图片';
+				Iframe(url, this.width, this.height, title);
+			},
+			edit : function(id) {
+				var url = 'admin/image/edit/'+id;
+				var title = '修改图片';
+				Iframe(url, this.width, this.height, title);
+			},
+			del : function(id) {
+				var url = 'admin/image/del/'+id;
+				var title = '确认要删除该图片信息？';
+				Confirm(title, function() {
+					Iframe(url, 450, 320, "删除图片");
+				});
+			}
+			,back : function(id) {
+				$('input').val('');
+				var url = 'admin/imageshow/list';
+				this.form.action = url;
+				this.form.submit();
+			}
+		};
+		//显示Menu索引
+		showMenu('page_image');
+	});
+	
+	//分页
+	var paginator = function(page) {
+		oper.list();
+	};
+</script>
+
+
+
+<%
+};
+
+var bodyContent = {
+%>
+
+<style>
+.btn-link {
+	padding: 2px 4px;
+}
+</style>
+
+	<form name="form1" action="" method="post"  class="form-inline" role="form">
+		<input type="hidden" id="album_id" value="${attr.album_id}" />
+		<!-- 菜单 -->
+		<% include("/static/component/include/menu.html"){} %>
+
+	<div class="tableSearch">
+			<%  //查询列表 %>
+			<label class="form-group">相册：${album.name}</label>
+			<button type="button" class="btn btn-default" onclick="oper.back();">
+			 		<span class="glyphicon glyphicon-arrow-left"></span> 返 回
+			</button>
+			<div class="form-group">
+					<input class="form-control" type="text" name="attr.name" value="${attr.name!''}" 
+						placeholder="请输入名称" required='required' />
+			</div>
+			<div class="form-group">
+					<select name="attr.status" class="form-control" >
+					<option value="-1">--请选择--</option>
+					<option value="1" ${attr.status==1?'selected':''}>显示</option>
+					<option value="2" ${attr.status==2?'selected':''}>隐藏</option>
+					</select>
+			</div>
+			
+			<button type="button" class="btn btn-default" onclick="oper.list();" name="search">
+			 		<span class="glyphicon glyphicon-search"></span> 查 询
+			</button>
+			<button type="button" class="btn btn-default" onclick="resetForm();">
+			 		<span class="glyphicon glyphicon-refresh"></span> 重 置
+			</button>
+			<button type="button" class="btn btn-default" onclick="oper.add();">
+			 		<span class="glyphicon glyphicon-plus"></span> 新 增
+			</button>
+		</div>
+		
+		<div style="margin: 10px;width: 98%;">
+			<div class="row">
+			
+				<% for(item in list){ %>
+					<div class="col-sm-6 col-md-2">
+				    <div class="thumbnail">
+				      <a href="${flyfox.getImage(item)}"  target="_blank">
+				      	<img class="img-thumbnail" style="width:250px;height:200px;" 
+				      		src="${flyfox.getImage(item)}" alt="..." title="点击查看"></a>
+				      <div class="caption">
+				        <p>${item.name}${item.status==2?"<span style='color:red;'>（隐藏）</span>":""}</p>
+				        <p><a href="#" onclick="oper.view(${item.id});return false;" class="btn btn-link" role="button">查看</a>
+				        <a href="#" onclick="oper.edit(${item.id});return false;" class="btn btn-link" role="button">编辑</a> 
+				        <a href="#" onclick="oper.del(${item.id});return false;" class="btn btn-link" role="button">删除</a></p>
+				      </div>
+				    </div>
+				  </div>
+				<%} %>
+			</div>
+		
+		
+		</div>
+
+	</form>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

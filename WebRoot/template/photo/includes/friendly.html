@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+	<h3 class="panel-title">友情链接</h3>
+  </div>
+  
+  <ul class="list-group">
+  	<% for(item in friendlylinkList){ %>
+		<li class="list-group-item">
+			<a href="${item.url}" target="_blank" title="${item.name}">
+			<% if (strutil.length(item.name) > 18) { %>
+				${strutil.subStringTo(item.name, 0, 18)}...
+			<% 	} else { %>
+				${item.name}
+			<%  } %>
+			</a>
+		</li>
+	<% } %>
+  </ul>
+  
+</div>

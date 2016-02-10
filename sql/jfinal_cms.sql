@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2016-01-31 04:39:41
+Date: 2016-02-11 02:34:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,7 +124,7 @@ CREATE TABLE `sys_log` (
   `create_time` varchar(64) NOT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10415 DEFAULT CHARSET=utf8 COMMENT='日志';
+) ENGINE=InnoDB AUTO_INCREMENT=10444 DEFAULT CHARSET=utf8 COMMENT='日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -147,7 +147,7 @@ CREATE TABLE `sys_menu` (
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='菜单';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -173,6 +173,10 @@ INSERT INTO `sys_menu` VALUES ('18', '0', '内容管理', 'folder_root', null, '
 INSERT INTO `sys_menu` VALUES ('19', '0', '评论管理', 'comment_root', null, '1', '1', '20', '1', '2016-01-29 04:26:57', '1');
 INSERT INTO `sys_menu` VALUES ('20', '0', '其他管理', 'other_root', null, '1', '1', '30', '1', '2016-01-29 04:29:39', '1');
 INSERT INTO `sys_menu` VALUES ('21', '0', '首页', 'home', 'admin/home', '1', '1', '2', '1', '2015-04-27 17:28:06', '1');
+INSERT INTO `sys_menu` VALUES ('22', '0', '素材管理', 'material_root', null, '1', '1', '16', '1', '2016-02-05 11:15:25', '1');
+INSERT INTO `sys_menu` VALUES ('23', '22', '图片管理', 'image', 'admin/image/list', '1', '1', '18', '2', '2016-02-05 11:15:45', '1');
+INSERT INTO `sys_menu` VALUES ('24', '22', '相册管理', 'imagealbum', 'admin/imagealbum/list', '1', '1', '17', '2', '2016-02-05 11:17:57', '1');
+INSERT INTO `sys_menu` VALUES ('25', '22', '我的相册', 'imageshow', 'admin/imageshow/list', '1', '1', '16', '2', '2016-02-10 01:22:01', '1');
 
 -- ----------------------------
 -- Table structure for `sys_role`
@@ -236,7 +240,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', '1', '1', '1', null, null, 'zcool321@sina.com', null, null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', 'flat-ui', '2016-06-06 06:06:06', '1');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', '1', '1', '1', null, null, 'zcool321@sina.com', null, null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', 'default', '2016-06-06 06:06:06', '1');
 INSERT INTO `sys_user` VALUES ('2', 'test', 'ldKI9edsQVM=', '后台测试用户', '2', '1', '1', null, null, null, null, null, null, null, 'default', '2016-06-06 06:06:06', '1');
 INSERT INTO `sys_user` VALUES ('3', 'webtest', 'ldKI9edsQVM=', '前台测试用户', '2', '3', '1', null, null, null, null, null, null, null, 'default', '2016-06-06 06:06:06', '1');
 
@@ -311,7 +315,7 @@ CREATE TABLE `tb_article` (
 -- ----------------------------
 -- Records of tb_article
 -- ----------------------------
-INSERT INTO `tb_article` VALUES ('1', '1', '内容管理平台', '<p>内容管理平台</p>', '124', '123', '12', '2', '1', '1', '1', 'download/image_url/20150529_102007_298104.jpg', null, null, null, '2014-03-05', '系统管理员', '2015-01-29', '2015-01-23', '2015-01-28 17:29:55', '2015-01-28', '1');
+INSERT INTO `tb_article` VALUES ('1', '1', '内容管理平台', '<p>内容管理平台</p>', '125', '123', '12', '2', '1', '1', '1', 'download/image_url/20150529_102007_298104.jpg', null, null, null, '2014-03-05', '系统管理员', '2015-01-29', '2015-01-23', '2015-01-28 17:29:55', '2015-01-28', '1');
 INSERT INTO `tb_article` VALUES ('105', '2', '测试4', '<p><span style=\"white-space: normal;\">测试</span></p>', '20', '0', '11', '1', '1', '2', '10', null, null, null, null, '2015-04-30', '测试', null, null, '2015-01-28 17:48:26', '2015-01-28', '1');
 INSERT INTO `tb_article` VALUES ('111', '2', '测试3', '<p><span style=\"white-space: normal;\">测试</span></p>', '27', '0', '11', '1', '1', '2', '10', null, null, null, null, '2015-02-04', '测试', null, null, '2015-02-04 08:47:31', '2015-02-04', '1');
 INSERT INTO `tb_article` VALUES ('112', '2', 'S1线6号线西延 明年年底开通', '<p>&nbsp;&nbsp;S1线预计明年年底将与6号线西延一起开通，同时长安街西延工程预计2017年12月全线通车。未来门头沟也将成为距离中心城区最近、交通最便利的新城。这是门头沟区区长王洪钟今天上午做客北京城市广播“市民对话一把手”栏目时透露的。</p><p>　　<strong>S1线与六号线西延一起开通</strong></p><p>　　提到门头沟区的交通发展，王洪钟表示，S1线现在已经开工建设，将在明年年底和地铁6号线西延一起开通。据介绍，S1线磁悬浮铁路在门头沟设了6个站点，届时从门头沟石门营到苹果园仅需10分钟左右。</p><p>　　另外长安街延长线从去年下半年也已经开工建设，预计将在2017年建成。据介绍，西延工程中还将架设永定河跨河大桥。在S1线和长安街延长线两条交通线建设完成后，门头沟区和市区的交通会更加便捷，这两条线也将与阜石路二期以及莲石路到潭柘寺的108国道、未来即将修建的109高速公路等形成一个总的大交通体系。</p>', '224', '3', '11', '1', '1', '1', '9', 'download/image_url/20150525_233451_151572.jpg', null, null, null, '2015-04-20', '中新网', null, null, '2015-02-06 09:18:50', '2015-02-06', '1');
@@ -323,7 +327,7 @@ INSERT INTO `tb_article` VALUES ('316', '13', '美丽门城', '<p>#</p>', '1', '
 INSERT INTO `tb_article` VALUES ('317', '13', '百花山', '<p>http://www.jflyfox.com/mtg/front/article/329.html</p>', '6', '0', '11', '1', '1', '2', '10', 'download/image_url/20150524_165105_854676.jpg', 'http://i1.tietuku.com/3951e9cb262621b6.jpg', null, null, '2015-05-24', '系统管理员', '', '', '2015-05-24 23:36:47', '2015-05-24 23:36:47', '1');
 INSERT INTO `tb_article` VALUES ('318', '2', '测试1', '<p>测试</p>', '1', '0', '11', '1', '1', '2', '10', null, null, null, null, '2015-05-06', '测试', null, null, '2015-05-24 22:17:25', '2015-05-24 22:17:25', '1');
 INSERT INTO `tb_article` VALUES ('319', '2', '红枣银耳汤', '<p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"><em class=\"step\" style=\"border: 0px; outline: 0px; font-size: 50px; vertical-align: baseline; color: rgb(255, 50, 50); text-align: center; font-family: arial; position: absolute; left: 0px; top: -6px; height: 100px; width: 100px; display: block; line-height: 52px; background: transparent;\">1.</em>银耳放入开水中浸泡20分钟，泡发后取出洗净，并去除黄根，掰成小朵；红枣洗净去核，枸杞放入清水中浸软备用</p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"><em class=\"step\" style=\"border: 0px; outline: 0px; font-size: 50px; vertical-align: baseline; color: rgb(255, 50, 50); text-align: center; font-family: arial; position: absolute; left: 0px; top: -6px; height: 100px; width: 100px; display: block; line-height: 52px; background: transparent;\">2.</em>汤锅中倒入适量清水，大火烧开后，转小火放入银耳熬煮30分钟，待汤汁变得黏稠后，放入红枣、枸杞继续熬煮10分钟</p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"><em class=\"step\" style=\"border: 0px; outline: 0px; font-size: 50px; vertical-align: baseline; color: rgb(255, 50, 50); text-align: center; font-family: arial; position: absolute; left: 0px; top: -6px; height: 100px; width: 100px; display: block; line-height: 52px; background: transparent;\">3.</em>10分钟后，将黄冰糖放入锅中，搅拌至冰糖融化即可</p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"><img class=\"conimg\" height=\"690\" width=\"460\" alt=\"红枣银耳汤Hs.jpg\" src=\"http://images.meishij.net/p/20110714/a691de05714c9bb940791709d67e1e53.jpg\" style=\"margin-right: auto; margin-left: auto; outline: 0px; vertical-align: baseline; display: block; max-width: 550px; background: transparent;\"/></p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"></p><h2 class=\"cpc_h2\" style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; border-width: 0px 0px 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); outline: 0px; font-size: 24px; vertical-align: baseline; color: rgb(51, 51, 51); height: 66px; line-height: 66px; text-indent: 24px; font-family: &#39;Microsoft Yahei&#39;; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\">厨房小常识</h2><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"></p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 质量较好的银耳呈淡黄色，水发后手感柔嫩，劣质银耳水发后较脆。另外不要购买太大朵的银耳，大朵银耳的黄根很大，清理时要去掉的部分就很多，小朵的银耳相对要好些。</p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"></p><h2 class=\"cpc_h2\" style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; border-width: 0px 0px 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); outline: 0px; font-size: 24px; vertical-align: baseline; color: rgb(51, 51, 51); height: 66px; line-height: 66px; text-indent: 24px; font-family: &#39;Microsoft Yahei&#39;; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\">营养功效</h2><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"></p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"><strong style=\"padding: 10px 20px; border: 0px; outline: 0px; vertical-align: baseline; background: transparent;\">好汤益容颜：</strong></p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 银耳是极好的美容品，其含有天然植物性胶质，长期食用可滋润肌肤，更有减轻面部黄褐斑、雀斑的功效。银耳汤营养丰富，但是不能隔夜饮用，所以，一定要饮用新鲜、美味的银耳汤。除此之外，银耳中还含有大量的维生素D，可有效地防止人体钙元素的流失，对人体骨骼也很有好处。</p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"></p><h2 class=\"cpc_h2\" style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; border-width: 0px 0px 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); outline: 0px; font-size: 24px; vertical-align: baseline; color: rgb(51, 51, 51); height: 66px; line-height: 66px; text-indent: 24px; font-family: &#39;Microsoft Yahei&#39;; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\">饮食小常识</h2><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\"></p><p style=\"white-space: normal; margin-top: 0px; margin-bottom: 0px; padding: 10px 20px 10px 100px; border: 0px; outline: 0px; font-size: 14px; vertical-align: baseline; line-height: 24px; color: rgb(102, 102, 102); position: relative; font-family: Arial, Helvetica, sans-serif; background-image: initial; background-attachment: initial; background-color: rgb(252, 248, 233); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;女人爱美丽，而日复一日忙碌于工作、家庭之中的女人，历经了岁月的洗礼，不经意间失去了一些花容月色，美丽元素的消耗也在与日俱增。纵然女人是水做的，也少不了一碗好汤给女人带来的温情与呵护。那就大胆运用每一个养颜公式，将美丽定格于此时此刻吧——从现在开始，时常为自己、为家人精心熬煮一碗养颜好汤，让容颜不再跟随着时光的脚步匆匆流逝——多一份眷顾，多一份妙色……</p><p><br/></p>', '1', '0', '11', '1', '1', '2', '10', null, null, null, null, '2015-05-08', '系统管理员', null, null, '2015-05-24 22:17:31', '2015-05-24 22:17:31', '1');
-INSERT INTO `tb_article` VALUES ('320', '2', '三种人', '<p><span style=\"background-color: rgb(255, 255, 255);\"><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">人的一生总是要学习各种知识。人人都在学习，但学习方法却各有不同。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">1 绝大多数人是闭门学习受填鸭式学习教育遗毒影响，独自一个人挑灯苦灯，学习吸收各种知识。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">这种学习方式比较枯燥，需要比较好的耐力，毅力。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">2 一部分重视通过交流学习现在网络比较发达了，许多人自觉不自觉得把自己的学习心得记录下来，并发表在网上。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">3 也有人通过启发别人来启发自己其中的哲学原理，按古代说法是天人合一，物我同体；按现代说法是信息相通，沟通无极限。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">通过帮助别人来帮助自己。通过启发别人来启发自己。凡有所得，必须分享。只有分享了的知识，才是真正的知识。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">上面三种人，对于知识而言，</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">第一种人是只进不出，只是获取别人总结的知识，而基本不去帮助别人获取知识</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">第二种人是多进少出，在学习知识的同时，也把自己的一些心得分享出来</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">第三种人趋于得失平衡，认为只有分享的知识才是真正的知识，只有帮助别人也掌握的知识才是真正的知识</span></span></p>', '5', '0', '11', '1', '1', '2', '10', null, null, null, null, '2015-05-10', '三种人', null, null, '2015-05-25 22:17:38', '2015-05-25 22:17:38', '1');
+INSERT INTO `tb_article` VALUES ('320', '2', '三种人', '<p><span style=\"background-color: rgb(255, 255, 255);\"><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">人的一生总是要学习各种知识。人人都在学习，但学习方法却各有不同。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">1 绝大多数人是闭门学习受填鸭式学习教育遗毒影响，独自一个人挑灯苦灯，学习吸收各种知识。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">这种学习方式比较枯燥，需要比较好的耐力，毅力。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">2 一部分重视通过交流学习现在网络比较发达了，许多人自觉不自觉得把自己的学习心得记录下来，并发表在网上。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">3 也有人通过启发别人来启发自己其中的哲学原理，按古代说法是天人合一，物我同体；按现代说法是信息相通，沟通无极限。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">通过帮助别人来帮助自己。通过启发别人来启发自己。凡有所得，必须分享。只有分享了的知识，才是真正的知识。</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">上面三种人，对于知识而言，</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">第一种人是只进不出，只是获取别人总结的知识，而基本不去帮助别人获取知识</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">第二种人是多进少出，在学习知识的同时，也把自己的一些心得分享出来</span><br style=\"white-space: normal; font-family: 微软雅黑, Verdana, sans-serif, 宋体; font-size: 13px; letter-spacing: 0.5px; line-height: 22.5px;\"/><span style=\"white-space: normal; letter-spacing: 0.5px; font-family: SimSun, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 21px;\">第三种人趋于得失平衡，认为只有分享的知识才是真正的知识，只有帮助别人也掌握的知识才是真正的知识</span></span></p>', '7', '0', '11', '1', '1', '2', '10', null, null, null, null, '2015-05-10', '三种人', null, null, '2015-05-25 22:17:38', '2015-05-25 22:17:38', '1');
 INSERT INTO `tb_article` VALUES ('321', '2', 'J2Cache', '<p><span style=\"font-family: &#39;Microsoft YaHei&#39;, Verdana, sans-serif, 宋体; font-size: 13.3333330154419px; line-height: 21.3333320617676px; white-space: normal;\">J2Cache 是 OSChina 目前正在使用的两级缓存框架。第一级缓存使用&nbsp;</span><a target=\"_blank\" href=\"http://www.oschina.net/p/ehcache\" style=\"margin: 0px; padding: 0px; color: rgb(62, 98, 166); outline: 0px; font-family: &#39;Microsoft YaHei&#39;, Verdana, sans-serif, 宋体; font-size: 13.3333330154419px; line-height: 21.3333320617676px; white-space: normal;\">Ehcache</a><span style=\"font-family: &#39;Microsoft YaHei&#39;, Verdana, sans-serif, 宋体; font-size: 13.3333330154419px; line-height: 21.3333320617676px; white-space: normal;\">，第二级缓存使用&nbsp;</span><a target=\"_blank\" href=\"http://www.oschina.net/p/redis\" style=\"margin: 0px; padding: 0px; color: rgb(62, 98, 166); outline: 0px; font-family: &#39;Microsoft YaHei&#39;, Verdana, sans-serif, 宋体; font-size: 13.3333330154419px; line-height: 21.3333320617676px; white-space: normal;\">Redis</a><span style=\"font-family: &#39;Microsoft YaHei&#39;, Verdana, sans-serif, 宋体; font-size: 13.3333330154419px; line-height: 21.3333320617676px; white-space: normal;\">&nbsp;。由于大量的缓存读取会导致 L2 的网络成为整个系统的瓶颈，因此 L1 的目标是降低对 L2 的读取次数。该缓存框架主要用于集群环境中。单机也可使用，用于避免应用重启导致的 Ehcache 缓存数据丢失。</span></p>', '25', '0', '11', '1', '1', '2', '10', null, null, null, null, '2015-05-23', '红薯', null, null, '2015-05-24 22:17:47', '2015-05-24 22:17:47', '1');
 INSERT INTO `tb_article` VALUES ('322', '2', 'beetl', '<p><span style=\"color: rgb(51, 51, 51); font-family: arial, 宋体, sans-serif; line-height: 24px; text-indent: 32px; white-space: normal;\">Beetl,是Bee Template Language的缩写，它绝不是简单的另外一种模板引擎，而是新一代的</span><a target=\"_blank\" href=\"http://baike.baidu.com/view/4258079.htm\" style=\"color: rgb(19, 110, 194); text-decoration: none; font-family: arial, 宋体, sans-serif; line-height: 24px; text-indent: 32px; white-space: normal;\">模板引擎</a><span style=\"color: rgb(51, 51, 51); font-family: arial, 宋体, sans-serif; line-height: 24px; text-indent: 32px; white-space: normal;\">，它功能强大，性能良好，秒杀当前流行的模板引擎。而且还易学易用。</span></p>', '2', '0', '11', '1', '1', '1', '10', null, null, null, null, '2015-05-24', '系统管理员', null, null, '2015-05-24 22:17:53', '2015-05-24 22:17:53', '1');
 INSERT INTO `tb_article` VALUES ('323', '2', 'Jfinal', '<p><span style=\"color: rgb(51, 51, 51); font-family: &#39;Lucida Grande&#39;, &#39;Hiragino Sans GB&#39;, &#39;Microsoft YaHei&#39;, &#39;WenQuanYi Micro Hei&#39;, sans-serif; font-size: 13px; line-height: 23.3999996185303px; white-space: normal;\">JFinal 是基于 Java 语言的极速 WEB + ORM 框架，其核心设计目标是开发迅速、代码量少、学习简单、功能强大、轻量级、易扩展、Restful。 在拥有Java语言所有优势的同时再拥有ruby、python、php等动态语言的开发效率！为您节约更多时间，去陪恋人、家人和朋友 :)</span></p>', '7', '0', '11', '1', '1', '2', '10', null, null, null, null, '2015-05-26', '系统管理员', null, null, '2015-05-24 22:17:59', '2015-05-24 22:17:59', '1');
@@ -581,7 +585,7 @@ CREATE TABLE `tb_folder_notice` (
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='栏目公告';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='栏目公告';
 
 -- ----------------------------
 -- Records of tb_folder_notice
@@ -650,6 +654,109 @@ INSERT INTO `tb_friendlylink` VALUES ('9', '免责声明', 'front/about/354.html
 INSERT INTO `tb_friendlylink` VALUES ('10', '广告服务', 'front/about/355.html', '11', '1', '22', null, '2015-05-26 11:28:42', '1');
 
 -- ----------------------------
+-- Table structure for `tb_image`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_image`;
+CREATE TABLE `tb_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `album_id` int(11) DEFAULT '1' COMMENT '相册ID',
+  `album_name` varchar(200) DEFAULT '' COMMENT '相册名称',
+  `name` varchar(200) DEFAULT '' COMMENT '图片名称',
+  `linkurl` varchar(400) DEFAULT '' COMMENT '链接地址',
+  `cdnurl` varchar(400) DEFAULT '' COMMENT 'CDN地址',
+  `image_url` varchar(256) DEFAULT NULL COMMENT '图片路径',
+  `image_net_url` varchar(256) DEFAULT NULL COMMENT '网络图片路径',
+  `ext` varchar(20) DEFAULT '' COMMENT '扩展名',
+  `width` varchar(20) DEFAULT '' COMMENT '宽',
+  `height` varchar(20) DEFAULT '' COMMENT '高',
+  `status` int(11) DEFAULT '1' COMMENT '状态//radio/2,隐藏,1,显示',
+  `is_comment` int(11) DEFAULT '1' COMMENT '是否评论//radio/2,否,1,是',
+  `is_recommend` int(11) DEFAULT '2' COMMENT '是否推荐：2 否 1 是',
+  `sort` int(11) DEFAULT '1' COMMENT '排序',
+  `remark` varchar(400) DEFAULT NULL COMMENT '备注',
+  `publish_time` varchar(64) DEFAULT NULL COMMENT '发布时间',
+  `publish_user` varchar(64) DEFAULT '1' COMMENT '发布者',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新者',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='图片';
+
+-- ----------------------------
+-- Records of tb_image
+-- ----------------------------
+INSERT INTO `tb_image` VALUES ('2', '1', '风景', '风景1', 'http://image226-c.poco.cn/mypoco/myphoto/20140121/16/6164818720140121160407052_640.jpg?1024x453_120', '', null, 'http://image226-c.poco.cn/mypoco/myphoto/20140121/16/6164818720140121160407052_640.jpg?1024x453_120', 'jpg?1024x453_120', '750', '331', '1', '2', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 00:41:10', '1', '2016-02-10 00:41:10', '1');
+INSERT INTO `tb_image` VALUES ('3', '3', '动漫', '动漫1', 'http://thumb.webps.cn/to/img/4/T1DTF3Fc4dXXXXXXXX_!!0-item_pic.jpg', '', null, 'http://thumb.webps.cn/to/img/4/T1DTF3Fc4dXXXXXXXX_!!0-item_pic.jpg', 'jpg', '500', '747', '1', '2', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 00:41:51', '1', '2016-02-10 00:41:51', '1');
+INSERT INTO `tb_image` VALUES ('4', '2', '美女', '美女1', 'http://i4.pdim.gs/t01d4f8e84b1434c8e3.jpg', '', null, 'http://i4.pdim.gs/t01d4f8e84b1434c8e3.jpg', 'jpg', '800', '566', '1', '2', '1', '9', null, '2016-02-10', '系统管理员', '2016-02-10 00:43:20', '1', '2016-02-10 00:43:20', '1');
+INSERT INTO `tb_image` VALUES ('5', '4', '游戏', '游戏1', 'http://news.waigame.com/static/newsimage/20140603/14017632866819.jpg', '', null, 'http://news.waigame.com/static/newsimage/20140603/14017632866819.jpg', 'jpg', '1400', '933', '1', '2', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 00:44:14', '1', '2016-02-10 00:44:14', '1');
+INSERT INTO `tb_image` VALUES ('7', '2', '美女', '美女2', 'http://i12.tietuku.com/15a72119633c812d.jpg', '', null, 'http://i12.tietuku.com/15a72119633c812d.jpg', 'jpg', '400', '445', '1', '2', '1', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:25:41', '1', '2016-02-10 01:25:41', '1');
+INSERT INTO `tb_image` VALUES ('8', '2', '美女', '美女3', 'http://i12.tietuku.com/ccb2e30c9fda92f6.jpg', '', null, 'http://i12.tietuku.com/ccb2e30c9fda92f6.jpg', 'jpg', '580', '870', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:30:59', '1', '2016-02-10 01:30:59', '1');
+INSERT INTO `tb_image` VALUES ('9', '2', '美女', '美女4', 'http://i12.tietuku.com/2329cc70e32d51c7.jpg', '', null, 'http://i12.tietuku.com/2329cc70e32d51c7.jpg', 'jpg', '480', '800', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:31:16', '1', '2016-02-10 01:31:16', '1');
+INSERT INTO `tb_image` VALUES ('10', '2', '美女', '美女5', 'http://i12.tietuku.com/f2229247cf39609c.jpg', '', null, 'http://i12.tietuku.com/f2229247cf39609c.jpg', 'jpg', '375', '550', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:31:30', '1', '2016-02-10 01:31:30', '1');
+INSERT INTO `tb_image` VALUES ('11', '2', '美女', '美女6', 'http://i12.tietuku.com/53cdf688c2c938f0.jpg', '', null, 'http://i12.tietuku.com/53cdf688c2c938f0.jpg', 'jpg', '610', '833', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:31:45', '1', '2016-02-10 01:31:45', '1');
+INSERT INTO `tb_image` VALUES ('12', '2', '美女', '美女7', 'http://i12.tietuku.com/9c83f4d0809adcbc.jpg', '', null, 'http://i12.tietuku.com/9c83f4d0809adcbc.jpg', 'jpg', '532', '600', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:31:59', '1', '2016-02-10 01:31:59', '1');
+INSERT INTO `tb_image` VALUES ('13', '2', '美女', '美女8', 'http://i4.tietuku.com/691d3f2a37fb0ba9.jpg', '', null, 'http://i4.tietuku.com/691d3f2a37fb0ba9.jpg', 'jpg', '1024', '1536', '1', '2', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:33:40', '1', '2016-02-10 01:33:40', '1');
+INSERT INTO `tb_image` VALUES ('14', '2', '美女', '美女9', 'http://i4.tietuku.com/1fd3bb6d9a0d5901.jpg', '', null, 'http://i4.tietuku.com/1fd3bb6d9a0d5901.jpg', 'jpg', '682', '1024', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:34:45', '1', '2016-02-10 01:34:45', '1');
+INSERT INTO `tb_image` VALUES ('15', '2', '美女', '美女10', 'http://i13.tietuku.com/bff63c26bea99e8d.jpg', '', null, 'http://i13.tietuku.com/bff63c26bea99e8d.jpg', 'jpg', '900', '1200', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:35:16', '1', '2016-02-10 01:35:16', '1');
+INSERT INTO `tb_image` VALUES ('16', '2', '美女', '美女11', 'http://i13.tietuku.com/8484c08a850a74c8.jpg', '', null, 'http://i13.tietuku.com/8484c08a850a74c8.jpg', 'jpg', '768', '1152', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:35:55', '1', '2016-02-10 01:35:55', '1');
+INSERT INTO `tb_image` VALUES ('17', '2', '美女', '美女12', 'http://i4.tietuku.com/4231f8da8b09331c.jpg', '', null, 'http://i4.tietuku.com/4231f8da8b09331c.jpg', 'jpg', '640', '960', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:36:09', '1', '2016-02-10 01:36:09', '1');
+INSERT INTO `tb_image` VALUES ('18', '2', '美女', '美女13', 'http://i13.tietuku.com/a5d2a6478c6ed758.jpg', '', null, 'http://i13.tietuku.com/a5d2a6478c6ed758.jpg', 'jpg', '496', '750', '1', '1', '2', '10', null, '2016-02-10', '系统管理员', '2016-02-10 01:36:29', '1', '2016-02-10 01:36:29', '1');
+
+-- ----------------------------
+-- Table structure for `tb_image_album`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_image_album`;
+CREATE TABLE `tb_image_album` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `parent_id` int(11) DEFAULT '0' COMMENT '父ID',
+  `name` varchar(100) NOT NULL DEFAULT '' COMMENT '相册名称',
+  `remark` text COMMENT '描述',
+  `sort` int(11) DEFAULT '1' COMMENT '排序',
+  `status` int(11) DEFAULT '1' COMMENT '状态//radio/2,隐藏,1,显示',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新人',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='相册';
+
+-- ----------------------------
+-- Records of tb_image_album
+-- ----------------------------
+INSERT INTO `tb_image_album` VALUES ('1', '0', '风景', null, '1', '1', '2016-02-10 00:28:19', '1', '2016-02-10 00:28:19', '1');
+INSERT INTO `tb_image_album` VALUES ('2', '0', '美女', null, '2', '1', '2016-02-10 00:28:43', '1', '2016-02-10 00:28:43', '1');
+INSERT INTO `tb_image_album` VALUES ('3', '0', '动漫', null, '3', '1', '2016-02-10 00:28:55', '1', '2016-02-10 00:28:55', '1');
+INSERT INTO `tb_image_album` VALUES ('4', '0', '游戏', null, '4', '1', '2016-02-10 00:29:42', '1', '2016-02-10 00:29:42', '1');
+
+-- ----------------------------
+-- Table structure for `tb_image_tags`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_image_tags`;
+CREATE TABLE `tb_image_tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `image_id` int(11) DEFAULT NULL COMMENT '图片ID',
+  `tagname` varchar(200) DEFAULT '' COMMENT '标签内容',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COMMENT='标签';
+
+-- ----------------------------
+-- Records of tb_image_tags
+-- ----------------------------
+INSERT INTO `tb_image_tags` VALUES ('1', null, 'a', '2016-02-10 02:09:39', '1');
+INSERT INTO `tb_image_tags` VALUES ('2', null, 'b', '2016-02-10 02:09:39', '1');
+INSERT INTO `tb_image_tags` VALUES ('3', null, 'b', '2016-02-10 02:09:39', '1');
+INSERT INTO `tb_image_tags` VALUES ('4', null, 'a', '2016-02-10 02:09:48', '1');
+INSERT INTO `tb_image_tags` VALUES ('5', null, 'c', '2016-02-10 02:09:48', '1');
+INSERT INTO `tb_image_tags` VALUES ('6', null, 'a', '2016-02-10 02:10:43', '1');
+INSERT INTO `tb_image_tags` VALUES ('7', null, 'b', '2016-02-10 02:10:45', '1');
+INSERT INTO `tb_image_tags` VALUES ('39', '4', '美女', '2016-02-10 03:35:06', '1');
+INSERT INTO `tb_image_tags` VALUES ('40', '4', '图片', '2016-02-10 03:35:06', '1');
+INSERT INTO `tb_image_tags` VALUES ('41', '4', '视频', '2016-02-10 03:35:06', '1');
+
+-- ----------------------------
 -- Table structure for `tb_pageview`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_pageview`;
@@ -660,7 +767,7 @@ CREATE TABLE `tb_pageview` (
   `create_day` varchar(64) NOT NULL COMMENT '创建时间到天',
   `create_time` varchar(64) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COMMENT='访问量统计';
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8 COMMENT='访问量统计';
 
 -- ----------------------------
 -- Records of tb_pageview

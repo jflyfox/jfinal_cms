@@ -99,7 +99,8 @@ public class CommonController extends BaseProjectController {
 
 		// 新加入，判断是否有上一个页面
 		String prePage = getPara("pre_page");
-		String toPage = StrUtils.isEmpty(prePage) || prePage.indexOf("login") >= 0 ? firstPage : prePage;
+		String toPage = StrUtils.isEmpty(prePage) || prePage.indexOf("login") >= 0 //
+				|| prePage.indexOf("trans") >= 0 ? firstPage : prePage;
 		setAttr("pre_page", prePage); // 如果密码错误还需要用到
 
 		if (StrUtils.isEmpty(username)) {

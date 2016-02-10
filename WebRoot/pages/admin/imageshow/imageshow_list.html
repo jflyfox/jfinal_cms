@@ -1,0 +1,114 @@
+<% 
+	var headContent = {
+	include("/pages/template/head.html"){}
+%>
+
+<script type="text/javascript">
+		
+	var oper;
+	jQuery(function($) {
+		// 页面方法
+		oper = {
+			width : 800,
+			height : 450,
+			form : document.form1,
+			list : function() {
+				var url = 'admin/imageshow/list';
+				this.form.action = url;
+				this.form.submit();
+			},
+			edit : function(id) {
+				var url = 'admin/imageshow/edit/'+id;
+				this.form.action = url;
+				this.form.submit();
+			}
+			,add : function() {
+				var url = 'admin/imagealbum/add';
+				var title = '添加相册';
+				Iframe(url, this.width, this.height, title);
+			}
+			,editalbum : function(id) {
+				var url = 'admin/imagealbum/edit/'+id;
+				var title = '编辑相册';
+				Iframe(url, 350, 400, title);
+			}
+			,delalbum : function(id) {
+				var url = 'admin/imagealbum/del/'+id;
+				var title = '删除相册';
+				Confirm("确认要删除该相册吗？", function() {
+					Iframe(url, 450, 320, title);
+				});
+			}
+		};
+		//显示Menu索引
+		showMenu('page_image');
+	});
+	
+	//分页
+	var paginator = function(page) {
+		oper.list();
+	};
+</script>
+
+<%
+};
+
+var bodyContent = {
+%>
+	<form name="form1" action="" method="post"  class="form-inline" role="form">
+		<!-- 菜单 -->
+		<% include("/static/component/include/menu.html"){} %>
+
+	<div class="tableSearch">
+		<%  //查询列表 %>
+		<div class="form-group">
+				<input class="form-control" type="text" name="attr.name" value="${attr.name!''}" 
+					placeholder="请输入名称" required='required' />
+		</div>
+		<div class="form-group">
+				<select name="attr.status" class="form-control" >
+				<option value="-1">--请选择--</option>
+				<option value="1" ${attr.status==1?'selected':''}>显示</option>
+				<option value="2" ${attr.status==2?'selected':''}>隐藏</option>
+				</select>
+		</div>
+		
+		<button type="button" class="btn btn-default" onclick="oper.list();" name="search">
+		 		<span class="glyphicon glyphicon-search"></span> 查 询
+		</button>
+		<button type="button" class="btn btn-default" onclick="resetForm();">
+		 		<span class="glyphicon glyphicon-refresh"></span> 重 置
+		</button>
+		<button type="button" class="btn btn-default" onclick="oper.add();">
+		 		<span class="glyphicon glyphicon-plus"></span> 新 增
+		</button>
+	</div>
+
+<div style="margin: 10px;width: 98%;">
+	<div class="row">
+	
+		<% for(item in list){ %>
+			<div class="col-sm-6 col-md-2">
+		    <div class="thumbnail">
+		      <a href="#"  onclick="oper.edit(${item.id});return false;"><img class="img-thumbnail" style="width:250px;height:250px;" src="${item.imageUrl!}" alt="..." title="点击查看"></a>
+		      <div class="caption">
+		        <p>${item.name}(${item.id})${item.status==2?"<span style='color:red;'> （隐藏）</span>":""}</p>
+		        <p><a href="#" onclick="oper.editalbum(${item.id});return false;" class="btn btn-link" role="button">编辑相册</a> 
+		        <a href="#" onclick="oper.delalbum(${item.id});return false;" class="btn btn-link" role="button">删除相册</a></p>
+		      </div>
+		    </div>
+		  </div>
+		<%} %>
+	
+	</div>
+
+
+</div>
+		
+		
+	</form>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

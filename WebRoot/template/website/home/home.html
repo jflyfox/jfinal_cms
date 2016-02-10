@@ -105,7 +105,7 @@ var navigationTooltipsArray = [];
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"> <img alt="logo" src="${flyfox.getArtImage(homeArticle)}" width="24" height="24">
+				<a class="navbar-brand" href="#"> <img alt="logo" src="${flyfox.getImage(homeArticle)}" width="24" height="24">
 					${homeArticle.title}
 				</a>
 			</div>
@@ -123,7 +123,7 @@ var navigationTooltipsArray = [];
 
 	<div id="fullpage">
 		<% for(item in articlePage.list){ %>
-			<div class="section" id="section${itemLP.index}" style="background-image: url(${flyfox.getArtImage(item)});">
+			<div class="section" id="section${itemLP.index}" style="background-image: url(${flyfox.getImage(item)});">
 				${item.content!}
 			</div>
 		<% } %>

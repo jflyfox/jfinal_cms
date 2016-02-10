@@ -113,8 +113,8 @@ var bodyContent = {
 			<tr>
 				<td>图片
 					<% if(!strutil.isEmpty(model.image_url)||!strutil.isEmpty(model.image_net_url)){ %>
-						<a href="${flyfox.getArtImage(model)}" target="_blank" style="text-decoration:none;">
-							<img alt="图片" title="点击浏览" src="${flyfox.getArtImage(model)}" width="40" height="40">
+						<a href="${flyfox.getImage(model)}" target="_blank" style="text-decoration:none;">
+							<img alt="图片" title="点击浏览" src="${flyfox.getImage(model)}" width="40" height="40">
 						</a>
 					<% } %></td>
 				<td>

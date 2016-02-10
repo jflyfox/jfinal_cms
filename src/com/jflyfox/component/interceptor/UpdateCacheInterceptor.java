@@ -5,6 +5,7 @@ import com.jfinal.aop.Invocation;
 import com.jflyfox.modules.admin.comment.CommentService;
 import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.front.service.FrontCacheService;
+import com.jflyfox.modules.front.service.FrontImageService;
 import com.jflyfox.util.Config;
 
 /**
@@ -32,6 +33,8 @@ public class UpdateCacheInterceptor implements Interceptor {
 			new CommentService().clearCache();
 			// 清除所有前台缓存
 			new FrontCacheService().clearCache();
+			// 清除前台图片缓存
+			new FrontImageService().clearCache();
 
 			lastUpdateTime = now;
 		}

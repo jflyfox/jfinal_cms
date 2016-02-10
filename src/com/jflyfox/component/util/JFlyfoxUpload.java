@@ -17,31 +17,42 @@ public class JFlyfoxUpload {
 	public static final String UPLOAD_TMP_PATH = "tmp";
 
 	/**
+	 * 文章图片目录
+	 */
+	public static final String ARICLE_PATH = "download" + File.separator + "image_url";
+	/**
+	 * 文章图片全目录
+	 */
+	public static final String UPLOAD_ARICLE_PATH = PathKit.getWebRootPath() + File.separator + ARICLE_PATH;
+	
+	/**
+	 * 栏目滚动图片目录
+	 */
+	public static final String ROLL_IMAGE_PATH = "download" + File.separator + "roll_image";
+	/**
+	 * 栏目滚动图片全目录
+	 */
+	public static final String UPLOAD_ROLL_IMAGE_PATH = PathKit.getWebRootPath() + File.separator + ROLL_IMAGE_PATH;
+	
+	/**
+	 * 文章文件目录
+	 */
+	public static final String FILE_PATH = "download" + File.separator + "file_url";
+	/**
+	 * 文章文件全目录
+	 */
+	public static final String UPLOAD_FILE_PATH = PathKit.getWebRootPath() + File.separator + FILE_PATH;
+	
+	/**
 	 * 图片目录
 	 */
-	public static final String IMAGE_PATH = "download" + File.separator + "image_url";
+	public static final String IMAGE_PATH = "download" + File.separator + "image";
+	
 	/**
 	 * 图片全目录
 	 */
 	public static final String UPLOAD_IMAGE_PATH = PathKit.getWebRootPath() + File.separator + IMAGE_PATH;
 	
-	/**
-	 * 图片目录
-	 */
-	public static final String ROLL_IMAGE_PATH = "download" + File.separator + "roll_image";
-	/**
-	 * 图片全目录
-	 */
-	public static final String UPLOAD_ROLL_IMAGE_PATH = PathKit.getWebRootPath() + File.separator + ROLL_IMAGE_PATH;
-	
-	/**
-	 * 文件目录
-	 */
-	public static final String FILE_PATH = "download" + File.separator + "file_url";
-	/**
-	 * 文件全目录
-	 */
-	public static final String UPLOAD_FILE_PATH = PathKit.getWebRootPath() + File.separator + FILE_PATH;
 	
 	/**
 	 * 重命名

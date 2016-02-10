@@ -1,0 +1,60 @@
+<style>
+.q-taglist .q-tagitem {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+}
+
+.q-taglist .a-tagitem-active {
+    color: #fff;
+    background-color: #D8D8D8;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px
+}
+</style>
+
+<% var albums = tempImage.albums(); %>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="text-left" style="margin-top: 15px;margin-left: 10px;">
+					<%  
+						if(albums != null && albums.~size > 0) {
+					%>
+						<ul class="q-taglist clearfix">
+							<li title="标签"><span class="q-icon"></span></li>
+							<li class="q-tagitem">
+							<a class="a-tagitem" href="home.html" >全部</a>
+							</li>
+						<%
+							for(item in albums){ 
+						%>
+							<li class="q-tagitem ${album_selected!0==item.id?'a-tagitem-active':''}">
+							<a class="a-tagitem" href="album/${tempImage.randomAlbumId()}${item.id}.html" >${item.name}</a>
+							</li>
+						<% 
+							}
+						%>
+						</ul>
+					<%
+					} 
+					%>
+					</div>
+					
+					<div class="text-right">
+					</div>
+</nav>
+
+<div class="container">
+	<!-- 固定导航 -->
+	<div class="row" style="height:60px;">
+	  <div class="col-md-12">
+			&nbsp;
+	  </div>
+	</div>
+</div>
+
+
+
+	

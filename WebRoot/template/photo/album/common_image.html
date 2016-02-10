@@ -1,0 +1,68 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+	var imageWidth = parseInt(image.width);
+	var imageHeight = parseInt(image.height);
+	if(imageWidth > 600){
+		imageHeight = imageHeight * 600 / imageWidth;
+		imageWidth = 600;
+	}
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-6">
+	 	<a href="${flyfox.getImage(image)}" target="_blank">
+		         <img alt="${image.name}" src="${flyfox.getImage(image)}" data-holder-rendered="true" 
+		         style="height: ${imageHeight}px; width: ${imageWidth}px; margin:5px; display: block;">
+		</a>
+	
+	</div>
+	
+	<div class="col-md-4">
+		<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+			<tr>
+				<td>相册名称</td>
+				<td>${image.album_name}</td>
+			</tr>
+			<tr>
+				<td>图片名称</td>
+				<td>${image.name}</td>
+			</tr>
+			<tr>
+				<td>链接地址</td>
+				<td>
+				<input type="text" class="form-control" value="${image.linkurl}">
+				</td>
+			</tr>
+			<tr>
+				<td>发布时间</td>
+				<td>${image.publish_time}</td>
+			</tr>
+			<tr>
+				<td>发布者</td>
+				<td>${image.publish_user}</td>
+			</tr>
+	</table>
+	</div>
+
+</div>
+	
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="self.opener=null;self.close();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

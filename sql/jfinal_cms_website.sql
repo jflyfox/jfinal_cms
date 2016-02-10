@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2016-01-31 04:39:51
+Date: 2016-02-11 02:55:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,7 +124,7 @@ CREATE TABLE `sys_log` (
   `create_time` varchar(64) NOT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10467 DEFAULT CHARSET=utf8 COMMENT='日志';
+) ENGINE=InnoDB AUTO_INCREMENT=10468 DEFAULT CHARSET=utf8 COMMENT='日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -147,7 +147,7 @@ CREATE TABLE `sys_menu` (
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='菜单';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -173,6 +173,10 @@ INSERT INTO `sys_menu` VALUES ('18', '0', '内容管理', 'folder_root', null, '
 INSERT INTO `sys_menu` VALUES ('19', '0', '评论管理', 'comment_root', null, '1', '1', '20', '1', '2016-01-29 04:26:57', '1');
 INSERT INTO `sys_menu` VALUES ('20', '0', '其他管理', 'other_root', null, '1', '1', '30', '1', '2016-01-29 04:29:39', '1');
 INSERT INTO `sys_menu` VALUES ('21', '0', '首页', 'home', 'admin/home', '1', '1', '2', '1', '2015-04-27 17:28:06', '1');
+INSERT INTO `sys_menu` VALUES ('22', '0', '素材管理', 'material_root', null, '1', '1', '16', '1', '2016-02-05 11:15:25', '1');
+INSERT INTO `sys_menu` VALUES ('23', '22', '图片管理', 'image', 'admin/image/list', '1', '1', '18', '2', '2016-02-05 11:15:45', '1');
+INSERT INTO `sys_menu` VALUES ('24', '22', '相册管理', 'imagealbum', 'admin/imagealbum/list', '1', '1', '17', '2', '2016-02-05 11:17:57', '1');
+INSERT INTO `sys_menu` VALUES ('25', '22', '我的相册', 'imageshow', 'admin/imageshow/list', '1', '1', '16', '2', '2016-02-10 01:22:01', '1');
 
 -- ----------------------------
 -- Table structure for `sys_role`
@@ -512,6 +516,79 @@ INSERT INTO `tb_friendlylink` VALUES ('9', '免责声明', 'front/about/354.html
 INSERT INTO `tb_friendlylink` VALUES ('10', '广告服务', 'front/about/355.html', '11', '1', '22', null, '2015-05-26 11:28:42', '1');
 
 -- ----------------------------
+-- Table structure for `tb_image`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_image`;
+CREATE TABLE `tb_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `album_id` int(11) DEFAULT '1' COMMENT '相册ID',
+  `album_name` varchar(200) DEFAULT '' COMMENT '相册名称',
+  `name` varchar(200) DEFAULT '' COMMENT '图片名称',
+  `linkurl` varchar(400) DEFAULT '' COMMENT '链接地址',
+  `cdnurl` varchar(400) DEFAULT '' COMMENT 'CDN地址',
+  `image_url` varchar(256) DEFAULT NULL COMMENT '图片路径',
+  `image_net_url` varchar(256) DEFAULT NULL COMMENT '网络图片路径',
+  `ext` varchar(20) DEFAULT '' COMMENT '扩展名',
+  `width` varchar(20) DEFAULT '' COMMENT '宽',
+  `height` varchar(20) DEFAULT '' COMMENT '高',
+  `status` int(11) DEFAULT '1' COMMENT '状态//radio/2,隐藏,1,显示',
+  `is_comment` int(11) DEFAULT '1' COMMENT '是否评论//radio/2,否,1,是',
+  `is_recommend` int(11) DEFAULT '2' COMMENT '是否推荐：2 否 1 是',
+  `sort` int(11) DEFAULT '1' COMMENT '排序',
+  `remark` varchar(400) DEFAULT NULL COMMENT '备注',
+  `publish_time` varchar(64) DEFAULT NULL COMMENT '发布时间',
+  `publish_user` varchar(64) DEFAULT '1' COMMENT '发布者',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新者',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片';
+
+-- ----------------------------
+-- Records of tb_image
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_image_album`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_image_album`;
+CREATE TABLE `tb_image_album` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `parent_id` int(11) DEFAULT '0' COMMENT '父ID',
+  `name` varchar(100) NOT NULL DEFAULT '' COMMENT '相册名称',
+  `remark` text COMMENT '描述',
+  `sort` int(11) DEFAULT '1' COMMENT '排序',
+  `status` int(11) DEFAULT '1' COMMENT '状态//radio/2,隐藏,1,显示',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新人',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='相册';
+
+-- ----------------------------
+-- Records of tb_image_album
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_image_tags`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_image_tags`;
+CREATE TABLE `tb_image_tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `image_id` int(11) DEFAULT NULL COMMENT '图片ID',
+  `tagname` varchar(200) DEFAULT '' COMMENT '标签内容',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='标签';
+
+-- ----------------------------
+-- Records of tb_image_tags
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `tb_pageview`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_pageview`;
@@ -522,7 +599,7 @@ CREATE TABLE `tb_pageview` (
   `create_day` varchar(64) NOT NULL COMMENT '创建时间到天',
   `create_time` varchar(64) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COMMENT='访问量统计';
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 COMMENT='访问量统计';
 
 -- ----------------------------
 -- Records of tb_pageview

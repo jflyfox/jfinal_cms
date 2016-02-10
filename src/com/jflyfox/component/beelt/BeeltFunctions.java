@@ -2,10 +2,9 @@ package com.jflyfox.component.beelt;
 
 import java.util.Date;
 
+import com.jflyfox.jfinal.base.BaseModel;
 import com.jflyfox.jfinal.template.TemplateFunctions;
-import com.jflyfox.modules.admin.article.TbArticle;
 import com.jflyfox.modules.admin.folder.FolderService;
-import com.jflyfox.modules.admin.folderrollpicture.TbFolderRollPicture;
 import com.jflyfox.system.dict.DictCache;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
@@ -51,26 +50,10 @@ public class BeeltFunctions extends TemplateFunctions {
 	 * @param article
 	 * @return
 	 */
-	public static String getArtImage(TbArticle article) {
-		String imageUrl = article.getImageNetUrl();
+	public static String getImage(BaseModel<?> article) {
+		String imageUrl = article.getStr("image_net_url");
 		if (StrUtils.isEmpty(imageUrl)) {
-			imageUrl = article.getImageUrl();
-		}
-		return imageUrl;
-	}
-	
-	/**
-	 * 获取roll图片路径
-	 * 
-	 * 2015年6月2日 下午6:36:37 flyfox 330627517@qq.com
-	 * 
-	 * @param article
-	 * @return
-	 */
-	public static String getArtImage(TbFolderRollPicture picture) {
-		String imageUrl = picture.getImageNetUrl();
-		if (StrUtils.isEmpty(imageUrl)) {
-			imageUrl = picture.getImageUrl();
+			imageUrl = article.getStr("image_url");
 		}
 		return imageUrl;
 	}

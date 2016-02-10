@@ -1,0 +1,20 @@
+<% var recommendImages = tempImage.recommendImages(1,10); %>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+	<h3 class="panel-title">推荐</h3>
+  </div>
+
+	<div class="row">
+	  <% for(item in recommendImages.list){ %>
+		<div class="col-sm-12 col-md-12">
+	        <div class="">
+	          <a href="album/img/${item.id}.html" target="_blank">
+	          <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 150px; width: 100%; display: block;">
+	        </a>
+	      </div>
+	    </div>
+	    <% } %>
+	</div>
+</div>

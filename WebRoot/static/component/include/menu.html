@@ -6,6 +6,9 @@ body { padding-top: 51px; }
 <script type="text/javascript">
 	function showMenu(id){
 		$("#"+id).addClass('active');
+		if($("#"+id).parent().is('.dropdown-menu')){
+			$("#"+id).parent().parent().addClass('active');
+		}
 	}
 	
 	/**

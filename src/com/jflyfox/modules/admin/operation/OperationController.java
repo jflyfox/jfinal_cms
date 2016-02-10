@@ -6,6 +6,7 @@ import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.admin.comment.CommentService;
 import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.front.service.FrontCacheService;
+import com.jflyfox.modules.front.service.FrontImageService;
 import com.jflyfox.system.user.SysUser;
 
 /**
@@ -49,7 +50,9 @@ public class OperationController extends BaseProjectController {
 		new CommentService().clearCache();
 		// 清除所有前台缓存
 		new FrontCacheService().clearCache();
-
+		// 清除前台图片缓存
+		new FrontImageService().clearCache();
+		
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
 	}

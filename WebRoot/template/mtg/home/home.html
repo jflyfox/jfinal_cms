@@ -93,7 +93,7 @@ var bodyContent = {
 							  <% if(strutil.isNotEmpty(item.url)) { %>
 							  <a href="${item.url}" target="_blank">
 							  <% } %>
-							   	<img src="${flyfox.getArtImage(item)}" alt="${item.title}">
+							   	<img src="${flyfox.getImage(item)}" alt="${item.title}">
 							  <% if(strutil.isNotEmpty(item.url)) { %>
 							  </a>
 							  <% } %>
@@ -220,7 +220,7 @@ var bodyContent = {
 			<div class="col-sm-6 col-md-4">
 		        <div class="thumbnail">
 		          <a href="front/article/${item.id}.html" target="_blank">
-		          <img alt="${item.title}" src="${flyfox.getArtImage(item)}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+		          <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 		          </a>
 		          <div class="caption">
 		            <a href="front/article/${item.id}.html" target="_blank">${item.title}</a>
@@ -267,7 +267,7 @@ var bodyContent = {
 			  	 <div class="col-md-6">
 					<div class="thumbnail">
 					  <a href="front/article/${item.id}.html" target="_blank">
-					  <img alt="${item.title}" src="${flyfox.getArtImage(item)}" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
+					  <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
 					  </a>
 					  <div class="caption">
 						<a href="front/article/${item.id}.html" target="_blank">${item.title}</a>
@@ -314,7 +314,7 @@ var bodyContent = {
 			  	 <div class="col-md-6">
 					<div class="thumbnail">
 					  <a href="front/article/${item.id}.html" target="_blank">
-					  <img alt="${item.title}" src="${flyfox.getArtImage(item)}" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
+					  <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
 					  </a>
 					  <div class="caption">
 						<a href="front/article/${item.id}.html" target="_blank">${item.title}</a>

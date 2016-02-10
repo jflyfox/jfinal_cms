@@ -13,6 +13,13 @@ import com.jflyfox.modules.admin.tags.TbTags;
 import com.jflyfox.modules.front.Home;
 import com.jflyfox.util.NumberUtils;
 
+/**
+ * 旧版首页~
+ * 
+ * 2016年2月11日 上午2:16:29
+ * flyfox 330627517@qq.com
+ */
+@Deprecated
 public class FrontService extends BaseService {
 
 	public void menu(BaseProjectController controller) {

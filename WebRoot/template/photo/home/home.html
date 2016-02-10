@@ -1,0 +1,67 @@
+<% var images = tempImage.images(paginator.pageNo,paginator.pageSize); %>
+
+<% 
+	var headContent = {
+%>
+	<% include("/template/photo/includes/header.html"){} %>
+<script type="text/javascript">
+<!--
+	$(function(){
+		
+	});
+//-->
+</script>
+
+<%
+};
+%>
+
+<%
+var bodyContent = {
+%>
+<%  include("/template/photo/includes/header_menu.html"){} %>	
+
+
+<div class="container">
+	
+	<div class="row">
+	 	
+		<div class="col-md-10">
+		 <div class="row">
+		 <% for(item in images.list){ %>
+		<div class="col-sm-4 col-md-3">
+		       <div class="thumbnail">
+		         <a href="album/img/${item.id}.html" target="_blank">
+		         <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+		         </a>
+		         <div class="caption">
+		           <a href="album/img/${item.id}.html" target="_blank">${item.name}</a>
+		         </div>
+		       </div>
+		     </div>
+		 <% } %>
+		 </div>
+		 <%include("/template/photo/includes/paginator.html",{page:images}){} %>
+		
+		</div>
+	
+	  	<div class="col-md-2">	
+		
+		<!-- 推荐图片 -->
+	  	<%  include("/template/photo/includes/recommend.html"){} %>
+	  	
+		<!-- 友情链接 -->
+	  	<%  include("/template/photo/includes/friendly.html"){} %>
+	  	
+		</div>
+	</div>
+
+</div>
+<%  include("/template/photo/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
