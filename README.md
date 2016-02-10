@@ -11,11 +11,14 @@
 > 4. 如需要oauth2的，设置src/conf/oauth.properties
 > 5. 通过config.properties的ATTR.PATH_PC=/template/mtg配置可以切换模板，记得数据库数据对应哦。
 > 6. 如果是/template/website模板，请运行jfinal_cms_website.sql脚本
+> 6. 如果是/template/photo模板，请运行jfinal_cms_photo.sql脚本
 
 #### 网站地址：[http://www.jflyfox.com/mtg](http://www.jflyfox.com/mtg) ####
 ![网站](http://static.oschina.net/uploads/img/201601/21022316_Nk5M.gif "jfinal cms")
 #### 网站地址模板2：[http://www.jflyfox.com/website](http://www.jflyfox.com/website) ####
 ![官网](http://static.oschina.net/uploads/img/201601/21022316_XkxY.gif "jfinal cms")
+#### 相册管理模板：[http://www.jflyfox.com/photo](http://www.jflyfox.com/photo) ####
+![官网](http://i4.tietuku.com/808b7e744bd4857a.gif "jfinal cms")
 #### 后台页面主题： ####
 ![后台管理](http://i4.tietuku.com/3fd03e19f8c4e33b.gif "jfinal cms")
 
