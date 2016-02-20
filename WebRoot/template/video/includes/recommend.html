@@ -1,0 +1,28 @@
+<% var recommendVideos = tempVideo.recommendVideos(1,10); %>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+	<h3 class="panel-title">推荐</h3>
+  </div>
+
+	<div class="row">
+	  <% for(item in recommendVideos.list){ %>
+		<div class="col-sm-12 col-md-12">
+	        <div class="">
+        		<% if(!strutil.isEmpty(item.thumbnail)){ %>
+	         	<a href="album/video/img/${item.id}.html" target="_blank">
+						<img src="${item.thumbnail}" data-holder-rendered="true" style="height: 150px; width: 100%; display: block;">
+	         			<span aria-hidden="true"></span>
+					</a>
+				<% } else { %>
+					<a href="album/video/img/${item.id}.html" target="_blank">
+						<img src="static/images/video/no_image.jpg" data-holder-rendered="true" style="height: 150px; width: 100%; display: block;">
+						<span aria-hidden="true"></span>
+					</a>
+				<% } %>
+	      </div>
+	    </div>
+	    <% } %>
+	</div>
+</div>

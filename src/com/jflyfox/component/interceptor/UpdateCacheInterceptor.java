@@ -6,6 +6,7 @@ import com.jflyfox.modules.admin.comment.CommentService;
 import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.front.service.FrontCacheService;
 import com.jflyfox.modules.front.service.FrontImageService;
+import com.jflyfox.modules.front.service.FrontVideoService;
 import com.jflyfox.util.Config;
 
 /**
@@ -35,6 +36,8 @@ public class UpdateCacheInterceptor implements Interceptor {
 			new FrontCacheService().clearCache();
 			// 清除前台图片缓存
 			new FrontImageService().clearCache();
+			// 清除前台视频缓存
+			new FrontVideoService().clearCache();
 
 			lastUpdateTime = now;
 		}

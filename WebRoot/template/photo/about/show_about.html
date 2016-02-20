@@ -1,0 +1,68 @@
+<% var headContent = { %> <%
+include("/template/image/includes/header.html"){} %>
+
+<script type="text/javascript" src="template/image/article/show_article.js"></script>
+<script>
+$(function(){
+	// 保证菜单宽度不变
+	$('#affix_menu').width($('#affix_menu').width());
+	$('#affix_menu').affix({
+	  offset: {
+	    top: 200
+	  }
+	});
+});
+
+</script>
+<% }; var bodyContent = { %> <%
+include("/template/image/includes/header_menu.html"){} %>
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="panel panel-default">
+				<div class="panel-body" style="padding: 0px;">
+					<ol class="breadcrumb" style="margin: 0px;">
+						<li><a href="home">首页</a></li>
+						<li class="active"><a href="front/about">关于我们</a></li>
+					</ol>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="row">
+	
+		<div class="col-md-4">
+			<ul class="list-group" id="affix_menu">
+				<% for(item in pages.list) { %>
+				<li class="list-group-item"><a href="front/about/${item.id}.html">${item.title}</a></li>
+				<% } %>
+			</ul>
+		</div>
+		
+		<!--  内容 -->
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">${article.title}</h3>
+				</div>
+				<div class="panel-body" style="padding: 0px;">
+					<div class="content" style="padding: 20px;">
+							${article.content}
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<% include("/template/image/includes/footer.html"){} %> <a id="scrollTop"
+		href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+
+	<%}; %> <%
+	layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){
+	%> <%} %>

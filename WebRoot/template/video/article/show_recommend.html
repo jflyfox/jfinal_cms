@@ -1,0 +1,144 @@
+<% 
+	var headContent = {
+%>
+	<% include("/template/video/includes/header.html"){} %>
+	
+	<script type="text/javascript" src="template/video/article/show_article.js"></script>
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/video/includes/header_menu.html"){} %>	
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-12">	
+	
+		<div class="panel panel-default">
+			 <div class="panel-body" style="padding:0px;">
+			<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="home">首页</a></li>
+			  <li class="active"><a href="front/article/recommend">推荐文章</a></li>
+			</ol>
+			</div>
+		</div>
+	
+		</div>
+	</div>
+
+	<div class="row">
+	<!-- 文章 -->
+	<div class="col-md-8">	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">推荐文章</h3>
+		  </div>
+		 	 <ul class="list-group">
+		 	 	<% for(item in page.list){ %>
+		 	 	<li class="list-group-item">
+					<div class="row">
+					  <div class="col-md-2">
+					  	<div class="thumbnail">
+					  	  <% if(strutil.isEmpty(item.image_url) && strutil.isEmpty(item.image_net_url)) { %>
+						  <img src="static/front/images/news.jpg" alt="${item.title}" height="85" 
+						  	 style="height: 85px; width: 100%; display: block;" >
+					  	  <% } else { %>	
+					  	  <img src="${flyfox.getImage(item)}"  alt="${item.title}" height="85"
+					  	  	data-holder-rendered="true" style="height: 85px; width: 100%; display: block;">
+						  <% } %>
+						</div>
+					  </div>
+					  <div class="col-md-10">
+							<h4>
+							<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+							<% if (strutil.length(item.title) > 18) { %>
+								${strutil.subStringTo(item.title, 0, 18)}...
+							<% 	} else { %>
+								${item.title}
+							<%  } %>
+							</a>
+							<% if(item.sort < 10) { %>
+							<span class="label label-primary">置顶</span>
+							<% } %>
+							<% if(item.is_recommend == 1) { %>
+							<span class="label  label-success">推荐</span>
+							<% } %> 
+								<div class="pull-right" style="font-size:12px;">
+								<% if(item.is_comment==1){ %>
+								<a href="front/article/${item.id}.html#article_comment"  target="_blank"><span>评论(${temp.countComment(item.id)})</span></a>
+								&nbsp;&nbsp;
+								<% } %>
+								<span>浏览量(${temp.countView(item.id)})</span>
+								</div>
+							</h4>
+							
+							<% var article_content = flyfox.showHTML(item.content!'',100,'  ......'); %>
+							<p>
+								&nbsp;&nbsp;&nbsp;&nbsp;${article_content!'' }
+							</p>
+							
+							<footer>
+								<div class="pull-left" >
+									<small>发布时间：${item.publish_time }</small>
+								</div>
+								<div class="pull-right" >
+									<a href="front/article/${item.id}.html" target="_blank"><small>查看全部</small></a>
+								</div>
+							</footer>
+					  </div>
+					 </div>
+				</li>
+				<% } %>
+				<li class="list-group-item">
+					<%include("/template/video/includes/paginator.html"){} %>
+				</li>
+			  </ul>
+		</div>
+	</div>
+	
+	<!-- 信息列表 -->
+	<div class="col-md-4">	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">其他标签<a class="more" href="front/tags/all">更多</a></h3>
+		  </div>
+		  <div class="panel-body">
+			<%  
+					if(taglist != null && taglist.~size > 0) {
+			%>
+				<ul class="q-taglist clearfix">
+					<li title="标签"><span class="q-icon"></span></li>
+				<%
+					for(tagitem in taglist){ 
+				%>
+					<li class="q-tagitem">
+					<a class="a-tagitem" href="front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+					</li>
+				<% 
+					}
+				%>
+				</ul>
+			<%
+			} 
+			%>
+		 </div>
+		</div>
+		
+		<!-- 友情链接 -->
+		<%  include("/template/video/includes/friendly.html"){} %>
+	</div>
+	</div>
+
+</div>
+	
+<%  include("/template/video/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

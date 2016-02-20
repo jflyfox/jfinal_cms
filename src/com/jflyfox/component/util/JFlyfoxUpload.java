@@ -53,6 +53,15 @@ public class JFlyfoxUpload {
 	 */
 	public static final String UPLOAD_IMAGE_PATH = PathKit.getWebRootPath() + File.separator + IMAGE_PATH;
 	
+	/**
+	 * 视频目录
+	 */
+	public static final String VIDEO_PATH = "download" + File.separator + "video";
+	
+	/**
+	 * 视频全目录
+	 */
+	public static final String UPLOAD_VIDEO_PATH = PathKit.getWebRootPath() + File.separator + VIDEO_PATH;
 	
 	/**
 	 * 重命名

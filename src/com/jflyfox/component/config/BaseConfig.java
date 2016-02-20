@@ -16,6 +16,7 @@ import com.jflyfox.jfinal.component.handler.HtmlHandler;
 import com.jflyfox.jfinal.config.JflyfoxConfig;
 import com.jflyfox.modules.front.template.TemplateImageService;
 import com.jflyfox.modules.front.template.TemplateService;
+import com.jflyfox.modules.front.template.TemplateVideoService;
 import com.jflyfox.system.user.UserInterceptor;
 
 /**
@@ -32,6 +33,7 @@ public class BaseConfig extends JflyfoxConfig {
 		groupTemplate.registerFunctionPackage("flyfox", BeeltFunctions.class);
 		groupTemplate.registerFunctionPackage("temp", TemplateService.class);
 		groupTemplate.registerFunctionPackage("tempImage", TemplateImageService.class);
+		groupTemplate.registerFunctionPackage("tempVideo", TemplateVideoService.class);
 	};
 
 	@Override

@@ -7,6 +7,7 @@ import com.jflyfox.modules.admin.comment.CommentService;
 import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.front.service.FrontCacheService;
 import com.jflyfox.modules.front.service.FrontImageService;
+import com.jflyfox.modules.front.service.FrontVideoService;
 import com.jflyfox.system.user.SysUser;
 
 /**
@@ -52,6 +53,8 @@ public class OperationController extends BaseProjectController {
 		new FrontCacheService().clearCache();
 		// 清除前台图片缓存
 		new FrontImageService().clearCache();
+		// 清除前台视频缓存
+		new FrontVideoService().clearCache();
 		
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());

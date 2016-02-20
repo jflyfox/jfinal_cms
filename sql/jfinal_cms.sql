@@ -147,7 +147,7 @@ CREATE TABLE `sys_menu` (
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='菜单';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -177,6 +177,8 @@ INSERT INTO `sys_menu` VALUES ('22', '0', '素材管理', 'material_root', null,
 INSERT INTO `sys_menu` VALUES ('23', '22', '图片管理', 'image', 'admin/image/list', '1', '1', '18', '2', '2016-02-05 11:15:45', '1');
 INSERT INTO `sys_menu` VALUES ('24', '22', '相册管理', 'imagealbum', 'admin/imagealbum/list', '1', '1', '17', '2', '2016-02-05 11:17:57', '1');
 INSERT INTO `sys_menu` VALUES ('25', '22', '我的相册', 'imageshow', 'admin/imageshow/list', '1', '1', '16', '2', '2016-02-10 01:22:01', '1');
+INSERT INTO `sys_menu` VALUES ('26', '22', '视频专辑管理', 'videoalbum', 'admin/videoalbum/list', '1', '1', '19', '2', '2016-02-16 16:25:08', '1');
+INSERT INTO `sys_menu` VALUES ('27', '22', '视频管理', 'video', 'admin/video/list', '1', '1', '20', '2', '2016-02-16 16:25:37', '1');
 
 -- ----------------------------
 -- Table structure for `sys_role`
@@ -644,14 +646,12 @@ CREATE TABLE `tb_friendlylink` (
 -- ----------------------------
 INSERT INTO `tb_friendlylink` VALUES ('1', '意见反馈', 'advice', '16', '1', '22', null, '2015-04-24 15:03:02', '1');
 INSERT INTO `tb_friendlylink` VALUES ('2', '捐赠我们', 'front/about/351.html', '13', '1', '22', null, '2015-04-24 15:27:36', '1');
-INSERT INTO `tb_friendlylink` VALUES ('3', '关于我们', 'front/about/352.html', '2', '1', '22', null, '2015-04-24 15:28:56', '1');
 INSERT INTO `tb_friendlylink` VALUES ('4', '给我写信', 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=allcU1tTW15dWiobG0QJBQc', '15', '1', '22', null, '2015-04-24 15:29:12', '1');
 INSERT INTO `tb_friendlylink` VALUES ('5', '大峪中学', 'http://www.dyzx-bj.com/', '112', '1', '21', null, '2015-05-06 16:13:40', '1');
 INSERT INTO `tb_friendlylink` VALUES ('6', 'Jflyfox博客', 'http://www.jflyfox.com/', '114', '1', '21', null, '2015-05-06 16:14:37', '1');
 INSERT INTO `tb_friendlylink` VALUES ('7', '门头沟介绍', 'http://baike.baidu.com/view/193726.htm?fromtitle=%E9%97%A8%E5%A4%B4%E6%B2%9F&fromid=1055081&type=syn', '111', '1', '21', null, '2015-05-06 16:15:03', '1');
 INSERT INTO `tb_friendlylink` VALUES ('8', '联系我们', 'front/about/353.html', '3', '1', '22', null, '2015-05-26 11:26:57', '1');
 INSERT INTO `tb_friendlylink` VALUES ('9', '免责声明', 'front/about/354.html', '20', '1', '22', null, '2015-05-26 11:27:18', '1');
-INSERT INTO `tb_friendlylink` VALUES ('10', '广告服务', 'front/about/355.html', '11', '1', '22', null, '2015-05-26 11:28:42', '1');
 
 -- ----------------------------
 -- Table structure for `tb_image`
@@ -799,3 +799,67 @@ INSERT INTO `tb_tags` VALUES ('168', '319', '新闻', '2016-01-17 00:23:46', '1'
 INSERT INTO `tb_tags` VALUES ('169', '318', '新闻', '2016-01-17 00:23:56', '1');
 INSERT INTO `tb_tags` VALUES ('173', '105', '新闻', '2016-01-17 00:24:14', '1');
 INSERT INTO `tb_tags` VALUES ('174', '111', '新闻', '2016-01-17 00:24:20', '1');
+
+
+-- ----------------------------
+-- Table structure for `tb_video`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_video`;
+CREATE TABLE `tb_video` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `album_id` int(11) DEFAULT '1' COMMENT '专辑ID',
+  `album_name` varchar(200) DEFAULT '' COMMENT '专辑名称',
+  `name` varchar(200) DEFAULT '' COMMENT '视频名称',
+  `video_url` varchar(256) DEFAULT NULL COMMENT '点播视频路径',
+  `video_net_url` varchar(256) DEFAULT NULL COMMENT '网络视频路径',
+  `thumbnail` varchar(256) DEFAULT '' COMMENT '缩略图',
+  `ext` varchar(20) DEFAULT '' COMMENT '扩展名',
+  `resolution` varchar(20) DEFAULT '' COMMENT '分辨率',
+  `status` int(11) DEFAULT '1' COMMENT '状态//ra dio/2,隐藏,1,显示',
+  `is_comment` int(11) DEFAULT '1' COMMENT '是否评论//radio/2,否,1,是',
+  `is_recommend` int(11) DEFAULT '2' COMMENT '是否推荐：2 否 1 是',
+  `sort` int(11) DEFAULT '1' COMMENT '排序',
+  `remark` varchar(400) DEFAULT NULL COMMENT '备注',
+  `publish_time` varchar(64) DEFAULT NULL COMMENT '发布时间',
+  `publish_user` varchar(64) DEFAULT '1' COMMENT '发布者',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新者',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='视频';
+
+-- ----------------------------
+-- Table structure for `tb_video_album`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_video_album`;
+CREATE TABLE `tb_video_album` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `parent_id` int(11) DEFAULT '0' COMMENT '父ID',
+  `name` varchar(100) NOT NULL DEFAULT '' COMMENT '专辑名称',
+  `remark` text COMMENT '描述',
+  `sort` int(11) DEFAULT '1' COMMENT '排序',
+  `status` int(11) DEFAULT '1' COMMENT '状态//radio/2,隐藏,1,显示',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新人',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='专辑';
+
+-- ----------------------------
+-- Table structure for `tb_video_tags`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_video_tags`;
+CREATE TABLE `tb_video_tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `video_id` int(11) DEFAULT NULL COMMENT '视频ID',
+  `tagname` varchar(200) DEFAULT '' COMMENT '标签内容',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='视频标签';
+
+-- ----------------------------
+-- Records of tb_video_tags
+-- ----------------------------

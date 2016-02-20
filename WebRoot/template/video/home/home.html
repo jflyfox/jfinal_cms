@@ -1,0 +1,76 @@
+<% var videos = tempVideo.videos(paginator.pageNo,paginator.pageSize); %>
+
+<% 
+	var headContent = {
+%>
+	<% include("/template/video/includes/header.html"){} %>
+<script type="text/javascript">
+<!--
+	$(function(){
+		
+	});
+//-->
+</script>
+
+<%
+};
+%>
+
+<%
+var bodyContent = {
+%>
+<%  include("/template/video/includes/header_menu.html"){} %>	
+
+<div class="container">
+	
+	<div class="row">
+	 	
+		<div class="col-md-10">
+		 <div class="row">
+		 <% for(item in videos.list){ %>
+		<div class="col-sm-4 col-md-3">
+		       <div class="thumbnail">
+		       	<div>
+		         	<% if(!strutil.isEmpty(item.thumbnail)){ %>
+		         	<a href="album/video/img/${item.id}.html" target="_blank">
+							<img src="${item.thumbnail}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+		         			<span class="shuiyin_play" aria-hidden="true"></span>
+						</a>
+					<% } else { %>
+						<a href="album/video/img/${item.id}.html" target="_blank">
+							<img src="static/images/video/no_image.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+							<span class="shuiyin_play" aria-hidden="true"></span>
+						</a>
+					<% } %>
+				</div>
+		         <div class="caption">
+		           <a href="album/video/img/${item.id}.html" target="_blank">${item.name}</a>
+		         </div>
+		       </div>
+		     </div>
+		 <% } %>
+		 </div>
+		 <%include("/template/video/includes/paginator.html",{page:videos}){} %>
+		
+		</div>
+	
+	  	<div class="col-md-2">	
+		
+		<!-- 推荐图片 -->
+	  	<%  include("/template/video/includes/recommend.html"){} %>
+	  	
+		<!-- 友情链接 -->
+	  	<%  include("/template/video/includes/friendly.html"){} %>
+	  	
+		</div>
+	</div>
+
+</div>
+<%  include("/template/video/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

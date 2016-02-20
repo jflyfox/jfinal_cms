@@ -6,19 +6,19 @@ import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
-import com.jflyfox.modules.admin.image.model.TbImage;
-import com.jflyfox.modules.admin.image.model.TbImageAlbum;
+import com.jflyfox.modules.admin.video.model.TbVideo;
+import com.jflyfox.modules.admin.video.model.TbVideoAlbum;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
-import com.jflyfox.modules.front.service.FrontImageService;
+import com.jflyfox.modules.front.service.FrontVideoService;
 import com.jflyfox.util.NumberUtils;
 
-@ControllerBind(controllerKey = "/album")
-public class FrontAlbumController extends BaseProjectController {
+@ControllerBind(controllerKey = "/album/video")
+public class FrontAlbumVideoController extends BaseProjectController {
 
 	public static final String path = "/album/";
 
 	/**
-	 * 图片专辑
+	 * 视频专辑
 	 * 
 	 * 2016年2月10日 上午3:43:39 flyfox 330627517@qq.com
 	 */
@@ -30,7 +30,7 @@ public class FrontAlbumController extends BaseProjectController {
 		// 活动目录
 		setAttr("album_selected", albumId);
 
-		TbImageAlbum album = new FrontImageService().getAlbum(albumId);
+		TbVideoAlbum album = new FrontVideoService().getAlbum(albumId);
 		setAttr("album", album);
 
 		setAttr("paginator", getPaginator());
@@ -43,30 +43,30 @@ public class FrontAlbumController extends BaseProjectController {
 	}
 
 	/**
-	 * 图片
+	 * 视频
 	 * 
 	 * 2016年2月10日 上午3:43:47 flyfox 330627517@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void img() {
-		int imageId = getParaToInt();
+		int videoId = getParaToInt();
 		// 活动目录
-		setAttr("imageId", imageId);
+		setAttr("videoId", videoId);
 
-		TbImage image = new FrontImageService().getImage(imageId);
-		setAttr("image", image);
+		TbVideo video = new FrontVideoService().getVideo(videoId);
+		setAttr("video", video);
 
 		// 设置标签
 		String tags = Db.findFirst("select group_concat(tagname) tags " //
-				+ " from tb_image_tags where image_id = ? order by id", image.getId()).getStr("tags");
+				+ " from tb_video_tags where video_id = ? order by id", video.getId()).getStr("tags");
 		setAttr("tags", tags);
 				
 		setAttr("paginator", getPaginator());
 
 		// seo：title优化
-		String imageName = (image == null ? "" : image.getName() + " - ");
-		setAttr(JFlyFoxUtils.TITLE_ATTR, imageName + JFlyFoxCache.getHeadTitle());
+		String videoName = (video == null ? "" : video.getName() + " - ");
+		setAttr(JFlyFoxUtils.TITLE_ATTR, videoName + JFlyFoxCache.getHeadTitle());
 
-		renderAuto(path + "common_image.html");
+		renderAuto(path + "common_video.html");
 	}
 }

@@ -59,6 +59,23 @@ public class BeeltFunctions extends TemplateFunctions {
 	}
 
 	/**
+	 * 获取视频路径
+	 * 
+	 * 2015年6月2日 下午6:36:37 flyfox 330627517@qq.com
+	 * 
+	 * @param video
+	 * @return
+	 */
+	public static String getVideo(BaseModel<?> video) {
+		String videoUrl = video.getStr("video_net_url");
+		if (StrUtils.isEmpty(videoUrl)) {
+			videoUrl = video.getStr("video_url");
+		}
+		videoUrl = videoUrl.replaceAll("\\\\", "\\/");
+		return videoUrl;
+	}
+	
+	/**
 	 * 获取菜单，数字和字符串转换
 	 * 
 	 * 2015年5月26日 上午8:57:48 flyfox 330627517@qq.com

@@ -1,0 +1,70 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-6">
+	 	
+		<div style="width: 640px; height: 352px; margin:5px; padding: 10px; border:5px solid #999;">
+			<% include("/static/component/include/sewise-player.html"){} %>
+			
+	        <script type="text/javascript">
+	            SewisePlayer.setup({
+	                server: "vod",
+	                type: "${video.ext}",
+	                // videourl: "http://jackzhang1204.github.io/materials/mov_bbb.mp4",
+	                videourl:"${flyfox.getVideo(video)}",
+	                skin: "vodWhite",
+	                title: "${video.name}",
+	                lang: 'zh_CN'
+	            });
+	        </script>
+		
+		</div>
+
+	</div>
+	
+	<div class="col-md-4">
+		<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+			<tr>
+				<td>专辑名称</td>
+				<td>${video.album_name}</td>
+			</tr>
+			<tr>
+				<td>视频名称</td>
+				<td>${video.name}</td>
+			</tr>
+			<tr>
+				<td>发布时间</td>
+				<td>${video.publish_time}</td>
+			</tr>
+			<tr>
+				<td>发布者</td>
+				<td>${video.publish_user}</td>
+			</tr>
+	</table>
+	</div>
+
+</div>
+	
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="self.opener=null;self.close();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
