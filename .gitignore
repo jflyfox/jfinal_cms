@@ -7,3 +7,6 @@
 /logs
 /autopath
 /target
+/.settings
+/.classpath
+/.project
