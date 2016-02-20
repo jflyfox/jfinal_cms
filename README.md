@@ -21,7 +21,7 @@
 
 #### 网站地址：[http://www.jflyfox.com/mtg](http://www.jflyfox.com/mtg) ####
 ![网站](http://static.oschina.net/uploads/img/201601/21022316_Nk5M.gif "jfinal cms")
-#### 网站地址模板2：[http://www.jflyfox.com/website](http://www.jflyfox.com/website) ####
+#### 网站官网模板：[http://www.jflyfox.com/website](http://www.jflyfox.com/website) ####
 ![官网](http://static.oschina.net/uploads/img/201601/21022316_XkxY.gif "jfinal cms")
 #### 相册管理模板：[http://www.jflyfox.com/photo](http://www.jflyfox.com/photo) ####
 ![官网](http://i11.tietuku.com/2428dbfd83dee15b.gif "jfinal cms")
