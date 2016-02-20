@@ -431,6 +431,7 @@ CREATE TABLE `tb_folder` (
 -- ----------------------------
 INSERT INTO `tb_folder` VALUES ('1', '0', '首页', 'home', '', 'jfinal cms', '1', '1', '1', null, null, null, '2015-01-28 16:54:03', '0', '2015-01-30 13:24:58', '1');
 INSERT INTO `tb_folder` VALUES ('6', '0', '后台管理', null, '', null, '90', '1', '3', 'admin', null, null, '2015-05-24 15:47:32', '0', '2015-01-30 13:24:58', '1');
+INSERT INTO `tb_folder` VALUES ('90', '0', '关于我们', 'about', '', null, '81', '1', '1', null, null, null, '2015-05-26 16:40:46', '0', '2015-05-26 10:36:30', '1');
 INSERT INTO `tb_folder` VALUES ('100', '0', '博文目录', '', '', null, '99', '2', '1', null, null, null, '2015-06-17 22:29:44', '0', '2015-06-17 22:29:44', '2');
 
 -- ----------------------------

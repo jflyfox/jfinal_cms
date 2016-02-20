@@ -3,16 +3,12 @@
     <wb-module deploy-name="jflyfox_mtgxxw">
         <wb-resource deploy-path="/WEB-INF/web.xml" source-path="/WebRoot/WEB-INF/web.xml"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-        <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <dependent-module archiveName="jflyfox_jfinal-4.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jflyfox_jfinal/jflyfox_jfinal">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="jflyfox_base-3.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jflyfox_base/jflyfox_base">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <property name="java-output-path" value="/money/WebRoot/WEB-INF/classes"/>
-        <property name="component.exclusion.patterns" value="data\**"/>
         <property name="context-root" value="jfinal_cms"/>
+        <property name="component.exclusion.patterns"/>
     </wb-module>
 </project-modules>
