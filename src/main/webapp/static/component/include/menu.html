@@ -10,6 +10,13 @@ body { padding-top: 51px; }
 			$("#"+id).parent().parent().addClass('active');
 		}
 	}
+    
+    $(function(){
+		$(window).resize(function(){
+			$('body').css('padding-top',$('nav.navbar.navbar-fixed-top').height()+'px');
+		});
+		$('body').css('padding-top',$('nav.navbar.navbar-fixed-top').height()+'px');
+	});
 	
 	/**
 	 * 设置主题
