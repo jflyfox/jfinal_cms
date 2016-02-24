@@ -8,16 +8,19 @@
 #### 管理地址：http://${ip:port}/${project_name}/admin  ####
 #### 测试账号: admin/admin123 或 test/123456  ####
 
-# 平台部署说明 #
+# 平台部署和配置说明 #
 ------------------------
-> 1. 数据库配置文件：src/conf/db.properties
-> 2. 安装mysql数据库，创建用户和数据库。
-> 3. 运行jfinal_cms.sql文件。
-> 4. 如需要oauth2的，设置src/conf/oauth.properties
-> 5. 通过config.properties的ATTR.PATH_PC=/template/mtg配置可以切换模板，记得数据库数据对应哦。
-> 6. 如果是/template/website模板，请运行jfinal_cms_website.sql脚本
-> 6. 如果是/template/photo模板，请运行jfinal_cms_photo.sql脚本
-> 6. 如果是/template/video模板，请运行jfinal_cms_video.sql脚本
+> 1. 下载项目代码，安装jdk、maven、mysql。
+> 2. 在项目目录下运行mvn install，提示BUILD SUCCESS即可。
+> 3. 创建mysql用户和数据库，运行/jfinal_cms/sql下对应jfinal_cms.sql。
+> 4. 数据库配置文件：/jfinal_cms/src/main/resources/conf/db.properties
+> 5. 如需要oauth2的，设置src/conf/oauth.properties
+> 6. 通过config.properties的ATTR.PATH_PC=/template/mtg配置可以切换模板，记得数据库数据对应哦。
+>> 如果是/template/mtg模板，请运行jfinal_cms.sql脚本
+>> 如果是/template/website模板，请运行jfinal_cms_website.sql脚本
+>> 如果是/template/photo模板，请运行jfinal_cms_photo.sql脚本
+>> 如果是/template/video模板，请运行jfinal_cms_video.sql脚本
+> 7.运行：mvn tomcat:run
 
 #### 网站地址：[http://www.jflyfox.com/mtg](http://www.jflyfox.com/mtg) ####
 ![网站](http://static.oschina.net/uploads/img/201601/21022316_Nk5M.gif "jfinal cms")
