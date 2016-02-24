@@ -49,6 +49,10 @@
 					<groupId>javax.servlet.jsp</groupId>
 					<artifactId>jsp-api</artifactId>
 				</exclusion>
+                <exclusion>
+    				<groupId>com.jflyfox</groupId>
+					<artifactId>jflyfox_base</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
