@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>com.jflyfox</groupId>
 			<artifactId>jflyfox_base</artifactId>
-			<version>3.0</version>
+			<version>3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfinal</groupId>
