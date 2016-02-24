@@ -16,10 +16,10 @@
 > 4. 数据库配置文件：/jfinal_cms/src/main/resources/conf/db.properties
 > 5. 如需要oauth2的，设置src/conf/oauth.properties
 > 6. 通过config.properties的ATTR.PATH_PC=/template/mtg配置可以切换模板，记得数据库数据对应哦。
->> 如果是/template/mtg模板，请运行jfinal_cms.sql脚本
->> 如果是/template/website模板，请运行jfinal_cms_website.sql脚本
->> 如果是/template/photo模板，请运行jfinal_cms_photo.sql脚本
->> 如果是/template/video模板，请运行jfinal_cms_video.sql脚本
+* 如果是/template/mtg模板，请运行jfinal_cms.sql脚本
+* 如果是/template/website模板，请运行jfinal_cms_website.sql脚本
+* 如果是/template/photo模板，请运行jfinal_cms_photo.sql脚本
+* 如果是/template/video模板，请运行jfinal_cms_video.sql脚本
 > 7.运行：mvn tomcat:run
 
 #### 网站地址：[http://www.jflyfox.com/mtg](http://www.jflyfox.com/mtg) ####
