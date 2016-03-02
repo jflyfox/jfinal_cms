@@ -1,0 +1,108 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+			<tr>
+				<td>专辑名称</td>
+				<td>${model.album_name}</td>
+				<td>视频名称</td>
+				<td>${model.name}</td>
+			</tr>
+			<tr>
+				<td>点播视频路径</td>
+				<td colspan="3"><input type="text" class="form-control" value="${model.video_url}"></td>
+			</tr>
+			<tr>
+				<td>网络视频路径</td>
+				<td colspan="3"><input type="text" class="form-control" value="${model.video_net_url}"></td>
+			</tr>
+			<tr>
+				<td>缩略图</td>
+				<td colspan="3">
+					<% if(!strutil.isEmpty(model.thumbnail)){ %>
+						<a href="${model.thumbnail}" target="_blank" style="text-decoration:none;">
+							<img alt="缩略图" title="点击浏览" src="${model.thumbnail}" width="40" height="40">
+						</a>
+					<% } %>
+					${flyfox.getImage(model)}
+				</td>
+			</tr>
+			</tr>
+			<tr>
+				<td>扩展名</td>
+				<td>${model.ext}</td>
+				<td>分辨率</td>
+				<td>${model.resolution}</td>
+			</tr>
+			<tr>
+				<td>排序</td>
+				<td>${model.sort}</td>
+				<td>状态</td>
+				<td>
+				<% if(model.status==2) { %>
+				隐藏
+				<%	} %>
+				<% if(model.status==1) { %>
+				显示
+				<%	} %>
+				</td>  
+			</tr>
+			<tr>
+				<td>是否评论</td>
+				<td>
+				<% if(model.is_comment==2) { %>
+				否
+				<%	} %>
+				<% if(model.is_comment==1) { %>
+				是
+				<%	} %>
+				</td>  
+				<td>是否推荐：2 否 1 是</td>
+				<td>${model.is_recommend}</td>
+			</tr>
+			
+			<tr>
+				<td>发布时间</td>
+				<td>${model.publish_time}</td>
+				<td>发布者</td>
+				<td>${model.publish_user}</td>
+			</tr>
+			<tr>
+				<td>备注</td>
+				<td title="${model.remark}" colspan="3">
+				<% if (strutil.length(model.remark) > 25) { %>
+					${strutil.subStringTo(model.remark, 0, 25)}...
+				<% 	} else { %>
+					${model.remark}
+				<%  } %>
+			</td> 
+			<tr>
+				<td>标签</td>
+				<td title="${tags!}" colspan="3">
+				<% if (strutil.length(tags!) > 25) { %>
+					${strutil.subStringTo(tags!, 0, 25)}...
+				<% 	} else { %>
+					${tags!}
+				<%  } %>
+			</td> 
+			</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

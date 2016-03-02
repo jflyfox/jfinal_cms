@@ -1,0 +1,177 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<% include("/static/component/include/my97.html"){} %>
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			
+			// 设置相册名称
+			$('[name="model.album_name"]').val($('[name="model.album_id"] option:selected').text())
+			
+			// 标签设置
+			var tags = $('.tags_content').text().replace(/，/g, ",");
+			$('[name="tags"]').val(tags);
+			
+			id = id || '0';
+			var url = 'admin/video/save/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+</script>
+
+<style>
+.tags {
+	line-height: 22px;
+	height: 22px;
+	border-top: 1px solid rgb(210, 210, 210);
+}
+
+.tags .tags_label {
+	float: left;
+	margin-right: 20px;
+	margin-left: 5px;
+	padding: 5px 1px 1px 3px;
+}
+
+.tags .tags_content {
+	float: left;
+	width: 500px;
+	margin: 5px 5px 0 0;
+	padding: 1px;
+	border: 1px solid #ccc;
+	background: #fff;
+	vertical-align: middle;
+}
+
+.tags .tags_remark {
+	padding: 5px 1px 1px 3px;
+	color: #999999;
+	font-size: 12px;
+	z-index: 10000;
+}
+</style>
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal"
+		enctype="multipart/form-data" role="form" >
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<input class="form-control" type="hidden" name="model.album_name" value="${model.album_name }"  />
+	
+	<table class="table">
+		<%  // 列表头部%>
+				<tr>
+					<td>专辑</td>
+					<td>
+						<select name="model.album_id" class="form-control"  valid="vselect" validname="专辑">
+						<option value="-1">--请选择--</option>
+						${selectAlbum }
+						</select>
+					</td>
+					<td>视频名称</td>
+					<td>
+					<input class="form-control" type="text" name="model.name" value="${model.name }"  valid="vtext" validname="视频名称" />
+					</td>
+				</tr>
+				<tr>
+					<td>视频</td>
+					<td colspan="3">
+						<input type="text" class="form-control" name="model.video_net_url"  value="${model.video_net_url}" placeholder="网络视频url" />
+						<input type="file" accept="video/*" class="form-control" name="model.video_url" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td>缩略图</td>
+					<td colspan="3">
+					<input class="form-control" type="text" name="model.thumbnail" value="${model.thumbnail }"  />
+					</td>
+				</tr>
+				<tr>
+					<td>排序</td>
+					<td>
+					<input class="form-control" type="text" name="model.sort" value="${model.sort!'10' }"  valid='vnum' validname='排序'  />
+					</td>
+					<td>状态</td>
+					<td>
+						<label class="radio-inline">
+						  <input type="radio" name="model.status" id="" value="1"  ${model.status!=2?"checked":"" } > 显示
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="model.status" id="" value="2"  ${model.status==2?"checked":"" } > 隐藏
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td>是否评论</td>
+					<td>
+						<label class="radio-inline">
+						  <input type="radio" name="model.is_comment" id="" value="1"  ${model.is_comment!=2?"checked":"" } > 是
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="model.is_comment" id="" value="2"  ${model.is_comment==2?"checked":"" } > 否
+						</label>
+					</td>
+					<td>是否推荐</td>
+					<td>
+						<label class="radio-inline">
+						  <input type="radio" name="model.is_recommend" id="" value="1"  ${model.is_recommend==1?"checked":"" } > 是
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="model.is_recommend" id="" value="2"  ${model.is_recommend!=1?"checked":"" } > 否
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td>发布时间</td>
+					<td>
+					<input class="form-control" type="text" name="model.publish_time" 
+						value="${model.publish_time!flyfox.getNow() }"   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"  />
+					</td>
+					<td>发布者</td>
+					<td>
+						<% if(model.id!0 > 0) { %>
+							<input class="form-control" type="text" name="model.publish_user" value="${model.publish_user}"  />
+						<% } else { %>
+							<input class="form-control" type="text" name="model.publish_user" value="${session.session_user.realname!session.session_user.username }"  />
+						<% } %>
+					</td>
+				</tr>
+				<tr>
+					<td>备注</td>
+					<td colspan="3">
+					<textarea class="form-control" rows="2" cols="20" name="model.remark">${model.remark }</textarea>
+					</td>
+				</tr>
+	</table>
+					
+	<div class="tags">
+		<input name="tags" type="hidden" value="${tags!''}" />
+		<div class="tags_label">标签</div>
+		<div contentEditable="true" class="tags_content">${tags!''}</div>
+		<div class="tags_remark">请使用逗号分隔不同标签，最多5个哦</div>
+	</div>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%}
+DIRECTIVE SAFE_OUTPUT_CLOSE; 
+%>

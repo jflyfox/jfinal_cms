@@ -1,0 +1,47 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	<!-- 数据列表 -->
+	<table class="table">
+		<%  // 列表头部 %>
+			<tr>
+				<td>父专辑</td>
+				<td>${model.parentName!'根专辑'}</td>
+			</tr>
+			<tr>
+				<td>专辑名称</td>
+				<td>${model.name}</td>
+			</tr>
+			<tr>
+				<td>排序</td>
+				<td>${model.sort}</td>
+			</tr>
+			<tr>
+				<td>状态</td>
+				<td>
+				<% if(model.status==2) { %>
+				隐藏
+				<%	} %>
+				<% if(model.status==1) { %>
+				显示
+				<%	} %>
+				</td>  
+			</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

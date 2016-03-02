@@ -1,0 +1,36 @@
+﻿<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+};
+
+var bodyContent = {
+%>
+
+	<div style="width: 640px; height: 352px; margin:5px; padding: 10px; border:5px solid #999;">
+		<% include("/static/component/include/sewise-player.html"){} %>
+		
+        <script type="text/javascript">
+            SewisePlayer.setup({
+                server: "vod",
+                type: "${model.ext}",
+                // videourl: "http://jackzhang1204.github.io/materials/mov_bbb.mp4",
+                videourl:"${flyfox.getVideo(model)}",
+                skin: "vodWhite",
+                title: "${model.name}",
+                lang: 'zh_CN'
+            });
+        </script>
+	
+	</div>
+
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
