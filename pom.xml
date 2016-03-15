@@ -202,6 +202,7 @@
 				<configuration>
 					<port>80</port>
 					<path>/${project.artifactId}</path>
+                    <warSourceDirectory>${basedir}/target/${artifactId}</warSourceDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
