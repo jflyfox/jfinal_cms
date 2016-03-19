@@ -1,5 +1,6 @@
 package com.jflyfox.modules.admin.article;
 
+import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.util.DateUtils;
 import com.jflyfox.util.NumberUtils;
 
@@ -11,7 +12,11 @@ public class ArticleService {
 			String now = DateUtils.getNow(DateUtils.DEFAULT_REGEX_YYYY_MM_DD_HH_MIN_SS);
 			model.remove("id");
 			model.setFolderId(NumberUtils.parseInt(folderStr));
-			model.set("approve_status", ArticleConstant.APPROVE_STATUS_INIT);
+			if (JFlyFoxUtils.ARTICLE_APPROVE) {
+				model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE);
+			} else {
+				model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS);
+			}
 			model.set("create_id", userid);
 			model.set("create_time", now);
 			if (model.get("sort") == null)
