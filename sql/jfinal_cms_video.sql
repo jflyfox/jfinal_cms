@@ -180,6 +180,7 @@ INSERT INTO `sys_menu` VALUES ('25', '22', '我的相册', 'imageshow', 'admin/i
 INSERT INTO `sys_menu` VALUES ('26', '22', '视频专辑管理', 'videoalbum', 'admin/videoalbum/list', '1', '1', '19', '2', '2016-02-16 16:25:08', '1');
 INSERT INTO `sys_menu` VALUES ('27', '22', '视频管理', 'video', 'admin/video/list', '1', '1', '20', '2', '2016-02-16 16:25:37', '1');
 INSERT INTO `sys_menu` VALUES ('28', '0', '模板管理', 'filemanager', 'admin/filemanager/list', '1', '1', '60', '1', '2016-03-06 09:36:36', '1');
+INSERT INTO `sys_menu` VALUES ('29', '18', '文章审核', 'article_approve', 'admin/article/list_approve', '1', '1', '15', '2', '2016-03-16 00:21:12', '1');
 
 -- ----------------------------
 -- Table structure for `sys_role`
