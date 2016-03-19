@@ -155,4 +155,15 @@ public class FolderService extends BaseService {
 		}
 		return sb.toString();
 	}
+	
+	/**
+	 * 不通过索引获取所有目录
+	 * 
+	 * 2016年3月19日 下午6:04:32
+	 * flyfox 330627517@qq.com
+	 * @return
+	 */
+	public List<TbFolder> getFolders() {
+		return TbFolder.dao.findByWhere(" order by sort,id ");
+	}
 }

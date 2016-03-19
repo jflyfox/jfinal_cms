@@ -47,6 +47,8 @@ public class FolderController extends BaseProjectController {
 		// 下拉框
 		setAttr("page", page);
 		setAttr("attr", model);
+		
+		setAttr("folders", new FolderService().getFolders());
 		render(path + "list.html");
 	}
 

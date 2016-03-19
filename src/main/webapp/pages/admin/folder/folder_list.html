@@ -3,6 +3,8 @@
 	include("/pages/template/head.html"){}
 %>
 
+<% include("/static/component/include/ztree.html"){} %>  
+    
 <script type="text/javascript">
 var oper;
 jQuery(function($) {
@@ -21,8 +23,9 @@ jQuery(function($) {
 			var title = '查看目录';
 			Iframe(url, this.width, this.height, title, false, false, false, EmptyFunc);
 		},
-		add : function() {
-			var url = 'admin/folder/add';
+		add : function(id) {
+			id = id||0;
+			var url = 'admin/folder/add/'+id;
 			var title = '添加目录';
 			Iframe(url, this.width, this.height, title);
 		},
@@ -49,13 +52,116 @@ var paginator = function(page) {
 	oper.list();
 };
 
+var zTree;
+var demoIframe;
+var newCount=0;
+
+function addHoverDom(treeId, treeNode) {
+    var sObj = $("#" + treeNode.tId + "_span");
+    if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+    var  addStr = "<span class='button add' id='addBtn_" + treeNode.tId + "'></span>";
+    addStr += "<span class='button edit' id='editBtn_" + treeNode.tId + "'></span>";
+    addStr += "<span class='button remove' id='removeBtn_" + treeNode.tId
+    + "' title='add node' onfocus='this.blur();'></span>";
+    sObj.after(addStr);
+    
+    var addBtn = $("#addBtn_"+treeNode.tId);
+    if (addBtn) addBtn.bind("click", function(){
+    	oper.add(treeNode.id);
+        return false;
+    });
+    
+	var editBtn = $("#editBtn_"+treeNode.tId);
+    if (editBtn) editBtn.bind("click", function(){
+    	oper.edit(treeNode.id);
+        return false;
+    });
+    
+	var delBtn = $("#removeBtn_"+treeNode.tId);
+    if (delBtn) delBtn.bind("click", function(){
+    	oper.del(treeNode.id);
+        return false;
+    });
+    
+};
+
+function removeHoverDom(treeId, treeNode) {
+    $("#addBtn_"+treeNode.tId).unbind().remove();
+    $("#removeBtn_"+treeNode.tId).unbind().remove();
+    $("#editBtn_"+treeNode.tId).unbind().remove();
+};
+
+var setting = {
+    check: {
+        enable: false
+    },
+    view: {
+    	addHoverDom: addHoverDom,
+         removeHoverDom: removeHoverDom,
+        dblClickExpand: false,
+        showLine: true,
+        selectedMulti: false
+    },
+    data: {
+        simpleData: {
+            enable:true,
+            idKey: "id",
+            pIdKey: "pId",
+            rootPId: ""
+        }
+    },
+    callback: {
+        beforeClick: function(treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("tree");
+            if (treeNode.isParent) {
+                zTree.expandNode(treeNode);
+                return false;
+            } else {
+                // demoIframe.attr("src",treeNode.file + ".html");
+                return true;
+            }
+        }
+    }
+};
+
+var zNodes =[
+     <% for(item in folders){ %>
+     	{id:${item.id}, pId:${item.parent_id}, name:"${item.name}", open:true} ${itemLP.index==folders.~size?"":","}
+     <% } %>
+];
+
+$(document).ready(function(){
+    var t = $("#tree");
+    t = $.fn.zTree.init(t, setting, zNodes);
+    demoIframe = $("#testIframe");
+    demoIframe.bind("load", loadReady);
+    var zTree = $.fn.zTree.getZTreeObj("tree");
+   // zTree.selectNode(zTree.getNodeByParam("id", 101));
+
+});
+
+function loadReady() {
+    var bodyH = demoIframe.contents().find("body").get(0).scrollHeight,
+            htmlH = demoIframe.contents().find("html").get(0).scrollHeight,
+            maxH = Math.max(bodyH, htmlH), minH = Math.min(bodyH, htmlH),
+            h = demoIframe.height() >= maxH ? minH:maxH ;
+    if (h < 530) h = 530;
+}
 </script>
+
 
 <%
 };
 
 var bodyContent = {
 %>
+
+<div class="row" style="margin-right: 0px; margin-left: 0px; ">
+<div class="col-md-2">
+<ul id="tree" class="ztree" style="overflow:auto;"></ul>
+</div>
+<div class="col-md-10">
+
 	<form name="form1" action="" method="post"  class="form-inline" role="form">
 		<!-- 菜单 -->
 		<% include("/static/component/include/menu.html"){} %>
@@ -146,6 +252,9 @@ var bodyContent = {
 		</table>
 		<%include("/static/component/include/paginator.html"){} %>
 	</form>
+	
+</div>
+</div>
 <%}; %>
 
 
