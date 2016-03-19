@@ -30,17 +30,14 @@ var bodyContent = {
 	<table class="table">
 		<% // 列表头部 %>
 			<tr>
-				<td>栏目</td>
-				<td>
+				<td width="15%">栏目</td>
+				<td width="33%">
 					<select name="model.folder_id" class="form-control" valid="vselect" validname="栏目">
-					<option value="-1">--请选择--</option>
 					${selectFolder }
 					</select>
 				</td>
-			</tr>
-			<tr>
-				<td>名称</td>
-				<td>
+				<td width="15%">名称</td>
+				<td width="33%">
 						<input class="form-control" type="text" name="model.title" value="${model.title}" 
 						valid="vtext" validname="名称" />
 				</td>
@@ -54,8 +51,6 @@ var bodyContent = {
 						<input class="form-control" type="text" name="model.publish_user" value="${session.session_user.realname!session.session_user.username }"  />
 					<% } %>
 				</td>
-			</tr>
-			<tr>
 				<td>发布时间</td>
 				<td>
 						<input class="form-control" type="text" name="model.publish_time" 
@@ -68,8 +63,6 @@ var bodyContent = {
 						<input class="form-control" type="text" name="model.sort" value="${model.sort!'10'}" 
 						valid="vnum_y" validname="排序" />
 				</td>
-			</tr>
-			<tr>
 				<td>状态</td>
 				<td>
 					<label class="radio-inline">
@@ -90,8 +83,6 @@ var bodyContent = {
 					  <input type="radio" name="model.is_comment" id="" value="2"  ${model.is_comment==2?"checked":"" } > 否
 					</label>
 				</td>
-			</tr>
-			<tr>
 				<td>是否推荐</td>
 				<td>
 					<label class="radio-inline">
@@ -103,14 +94,24 @@ var bodyContent = {
 				</td>
 			</tr>
 			<tr>
+				<td>开始时间</td>
+				<td>
+						<input class="form-control" type="text" name="model.start_time" 
+						value="${model.start_time}"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"  />
+				</td>
+				<td>结束时间</td>
+				<td>
+						<input class="form-control" type="text" name="model.end_time" 
+						value="${model.end_time}"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"  />
+				</td>
+			</tr>
+			<tr>
 				<td>类型</td>
 				<td>
 					<select name="model.type" class="form-control" >
 					${flyfox.dictSelect('articleType' , model.type!'11')  }
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>跳转地址</td>
 				<td>
 					<input type="text" class="form-control" name="model.jump_url" 
@@ -125,14 +126,21 @@ var bodyContent = {
 						</a>
 					<% } %></td>
 				<td>
+					<input type="file" accept="image/*" class="form-control" name="model.image_url" />
+				</td>
+				<td colspan="2">
 					<input type="text" class="form-control" name="model.image_net_url" 
 						value="${model.image_net_url}" placeholder="网络图片url" />
-					<input type="file" accept="image/*" class="form-control" name="model.image_url" />
 				</td>
 			</tr>
 			<tr>
 				<td>附件</td>
 				<td>
+					<input type="file" accept="*/*" class="form-control" name="model.file_url" />
+				</td>
+				<td colspan="2">
+					<!-- 删除标记 -->
+					<input type="hidden" id="file_url_flag" class="form-control" name="file_url_flag" />
 					<% if(!strutil.isEmpty(model.file_url)){ %>
 					<div id="file_url_show" >
 						<a href="${model.file_url }" target="_blank" style="text-decoration:none;">
@@ -143,23 +151,6 @@ var bodyContent = {
 						style="color: red;">删除</a>
 					</div>
 					<% } %>
-					<!-- 删除标记 -->
-					<input type="hidden" id="file_url_flag" class="form-control" name="file_url_flag" />
-					<input type="file" accept="*/*" class="form-control" name="model.file_url" />
-				</td>
-			</tr>
-			<tr>
-				<td>开始时间</td>
-				<td>
-						<input class="form-control" type="text" name="model.start_time" 
-						value="${model.start_time}"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"  />
-				</td>
-			</tr>
-			<tr>
-				<td>结束时间</td>
-				<td>
-						<input class="form-control" type="text" name="model.end_time" 
-						value="${model.end_time}"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"  />
 				</td>
 			</tr>
 	</table>

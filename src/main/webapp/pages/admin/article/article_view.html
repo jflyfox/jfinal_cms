@@ -12,16 +12,12 @@ var bodyContent = {
 	<tr>
 		<td>目录名称(${model.folder_id})</td>
 		<td>${model.folderName  }</td>
-	</tr>
-	<tr>
 		<td>名称</td>
 		<td>${model.title}</td>
 	</tr>
 	<tr>
 		<td>排序</td>
 		<td>${model.sort}</td>
-	</tr>
-	<tr>
 		<td>状态</td>
 		<td>
 			<% if(model.status=='2') { %>
@@ -42,8 +38,6 @@ var bodyContent = {
 			是
 			<%	} %>
 		</td> 
-	</tr>
-	<tr>
 		<td>是否推荐</td>
 		<td>
 			<% if(model.is_recommend==2) { %>
@@ -56,12 +50,24 @@ var bodyContent = {
 	</tr>
 	<tr>
 		<td>类型</td>
-		<td>${flyfox.dictValue(model.type )  }</td>
-			</tr>
+		<td colspan="3">${flyfox.dictValue(model.type )  }</td>
+	</tr>
 	<tr>
+	<tr>
+		<td>发布时间</td>
+		<td>${model.publish_time}</td>
+		<td>发布者</td>
+		<td>${model.publish_user}</td>
+	</tr>
+	<tr>
+		<td>开始时间</td>
+		<td>${model.start_time}</td>
+		<td>结束时间</td>
+		<td>${model.end_time}</td>
+	</tr>
 	<tr>
 		<td>图片</td>
-		<td>
+		<td colspan="3">
 			<% if(!strutil.isEmpty(model.image_url)||!strutil.isEmpty(model.image_net_url)){ %>
 				<a href="${flyfox.getImage(model)}" target="_blank" style="text-decoration:none;">
 					<img alt="图片" title="点击浏览" src="${flyfox.getImage(model)}" width="40" height="40">
@@ -72,29 +78,13 @@ var bodyContent = {
 	</tr>
 	<tr>
 		<td>附件</td>
-		<td>
+		<td colspan="3">
 			<% if(!strutil.isEmpty(model.file_url)){ %>
 			<a href="${model.file_url }" target="_blank" style="text-decoration:none;">
 				${model.file_name}
 			</a>
 			<% } %>
 		</td>
-	</tr>
-	<tr>
-		<td>发布时间</td>
-		<td>${model.publish_time}</td>
-	</tr>
-	<tr>
-		<td>发布者</td>
-		<td>${model.publish_user}</td>
-	</tr>
-	<tr>
-		<td>开始时间</td>
-		<td>${model.start_time}</td>
-	</tr>
-	<tr>
-		<td>结束时间</td>
-		<td>${model.end_time}</td>
 	</tr>
 	</table>
 	

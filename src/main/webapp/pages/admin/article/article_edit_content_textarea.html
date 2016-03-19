@@ -1,0 +1,84 @@
+<% 
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+
+<style>
+body {
+	overflow: hidden;
+}
+
+.tags {
+	line-height: 22px;
+	height: 22px;
+}
+
+.tags .tags_label {
+	float: left;
+	font-weight: bold;
+	margin-right: 5px;
+	padding: 5px 1px 1px 3px;
+	margin-right: 5px
+}
+
+.tags .tags_content {
+	float: left;
+	width: 500px;
+	margin: 5px 5px 0 0;
+	padding: 1px;
+	border: 1px solid #ccc;
+	background: #fff;
+	vertical-align: middle;
+}
+
+.tags .tags_remark {
+	padding: 5px 1px 1px 3px;
+	color: #999999;
+	font-size: 12px;
+	z-index: 10000;
+}
+
+</style>
+
+<script type="text/javascript">
+
+	function oper_save() {
+		var tags = $('.tags_content').text().replace(/，/g, ",");
+		if(tags!='') {
+			$('[name="tags"]').val(tags);
+		}
+		
+		form1.action = "admin/article/save_content/"+form1["model.id"].value;
+		form1.submit();
+		return true;
+	}
+	
+</script>
+
+<% }; var bodyContent = { %>
+<form name="form1" action="" method="post">
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<!-- 数据列表 -->
+	<div>
+		<textarea class="form-control" rows="20" cols="30" name="model.content">${model.content}</textarea>
+	</div>
+
+	<div class="tags">
+		<input name="tags" type="hidden" value="${tags!''}" />
+		<div class="tags_label">标签：</div>
+		<div contentEditable="true" class="tags_content">${tags!''}</div>
+		<div class="tags_remark">请使用逗号分隔不同标签，最多5个哦</div>
+	</div>
+
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper_save(${model.id!'0'});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %> <%
+layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){
+%> <%} %>
+

@@ -10,7 +10,7 @@ var oper;
 jQuery(function($) {
 	// 页面方法
 	oper = {
-		width : 450,
+		width : 750,
 		height : 500,
 		form : document.form1,
 		list : function() {
@@ -36,7 +36,15 @@ jQuery(function($) {
 		copy : function(id) {
 			var url = 'admin/article/tocopy/'+id;
 			var title = '复制文章';
-			Iframe(url, this.width, this.height, title);
+			Iframe(url, 450, this.height, title);
+		},
+		edit_content : function (pid){
+			var url = 'admin/article/edit_content/'+pid;
+			Iframe(url,900,580,'文章内容',false,false,true);
+		},
+		edit_content_textarea : function (pid){
+			var url = 'admin/article/edit_content_textarea/'+pid;
+			Iframe(url,900,580,'文章内容',false,false,true);
 		},
 		del : function(id) {
 			var url = 'admin/article/delete/'+id;
@@ -55,11 +63,6 @@ jQuery(function($) {
 var paginator = function(page) {
 	oper.list();
 };
-
-function oper_edit_content(pid){
-	var url = 'admin/article/edit_content/'+pid;
-	Iframe(url,900,580,'文章内容',false,false,true);
-}
 
 
 var zTree;
@@ -195,7 +198,6 @@ var bodyContent = {
 					<th>开始时间</th> 
 					<th>结束时间</th>
 					 -->
-					<th>编辑</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -250,14 +252,25 @@ var bodyContent = {
 					<td>${item.end_time}</td>
 					 -->
 					<td>
-					<!-- 
-					<a href="article/edit_content/${item.id}" class="btn btn-sm btn-primary" target="_blank">修改内容</a>
-					 -->
-					<a href="javascript:void(0);" class="btn btn-sm btn-primary"  onclick="oper_edit_content(${item.id});">编辑内容</a> 
-					</td>
-					<td>
-					<a href="javascript:void(0);" class="btn btn-sm btn-info" onclick="oper.copy(${item.id});">复制</a>
-					<a href="javascript:void(0);" class="btn btn-sm btn-success" onclick="oper.view(${item.id});">查看</a> 
+					
+					<!-- Split button -->
+					<div class="btn-group">
+					  <button type="button" class="btn btn-sm btn-info"  onclick="oper.edit_content(${item.id});">编辑内容</button>
+					  <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    <span class="caret"></span>
+					    <span class="sr-only">下拉</span>
+					  </button>
+					  <ul class="dropdown-menu">
+					  	<!-- 
+					    <li><a href="admin/article/edit_content/${item.id}" target="_blank">修改内容</a></li>
+					     -->
+					    <li><a href="javascript:void(0);"  onclick="oper.edit_content_textarea(${item.id});">修改内容(textarea)</a></li>
+					    <li role="separator" class="divider"></li>
+					    <li><a href="javascript:void(0);" onclick="oper.copy(${item.id});">复制文章</a></li>
+						<li><a href="javascript:void(0);" onclick="oper.view(${item.id});">查看内容</a></li>
+					  </ul>
+					</div>
+					
 					<a href="javascript:void(0);" class="btn btn-sm btn-primary" onclick="oper.edit(${item.id});">修改</a> 
 					<% if(item.id>1){ %>
 					<a href="javascript:void(0);" class="btn btn-sm btn-danger" onclick="oper.del(${item.id});">删除</a>

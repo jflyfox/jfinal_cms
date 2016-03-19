@@ -181,6 +181,18 @@ public class ArticleController extends BaseProjectController {
 		super.render(path + "edit_content.html");
 	}
 
+	public void edit_content_textarea() {
+		TbArticle model = TbArticle.dao.findById(getParaToInt());
+		setAttr("model", model);
+
+		// 设置标签
+		String tags = Db.findFirst("select group_concat(tagname) tags " //
+				+ " from tb_tags where article_id = ? order by id", model.getInt("id")).getStr("tags");
+		setAttr("tags", tags);
+
+		super.render(path + "edit_content_textarea.html");
+	}
+	
 	public void view_content() {
 		// 根目录
 		setAttr("model", TbFolder.dao.findById(TbFolder.ROOT));
