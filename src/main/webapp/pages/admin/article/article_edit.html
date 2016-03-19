@@ -111,6 +111,13 @@ var bodyContent = {
 				</td>
 			</tr>
 			<tr>
+				<td>跳转地址</td>
+				<td>
+					<input type="text" class="form-control" name="model.jump_url" 
+						value="${model.jump_url}" placeholder="跳转地址，设置直接跳转" />
+				</td>
+			</tr>
+			<tr>
 				<td>图片
 					<% if(!strutil.isEmpty(model.image_url)||!strutil.isEmpty(model.image_net_url)){ %>
 						<a href="${flyfox.getImage(model)}" target="_blank" style="text-decoration:none;">

@@ -16,6 +16,7 @@ import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.admin.tags.TbTags;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
 import com.jflyfox.modules.front.service.FrontCacheService;
+import com.jflyfox.util.StrUtils;
 
 /**
  * 文章管理
@@ -42,7 +43,15 @@ public class ArticleController extends BaseProjectController {
 		// 文章
 		// TbArticle article = new FrontCacheService().getArticle(articleId);
 		TbArticle article = TbArticle.dao.findById(articleId);
+		
 		if (article != null) {
+			// 新增链接跳转
+			String jumpUrl = article.getStr("jump_url");
+			if (StrUtils.isNotEmpty(jumpUrl)) { // jump url
+				redirect(jumpUrl);
+				return;
+			}
+			
 			// 更新浏览量
 			String key = getSessionAttr(JFlyFoxUtils.USER_KEY);
 			if (key != null) {
