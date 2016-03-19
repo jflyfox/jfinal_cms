@@ -83,6 +83,13 @@ public class UserInterceptor implements Interceptor {
 	 * @return
 	 */
 	protected boolean isAuth(String path_tmp) {
+		// 后台不需要认证页面
+		if (path_tmp.startsWith("admin/login")  //
+				|| path_tmp.startsWith("admin/logout") //
+				|| path_tmp.startsWith("admin/trans")) {
+			return false;
+		}
+		
 		return StrUtils.isNotEmpty(path_tmp) // 空是首页
 				&& (path_tmp.startsWith("system/") // 系统管理
 				|| path_tmp.startsWith("admin/") // 后台管理
