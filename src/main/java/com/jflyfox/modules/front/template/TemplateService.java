@@ -13,7 +13,7 @@ import com.jflyfox.modules.front.articlelike.ArticleLikeCache;
 import com.jflyfox.modules.front.service.FrontCacheService;
 
 /**
- * 模板方法
+ * 模板方法接口
  * 
  * 2016年1月18日 下午6:05:54 flyfox 330627517@qq.com
  */
@@ -81,6 +81,10 @@ public class TemplateService extends BaseService {
 		return service.getNewArticle(new Paginator(pageNo, pageSize));
 	}
 
+	public Page<TbArticle> articlePage(int pageNo, int pageSize) {
+		return service.getArticle(new Paginator(pageNo, pageSize));
+	}
+	
 	public Page<TbArticle> articlePage(int pageNo, int pageSize, int folderId) {
 		return service.getArticle(new Paginator(pageNo, pageSize), folderId);
 	}

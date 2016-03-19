@@ -126,8 +126,7 @@ public class FrontCacheService extends BaseService {
 	public Page<TbArticle> getRecommendArticle(Paginator paginator) {
 		String key = ("recommendArticle_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_article  where status = 1 and type in (11,12) " //
-						+ " and is_recommend = 1 " // 推荐文章
+				, " from tb_article  where " + getPublicWhere() + " and is_recommend = 1 " // 推荐文章
 						+ " and folder_id != " + JFlyFoxUtils.MENU_TOPPIC // 不搜索首页图片
 						+ " order by sort,create_time desc");
 		return articles;
@@ -145,8 +144,25 @@ public class FrontCacheService extends BaseService {
 		String key = ("newArticle_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		// 推荐文章列表
 		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_article where status = 1 and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
-						+ " order by publish_time desc,update_time desc");
+				, " from tb_article where " + getPublicWhere() + " order by publish_time desc,update_time desc");
+		return articles;
+	}
+
+	/**
+	 * 返回对应文章
+	 * 
+	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
+	 * 
+	 * @param paginator
+	 * @param folderId
+	 * @return
+	 */
+	public Page<TbArticle> getArticle(Paginator paginator) {
+		String key = ("article_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		// 推荐文章列表
+		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
+				, " from tb_article " //
+						+ " where " + getPublicWhere() + " order by sort,create_time desc");
 		return articles;
 	}
 
@@ -164,8 +180,7 @@ public class FrontCacheService extends BaseService {
 		// 推荐文章列表
 		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
 				, " from tb_article " //
-						+ " where status = 1 and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
-						+ " and folder_id =  ? " //
+						+ " where " + getPublicWhere() + " and folder_id =  ? " //
 						+ " order by sort,create_time desc", folderId);
 		return articles;
 	}
@@ -183,8 +198,7 @@ public class FrontCacheService extends BaseService {
 		// 推荐文章列表
 		Page<TbArticle> articles = TbArticle.dao.paginate(paginator, "select * " //
 				, " from tb_article " //
-						+ " where status = 1 and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
-						+ " and folder_id =  ? " //
+						+ " where " + getPublicWhere() + " and folder_id =  ? " //
 						+ " order by sort,create_time desc", folderId);
 		return articles;
 	}
@@ -233,10 +247,21 @@ public class FrontCacheService extends BaseService {
 	public List<TbFolderNotice> getNotice(int folderId) {
 		String key = ("getNotice_" + folderId);
 		String sql = "select * from tb_folder_notice t " //
-				+ " where is_deleted = " + JFlyFoxUtils.IS_DELETED_NO  //
+				+ " where is_deleted = " + JFlyFoxUtils.IS_DELETED_NO //
 				+ " and folder_id = ? order by sort,create_time desc";
 		List<TbFolderNotice> list = TbFolderNotice.dao.findCache(cacheName, key, sql, folderId);
 		return list;
 	}
 
+	/**
+	 * 公共文章查询sql
+	 * 
+	 * 2016年3月19日 下午7:03:11 flyfox 330627517@qq.com
+	 * 
+	 * @return
+	 */
+	public String getPublicWhere() {
+		return " status = 1 and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
+		;
+	}
 }
