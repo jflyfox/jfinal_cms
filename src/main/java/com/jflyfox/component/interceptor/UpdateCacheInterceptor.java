@@ -19,7 +19,7 @@ public class UpdateCacheInterceptor implements Interceptor {
 	/**
 	 * 缓存更新时间
 	 */
-	public static final long UPDATE_TIME = Config.getToLong("MTG.UPDATE_TIME");
+	public static final long UPDATE_TIME = Config.getToLong("CMS.UPDATE_TIME");
 
 	public static long lastUpdateTime = System.currentTimeMillis();
 

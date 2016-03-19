@@ -6,6 +6,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.BaseService;
 import com.jflyfox.jfinal.base.Paginator;
+import com.jflyfox.modules.admin.article.ArticleConstant;
 import com.jflyfox.modules.admin.article.TbArticle;
 import com.jflyfox.modules.admin.foldernotice.TbFolderNotice;
 import com.jflyfox.modules.admin.folderrollpicture.TbFolderRollPicture;
@@ -261,7 +262,9 @@ public class FrontCacheService extends BaseService {
 	 * @return
 	 */
 	public String getPublicWhere() {
-		return " status = 1 and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
+		return " status = 1 "
+				+ " and approve_status = " + ArticleConstant.APPROVE_STATUS_PASS // 审核通过
+				+ "and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
 		;
 	}
 }

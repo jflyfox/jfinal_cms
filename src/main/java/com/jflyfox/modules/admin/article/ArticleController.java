@@ -1,11 +1,13 @@
 package com.jflyfox.modules.admin.article;
 
 import java.io.File;
+import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
 import com.jflyfox.component.base.BaseProjectController;
+import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.component.util.JFlyfoxUpload;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
@@ -16,7 +18,7 @@ import com.jflyfox.modules.admin.tags.TbTags;
 import com.jflyfox.util.StrUtils;
 
 /**
- * 联系人管理
+ * 文章管理管理
  * 
  * @author flyfox 2014-2-11
  */
@@ -58,7 +60,7 @@ public class ArticleController extends BaseProjectController {
 
 		setAttr("page", page);
 		setAttr("attr", model);
-		
+
 		setAttr("folders", new FolderService().getFolders());
 		render(path + "list.html");
 	}
@@ -144,9 +146,19 @@ public class ArticleController extends BaseProjectController {
 		model.put("update_id", userid);
 		model.put("update_time", now);
 		if (pid != null && pid > 0) { // 更新
+			if (JFlyFoxUtils.ARTICLE_APPROVE) {
+				model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE);
+			} else {
+				model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS);
+			}
 			model.update();
 		} else { // 新增
 			model.remove("id");
+			if (JFlyFoxUtils.ARTICLE_APPROVE) {
+				model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE);
+			} else {
+				model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS);
+			}
 			model.put("create_id", userid);
 			model.put("create_time", now);
 			if (model.get("sort") == null)
@@ -184,6 +196,11 @@ public class ArticleController extends BaseProjectController {
 
 	public void save_content() {
 		TbArticle model = getModel(TbArticle.class);
+		if (JFlyFoxUtils.ARTICLE_APPROVE) {
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_UPDATE);
+		} else {
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS);
+		}
 		model.update();
 
 		// 保存tags
@@ -213,18 +230,75 @@ public class ArticleController extends BaseProjectController {
 		renderMessage("保存成功");
 	}
 
-	public static void main(String[] args) {
-		String uploadPath = "/aa";
-		String baseUploadPath = "/bb";
-		uploadPath = uploadPath.trim();
-		if (uploadPath.startsWith("/") || uploadPath.startsWith("\\")) {
-			if (baseUploadPath.equals("/")) {
-				System.out.println("1:" + uploadPath);
-			} else {
-				System.out.println("2:" + baseUploadPath + uploadPath);
-			}
-		} else {
-			System.out.println("3:" + baseUploadPath + File.separator + uploadPath);
+	public void list_approve() {
+		TbArticle model = getModelByAttr(TbArticle.class);
+
+		SQLUtils sql = new SQLUtils(" from tb_article t " //
+				+ " left join tb_folder f on f.id = t.folder_id " //
+				+ " where approve_status in ( " //
+				+ ArticleConstant.APPROVE_STATUS_INIT + "," + ArticleConstant.APPROVE_STATUS_UPDATE + " ) ");
+		if (model.getAttrValues().length != 0) {
+			sql.setAlias("t");
+			sql.whereLike("title", model.getStr("title"));
+			sql.whereEquals("folder_id", model.getInt("folder_id"));
+			sql.whereEquals("status", model.getInt("status"));
 		}
+
+		// 排序
+		String orderBy = getBaseForm().getOrderBy();
+		if (StrUtils.isEmpty(orderBy)) {
+			sql.append(" order by t.folder_id,t.sort,t.create_time desc ");
+		} else {
+			sql.append(" order by ").append(orderBy);
+		}
+
+		Page<TbArticle> page = TbArticle.dao.paginate(getPaginator(), "select t.*,f.name as folderName ", //
+				sql.toString().toString());
+
+		// 查询下拉框
+		setAttr("selectFolder", new FolderService().selectFolder(model.getInt("folder_id")));
+
+		setAttr("page", page);
+		setAttr("attr", model);
+
+		List<TbFolder> folders = TbFolder.dao.findByWhere("order by sort,id");
+		setAttr("folders", folders);
+
+		render(path + "list_approve.html");
 	}
+
+	public void save_approve() {
+		TbArticle model = TbArticle.dao.findById(getParaToInt());
+		int approveStatus = getParaToInt("approve_status");
+		Integer userid = getSessionUser().getUserID();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
+		model.set("approve_status", approveStatus);
+		model.update();
+
+		// renderMessage("审核成功","javascript:window.top.location.href = 'admin/article/list_approve';");
+		redirect("/admin/article/list_approve");
+	}
+
+	public void tocopy() {
+		TbArticle model = TbArticle.dao.findById(getParaToInt());
+
+		// 查询下拉框
+		setAttr("selectFolder", new FolderService().selectFolder(0));
+
+		setAttr("model", model);
+		render(path + "copy.html");
+	}
+
+	public void copy() {
+		int id = getParaToInt();
+		Integer userid = getSessionUser().getUserID();
+		String folders = getPara("folders");
+		// 复制
+		new ArticleService().copy(id, userid, folders);
+
+		renderMessage("复制完成");
+	}
+
 }

@@ -1,0 +1,91 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<% include("/static/component/include/my97.html"){} %>
+<% include("/static/component/include/bootstrap-multiselect.html"){} %>
+
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			
+			if( $('[name="folders"]').val() == '') {
+				Alert('请选择至少一个栏目');
+				return false;
+			}
+			
+			id = id || '0';
+			var url = 'admin/article/copy/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+	
+	$(function() {
+		// 设置栏目选择
+	    $('#folder_select').multiselect({
+	    	 nonSelectedText: '请选择栏目',
+	    	 maxHeight: 300,
+	    	 selectAllText: '全选',
+	         nonSelectedText: '全部未被选中',
+	         nSelectedText: '选中',
+	         allSelectedText: '全部被选中',
+	    	 buttonWidth: '300px',
+	    	 numberDisplayed: 10,
+	    	 includeSelectAllOption: true,
+	    	 onChange: function(option, checked, select) {
+	            var folders = '';
+	            $('#folder_select option:selected').each(function(i){
+	            	folders += $(this).val() + ',';
+	            });
+	            if(folders != '') {
+	            	folders = folders.substring(0,folders.length-1);
+	            }
+	            $('[name="folders"]').val(folders);
+	         }
+	    });
+		
+	 });
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal" role="form">
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<input type="hidden" name="folders" value="" />
+	<table class="table">
+		<% // 列表头部 %>
+			<tr>
+				<td>栏目</td>
+				<td>
+					<select name="model.folder_id" id="folder_select" multiple="multiple"
+						class="form-control" valid="vselect" validname="栏目">
+					<!-- 
+					<option value="-1">--请选择--</option>
+					 -->
+					${selectFolder }
+					</select>
+				</td>
+			</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id!'0'});">复 制</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+DIRECTIVE SAFE_OUTPUT_CLOSE;
+<%} %>

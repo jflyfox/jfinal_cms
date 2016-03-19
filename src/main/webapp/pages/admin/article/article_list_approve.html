@@ -3,18 +3,19 @@
 	include("/pages/template/head.html"){}
 %>
 
-<% include("/static/component/include/ztree.html"){} %>
+<link rel="stylesheet" href="static/component/zTree/css/zTreeStyle/metro.css">
+<script src="static/component/zTree/js/jquery.ztree.all-3.5.min.js"></script>
 
 <script type="text/javascript">
 var oper;
 jQuery(function($) {
 	// 页面方法
 	oper = {
-		width : 450,
-		height : 500,
+		width : 550,
+		height : 600,
 		form : document.form1,
 		list : function() {
-			var url = 'admin/article/list';
+			var url = 'admin/article/list_approve';
 			this.form.action = url;
 			this.form.submit();
 		},
@@ -23,32 +24,23 @@ jQuery(function($) {
 			var title = '查看文章';
 			Iframe(url, this.width, this.height, title, false, false, false, EmptyFunc);
 		},
-		add : function() {
-			var url = 'admin/article/add?model.folder_id='+$('[name="attr.folder_id"]').val();
-			var title = '添加文章';
-			Iframe(url, this.width, this.height, title);
+		reject : function(id) {
+			var url = 'admin/article/save_approve/'+id+'?approve_status=9';
+			Confirm("确认要拒绝审核？", function() {
+				document.form1.action = url;
+				document.form1.submit();
+			});
 		},
-		edit : function(id) {
-			var url = 'admin/article/edit/'+id;
-			var title = '修改文章';
-			Iframe(url, this.width, this.height, title);
-		},
-		copy : function(id) {
-			var url = 'admin/article/tocopy/'+id;
-			var title = '复制文章';
-			Iframe(url, this.width, this.height, title);
-		},
-		del : function(id) {
-			var url = 'admin/article/delete/'+id;
-			var title = '确认要删除该文章信息？';
-			Confirm(title, function() {
-				form1.action = url;
-				form1.submit();
+		pass : function(id) {
+			var url = 'admin/article/save_approve/'+id+'?approve_status=10';
+			Confirm("确认要通过审核？", function() {
+				document.form1.action = url;
+				document.form1.submit();
 			});
 		}
 	};
 	//显示Menu索引
-	showMenu('page_article');
+	showMenu('page_article_approve');
 });
 
 //分页
@@ -60,7 +52,6 @@ function oper_edit_content(pid){
 	var url = 'admin/article/edit_content/'+pid;
 	Iframe(url,900,580,'文章内容',false,false,true);
 }
-
 
 var zTree;
 var demoIframe;
@@ -108,14 +99,14 @@ var zNodes =[
 ];
 
 $(document).ready(function(){
-	var t = $("#tree");
-	t = $.fn.zTree.init(t, setting, zNodes);
-	demoIframe = $("#testIframe");
-	demoIframe.bind("load", loadReady);
-	zTree = $.fn.zTree.getZTreeObj("tree");
-	// zTree.selectNode(zTree.getNodeByParam("id", 101));
-	var openTree = $('[name="attr.folder_id"]').val();
-	if(openTree>0) zTree.selectNode(zTree.getNodeByParam("id", openTree));
+    var t = $("#tree");
+    t = $.fn.zTree.init(t, setting, zNodes);
+    demoIframe = $("#testIframe");
+    demoIframe.bind("load", loadReady);
+    var zTree = $.fn.zTree.getZTreeObj("tree");
+   // zTree.selectNode(zTree.getNodeByParam("id", 101));
+    var openTree = $('[name="attr.folder_id"]').val();
+    if(openTree>0) zTree.selectNode(zTree.getNodeByParam("id", openTree));
 });
 
 function loadReady() {
@@ -138,7 +129,6 @@ var bodyContent = {
 <ul id="tree" class="ztree" style="overflow:auto;"></ul>
 </div>
 <div class="col-md-10">
-
 
 	<form name="form1" action="" method="post"  class="form-inline" role="form">
 		<!-- 菜单 -->
@@ -170,9 +160,6 @@ var bodyContent = {
 			<button type="button" class="btn btn-default" onclick="resetForm();">
 			 		<span class="glyphicon glyphicon-refresh"></span> 重 置
 			</button>
-			<button type="button" class="btn btn-default" onclick="oper.add();">
-			 		<span class="glyphicon glyphicon-plus"></span> 新 增
-			</button>
 		</div>
 		
 		<!-- 数据列表 -->
@@ -186,16 +173,12 @@ var bodyContent = {
 					<th name="title" class="sorting">名称</th> 
 					<th name="sort" class="sorting">排序</th> 
 					<th name="status" class="sorting">状态</th> 
+					<th name="is_comment" class="sorting">评论</th> 
 					<th>置顶</th>
 					<th name="is_recommend" class="sorting">推荐</th> 
-					<th name="approve_status" class="sorting">审核状态</th> 
+					<th name="type" class="sorting">类型</th> 
 					<th name="publish_time" class="sorting">发布时间</th> 
 					<th name="publish_user" class="sorting">发布者</th> 
-					<!-- 
-					<th>开始时间</th> 
-					<th>结束时间</th>
-					 -->
-					<th>编辑</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -223,6 +206,14 @@ var bodyContent = {
 					显示
 					<%	} %>
 					</td> 
+					<td>
+					<% if(item.is_comment==2) { %>
+					否
+					<%	} %>
+					<% if(item.is_comment==1) { %>
+					是
+					<%	} %>
+					</td> 
 					<td>${item.sort<10?'是':'否'  }</td>
 					<td>
 					<% if(item.is_recommend==2) { %>
@@ -232,37 +223,13 @@ var bodyContent = {
 					是
 					<%	} %>
 					</td> 
-					<td style='background-color:${(item.approve_status==1 || item.approve_status==2)?"#ECC2C2":""} '>
-					<% if(item.approve_status==1 || item.approve_status==2) { %>
-					待审核
-					<%	} %>
-					<% if(item.approve_status==9) { %>
-					未通过
-					<%	} %>
-					<% if(item.approve_status==10) { %>
-					通过
-					<%	} %>
-					</td>
+					<td>${flyfox.dictValue(item.type!'' )  }</td>
 	 				<td>${item.publish_time}</td>
 					<td>${item.publish_user}</td> 
-					<!-- 
-					<td>${item.start_time}</td>
-					<td>${item.end_time}</td>
-					 -->
 					<td>
-					<!-- 
-					<a href="article/edit_content/${item.id}" class="btn btn-sm btn-primary" target="_blank">修改内容</a>
-					 -->
-					<a href="javascript:void(0);" class="btn btn-sm btn-primary"  onclick="oper_edit_content(${item.id});">编辑内容</a> 
-					</td>
-					<td>
-					<a href="javascript:void(0);" class="btn btn-sm btn-info" onclick="oper.copy(${item.id});">复制</a>
 					<a href="javascript:void(0);" class="btn btn-sm btn-success" onclick="oper.view(${item.id});">查看</a> 
-					<a href="javascript:void(0);" class="btn btn-sm btn-primary" onclick="oper.edit(${item.id});">修改</a> 
-					<% if(item.id>1){ %>
-					<a href="javascript:void(0);" class="btn btn-sm btn-danger" onclick="oper.del(${item.id});">删除</a>
-					<% } %>
-					
+					<a href="javascript:void(0);" class="btn btn-sm btn-primary" onclick="oper.pass(${item.id});">通过</a> 
+					<a href="javascript:void(0);" class="btn btn-sm btn-danger" onclick="oper.reject(${item.id});">拒绝</a> 
 					</td>
 				</tr>
 			<% } %>
@@ -270,7 +237,7 @@ var bodyContent = {
 		</table>
 		<%include("/static/component/include/paginator.html"){} %>
 	</form>
-
+	
 </div>
 </div>
 <%}; %>
