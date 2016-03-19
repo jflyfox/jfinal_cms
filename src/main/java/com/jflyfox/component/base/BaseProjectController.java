@@ -68,6 +68,10 @@ public abstract class BaseProjectController extends BaseController {
 				}
 			}
 		} catch (Exception e) {
+			// 异常cookie重新登陆
+			removeSessionAttr(Attr.SESSION_NAME);
+			removeCookie(Attr.SESSION_NAME);
+			
 			log.error("cooke user异常:", e);
 			return null;
 		}
