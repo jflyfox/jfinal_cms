@@ -2,7 +2,7 @@ ALTER TABLE `tb_article`
 ADD COLUMN `jump_url`  varchar(256) NULL COMMENT '跳转地址' AFTER `sort`;
 
 ALTER TABLE `tb_article`
-ADD COLUMN `approve_status`  int(11) NULL COMMENT '审核状态' AFTER `file_name`;
+ADD COLUMN `approve_status`  int(11) DEFAULT '10' COMMENT '审核状态' AFTER `file_name`;
 
 update `tb_article` set approve_status = 10;
 

@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
-Source Server Version : 50610
+Source Server         : 本地
+Source Server Version : 50519
 Source Host           : localhost:3306
-Source Database       : jfinal_cms_website
+Source Database       : bakup
 
 Target Server Type    : MYSQL
-Target Server Version : 50610
+Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-02-11 02:55:11
+Date: 2016-03-22 11:05:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -147,7 +147,7 @@ CREATE TABLE `sys_menu` (
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='菜单';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -302,12 +302,12 @@ CREATE TABLE `tb_article` (
   `is_comment` int(11) DEFAULT '1' COMMENT '是否评论：2 否 1 是',
   `is_recommend` int(11) DEFAULT '2' COMMENT '是否推荐：2 否 1 是',
   `sort` int(11) DEFAULT '1' COMMENT '排序',
-  `jump_url`  varchar(256) DEFAULT NULL COMMENT '跳转地址',
+  `jump_url` varchar(256) DEFAULT NULL COMMENT '跳转地址',
   `image_url` varchar(256) DEFAULT NULL COMMENT '图片路径',
   `image_net_url` varchar(256) DEFAULT NULL COMMENT '网络图片路径',
   `file_url` varchar(256) DEFAULT NULL,
   `file_name` varchar(256) DEFAULT NULL,
-  `approve_status`  int(11) DEFAULT '10' COMMENT '审核状态',
+  `approve_status` int(11) DEFAULT '10' COMMENT '审核状态',
   `publish_time` varchar(64) DEFAULT NULL COMMENT '发布时间',
   `publish_user` varchar(64) DEFAULT '1' COMMENT '发布者',
   `start_time` varchar(64) DEFAULT NULL COMMENT '开始时间',
@@ -321,20 +321,19 @@ CREATE TABLE `tb_article` (
 -- ----------------------------
 -- Records of tb_article
 -- ----------------------------
-INSERT INTO `tb_article` VALUES ('1', '1', '英雄联盟', '<p>内容管理平台</p>', '124', '123', '12', '2', '1', '1', '1', 'download/image_url/20150529_102007_298104.jpg', 'http://i4.tietuku.com/0bf9b53228782326.png', null, null, '2014-03-05', '系统管理员', '2015-01-29', '2015-01-23', '2015-01-28 17:29:55', '2015-01-28', '1');
-INSERT INTO `tb_article` VALUES ('351', '90', '捐赠我们', '<p style=\"box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; white-space: normal; text-align: center; background-color: rgb(255, 255, 255);\">支付宝捐赠二维码 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 微信捐赠二维码</p><p style=\"box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; white-space: normal; text-align: center; background-color: rgb(255, 255, 255);\"><img src=\"http://ww1.sinaimg.cn/mw690/3fc7e281jw1eqec436tzwj2074074mxr.jpg\" style=\"box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; vertical-align: middle;\"/>&nbsp; &nbsp;&nbsp;<img src=\"http://ww1.sinaimg.cn/mw690/3fc7e281jw1es3jr0k25xj20a50a5q3v.jpg\" style=\"box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; vertical-align: middle; line-height: 1.42857143; width: 256px; height: 256px;\"/></p><p style=\"box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; white-space: normal; text-align: center; background-color: rgb(255, 255, 255);\"><br/></p><br/><p><br/></p>', '0', '0', '11', '1', '1', '2', '19', null, null, null, null, '2015-05-26', '系统管理员', null, null, '2015-05-26 10:39:11', '2015-05-26 10:39:11', '1');
-INSERT INTO `tb_article` VALUES ('352', '90', '关于我们', '<p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><span style=\"line-height: 22.8571434020996px;\"></span></p><p>可通过如下方式联系我们：<br/></p><p>联系方式：qq(369191470)</p><p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=_crKyc-LzszIzrmIiNealpQ\" style=\"box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(66, 139, 202); text-decoration: none; background: 0px 0px;\"></a></p><p style=\"white-space: normal;\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=allcU1tTW15dWiobG0QJBQc\" style=\"text-decoration: none;\"><img src=\"http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png\"/></a></p><p><br/></p>', '1', '0', '11', '1', '1', '2', '13', null, null, null, null, '2015-05-26', '系统管理员', null, null, '2015-05-26 10:39:24', '2015-05-26 10:39:24', '1');
-INSERT INTO `tb_article` VALUES ('353', '90', '联系我们', '<p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><span style=\"line-height: 22.8571434020996px;\">地址：北京市</span><br/></p><p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\">联系方式：qq(369191470)</p><p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=_crKyc-LzszIzrmIiNealpQ\" style=\"box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(66, 139, 202); text-decoration: none; background: 0px 0px;\"></a></p><p><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=allcU1tTW15dWiobG0QJBQc\" style=\"text-decoration:none;\"><img src=\"http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png\"/></a></p>', '0', '0', '11', '1', '1', '2', '15', null, null, null, null, '2015-05-26', '系统管理员', null, null, '2015-05-26 10:39:53', '2015-05-26 10:39:53', '1');
-INSERT INTO `tb_article` VALUES ('354', '90', '免责声明', '<p>本网站对本网站上所有由第三方提供的信息、内容和服务，不提供明示或暗示的担保。本网站对使用上述信息、内容和服务所造成的任何损失不承担责任，包括直接损失和间接损失。<br/></p><p><br/></p>', '0', '0', '11', '1', '1', '2', '20', null, null, null, null, '2015-05-26', '系统管理员', null, null, '2015-05-26 10:40:04', '2015-05-26 10:40:04', '1');
-INSERT INTO `tb_article` VALUES ('355', '90', '广告服务', '<p>广告服务请通过以下方式联系：</p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size: 14px; white-space: normal; padding: 0px; line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\">联系方式：qq(369191470)</p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size: 14px; white-space: normal; padding: 0px; line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=_crKyc-LzszIzrmIiNealpQ\" style=\"box-sizing: border-box; color: rgb(66, 139, 202); text-decoration: none; margin: 0px; padding: 0px; background: 0px 0px;\"></a></p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; white-space: normal; background-color: rgb(255, 255, 255);\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=allcU1tTW15dWiobG0QJBQc\" style=\"box-sizing: border-box; color: rgb(51, 122, 183); text-decoration: none; background-color: transparent;\"><img src=\"http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png\" style=\"box-sizing: border-box; border: 0px; vertical-align: middle;\"/></a></p>', '1', '0', '11', '1', '1', '2', '17', null, null, null, null, '2015-05-26', '系统管理员', null, null, '2015-05-26 10:40:30', '2015-05-26 10:40:30', '1');
-INSERT INTO `tb_article` VALUES ('408', '1', '英雄联盟', '<p>&nbsp;</p>', '5', '0', '11', '1', '1', '2', '10', null, 'static/template/website/images/bg0.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:02:55', '2016-01-20 17:02:55', '1');
-INSERT INTO `tb_article` VALUES ('409', '1', '德玛西亚皇子', '<p>德玛西亚皇子,别名四阿哥,周杰伦,嘉文四世。</p><p>E-Q技能的存在为嘉文带来了不错的机动性，还附带三种控制技能让他成为一个让人十分头疼的坦克，</p><p>你无法在第一时间秒掉他，却也无法忽视他的存在，是一个团队价值非常高的英雄。</p>', '3', '0', '11', '1', '1', '2', '11', null, 'static/template/website/images/bg1.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:04:15', '2016-01-20 17:04:15', '1');
-INSERT INTO `tb_article` VALUES ('410', '1', '德邦总管', '<p>德邦总管,别名赵信,菊花信。</p><p>赵信很适合做团战发起人，第一时间冲锋加大招尽量多的造成伤害。</p><p>至少加1点战嚎来减少技能的冷却。对于赵信来说，攻速道具是收益最高的选择。缺点赵信是一个只进不退的英雄。</p>', '0', '0', '11', '1', '1', '2', '12', null, 'static/template/website/images/bg2.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:04:59', '2016-01-20 17:04:59', '1');
-INSERT INTO `tb_article` VALUES ('411', '1', '黑暗之女', '<p>黑暗之女,别名火女,萝莉,安妮。</p><p>有着被动技能和Q技能的回蓝特效让安妮在对线期就能占尽优势，可以在前期保证自己的经济，</p><p>而技能本身的固定伤害让安妮在到达六级后就可以用一套连招给对方带来极大伤害甚至秒掉对手。</p>', '0', '0', '11', '1', '1', '2', '13', null, 'static/template/website/images/bg3.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:05:33', '2016-01-20 17:05:33', '1');
-INSERT INTO `tb_article` VALUES ('412', '1', '皎月女神', '<p>皎月女神,别名皎月,黛安娜。</p><p>戴安娜作为一个近战法师，有着其他AP难以企及的爆发，同时还有突进、控制以及不错的生存能力。</p><p>但缺点也很明显，作为一个法师却是近战，而且又没有逃生技能，如果团战的时机切入时机错误，经常会有去无回。</p>', '2', '0', '11', '1', '1', '2', '14', null, 'static/template/website/images/bg4.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:05:59', '2016-01-20 17:05:59', '1');
-INSERT INTO `tb_article` VALUES ('413', '1', '寒冰射手', '<p>寒冰射手,别名寒冰,艾希,爱射,冰弓,冰女。</p><p>寒冰射手艾希是一个能力全面的防守型ADCarry，她的W可以进攻性地推线，也是个配合她的Q进行风筝的强力技能。</p>', '0', '0', '11', '1', '1', '2', '15', null, 'static/template/website/images/bg5.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:06:31', '2016-01-20 17:06:31', '1');
-INSERT INTO `tb_article` VALUES ('414', '1', '联系我们', '<p>作者：Fly的狐狸</p><p>QQ：330627517</p><p><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=_crKyc-LzszIzrmIiNealpQ\" style=\"text-decoration:none;\"><img src=\"http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png\"/></a></p>', '1', '0', '11', '1', '1', '2', '16', null, 'static/template/website/images/bg6.jpg', null, null, '2016-01-20', '系统管理员', null, null, '2016-01-20 17:07:05', '2016-01-20 17:07:05', '1');
-
+INSERT INTO `tb_article` VALUES ('1', '1', '英雄联盟', '<p>内容管理平台</p>', '124', '123', '12', '2', '1', '1', '1', null, 'download/image_url/20150529_102007_298104.jpg', 'http://i4.tietuku.com/0bf9b53228782326.png', null, null, '10', '2014-03-05', '系统管理员', '2015-01-29', '2015-01-23', '2015-01-28 17:29:55', '2015-01-28', '1');
+INSERT INTO `tb_article` VALUES ('351', '90', '捐赠我们', '<p style=\"box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; white-space: normal; text-align: center; background-color: rgb(255, 255, 255);\">支付宝捐赠二维码 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 微信捐赠二维码</p><p style=\"box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; white-space: normal; text-align: center; background-color: rgb(255, 255, 255);\"><img src=\"http://ww1.sinaimg.cn/mw690/3fc7e281jw1eqec436tzwj2074074mxr.jpg\" style=\"box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; vertical-align: middle;\"/>&nbsp; &nbsp;&nbsp;<img src=\"http://ww1.sinaimg.cn/mw690/3fc7e281jw1es3jr0k25xj20a50a5q3v.jpg\" style=\"box-sizing: border-box; margin: 0px; padding: 0px; border: 0px; vertical-align: middle; line-height: 1.42857143; width: 256px; height: 256px;\"/></p><p style=\"box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; white-space: normal; text-align: center; background-color: rgb(255, 255, 255);\"><br/></p><br/><p><br/></p>', '0', '0', '11', '1', '1', '2', '19', null, null, null, null, null, '10', '2015-05-26', '系统管理员', null, null, '2015-05-26 10:39:11', '2015-05-26 10:39:11', '1');
+INSERT INTO `tb_article` VALUES ('352', '90', '关于我们', '<p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><span style=\"line-height: 22.8571434020996px;\"></span></p><p>可通过如下方式联系我们：<br/></p><p>联系方式：qq(369191470)</p><p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=_crKyc-LzszIzrmIiNealpQ\" style=\"box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(66, 139, 202); text-decoration: none; background: 0px 0px;\"></a></p><p style=\"white-space: normal;\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=allcU1tTW15dWiobG0QJBQc\" style=\"text-decoration: none;\"><img src=\"http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png\"/></a></p><p><br/></p>', '1', '0', '11', '1', '1', '2', '13', null, null, null, null, null, '10', '2015-05-26', '系统管理员', null, null, '2015-05-26 10:39:24', '2015-05-26 10:39:24', '1');
+INSERT INTO `tb_article` VALUES ('353', '90', '联系我们', '<p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><span style=\"line-height: 22.8571434020996px;\">地址：北京市</span><br/></p><p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\">联系方式：qq(369191470)</p><p style=\"white-space: normal; box-sizing: border-box; padding: 0px; color: rgb(51, 51, 51); line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=_crKyc-LzszIzrmIiNealpQ\" style=\"box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(66, 139, 202); text-decoration: none; background: 0px 0px;\"></a></p><p><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=allcU1tTW15dWiobG0QJBQc\" style=\"text-decoration:none;\"><img src=\"http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png\"/></a></p>', '0', '0', '11', '1', '1', '2', '15', null, null, null, null, null, '10', '2015-05-26', '系统管理员', null, null, '2015-05-26 10:39:53', '2015-05-26 10:39:53', '1');
+INSERT INTO `tb_article` VALUES ('354', '90', '免责声明', '<p>本网站对本网站上所有由第三方提供的信息、内容和服务，不提供明示或暗示的担保。本网站对使用上述信息、内容和服务所造成的任何损失不承担责任，包括直接损失和间接损失。<br/></p><p><br/></p>', '0', '0', '11', '1', '1', '2', '20', null, null, null, null, null, '10', '2015-05-26', '系统管理员', null, null, '2015-05-26 10:40:04', '2015-05-26 10:40:04', '1');
+INSERT INTO `tb_article` VALUES ('355', '90', '广告服务', '<p>广告服务请通过以下方式联系：</p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size: 14px; white-space: normal; padding: 0px; line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\">联系方式：qq(369191470)</p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size: 14px; white-space: normal; padding: 0px; line-height: 22.8571434020996px; background-color: rgb(255, 255, 255);\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=_crKyc-LzszIzrmIiNealpQ\" style=\"box-sizing: border-box; color: rgb(66, 139, 202); text-decoration: none; margin: 0px; padding: 0px; background: 0px 0px;\"></a></p><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 10px; color: rgb(51, 51, 51); font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; white-space: normal; background-color: rgb(255, 255, 255);\"><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=allcU1tTW15dWiobG0QJBQc\" style=\"box-sizing: border-box; color: rgb(51, 122, 183); text-decoration: none; background-color: transparent;\"><img src=\"http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png\" style=\"box-sizing: border-box; border: 0px; vertical-align: middle;\"/></a></p>', '1', '0', '11', '1', '1', '2', '17', null, null, null, null, null, '10', '2015-05-26', '系统管理员', null, null, '2015-05-26 10:40:30', '2015-05-26 10:40:30', '1');
+INSERT INTO `tb_article` VALUES ('408', '1', '英雄联盟', '<p>&nbsp;</p>', '5', '0', '11', '1', '1', '2', '10', null, null, 'static/template/website/images/bg0.jpg', null, null, '10', '2016-01-20', '系统管理员', null, null, '2016-01-20 17:02:55', '2016-01-20 17:02:55', '1');
+INSERT INTO `tb_article` VALUES ('409', '1', '德玛西亚皇子', '<p>德玛西亚皇子,别名四阿哥,周杰伦,嘉文四世。</p><p>E-Q技能的存在为嘉文带来了不错的机动性，还附带三种控制技能让他成为一个让人十分头疼的坦克，</p><p>你无法在第一时间秒掉他，却也无法忽视他的存在，是一个团队价值非常高的英雄。</p>', '3', '0', '11', '1', '1', '2', '11', null, null, 'static/template/website/images/bg1.jpg', null, null, '10', '2016-01-20', '系统管理员', null, null, '2016-01-20 17:04:15', '2016-01-20 17:04:15', '1');
+INSERT INTO `tb_article` VALUES ('410', '1', '德邦总管', '<p>德邦总管,别名赵信,菊花信。</p><p>赵信很适合做团战发起人，第一时间冲锋加大招尽量多的造成伤害。</p><p>至少加1点战嚎来减少技能的冷却。对于赵信来说，攻速道具是收益最高的选择。缺点赵信是一个只进不退的英雄。</p>', '0', '0', '11', '1', '1', '2', '12', null, null, 'static/template/website/images/bg2.jpg', null, null, '10', '2016-01-20', '系统管理员', null, null, '2016-01-20 17:04:59', '2016-01-20 17:04:59', '1');
+INSERT INTO `tb_article` VALUES ('411', '1', '黑暗之女', '<p>黑暗之女,别名火女,萝莉,安妮。</p><p>有着被动技能和Q技能的回蓝特效让安妮在对线期就能占尽优势，可以在前期保证自己的经济，</p><p>而技能本身的固定伤害让安妮在到达六级后就可以用一套连招给对方带来极大伤害甚至秒掉对手。</p>', '0', '0', '11', '1', '1', '2', '13', null, null, 'static/template/website/images/bg3.jpg', null, null, '10', '2016-01-20', '系统管理员', null, null, '2016-01-20 17:05:33', '2016-01-20 17:05:33', '1');
+INSERT INTO `tb_article` VALUES ('412', '1', '皎月女神', '<p>皎月女神,别名皎月,黛安娜。</p><p>戴安娜作为一个近战法师，有着其他AP难以企及的爆发，同时还有突进、控制以及不错的生存能力。</p><p>但缺点也很明显，作为一个法师却是近战，而且又没有逃生技能，如果团战的时机切入时机错误，经常会有去无回。</p>', '2', '0', '11', '1', '1', '2', '14', null, null, 'static/template/website/images/bg4.jpg', null, null, '10', '2016-01-20', '系统管理员', null, null, '2016-01-20 17:05:59', '2016-01-20 17:05:59', '1');
+INSERT INTO `tb_article` VALUES ('413', '1', '寒冰射手', '<p>寒冰射手,别名寒冰,艾希,爱射,冰弓,冰女。</p><p>寒冰射手艾希是一个能力全面的防守型ADCarry，她的W可以进攻性地推线，也是个配合她的Q进行风筝的强力技能。</p>', '0', '0', '11', '1', '1', '2', '15', null, null, 'static/template/website/images/bg5.jpg', null, null, '10', '2016-01-20', '系统管理员', null, null, '2016-01-20 17:06:31', '2016-01-20 17:06:31', '1');
+INSERT INTO `tb_article` VALUES ('414', '1', '联系我们', '<p>作者：Fly的狐狸</p><p>QQ：330627517</p><p><a target=\"_blank\" href=\"http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=_crKyc-LzszIzrmIiNealpQ\" style=\"text-decoration:none;\"><img src=\"http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png\"/></a></p>', '1', '0', '11', '1', '1', '2', '16', null, null, 'static/template/website/images/bg6.jpg', null, null, '10', '2016-01-20', '系统管理员', null, null, '2016-01-20 17:07:05', '2016-01-20 17:07:05', '1');
 
 -- ----------------------------
 -- Table structure for `tb_articlelike`
@@ -646,7 +645,6 @@ INSERT INTO `tb_tags` VALUES ('169', '318', '新闻', '2016-01-17 00:23:56', '1'
 INSERT INTO `tb_tags` VALUES ('173', '105', '新闻', '2016-01-17 00:24:14', '1');
 INSERT INTO `tb_tags` VALUES ('174', '111', '新闻', '2016-01-17 00:24:20', '1');
 
-
 -- ----------------------------
 -- Table structure for `tb_video`
 -- ----------------------------
@@ -676,6 +674,10 @@ CREATE TABLE `tb_video` (
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='视频';
 
 -- ----------------------------
+-- Records of tb_video
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `tb_video_album`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_video_album`;
@@ -692,6 +694,10 @@ CREATE TABLE `tb_video_album` (
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='专辑';
+
+-- ----------------------------
+-- Records of tb_video_album
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tb_video_tags`
