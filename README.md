@@ -25,6 +25,15 @@ jfinal cms
 * 如果是/template/photo模板，请运行jfinal_cms_photo.sql脚本
 * 如果是/template/video模板，请运行jfinal_cms_video.sql脚本
 
+其他说明
+------------------------
+
+两个依赖项目jflyfox_base，jflyfox_jfinal。前者是String，Number,Date等公共方法封装，后者是对jfinal和一些公用方法的简单封装
+
+源码地址：
+> http://git.oschina.net/flyfox/jflyfox_jfinal 
+> http://git.oschina.net/flyfox/jflyfox_base
+
 演示效果截图
 ------------------------
 
