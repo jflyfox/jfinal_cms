@@ -6,6 +6,7 @@ import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ImageCode;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
+import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
@@ -88,12 +89,18 @@ public class RegistController extends BaseProjectController {
 
 		user.set("username", key);
 		user.set("password", JFlyFoxUtils.passwordEncrypt(password));
-		user.set("usertype", 3);
+		user.set("usertype", JFlyFoxUtils.USER_TYPE_FRONT);
 		user.set("departid", JFlyFoxUtils.DEPART_REGIST_ID);
 		user.set("state", 2); // 需要认证
+		// 站点设置
+		TbSite site = getSessionSite().getModel();
+		user.set("back_site_id", 0);
+		user.set("create_site_id", site.getId());
+		
 		user.set("create_time", getNow());
 		user.set("create_id", 1);
 		user.save();
+		
 		UserCache.init(); // 设置缓存
 		setSessionUser(user); // 设置session
 		json.put("status", 1);// 成功

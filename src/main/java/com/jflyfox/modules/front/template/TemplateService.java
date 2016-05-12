@@ -69,22 +69,22 @@ public class TemplateService extends BaseService {
 		return service.getTagsByFolder(new Paginator(pageNo, pageSize), folderId);
 	}
 
-	public Page<TbTags> tagsPage(int pageNo, int pageSize) {
-		return service.getTags(new Paginator(pageNo, pageSize));
+	public Page<TbTags> tagsPage(int pageNo, int pageSize, int siteId) {
+		return service.getTags(new Paginator(pageNo, pageSize), siteId);
 	}
 
-	public Page<TbArticle> articlePageRecommend(int pageNo, int pageSize) {
-		return service.getRecommendArticle(new Paginator(pageNo, pageSize));
+	public Page<TbArticle> articlePageRecommend(int pageNo, int pageSize, int siteId) {
+		return service.getRecommendArticle(new Paginator(pageNo, pageSize), siteId);
 	}
 
-	public Page<TbArticle> articlePageTop(int pageNo, int pageSize) {
-		return service.getNewArticle(new Paginator(pageNo, pageSize));
+	public Page<TbArticle> articlePageTop(int pageNo, int pageSize, int siteId) {
+		return service.getNewArticle(new Paginator(pageNo, pageSize), siteId);
 	}
 
-	public Page<TbArticle> articlePage(int pageNo, int pageSize) {
-		return service.getArticle(new Paginator(pageNo, pageSize));
+	public Page<TbArticle> articlePageSite(int pageNo, int pageSize, int siteId) {
+		return service.getArticleBySiteId(new Paginator(pageNo, pageSize), siteId);
 	}
-	
+
 	public Page<TbArticle> articlePage(int pageNo, int pageSize, int folderId) {
 		return service.getArticle(new Paginator(pageNo, pageSize), folderId);
 	}

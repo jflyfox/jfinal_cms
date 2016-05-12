@@ -57,7 +57,7 @@ public class BeeltFunctions extends TemplateFunctions {
 		}
 		return imageUrl;
 	}
-
+	
 	/**
 	 * 获取视频路径
 	 * 
@@ -125,6 +125,22 @@ public class BeeltFunctions extends TemplateFunctions {
 		return StrUtils.suojin(str, length);
 	}
 
+	/**
+	 * split
+	 * 
+	 * 2015年5月17日 下午11:03:39 flyfox 330627517@qq.com
+	 * 
+	 * @param str
+	 * @param split
+	 * @return
+	 */
+	public static String[] split(String str, String split) {
+		if (StrUtils.isEmpty(str)) {
+			return null;
+		}
+		return str.split(split);
+	}
+	
 	/**
 	 * html预览
 	 * 

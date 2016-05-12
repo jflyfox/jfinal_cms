@@ -14,6 +14,7 @@ import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.modules.admin.comment.CommentService;
 import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.admin.folder.TbFolder;
+import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.modules.admin.tags.TbTags;
 import com.jflyfox.util.StrUtils;
 
@@ -43,6 +44,9 @@ public class ArticleController extends BaseProjectController {
 			sql.whereEquals("folder_id", model.getInt("folder_id"));
 			sql.whereEquals("status", model.getInt("status"));
 		}
+		// 站点设置
+		int siteId = getSessionSite().getBackSiteId();
+		sql.append(" and site_id = " + siteId);
 
 		// 排序
 		String orderBy = getBaseForm().getOrderBy();
@@ -56,12 +60,12 @@ public class ArticleController extends BaseProjectController {
 				sql.toString().toString());
 
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(model.getInt("folder_id")));
+		setAttr("selectFolder", selectFolder(model.getInt("folder_id")));
 
 		setAttr("page", page);
 		setAttr("attr", model);
 
-		setAttr("folders", new FolderService().getFolders());
+		setAttr("folders", new FolderService().getFolders(siteId));
 		render(path + "list.html");
 	}
 
@@ -71,7 +75,7 @@ public class ArticleController extends BaseProjectController {
 		setAttr("model", attr);
 
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(attr.getInt("folder_id")));
+		setAttr("selectFolder", selectFolder(attr.getInt("folder_id")));
 
 		render(path + "add.html");
 	}
@@ -105,32 +109,32 @@ public class ArticleController extends BaseProjectController {
 		setAttr("model", model);
 
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(model.getInt("folder_id")));
+		setAttr("selectFolder", selectFolder(model.getInt("folder_id")));
 
 		render(path + "edit.html");
 	}
 
 	public void save() {
+		TbSite site = getSessionSite().getBackModel();
+		UploadFile uploadImage = getFile("model.image_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
 
-		UploadFile uploadImage = getFile("model.image_url", JFlyfoxUpload.UPLOAD_TMP_PATH, JFlyfoxUpload.UPLOAD_MAX);
-
-		UploadFile uploadFile = getFile("model.file_url", JFlyfoxUpload.UPLOAD_TMP_PATH, JFlyfoxUpload.UPLOAD_MAX);
+		UploadFile uploadFile = getFile("model.file_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
 
 		Integer pid = getParaToInt();
 		TbArticle model = getModel(TbArticle.class);
 
 		// 图片附件
 		if (uploadImage != null) {
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.UPLOAD_ARICLE_PATH, uploadImage);
-			model.set("image_url", JFlyfoxUpload.ARICLE_PATH + File.separator + fileName);
+			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "article_image"), uploadImage);
+			model.set("image_url", JFlyfoxUpload.getUploadPath(site, "article_image")+ File.separator + fileName);
 			// model.set("image_url", uploadFile.getFileName());
 		}
 
 		// 文件附件
 		if (uploadFile != null) {
 			String oldFileName = uploadFile.getFileName();
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.UPLOAD_FILE_PATH, uploadFile);
-			model.set("file_url", JFlyfoxUpload.FILE_PATH + File.separator + fileName);
+			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "file_url"), uploadFile);
+			model.set("file_url", JFlyfoxUpload.getUploadPath(site, "file_url") + File.separator + fileName);
 			model.set("file_name", oldFileName); // 原文件名
 		} else {
 			// 删除标记
@@ -173,26 +177,34 @@ public class ArticleController extends BaseProjectController {
 		TbArticle model = TbArticle.dao.findById(getParaToInt());
 		setAttr("model", model);
 
-		// 设置标签
-		String tags = Db.findFirst("select group_concat(tagname) tags " //
-				+ " from tb_tags where article_id = ? order by id", model.getInt("id")).getStr("tags");
+		String tags = new ArticleService().getTags(model);
 		setAttr("tags", tags);
 
 		super.render(path + "edit_content.html");
 	}
 
+	public void edit_content_ue() {
+		TbArticle model = TbArticle.dao.findById(getParaToInt());
+		setAttr("model", model);
+
+		// 设置标签
+		String tags = new ArticleService().getTags(model);
+		setAttr("tags", tags);
+
+		super.render(path + "edit_content_ue.html");
+	}
+	
 	public void edit_content_textarea() {
 		TbArticle model = TbArticle.dao.findById(getParaToInt());
 		setAttr("model", model);
 
 		// 设置标签
-		String tags = Db.findFirst("select group_concat(tagname) tags " //
-				+ " from tb_tags where article_id = ? order by id", model.getInt("id")).getStr("tags");
+		String tags = new ArticleService().getTags(model);
 		setAttr("tags", tags);
 
 		super.render(path + "edit_content_textarea.html");
 	}
-	
+
 	public void view_content() {
 		// 根目录
 		setAttr("model", TbFolder.dao.findById(TbFolder.ROOT));
@@ -254,6 +266,9 @@ public class ArticleController extends BaseProjectController {
 			sql.whereLike("title", model.getStr("title"));
 			sql.whereEquals("folder_id", model.getInt("folder_id"));
 			sql.whereEquals("status", model.getInt("status"));
+
+			// 站点设置
+			sql.whereEquals("site_id", getSessionSite().getBackSiteId());
 		}
 
 		// 排序
@@ -268,12 +283,12 @@ public class ArticleController extends BaseProjectController {
 				sql.toString().toString());
 
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(model.getInt("folder_id")));
+		setAttr("selectFolder", selectFolder(model.getInt("folder_id")));
 
 		setAttr("page", page);
 		setAttr("attr", model);
 
-		List<TbFolder> folders = TbFolder.dao.findByWhere("order by sort,id");
+		List<TbFolder> folders = new FolderService().getFolders(getSessionSite().getBackSiteId());
 		setAttr("folders", folders);
 
 		render(path + "list_approve.html");
@@ -297,7 +312,7 @@ public class ArticleController extends BaseProjectController {
 		TbArticle model = TbArticle.dao.findById(getParaToInt());
 
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(0));
+		setAttr("selectFolder", selectFolder(0));
 
 		setAttr("model", model);
 		render(path + "copy.html");

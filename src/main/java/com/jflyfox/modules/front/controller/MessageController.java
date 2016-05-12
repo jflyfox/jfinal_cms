@@ -19,7 +19,7 @@ import com.jflyfox.system.user.SysUser;
 public class MessageController extends BaseProjectController {
 
 	public static final String path = "/message/";
-	
+
 	/**
 	 * 我的消息
 	 */
@@ -36,10 +36,12 @@ public class MessageController extends BaseProjectController {
 
 		String sql = " from tb_comment t " //
 				+ " left join tb_article art on art.id = t.article_id " //
-				+ " where t.create_id = ? or t.reply_userid = ? order by t.create_time desc ";
+				+ " left join tb_folder tf on tf.id = art.folder_id " //
+				+ " where ( t.create_id = ? or t.reply_userid = ? ) and tf.site_id = ? " //
+				+ " order by t.create_time desc ";
 		Page<TbComment> pages = TbComment.dao.paginate(getPaginator(), //
 				"select t.*,art.title,art.create_id as article_create_id " //
-				, sql, user.getUserid(), user.getUserid());
+				, sql, user.getUserid(), user.getUserid(), getSessionSite().getSiteId());
 		// 更新状态为已读
 		new CommentService().updateCommentStatusRead(user.getUserid());
 

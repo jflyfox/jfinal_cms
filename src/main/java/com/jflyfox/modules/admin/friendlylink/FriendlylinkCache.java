@@ -1,5 +1,6 @@
 package com.jflyfox.modules.admin.friendlylink;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jfinal.log.Log;
@@ -42,6 +43,48 @@ public class FriendlylinkCache extends BaseService {
 
 	public static List<TbFriendlylink> getList(int type) {
 		return cache.get(type + "");
+	}
+
+	/**
+	 * 友情链接
+	 * 
+	 * 2016年5月4日 下午2:50:27
+	 * flyfox 330627517@qq.com
+	 * @param siteId
+	 * @return
+	 */
+	public static List<TbFriendlylink> getFriendlylinkList(int siteId) {
+		List<TbFriendlylink> list = cache.get(21 + "");
+		
+		List<TbFriendlylink> newList =  new ArrayList<TbFriendlylink>();
+		for (TbFriendlylink item : list) {
+			int tmpSiteId = item.getInt("site_id");
+			if (tmpSiteId <= 0 || tmpSiteId == siteId) {
+				newList.add(item);
+			}
+		}
+		return newList;
+	}
+
+	/**
+	 * 关于我们
+	 * 
+	 * 2016年5月4日 下午2:50:34
+	 * flyfox 330627517@qq.com
+	 * @param siteId
+	 * @return
+	 */
+	public static List<TbFriendlylink> getAboutList(int siteId) {
+		List<TbFriendlylink> list = cache.get(22 + "");
+		
+		List<TbFriendlylink> newList =  new ArrayList<TbFriendlylink>();
+		for (TbFriendlylink item : list) {
+			int tmpSiteId = item.getInt("site_id");
+			if (tmpSiteId <= 0 || tmpSiteId == siteId) {
+				newList.add(item);
+			}
+		}
+		return newList;
 	}
 
 }

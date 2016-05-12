@@ -1,7 +1,7 @@
 <% var headContent = { %> <%
 include("/template/mtg/includes/header.html"){} %>
 
-<script type="text/javascript" src="template/mtg/person/show_person.js"></script>
+<script type="text/javascript" src="${BASE_PATH }template/mtg/person/show_person.js"></script>
 <% }; var bodyContent = { %> <%
 include("/template/mtg/includes/header_menu.html"){} %>
 
@@ -15,8 +15,8 @@ include("/template/mtg/includes/header_menu.html"){} %>
 		<div class="panel panel-default">
 			 <div class="panel-body" style="padding:0px;">
 			<ol class="breadcrumb" style="margin:0px;">
-			  <li><a href="web">首页</a></li>
-			  <li><a href="front/person">我的空间</a></li>
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <li><a href="${BASE_PATH }front/person">我的空间</a></li>
 			  <li>编辑信息</li>
 			</ol>
 			</div>
@@ -38,8 +38,16 @@ include("/template/mtg/includes/header_menu.html"){} %>
 						<input type="hidden" name="model.userid" value="${model.userid}" />
 						<div  class="form-group text-center">
 							<div class="col-sm-offset-2 col-sm-10">
+							<% 
+							var userPic = model.title_url;
+							if(isEmpty(userPic)){
+								userPic = BASE_PATH + 'static/images/user/user.png';
+							} else if(!strutil.startWith(userPic , 'http')) {
+								userPic = ASE_PATH + userPic;
+							}
+						 %>
 							<img id="title_pic" alt="头像"  width="64" height="64" 
-						 			class="img_radius" src="${model.title_url!'static/images/user/user.png'}">
+						 			class="img_radius" src="${userPic}">
 						 	</div>
 						</div>
 						

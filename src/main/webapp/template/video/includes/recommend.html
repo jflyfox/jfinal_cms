@@ -11,13 +11,13 @@
 		<div class="col-sm-12 col-md-12">
 	        <div class="">
         		<% if(!strutil.isEmpty(item.thumbnail)){ %>
-	         	<a href="album/video/img/${item.id}.html" target="_blank">
+	         	<a href="${BASE_PATH }album/video/img/${item.id}.html" target="_blank">
 						<img src="${item.thumbnail}" data-holder-rendered="true" style="height: 150px; width: 100%; display: block;">
 	         			<span aria-hidden="true"></span>
 					</a>
 				<% } else { %>
-					<a href="album/video/img/${item.id}.html" target="_blank">
-						<img src="static/images/video/no_image.jpg" data-holder-rendered="true" style="height: 150px; width: 100%; display: block;">
+					<a href="${BASE_PATH }album/video/img/${item.id}.html" target="_blank">
+						<img src="${BASE_PATH }static/images/video/no_image.jpg" data-holder-rendered="true" style="height: 150px; width: 100%; display: block;">
 						<span aria-hidden="true"></span>
 					</a>
 				<% } %>

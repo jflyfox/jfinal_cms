@@ -1,8 +1,10 @@
+	<!-- 
 	<base href="${BASE_PATH }">
+	 -->
 	<title>${HEAD_TITLE }</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="icon" href="favicon.ico" />
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="icon" href="${BASE_PATH }favicon.ico" />
+	<link rel="shortcut icon" href="${BASE_PATH }favicon.ico" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">
@@ -13,19 +15,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<% include("/static/component/include/jquery.html"){} %>
-	<script type="text/javascript" src="template/mtg/includes/common_pack.js"></script>
+	<% include("/template/includes/jquery.html"){} %>
+	<script type="text/javascript" src="${BASE_PATH }template/mtg/includes/common_pack.js"></script>
 	<!-- 
-	<script type="text/javascript" src="template/mtg/includes/common.js"></script>
+	<script type="text/javascript" src="${BASE_PATH }template/mtg/includes/common.js"></script>
 	 -->
 
-	<% include("/static/component/include/bootstrap.html"){} %>
+	<% include("/template/includes/bootstrap.html"){} %>
 	
-	<script type="text/javascript" src="template/mtg/includes/common_pack.js"></script>
+	<script type="text/javascript" src="${BASE_PATH }template/mtg/includes/common_pack.js"></script>
 	<!-- 
-	<link rel="stylesheet" href="static/front/home.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="${BASE_PATH }static/front/home.css" type="text/css" media="screen, projection">
 	 -->
-	<link rel="stylesheet" href="static/front/home.min.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="${BASE_PATH }static/front/home.min.css" type="text/css" media="screen, projection">
 
 	<style>
 	<!--

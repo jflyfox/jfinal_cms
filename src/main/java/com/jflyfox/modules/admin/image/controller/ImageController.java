@@ -6,15 +6,16 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ImageModel;
 import com.jflyfox.component.util.ImageUtils;
 import com.jflyfox.component.util.JFlyfoxUpload;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.modules.admin.image.model.TbImage;
 import com.jflyfox.modules.admin.image.model.TbImageTags;
 import com.jflyfox.modules.admin.image.service.ImageAlbumService;
+import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.util.StrUtils;
 
 /**
@@ -24,7 +25,7 @@ import com.jflyfox.util.StrUtils;
  * flyfox 330627517@qq.com
  */
 @ControllerBind(controllerKey = "/admin/image")
-public class ImageController extends BaseController {
+public class ImageController extends BaseProjectController {
 
 	private static final String path = "/pages/admin/image/image_";
 
@@ -128,15 +129,16 @@ public class ImageController extends BaseController {
 	}
 
 	public void save() {
-		UploadFile uploadImage = getFile("model.image_url", JFlyfoxUpload.UPLOAD_TMP_PATH, JFlyfoxUpload.UPLOAD_MAX);
+		TbSite site = getSessionSite().getBackModel();
+		UploadFile uploadImage = getFile("model.image_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
 		
 		Integer pid = getParaToInt();
 		TbImage model = getModel(TbImage.class);
 		
 		// 图片附件
 		if (uploadImage != null) {
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.UPLOAD_IMAGE_PATH, uploadImage);
-			model.set("image_url", JFlyfoxUpload.IMAGE_PATH + File.separator + fileName);
+			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "image"), uploadImage);
+			model.set("image_url", JFlyfoxUpload.getUploadPath(site, "image") + File.separator + fileName);
 			
 
 		}

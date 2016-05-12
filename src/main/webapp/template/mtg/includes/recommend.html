@@ -1,12 +1,12 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-	<h3 class="panel-title">推荐文章<a class="more" href="front/article/recommend">更多</a></h3>
+	<h3 class="panel-title">推荐文章<a class="more" href="${BASE_PATH }front/article/recommend.html">更多</a></h3>
   </div>
 	<ul class="list-group">
 	  	<% for(item in recommendArticles.list){ %>
 			<li class="list-group-item">
 				<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-				<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+				<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
 				<% if (strutil.length(item.title) > 18) { %>
 					${strutil.subStringTo(item.title, 0, 18)}...
 				<% 	} else { %>

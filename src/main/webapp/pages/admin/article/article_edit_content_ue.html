@@ -1,0 +1,247 @@
+<% var headContent = { %>
+<base href="${BASE_PATH }">
+<title>${HEAD_TITLE }</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="icon" href="${BASE_PATH }favicon.ico" />
+<link rel="shortcut icon" href="${BASE_PATH }favicon.ico" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta name="keywords" content="${HEAD_TITLE }">
+<meta name="description" content="${HEAD_TITLE }">
+<!-- 弹出框 -->
+<% include("/pages/includes/ymprompt.html"){} %>
+<!-- jquery -->
+<% include("/pages/includes/jquery.html"){} %> 
+<% include("/pages/includes/ueditor.html"){} %>
+
+<style>
+body {
+	overflow: hidden;
+}
+
+.tags {
+	line-height: 22px;
+	height: 22px;
+}
+
+.tags .tags_label {
+	float: left;
+	font-weight: bold;
+	margin-right: 5px;
+	padding: 5px 1px 1px 3px;
+	margin-right: 5px
+}
+
+.tags .tags_content {
+	float: left;
+	width: 500px;
+	margin: 5px 5px 0 0;
+	padding: 1px;
+	border: 1px solid #ccc;
+	background: #fff;
+	vertical-align: middle;
+}
+
+.tags .tags_remark {
+	padding: 5px 1px 1px 3px;
+	color: #999999;
+	font-size: 12px;
+	z-index: 10000;
+}
+
+.btn_block {
+	width: 800px;
+	margin: 5px 0 5px 0;
+	padding: 10px 0px 0px 0px;
+	text-align: center;
+	z-index: 10000;
+}
+/***************bootstrap*************/
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px
+}
+
+.btn.active.focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn:active:focus,.btn:focus
+	{
+	outline: thin dotted;
+	outline: 5px auto -webkit-focus-ring-color;
+	outline-offset: -2px
+}
+
+.btn.focus,.btn:focus,.btn:hover {
+	color: #333;
+	text-decoration: none
+}
+
+.btn.active,.btn:active {
+	background-image: none;
+	outline: 0;
+	-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125)
+}
+
+.btn.disabled,.btn[disabled],fieldset[disabled] .btn {
+	pointer-events: none;
+	cursor: not-allowed;
+	filter: alpha(opacity = 65);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	opacity: .65
+}
+
+.btn-default {
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc
+}
+
+.btn-default.active,.btn-default.focus,.btn-default:active,.btn-default:focus,.btn-default:hover,.open>.dropdown-toggle.btn-default
+	{
+	color: #333;
+	background-color: #e6e6e6;
+	border-color: #adadad
+}
+
+.btn-default.active,.btn-default:active,.open>.dropdown-toggle.btn-default
+	{
+	background-image: none
+}
+
+.btn-default.disabled,.btn-default.disabled.active,.btn-default.disabled.focus,.btn-default.disabled:active,.btn-default.disabled:focus,.btn-default.disabled:hover,.btn-default[disabled],.btn-default[disabled].active,.btn-default[disabled].focus,.btn-default[disabled]:active,.btn-default[disabled]:focus,.btn-default[disabled]:hover,fieldset[disabled] .btn-default,fieldset[disabled] .btn-default.active,fieldset[disabled] .btn-default.focus,fieldset[disabled] .btn-default:active,fieldset[disabled] .btn-default:focus,fieldset[disabled] .btn-default:hover
+	{
+	background-color: #fff;
+	border-color: #ccc
+}
+
+.btn-default .badge {
+	color: #fff;
+	background-color: #333
+}
+
+.btn-primary {
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #2e6da4
+}
+
+.btn-primary.active,.btn-primary.focus,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.open>.dropdown-toggle.btn-primary
+	{
+	color: #fff;
+	background-color: #286090;
+	border-color: #204d74
+}
+
+.btn-primary.active,.btn-primary:active,.open>.dropdown-toggle.btn-primary
+	{
+	background-image: none
+}
+
+.btn-primary.disabled,.btn-primary.disabled.active,.btn-primary.disabled.focus,.btn-primary.disabled:active,.btn-primary.disabled:focus,.btn-primary.disabled:hover,.btn-primary[disabled],.btn-primary[disabled].active,.btn-primary[disabled].focus,.btn-primary[disabled]:active,.btn-primary[disabled]:focus,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary,fieldset[disabled] .btn-primary.active,fieldset[disabled] .btn-primary.focus,fieldset[disabled] .btn-primary:active,fieldset[disabled] .btn-primary:focus,fieldset[disabled] .btn-primary:hover
+	{
+	background-color: #337ab7;
+	border-color: #2e6da4
+}
+
+.btn-primary .badge {
+	color: #337ab7;
+	background-color: #fff
+}
+
+button,input,select,textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+button,html input[type=button],input[type=reset],input[type=submit] {
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+button,select {
+	text-transform: none;
+}
+
+button {
+	overflow: visible;
+}
+
+button,input,optgroup,select,textarea {
+	margin: 0;
+	font: inherit;
+	color: inherit;
+}
+</style>
+
+<script type="text/javascript">
+	var um;
+	$(document).ready(function(){
+		um = UE.getEditor('editor',{
+			initialFrameHeight:400  //初始化编辑器高度,默认320
+		});
+	});
+
+	function oper_save() {
+		if(!um.hasContents()){
+			Alert('请输入文章内容');
+			return false;
+		}
+		var tags = $('.tags_content').text().replace(/，/g, ",");
+		if(tags!='') {
+			$('[name="tags"]').val(tags);
+		}
+		
+		form1.action = "admin/article/save_content/"+form1["model.id"].value;
+		form1.submit();
+		return true;
+	}
+	
+</script>
+
+<% }; var bodyContent = { %>
+<form name="form1" action="" method="post" >
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<!-- 数据列表 -->
+	<div>
+		<script id="editor" type="text/plain" name="model.content"
+			style="width: 98%; height: 320px;">${model.content}</script>
+	</div>
+
+	<div class="tags">
+		<input name="tags" type="hidden" value="${tags!''}" />
+		<div class="tags_label">标签：</div>
+		<div contentEditable="true" class="tags_content">${tags!''}</div>
+		<div class="tags_remark">请使用逗号分隔不同标签，最多5个哦</div>
+	</div>
+
+	<div class="btn_block">
+		<button class="btn btn-primary"
+			onclick="return oper_save(${model.id!'0'});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关
+			闭</button>
+	</div>
+
+</form>
+<%}; %> <%
+layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){
+%> <%} %>
+

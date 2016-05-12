@@ -6,7 +6,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
-import com.jflyfox.modules.admin.image.model.TbImageAlbum;
 import com.jflyfox.modules.admin.video.model.TbVideo;
 import com.jflyfox.modules.admin.video.model.TbVideoAlbum;
 import com.jflyfox.util.StrUtils;
@@ -58,7 +57,7 @@ public class VideoalbumController extends BaseProjectController {
 	public void view() {
 		TbVideoAlbum model = TbVideoAlbum.dao.findById(getParaToInt());
 		
-		TbImageAlbum album = TbImageAlbum.dao.findById(model.getParentId());
+		TbVideoAlbum album = TbVideoAlbum.dao.findById(model.getParentId());
 		model.put("parentName", album != null ? album.getName() : null);
 		
 		setAttr("model", model);

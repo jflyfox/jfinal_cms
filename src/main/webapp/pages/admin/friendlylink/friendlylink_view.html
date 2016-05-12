@@ -36,7 +36,25 @@ var bodyContent = {
 			<%	} %>
 			</td>  
 		</tr>
-					<tr>
+		<tr>
+			<td>站点</td>
+			<td>
+			<% 
+			var nowSite = null;
+			if(!isEmpty(sites)) {
+				for(item in sites) { 
+					if(item.id==model.site_id) {
+						nowSite = item;
+					}
+			    }
+			 }
+		     %>
+		     ${isEmpty(nowSite)?'全部':nowSite.name}
+			</td>  
+		</tr>
+		
+		
+		<tr>
 			<td>备注</td>
 			<td title="${model.remark}">
 				<% if (strutil.length(model.remark) > 6) { %>

@@ -3,7 +3,7 @@
 		var taglist = temp.tagsPageByFolder(1, 50, folder.id).list;
 		
 		// 列表数据
-		var page = temp.articlePage(paginator.pageNo,paginator.pageSize, folder.id);
+		var page = temp.articlePage(paginator.pageNo, paginator.pageSize, folder.id);
 		
 		// 公告
 		var noticeList = temp.notice(folder.id);
@@ -30,8 +30,8 @@ var bodyContent = {
 		<div class="panel panel-default">
 			 <div class="panel-body" style="padding:0px;">
 			<ol class="breadcrumb" style="margin:0px;">
-			  <li><a href="home">首页</a></li>
-			  <li class="active"><a href="${flyfox.getMenu(folder.id)}">${folder.name }</a></li>
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <li class="active"><a href="${BASE_PATH }${flyfox.getMenu(folder.id)}">${folder.name }</a></li>
 			</ol>
 			</div>
 		</div>
@@ -77,7 +77,7 @@ var bodyContent = {
 		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			<h3 class="panel-title">推荐标签<a class="more" href="front/tags/all">更多</a></h3>
+			<h3 class="panel-title">推荐标签<a class="more" href="${BASE_PATH }front/tags/all">更多</a></h3>
 		  </div>
 		  <div class="panel-body">
 			<%  
@@ -89,7 +89,7 @@ var bodyContent = {
 					for(tagitem in taglist){ 
 				%>
 					<li class="q-tagitem">
-					<a class="a-tagitem" href="front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+					<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
 					</li>
 				<% 
 					}

@@ -1,7 +1,7 @@
 <%
 // 获取前20个文章
-var articlePage = temp.articlePage(1, 20, 1);
-var homeArticle = temp.article(1);
+var articlePage = temp.articlePage(1, 20, session.site.model.site_folder_id);
+var homeArticle = temp.article(session.site.model.site_article_id);
 %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,13 +9,13 @@ var homeArticle = temp.article(1);
 <head>
 	<title>${HEAD_TITLE }</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="icon" href="favicon.ico" />
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="icon" href="${BASE_PATH }favicon.ico" />
+	<link rel="shortcut icon" href="${BASE_PATH }favicon.ico" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">
-	<meta name="keywords" content="${HEAD_TITLE }">
-	<meta name="description" content="${HEAD_TITLE }">
+	<meta name="keywords" content="${HEAD_KEYWORDS }">
+	<meta name="description" content="${HEAD_DESCRIPTION  }">
 	
 	<!-- IE兼容处理 -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -128,8 +128,7 @@ var navigationTooltipsArray = [];
 			</div>
 		<% } %>
 		
-
-</div>
+	</div>
 
 </body>
 </html>

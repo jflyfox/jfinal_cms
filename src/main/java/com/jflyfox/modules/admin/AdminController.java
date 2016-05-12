@@ -58,7 +58,9 @@ public class AdminController extends BaseProjectController {
 			return;
 		}
 		String encryptPassword = JFlyFoxUtils.passwordEncrypt(password); // 加密
-		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? and password = ? ", username, encryptPassword);
+		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? and password = ? " //
+				+ " and usertype in ( " + JFlyFoxUtils.USER_TYPE_ADMIN + "," + JFlyFoxUtils.USER_TYPE_NORMAL + ")",
+				username, encryptPassword);
 		if (user == null || user.getInt("userid") <= 0) {
 			setAttr("msg", "认证失败，请您重新输入。");
 			render(loginPage);
@@ -66,7 +68,7 @@ public class AdminController extends BaseProjectController {
 		} else {
 			setSessionUser(user);
 		}
-		
+
 		// 添加日志
 		user.put("update_id", user.getUserid());
 		user.put("update_time", getNow());
@@ -90,7 +92,7 @@ public class AdminController extends BaseProjectController {
 			// 删除session
 			removeSessionUser();
 		}
-		
+
 		setAttr("msg", "您已退出");
 		render(loginPage);
 	}

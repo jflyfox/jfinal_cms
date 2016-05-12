@@ -3,15 +3,15 @@
 	include("/pages/template/head.html"){}
 %>
 
-<% include("/static/component/include/ztree.html"){} %>  
+<% include("/pages/includes/ztree.html"){} %>
     
 <script type="text/javascript">
 var oper;
 jQuery(function($) {
 	// 页面方法
 	oper = {
-		width : 400,
-		height : 430,
+		width : 750,
+		height : 550,
 		form : document.form1,
 		list : function() {
 			var url = 'admin/folder/list';
@@ -222,10 +222,10 @@ var bodyContent = {
 					<td>${item.key}</td>  
 					<td>${item.sort}</td>
 					<td>
-						<% if(item.status=='2') { %>
+						<% if(item.status==2) { %>
 						隐藏
 						<%	} %>
-						<% if(item.status=='1') { %>
+						<% if(item.status==1) { %>
 						显示
 						<%	} %>
 					</td> 
@@ -250,7 +250,7 @@ var bodyContent = {
 			<% } %>
 			</tbody>
 		</table>
-		<%include("/static/component/include/paginator.html"){} %>
+		<%include("/pages/includes/paginator.html"){} %>
 	</form>
 	
 </div>

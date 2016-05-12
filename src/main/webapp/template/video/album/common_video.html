@@ -7,13 +7,12 @@ var bodyContent = {
 
 %>
 <form name="form1" action="" method="post" class="form-horizontal" role="form">
+<div class="container">
 <div class="row">
-	<div class="col-md-1">
-	</div>
-	<div class="col-md-6">
+	<div class="col-md-8">
 	 	
 		<div style="width: 640px; height: 352px; margin:5px; padding: 10px; border:5px solid #999;">
-			<% include("/static/component/include/sewise-player.html"){} %>
+			<% include("/template/includes/sewise-player.html"){} %>
 			
 	        <script type="text/javascript">
 	            SewisePlayer.setup({
@@ -54,6 +53,7 @@ var bodyContent = {
 	</table>
 	</div>
 
+</div>
 </div>
 	
 	

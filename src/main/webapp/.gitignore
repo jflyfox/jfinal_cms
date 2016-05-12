@@ -1,2 +1,5 @@
+/download/*/*.jpg
+/download/*/*.png
 /umeditor
+/classes
 /bakup

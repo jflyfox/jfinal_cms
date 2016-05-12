@@ -4,6 +4,8 @@
 %>
 
 <script type="text/javascript">
+var oper;
+
 $(function() {
 	// 头像展示
 	$('[name="model.title_url"]').change(function(){
@@ -14,6 +16,17 @@ $(function() {
 		
 		$('#title_pic').attr('src',pic);
 	});
+	
+	
+	// 页面方法
+	oper = {
+		form : document.form1,
+		list : function() {
+			var url = 'admin/person';
+			this.form.action = url;
+			this.form.submit();
+		}
+	};
 });
 
 function oper_save(){
@@ -44,6 +57,38 @@ function oper_save(){
 	});
 }
 
+
+/**
+ * 设置主题
+ */
+function oper_theme(theme){
+	jQuery.ajax({
+		type:'POST',
+		url:'admin/person/theme/'+theme,
+		success:function(data){
+			if(data.status==1){
+				if(typeof oper=='undefined' && typeof form=='undefined') {
+					Alert('设置成功,请刷新页面');
+				} else {
+					Alert('设置成功.',function(){
+						if(typeof oper!='undefined'&&typeof oper.list!='undefined'&&oper.list instanceof Function) {
+							oper.list()
+						} else if(typeof form!='undefined'&&form.search[0].getAttribute("onclick")!=null){
+							form.search[0].click();
+						};
+					});
+				}
+			} else {
+				Alert('保存失败：'+data.msg);
+			}
+		},
+		error:function(html){
+			var flag = (typeof console != 'undefined');
+			if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+			alert("服务器忙，提交数据失败，请联系管理员！");
+		}
+	});
+}
 </script>
 
 <%
@@ -65,9 +110,25 @@ var bodyContent = {
 			<h3 class="panel-title">个人信息</h3>
 		  </div>
 		   <div class="panel-body">
-		  
 				<form class="form-horizontal" name="form1" action="" method="post">
 						<input type="hidden" name="model.userid" value="${model.userid}" />
+						
+						<!-- 主题 -->
+						<div class="form-group">
+						    <label for="username" class="col-sm-2 control-label">主题设置</label>
+						    <div class="col-sm-10">
+						    	<div class="dropdown" >
+								  <button class="btn btn-link dropdown-toggle" title="主题" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								    <span class="glyphicon glyphicon-th-list"></span> ${session.session_user.theme!'default'} <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								    <li><a href="#" onclick="oper_theme('default');return false;">default（白色）</a></li>
+								    <li><a href="#" onclick="oper_theme('inverse');return false;">inverse（黑色）</a></li>
+								    <li><a href="#" onclick="oper_theme('flat-ui');return false;">flat-ui（绿色）</a></li>
+								  </ul>
+								</div>
+						    </div>
+						  </div>
 						
 						 <div class="form-group">
 						    <label for="username" class="col-sm-2 control-label">登录名</label>

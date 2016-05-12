@@ -32,18 +32,18 @@ var bodyContent = {
 			<div class="col-sm-4 col-md-3">
 		       <div class="thumbnail">
 		       		<% if(!strutil.isEmpty(item.thumbnail)){ %>
-		         		<a href="album/video/img/${item.id}.html" target="_blank">
+		         		<a href="${BASE_PATH }album/video/img/${item.id}.html" target="_blank">
 							<img src="${item.thumbnail}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 							<span class="shuiyin_play" aria-hidden="true"></span>
 						</a>
 					<% } else { %>
-						<a href="album/video/img/${item.id}.html" target="_blank">
-							<img src="static/images/video/no_image.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+						<a href="${BASE_PATH }album/video/img/${item.id}.html" target="_blank">
+							<img src="${BASE_PATH }static/images/video/no_image.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 							<span class="shuiyin_play" aria-hidden="true"></span>
 						</a>
 					<% } %>
 		         <div class="caption">
-		           <a href="album/video/img/${item.id}.html" target="_blank">${item.name}</a>
+		           <a href="${BASE_PATH }album/video/img/${item.id}.html" target="_blank">${item.name}</a>
 		         </div>
 		       </div>
 		     </div>

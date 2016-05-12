@@ -9,8 +9,8 @@ import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.component.util.JFlyfoxUpload;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
-import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.admin.folder.TbFolder;
+import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.util.StrUtils;
 
 /**
@@ -34,6 +34,8 @@ public class FolderrollpictureController extends BaseProjectController {
 			// 查询条件
 			sql.whereEquals("folder_id", model.getInt("folder_id"));
 		}
+		// 站点设置
+		sql.append(" and site_id = " + getSessionSite().getBackSiteId());
 
 		// 排序
 		String orderBy = getBaseForm().getOrderBy();
@@ -48,7 +50,7 @@ public class FolderrollpictureController extends BaseProjectController {
 				sql.toString().toString());
 
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(model.getInt("folder_id")));
+		setAttr("selectFolder", selectFolder(model.getInt("folder_id")));
 
 		setAttr("page", page);
 		setAttr("attr", model);
@@ -57,7 +59,7 @@ public class FolderrollpictureController extends BaseProjectController {
 
 	public void add() {
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(0));
+		setAttr("selectFolder", selectFolder(0));
 
 		render(path + "add.html");
 	}
@@ -88,22 +90,23 @@ public class FolderrollpictureController extends BaseProjectController {
 		TbFolderRollPicture model = TbFolderRollPicture.dao.findById(getParaToInt());
 
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(model.getInt("folder_id")));
+		setAttr("selectFolder", selectFolder(model.getInt("folder_id")));
 
 		setAttr("model", model);
 		render(path + "edit.html");
 	}
 
 	public void save() {
-		UploadFile uploadImage = getFile("model.image_url", JFlyfoxUpload.UPLOAD_TMP_PATH, JFlyfoxUpload.UPLOAD_MAX);
+		TbSite site = getSessionSite().getBackModel();
+		UploadFile uploadImage = getFile("model.image_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
 
 		Integer pid = getParaToInt();
 		TbFolderRollPicture model = getModel(TbFolderRollPicture.class);
 
 		// 图片附件
 		if (uploadImage != null) {
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.UPLOAD_ROLL_IMAGE_PATH, uploadImage);
-			model.set("image_url", JFlyfoxUpload.ROLL_IMAGE_PATH + File.separator + fileName);
+			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "roll_image"), uploadImage);
+			model.set("image_url", JFlyfoxUpload.getUploadPath(site, "roll_image") + File.separator + fileName);
 		}
 
 		Integer userid = getSessionUser().getUserID();

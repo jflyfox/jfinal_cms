@@ -6,7 +6,6 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ArticleCountCache;
-import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
@@ -37,21 +36,23 @@ public class ArticleController extends BaseProjectController {
 	 */
 	@Before(FrontInterceptor.class)
 	public void index() {
-
 		// 数据列表
 		int articleId = getParaToInt();
+
 		// 文章
 		// TbArticle article = new FrontCacheService().getArticle(articleId);
 		TbArticle article = TbArticle.dao.findById(articleId);
-		
+
+		// 新增链接跳转
 		if (article != null) {
-			// 新增链接跳转
 			String jumpUrl = article.getStr("jump_url");
 			if (StrUtils.isNotEmpty(jumpUrl)) { // jump url
 				redirect(jumpUrl);
 				return;
 			}
-			
+		}
+
+		if (article != null) {
 			// 更新浏览量
 			String key = getSessionAttr(JFlyFoxUtils.USER_KEY);
 			if (key != null) {
@@ -63,11 +64,10 @@ public class ArticleController extends BaseProjectController {
 			setAttr("item", article);
 
 			// seo：title优化
-			setAttr(JFlyFoxUtils.TITLE_ATTR, article.getTitle() + " - " + JFlyFoxCache.getHeadTitle());
+			setAttr(JFlyFoxUtils.TITLE_ATTR, article.getTitle() + " - " + getAttr(JFlyFoxUtils.TITLE_ATTR));
 
 			// 标签
-			// List<TbTags> taglist = new
-			// FrontCacheService().getTagsByArticle(articleId);
+			// List<TbTags> taglist = new FrontCacheService().getTagsByArticle(articleId);
 			List<TbTags> taglist = TbTags.dao.find("select * from tb_tags " //
 					+ "where article_id = ? order by  create_time desc ", articleId);
 			setAttr("taglist", taglist);
@@ -107,15 +107,16 @@ public class ArticleController extends BaseProjectController {
 		setAttr("folders_selected", 0);
 
 		// 推荐文章列表，缓存
-		Page<TbArticle> pages = new FrontCacheService().getRecommendArticle(getPaginator());
+		Page<TbArticle> pages = new FrontCacheService().getRecommendArticle(getPaginator() //
+				, getSessionSite().getSiteId());
 		setAttr("page", pages);
 
 		// 显示50个标签
-		Page<TbTags> taglist = new FrontCacheService().getTags(new Paginator(1, 50));
+		Page<TbTags> taglist = new FrontCacheService().getTags(new Paginator(1, 50), getSessionSite().getSiteId());
 		setAttr("taglist", taglist.getList());
 
 		// seo：title优化
-		setAttr(JFlyFoxUtils.TITLE_ATTR, "推荐文章 - " + JFlyFoxCache.getHeadTitle());
+		setAttr(JFlyFoxUtils.TITLE_ATTR, "推荐文章 - " + getAttr(JFlyFoxUtils.TITLE_ATTR));
 
 		renderAuto(path + "show_recommend.html");
 	}

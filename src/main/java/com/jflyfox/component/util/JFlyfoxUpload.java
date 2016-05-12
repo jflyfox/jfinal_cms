@@ -5,64 +5,88 @@ import java.security.SecureRandom;
 
 import com.jfinal.kit.PathKit;
 import com.jfinal.upload.UploadFile;
+import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.util.DateUtils;
+import com.jflyfox.util.StrUtils;
 
 public class JFlyfoxUpload {
 
 	public static final int UPLOAD_MAX = 10 * 1024 * 1024;
-	
+
+	/**
+	 * 基础目录
+	 */
+	public static final String BASE_PATH = PathKit.getWebRootPath() + File.separator;
+
+	/**
+	 * 基础JFLYFOX目录
+	 */
+	private static final String JFLYFOX_PATH = "jflyfox" + File.separator;
+
 	/**
 	 * 上传临时目录
 	 */
-	public static final String UPLOAD_TMP_PATH = "tmp";
+	private static final String UPLOAD_TMP_PATH = "tmp";
 
 	/**
-	 * 文章图片目录
+	 * 临时路径
+	 * 
+	 * 2016年4月27日 下午4:07:23 flyfox 330627517@qq.com
+	 * 
+	 * @param site
+	 * @param type
+	 * @return
 	 */
-	public static final String ARICLE_PATH = "download" + File.separator + "image_url";
+	public static String getUploadTmpPath(TbSite site) {
+		String sitePath = site == null || StrUtils.isEmpty(site.getTemplate()) ? ""
+				: (site.getTemplate() + File.separator);
+		String path = JFLYFOX_PATH + sitePath + UPLOAD_TMP_PATH;
+
+		return path;
+	}
+
 	/**
-	 * 文章图片全目录
+	 * 上传路径
+	 * 
+	 * 2016年4月27日 下午4:07:28 flyfox 330627517@qq.com
+	 * 
+	 * @param site
+	 * @param type
+	 * @return
 	 */
-	public static final String UPLOAD_ARICLE_PATH = PathKit.getWebRootPath() + File.separator + ARICLE_PATH;
-	
+	public static String getUploadPath(TbSite site, String type) {
+		String sitePath = site == null || StrUtils.isEmpty(site.getTemplate()) ? ""
+				: (site.getTemplate() + File.separator);
+		String path = JFLYFOX_PATH + sitePath + type;
+		File file = new File(BASE_PATH + path);
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+
+		return path;
+	}
+
 	/**
-	 * 栏目滚动图片目录
+	 * 上传绝对路径
+	 * 
+	 * 2016年4月27日 下午4:07:34 flyfox 330627517@qq.com
+	 * 
+	 * @param site
+	 * @param type
+	 * @return
 	 */
-	public static final String ROLL_IMAGE_PATH = "download" + File.separator + "roll_image";
-	/**
-	 * 栏目滚动图片全目录
-	 */
-	public static final String UPLOAD_ROLL_IMAGE_PATH = PathKit.getWebRootPath() + File.separator + ROLL_IMAGE_PATH;
-	
-	/**
-	 * 文章文件目录
-	 */
-	public static final String FILE_PATH = "download" + File.separator + "file_url";
-	/**
-	 * 文章文件全目录
-	 */
-	public static final String UPLOAD_FILE_PATH = PathKit.getWebRootPath() + File.separator + FILE_PATH;
-	
-	/**
-	 * 图片目录
-	 */
-	public static final String IMAGE_PATH = "download" + File.separator + "image";
-	
-	/**
-	 * 图片全目录
-	 */
-	public static final String UPLOAD_IMAGE_PATH = PathKit.getWebRootPath() + File.separator + IMAGE_PATH;
-	
-	/**
-	 * 视频目录
-	 */
-	public static final String VIDEO_PATH = "download" + File.separator + "video";
-	
-	/**
-	 * 视频全目录
-	 */
-	public static final String UPLOAD_VIDEO_PATH = PathKit.getWebRootPath() + File.separator + VIDEO_PATH;
-	
+	public static String getUploadFilePath(TbSite site, String type) {
+		String sitePath = site == null || StrUtils.isEmpty(site.getTemplate()) ? ""
+				: (site.getTemplate() + File.separator);
+		String path = BASE_PATH + JFLYFOX_PATH + sitePath + type;
+		File file = new File(path);
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+
+		return path;
+	}
+
 	/**
 	 * 重命名
 	 * 

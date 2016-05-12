@@ -30,13 +30,13 @@ public class ImageAlbumService {
 				.find(" select id,name from tb_image_album order by sort,create_time desc ");
 		StringBuffer sb = new StringBuffer("");
 		if (list != null && list.size() > 0) {
-			for (TbImageAlbum folder : list) {
+			for (TbImageAlbum album : list) {
 				sb.append("<option value=\"");
-				sb.append(folder.getId());
+				sb.append(album.getId());
 				sb.append("\" ");
-				sb.append(folder.getId() == selected ? "selected" : "");
+				sb.append(album.getId() == selected ? "selected" : "");
 				sb.append(">");
-				sb.append(folder.getName());
+				sb.append(album.getName());
 				sb.append("</option>");
 			}
 		}

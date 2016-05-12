@@ -25,13 +25,13 @@
 						<ul class="q-taglist clearfix">
 							<li title="标签"><span class="q-icon"></span></li>
 							<li class="q-tagitem">
-							<a class="a-tagitem" href="home.html" >全部</a>
+							<a class="a-tagitem" href="${BASE_PATH }" >全部</a>
 							</li>
 						<%
 							for(item in albums){ 
 						%>
 							<li class="q-tagitem ${album_selected!0==item.id?'a-tagitem-active':''}">
-							<a class="a-tagitem" href="album/image/${tempImage.randomAlbumId()}${item.id}.html" >${item.name}</a>
+							<a class="a-tagitem" href="${BASE_PATH }album/image/${tempImage.randomAlbumId()}${item.id}.html" >${item.name}</a>
 							</li>
 						<% 
 							}

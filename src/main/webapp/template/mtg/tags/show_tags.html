@@ -13,7 +13,7 @@
 		<div class="panel panel-default">
 			 <div class="panel-body" style="padding:0px;">
 			<ol class="breadcrumb" style="margin:0px;">
-			  <li><a href="web">首页</a></li>
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
 			  <li class="active">标签查询</li>
 			</ol>
 			</div>
@@ -39,7 +39,7 @@
 					for(tagitem in taglist){ 
 				%>
 					<li class="q-tagitem">
-					<a class="a-tagitem" href="front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+					<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
 					</li>
 				<% 
 					}

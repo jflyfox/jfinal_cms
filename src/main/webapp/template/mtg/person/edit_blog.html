@@ -4,8 +4,8 @@
 	<% include("/template/mtg/includes/header.html"){} %>
 	
 <!-- jquery -->
-<% include("/static/component/include/jquery.html"){} %> 
-<% include("/static/component/include/umeditor.html"){} %>
+<% include("/template/includes/jquery.html"){} %> 
+<% include("/template/includes/umeditor.html"){} %>
 	
 <script type="text/javascript">
 	var um;
@@ -57,12 +57,12 @@
 		
 		jQuery.ajax({
 			type:'POST',
-			url:'front/person/saveblog/'+id,
+			url:jflyfox.BASE_PATH + 'front/person/saveblog/'+id,
 			data:$("form").serialize(),
 			success:function(data){
 				if(data.status==1){
 					alert('发布成功');
-					form1.action = "front/person";
+					form1.action = jflyfox.BASE_PATH + "front/person";
 					form1.submit();
 					return true;
 				} else {
@@ -100,8 +100,8 @@ var bodyContent = {
 		<div class="panel panel-default">
 			 <div class="panel-body" style="padding:0px;">
 			<ol class="breadcrumb" style="margin:0px;">
-			  <li><a href="web">首页</a></li>
-			  <li><a href="front/person">我的空间</a></li>
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <li><a href="${BASE_PATH }front/person">我的空间</a></li>
 			  <li>发布博文</li>
 			</ol>
 			</div>

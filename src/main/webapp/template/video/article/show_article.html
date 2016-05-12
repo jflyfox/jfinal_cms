@@ -3,7 +3,7 @@
 %>
 	<% include("/template/video/includes/header.html"){} %>
 	
-	<script type="text/javascript" src="template/video/article/show_article.js"></script>
+	<script type="text/javascript" src="${BASE_PATH }template/video/article/show_article.js"></script>
 <%
 };
 
@@ -26,9 +26,9 @@ var bodyContent = {
 			<ol class="breadcrumb" style="margin:0px;">
 			  <li><a href="home">首页</a></li>
 			  <% if(folder.id==100) { %>
-			  <li><a href="front/person/view/${item.create_id}.html">作者空间</a></li>
+			  <li><a href="${BASE_PATH }front/person/view/${item.create_id}.html">作者空间</a></li>
 			  <% } else { %>
-			  <li><a href="${flyfox.getMenu(folder.id)}">${folder.name}</a></li>
+			  <li><a href="${BASE_PATH }${flyfox.getMenu(folder.id)}">${folder.name}</a></li>
 			  <% } %>
 			  <li class="active">文章</li>
 			</ol>
@@ -150,7 +150,7 @@ var bodyContent = {
 						<div class="item-top">
 							<% var user = flyfox.getUser(comment.create_id);  %>
 							<a href="front/person/view/${comment.create_id}.html" target="_blank"><img width="32" height="32" alt="头像" class="img_radius"
-								src="${user.title_url!'static/images/user/user.png'}" /></a>
+								src="${user.title_url!(BASE_PATH  + 'static/images/user/user.png')}" /></a>
 							<a href="front/person/view/${comment.create_id}.html" target="_blank" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
 							<% if(comment.status > 20) { %>
 							<span class="comment-txt">回复</span>

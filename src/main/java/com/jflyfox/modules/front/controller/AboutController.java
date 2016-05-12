@@ -3,7 +3,6 @@ package com.jflyfox.modules.front.controller;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.component.base.BaseProjectController;
-import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
@@ -42,7 +41,7 @@ public class AboutController extends BaseProjectController {
 		setAttr("article", article);
 
 		// seo：title优化
-		setAttr(JFlyFoxUtils.TITLE_ATTR, article.getTitle() + " - " + "关于我们 - " + JFlyFoxCache.getHeadTitle());
+		setAttr(JFlyFoxUtils.TITLE_ATTR, article.getTitle() + " - " + "关于我们 - " + getAttr(JFlyFoxUtils.TITLE_ATTR));
 
 		renderAuto(path + "show_about.html");
 	}

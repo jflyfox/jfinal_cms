@@ -3,7 +3,7 @@
 	include("/pages/template/head.html"){}
 %>
 
-<% include("/static/component/include/ztree.html"){} %>
+<% include("/pages/includes/ztree.html"){} %>
 
 <script type="text/javascript">
 var oper;
@@ -45,6 +45,10 @@ jQuery(function($) {
 		edit_content_textarea : function (pid){
 			var url = 'admin/article/edit_content_textarea/'+pid;
 			Iframe(url,900,580,'文章内容',false,false,true);
+		},
+		edit_content_ue : function (pid){
+			var url = 'admin/article/edit_content_ue/'+pid;
+			Iframe(url,900,600,'文章内容',false,false,true);
 		},
 		del : function(id) {
 			var url = 'admin/article/delete/'+id;
@@ -255,22 +259,22 @@ var bodyContent = {
 					
 					<!-- Split button -->
 					<div class="btn-group">
-					  <button type="button" class="btn btn-sm btn-info"  onclick="oper.edit_content(${item.id});">编辑内容</button>
+					  <button type="button" class="btn btn-sm btn-info"  onclick="oper.edit_content_ue(${item.id});">编辑内容</button>
 					  <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					    <span class="caret"></span>
 					    <span class="sr-only">下拉</span>
 					  </button>
 					  <ul class="dropdown-menu">
 					  	<!-- 
-					    <li><a href="admin/article/edit_content/${item.id}" target="_blank">修改内容</a></li>
-					     -->
+					    <li><a href="admin/article/edit_content_ue/${item.id}" target="_blank">修改内容</a></li>
+					    <li><a href="javascript:void(0);"  onclick="oper.edit_content(${item.id});">修改内容(UM)</a></li>
 					    <li><a href="javascript:void(0);"  onclick="oper.edit_content_textarea(${item.id});">修改内容(textarea)</a></li>
 					    <li role="separator" class="divider"></li>
+					     -->
 					    <li><a href="javascript:void(0);" onclick="oper.copy(${item.id});">复制文章</a></li>
 						<li><a href="javascript:void(0);" onclick="oper.view(${item.id});">查看内容</a></li>
 					  </ul>
 					</div>
-					
 					<a href="javascript:void(0);" class="btn btn-sm btn-primary" onclick="oper.edit(${item.id});">修改</a> 
 					<% if(item.id>1){ %>
 					<a href="javascript:void(0);" class="btn btn-sm btn-danger" onclick="oper.del(${item.id});">删除</a>
@@ -281,7 +285,7 @@ var bodyContent = {
 			<% } %>
 			</tbody>
 		</table>
-		<%include("/static/component/include/paginator.html"){} %>
+		<%include("/pages/includes/paginator.html"){} %>
 	</form>
 
 </div>

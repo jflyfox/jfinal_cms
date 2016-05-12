@@ -55,7 +55,7 @@ public class OperationController extends BaseProjectController {
 		new FrontImageService().clearCache();
 		// 清除前台视频缓存
 		new FrontVideoService().clearCache();
-		
+
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
 	}

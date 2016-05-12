@@ -1,5 +1,5 @@
 function loadPicimageCode() {
-	document.getElementById("picimageCode").src = 'front/image_code?ran=' + Math.random();
+	document.getElementById("picimageCode").src = jflyfox.BASE_PATH + 'front/image_code?ran=' + Math.random();
 }
 
 function oper_save(){
@@ -66,7 +66,7 @@ function oper_save(){
 	
 	jQuery.ajax({
 		type:'POST',
-		url:'front/regist/save',
+		url:jflyfox.BASE_PATH + 'front/regist/save',
 		data:$("form").serialize(),
 		success:function(data){
 			if(data.status==1){

@@ -7,7 +7,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.beelt.BeeltFunctions;
-import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
@@ -50,11 +49,12 @@ public class PersonController extends BaseProjectController {
 		setAttr("user", user);
 
 		// 数据列表,只查询展示的和类型为11,12的
-		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), "select * ", //
-				" from tb_article where status = 1 and type in (11,12) " //
-						+ " and create_id = ? " //
-						+ " and folder_id != " + JFlyFoxUtils.MENU_TOPPIC // 不搜索首页图片
-						+ " order by sort,create_time desc", user.getUserid());
+		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), "select t.* ", //
+				" from tb_article t" //
+						+ " left join tb_folder tf on tf.id = t.folder_id " //
+						+ " where " + getPublicWhere() //
+						+ " and t.create_id = ? and tf.site_id = ? " //
+						+ " order by t.sort,t.create_time desc", user.getUserid(), getSessionSite().getSiteId());
 		setAttr("page", articles);
 
 		// 显示50个标签
@@ -63,7 +63,7 @@ public class PersonController extends BaseProjectController {
 					.get(0).getFolderId());
 			setAttr("taglist", taglist.getList());
 		} else {
-			Page<TbTags> taglist = new FrontCacheService().getTags(new Paginator(1, 50));
+			Page<TbTags> taglist = tags();
 			setAttr("taglist", taglist.getList());
 		}
 
@@ -89,11 +89,11 @@ public class PersonController extends BaseProjectController {
 		setAttr("user", user);
 
 		// 数据列表,只查询展示的和类型为11,12的
-		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), "select * ", //
-				" from tb_article where status = 1 and type in (11,12) " //
-						+ " and create_id = ? " //
-						+ " and folder_id != " + JFlyFoxUtils.MENU_TOPPIC // 不搜索首页图片
-						+ " order by sort,create_time desc", user.getUserid());
+		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), "select t.* ", //
+				" from tb_article t" + " left join tb_folder tf on tf.id = t.folder_id " //
+						+ " where " + getPublicWhere() //
+						+ " and t.create_id = ? and tf.site_id = ? " //
+						+ " order by t.sort,t.create_time desc", user.getUserid(), getSessionSite().getSiteId());
 		setAttr("page", articles);
 
 		// 显示50个标签
@@ -102,7 +102,7 @@ public class PersonController extends BaseProjectController {
 					.get(0).getFolderId());
 			setAttr("taglist", taglist.getList());
 		} else {
-			Page<TbTags> taglist = new FrontCacheService().getTags(new Paginator(1, 50));
+			Page<TbTags> taglist = tags();
 			setAttr("taglist", taglist.getList());
 		}
 
@@ -130,11 +130,10 @@ public class PersonController extends BaseProjectController {
 		// 数据列表,只查询展示的和类型为11,12的
 		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), "select t.* ", //
 				" from tb_article t " //
-						+ " left join tb_articlelike al on al.article_id = t.id"
-						+ " where t.status = 1 and t.type in (11,12) " //
-						+ " and al.create_id = ? " //
-						+ " and t.folder_id != " + JFlyFoxUtils.MENU_TOPPIC // 不搜索首页图片
-						+ " order by t.sort,t.create_time desc", user.getUserid());
+						+ " left join tb_folder tf on tf.id = t.folder_id " //
+						+ " left join tb_articlelike al on al.article_id = t.id" + " where " + getPublicWhere() //
+						+ " and al.create_id = ? and tf.site_id = ? " //
+						+ " order by t.sort,t.create_time desc", user.getUserid(), getSessionSite().getSiteId());
 		setAttr("page", articles);
 
 		// 显示50个标签
@@ -143,7 +142,7 @@ public class PersonController extends BaseProjectController {
 					.get(0).getFolderId());
 			setAttr("taglist", taglist.getList());
 		} else {
-			Page<TbTags> taglist = new FrontCacheService().getTags(new Paginator(1, 50));
+			Page<TbTags> taglist = tags();
 			setAttr("taglist", taglist.getList());
 		}
 
@@ -155,26 +154,27 @@ public class PersonController extends BaseProjectController {
 	/**
 	 * 列表公共方法，展示文章和喜欢文章数量以及SEO title
 	 * 
-	 * 2015年8月16日 下午8:48:35
-	 * flyfox 330627517@qq.com
+	 * 2015年8月16日 下午8:48:35 flyfox 330627517@qq.com
+	 * 
 	 * @param user
 	 */
 	private void common(SysUser user) {
 		// 文章数量和喜欢数量
 		Record record = Db.findFirst("select count(t.id) as artcount,count(al.id) as artlikecount from tb_article t" //
+				+ " left join tb_folder tf on tf.id = t.folder_id " //
 				+ " left join (select * from tb_articlelike where create_id = ? ) al on al.article_id = t.id"
-				+ " where t.status = 1 and t.type in (11,12) " //
-				+ " and t.create_id = ? " //
-				+ " and t.folder_id != " + JFlyFoxUtils.MENU_TOPPIC // 不搜索首页图片
-				+ " order by t.sort,t.create_time desc", user.getUserid(), user.getUserid());
+				+ " where  " + getPublicWhere() //
+				+ " and t.create_id = ? and tf.site_id = ? " //
+				+ " order by t.sort,t.create_time desc" //
+		, user.getUserid(), user.getUserid(), getSessionSite().getSiteId());
 		setAttr("userarticle", record.get("artcount"));
 		setAttr("userlike", record.get("artlikecount"));
 
 		// title展示
-		setAttr(JFlyFoxUtils.TITLE_ATTR,
-				"空间 - " + BeeltFunctions.getUserName(user.getUserid()) + " - " + JFlyFoxCache.getHeadTitle());
+		setAttr(JFlyFoxUtils.TITLE_ATTR, "空间 - " + BeeltFunctions.getUserName(user.getUserid()) + " - "
+				+ getAttr(JFlyFoxUtils.TITLE_ATTR));
 	}
-	
+
 	/**
 	 * 跳转到发布博文页面
 	 * 
@@ -439,11 +439,12 @@ public class PersonController extends BaseProjectController {
 		setAttr("user", user);
 
 		// 数据列表,只查询展示的和类型为11,12的
-		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), "select * ", //
-				" from tb_article where status = 1 and type in (11,12) " //
-						+ " and create_id = ? " //
-						+ " and folder_id != " + JFlyFoxUtils.MENU_TOPPIC // 不搜索首页图片
-						+ " order by sort,create_time desc", userid);
+		Page<TbArticle> articles = TbArticle.dao.paginate(getPaginator(), "select t.* ", //
+				" from tb_article t " //
+						+ " left join tb_folder tf on tf.id = t.folder_id " //
+						+ " where  " + getPublicWhere() //
+						+ " and t.create_id = ? and tf.site_id = ? " //
+						+ " order by t.sort,t.create_time desc", userid, getSessionSite().getSiteId());
 		setAttr("page", articles);
 
 		// 显示50个标签
@@ -452,14 +453,18 @@ public class PersonController extends BaseProjectController {
 					.get(0).getFolderId());
 			setAttr("taglist", taglist.getList());
 		} else {
-			Page<TbTags> taglist = new FrontCacheService().getTags(new Paginator(1, 50));
+			Page<TbTags> taglist = tags();
 			setAttr("taglist", taglist.getList());
 		}
 
 		// title展示
-		setAttr(JFlyFoxUtils.TITLE_ATTR, BeeltFunctions.getUserName(userid) + "的空间 - " + JFlyFoxCache.getHeadTitle());
+		setAttr(JFlyFoxUtils.TITLE_ATTR, BeeltFunctions.getUserName(userid) + "的空间 - " + getAttr(JFlyFoxUtils.TITLE_ATTR));
 
 		renderAuto(path + "view_person.html");
 
+	}
+
+	protected Page<TbTags> tags() {
+		return new FrontCacheService().getTags(new Paginator(1, 50), getSessionSite().getSiteId());
 	}
 }

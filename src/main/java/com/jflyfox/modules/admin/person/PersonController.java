@@ -1,12 +1,15 @@
 package com.jflyfox.modules.admin.person;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.CommonController;
+import com.jflyfox.modules.admin.site.SessionSite;
+import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
+import com.jflyfox.util.NumberUtils;
 import com.jflyfox.util.StrUtils;
 
 /**
@@ -15,7 +18,7 @@ import com.jflyfox.util.StrUtils;
  * 2015年3月10日 下午5:36:22 flyfox 330627517@qq.com
  */
 @ControllerBind(controllerKey = "/admin/person")
-public class PersonController extends BaseController {
+public class PersonController extends BaseProjectController {
 
 	public static final String path = "/pages/admin/person/";
 
@@ -120,6 +123,43 @@ public class PersonController extends BaseController {
 		UserCache.init(); // 设置缓存
 		
 		setSessionUser(model); // 设置session
+		
+		json.put("status", 1);// 成功
+		renderJson(json.toJSONString());
+	}
+	
+	
+	/**
+	 * 设置站点
+	 */
+	public void site() {
+		String site = getPara();
+		
+		JSONObject json = new JSONObject();
+		json.put("status", 2);// 失败
+
+		if (StrUtils.isEmpty(site)) {
+			json.put("msg", "提交数据错误！");
+			renderJson(json.toJSONString());
+			return;
+		}
+		
+		// 更新后台数据
+		SysUser user = (SysUser) getSessionUser();
+		int userid = user.getUserid();
+		SysUser model = SysUser.dao.findById(userid);
+		// 日志添加
+		model.put("update_id", getSessionUser().getUserID());
+		model.put("update_time", getNow());
+		model.set("back_site_id", site);
+		model.update();
+		
+		// 设置后台站点缓存
+		SessionSite sessionSite = getSessionSite();
+		int backSiteId = NumberUtils.parseInt(site);
+		sessionSite.setBackSiteId(backSiteId);
+		sessionSite.setBackModel(TbSite.dao.findById(backSiteId));
+		setSessionSite(sessionSite);
 		
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());

@@ -3,7 +3,6 @@ package com.jflyfox.modules.front;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jflyfox.component.base.BaseProjectController;
-import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.admin.image.model.TbImage;
@@ -37,7 +36,7 @@ public class FrontAlbumImageController extends BaseProjectController {
 
 		// seo：title优化
 		String albumName = (album == null ? "" : album.getName() + " - ");
-		setAttr(JFlyFoxUtils.TITLE_ATTR, albumName + JFlyFoxCache.getHeadTitle());
+		setAttr(JFlyFoxUtils.TITLE_ATTR, albumName + getAttr(JFlyFoxUtils.TITLE_ATTR));
 
 		renderAuto(path + "common_album.html");
 	}
@@ -65,7 +64,7 @@ public class FrontAlbumImageController extends BaseProjectController {
 
 		// seo：title优化
 		String imageName = (image == null ? "" : image.getName() + " - ");
-		setAttr(JFlyFoxUtils.TITLE_ATTR, imageName + JFlyFoxCache.getHeadTitle());
+		setAttr(JFlyFoxUtils.TITLE_ATTR, imageName + getAttr(JFlyFoxUtils.TITLE_ATTR));
 
 		renderAuto(path + "common_image.html");
 	}

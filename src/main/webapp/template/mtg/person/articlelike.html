@@ -32,8 +32,8 @@ var bodyContent = {
 		<div class="panel panel-default">
 			 <div class="panel-body" style="padding:0px;">
 			<ol class="breadcrumb" style="margin:0px;">
-			  <li><a href="web">首页</a></li>
-			  <li><a href="front/person">我的空间</a></li>
+			  <li><a href="${BASE_PATH }.home.html">首页</a></li>
+			  <li><a href="${BASE_PATH }front/person">我的空间</a></li>
 			  <li>喜欢的文章</li>
 			</ol>
 			</div>
@@ -64,7 +64,7 @@ var bodyContent = {
 		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			<h3 class="panel-title">其他标签<a class="more" href="front/tags/all">更多</a></h3>
+			<h3 class="panel-title">其他标签<a class="more" href="${BASE_PATH }front/tags/all">更多</a></h3>
 		  </div>
 		  <div class="panel-body">
 			<%  
@@ -76,7 +76,7 @@ var bodyContent = {
 					for(tagitem in taglist){ 
 				%>
 					<li class="q-tagitem">
-					<a class="a-tagitem" href="front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+					<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
 					</li>
 				<% 
 					}

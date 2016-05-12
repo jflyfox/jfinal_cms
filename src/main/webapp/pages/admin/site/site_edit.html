@@ -1,0 +1,136 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			id = id || '0';
+			var url = 'admin/site/save/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal"
+		role="form" >
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<table class="table">
+		<%  // 列表头部%>
+				<tr>
+					<td>名称</td>
+					<td>
+					<input class="form-control" type="text" name="model.name" value="${model.name }"  valid='vtext' validname='名称'  />
+					</td>
+					<td>标题</td>
+					<td>
+					<input class="form-control" type="text" name="model.site_title" value="${model.site_title }" 
+						 valid='vtext' validname='标题'  />
+					</td>
+				</tr>
+				<tr>
+					<td>模板名称</td>
+					<td>
+					<input class="form-control" type="text" name="model.template" value="${model.template }"  />
+					</td>
+					<td>移动模板</td>
+					<td>
+					<input class="form-control" type="text" name="model.template_mobile" value="${model.template_mobile }"  />
+					</td>
+				</tr>
+				<tr>
+					<td>序号</td>
+					<td>
+					<input class="form-control" type="text" name="model.sort" value="${model.sort }"  valid='vnum' validname='序号'  />
+					</td>
+					<td>状态</td>
+					<td>
+						<label class="radio-inline">
+						  <input type="radio" name="model.status" id="" value="2"  ${model.status==2?"checked":"" } > 禁用
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="model.status" id="" value="1"  ${model.status!=2?"checked":"" } > 启用
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td>默认目录</td>
+					<td>
+						<input class="form-control" type="text" name="model.site_folder_id" value="${model.site_folder_id }" 
+							 valid='vnum' validname='目录ID' placeholder="目录ID" />
+					</td>
+					<td>默认文章</td>
+					<td>
+						<input class="form-control" type="text" name="model.site_article_id" 
+							value="${model.site_article_id }"  valid='vnum' validname='文章ID' placeholder="文章ID"  />
+					</td>
+				</tr>
+				<tr>
+					<td>pc端域名</td>
+					<td>
+					<input class="form-control" type="text" name="model.domain_pc" value="${model.domain_pc }"  />
+					</td>
+					<td>移动端域名</td>
+					<td>
+					<input class="form-control" type="text" name="model.domain_mobile" value="${model.domain_mobile }"  />
+					</td>
+				</tr>
+				<tr>
+					<td>其他域名</td>
+					<td colspan="3">
+					<input class="form-control" type="text" name="model.domain_others" value="${model.domain_others }"  />
+					</td>
+				</tr>
+				<!-- 
+				<tr>
+					<td>数据库</td>
+					<td colspan="3">
+					<input class="form-control" type="text" name="model.db_url" value="${model.db_url }" 
+						placeholder="jdbc:mysql://{ip}:{port}/{databases}?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull" />
+					</td>
+				</tr>
+				<tr>
+					<td>数据库驱动</td>
+					<td colspan="3">
+					<input class="form-control" type="text" name="model.db_driver" value="${model.db_driver!'com.mysql.jdbc.Driver' }"  />
+					</td>
+				</tr>
+				<tr>
+					<td>数据库用户</td>
+					<td>
+					<input class="form-control" type="text" name="model.db_user" value="${model.db_user }"
+						 placeholder="username" />
+					</td>
+					<td>数据库密码</td>
+					<td>
+					<input class="form-control" type="text" name="model.db_pwd" value="${model.db_pwd }" 
+					 	placeholder="password" />
+					</td>
+				</tr>
+				 -->
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%}
+DIRECTIVE SAFE_OUTPUT_CLOSE; 
+%>

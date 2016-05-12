@@ -1,11 +1,35 @@
 package com.jflyfox.modules.admin.article;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.util.DateUtils;
 import com.jflyfox.util.NumberUtils;
 
 public class ArticleService {
 
+	/**
+	 * 获取tag标签
+	 * 
+	 * 2016年4月17日 下午9:14:02
+	 * flyfox 330627517@qq.com
+	 * @param model
+	 * @return
+	 */
+	public String getTags(TbArticle model) {
+		String tags = Db.findFirst("select group_concat(tagname) tags " //
+				+ " from tb_tags where article_id = ? order by id", model.getInt("id")).getStr("tags");
+		return tags;
+	}
+	
+	/**
+	 * 复制文章
+	 * 
+	 * 2016年4月17日 下午9:14:09
+	 * flyfox 330627517@qq.com
+	 * @param id
+	 * @param userid
+	 * @param folders
+	 */
 	public void copy(int id, Integer userid, String folders) {
 		TbArticle model = TbArticle.dao.findById(id);
 		for (String folderStr : folders.split(",")) {

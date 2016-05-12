@@ -1,0 +1,53 @@
+/** home **/
+.mod-pager {
+	width: 940px;
+	font-size: 12px;
+	position: static;
+	overflow: hidden;
+	top: 0px;
+	left: 0px;
+	padding: 20px 0 20px 20px;
+	margin: 0;
+}
+
+.mod-pager .item-pager {
+	font-size: 12px;
+	overflow: hidden;
+	list-style-type: none;
+	overflow: hidden;
+}
+
+.item-pager li {
+	float: left;
+	margin: 0 5px 0 0;
+}
+
+.item-pager li a {
+	font-family: Courier New, Arial;
+	font-size: 12pt;
+	color: #58595b;
+	border:1px solid #9CC04E;
+	display: block;
+	text-align: center;
+	padding: 6px 10px;
+	text-decoration: none;
+}
+
+.item-pager li a:hover {
+	color: #000;
+}
+
+.item-pager li.prev a {
+	background-color: #ccc;
+	color: #666;
+}
+
+.item-pager li.next a {
+	color: #666;
+}
+
+.item-pager li.current a {
+	color: #fff;
+	font-weight: bold;
+	background-color: #9CC04E;
+}

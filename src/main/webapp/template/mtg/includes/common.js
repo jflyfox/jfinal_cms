@@ -22,13 +22,13 @@ $(function() {
         var key = e.which;
         if (key == 13 ) {
             e.preventDefault();
-            search_form.action = "front/tags/"+ $('[name="search_header"]').val();
+            search_form.action = jflyfox.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
     		search_form.submit();
         }
     });
 	
 	$('#search_btn').on('click', function (e) {
-		search_form.action = "front/tags/"+ $('[name="search_header"]').val();
+		search_form.action = jflyfox.BASE_PATH + "front/tags/"+ $('[name="search_header"]').val();
 		search_form.submit();
     });
 	
@@ -50,7 +50,7 @@ comment = {
 		if(window.confirm('你确定要删除该评论吗？')){
 			jQuery.ajax({
 				type:'POST',
-				url:'front/comment/del',
+				url:jflyfox.BASE_PATH + 'front/comment/del',
 				data:"model.id=" + comment_id + "&model.article_id=" + article_id,
 				success:function(data){
 					if(data.status==1){
@@ -82,7 +82,7 @@ comment = {
 		
 		jQuery.ajax({
 			type:'POST',
-			url:'front/comment/save',
+			url:jflyfox.BASE_PATH + 'front/comment/save',
 			data:urlParams,
 			success:function(data){
 			if(data.status==1){
@@ -91,7 +91,7 @@ comment = {
 				var title_url = data.title_url||'';
 				var username = data.create_name;
 				var reply_username = data.reply_username; 
-				title_url = (title_url=='')?'static/images/user/user.png':title_url;
+				title_url = (title_url=='')?(jflyfox.BASE_PATH + 'static/images/user/user.png'):title_url;
 				
 				var htmlText = '<div class="comment-item" id=comment_'+ comment_id + '_' + article_id + '>';
 				htmlText += '<div class="item-top">';
@@ -143,7 +143,7 @@ comment = {
 		
 		jQuery.ajax({
 			type:'POST',
-			url:'front/comment/count',
+			url:jflyfox.BASE_PATH + 'front/comment/count',
 			success:function(data){
 				if(data.status==1){
 					if(data.count > 0 ){
@@ -171,7 +171,7 @@ comment = {
 			}
 		});
 		// 压力太大了就改大点
-		window.setTimeout('comment.count()',600000);
+		window.setTimeout('comment.count()',600*1000);
 	}
 	
 };
@@ -196,7 +196,7 @@ articlelike = {
 	,yes:function(article_id){
 		jQuery.ajax({
 			type:'POST',
-			url:'front/articlelike/yes/'+article_id,
+			url:jflyfox.BASE_PATH + 'front/articlelike/yes/'+article_id,
 			success:function(data){
 				if(data.status==1){
 					$('#articlelike_'+article_id).removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
@@ -221,7 +221,7 @@ articlelike = {
 	,no:function(article_id){
 		jQuery.ajax({
 			type:'POST',
-			url:'front/articlelike/no/'+article_id,
+			url:jflyfox.BASE_PATH + 'front/articlelike/no/'+article_id,
 			success:function(data){
 				if(data.status==1){
 					$('#articlelike_'+article_id).removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');

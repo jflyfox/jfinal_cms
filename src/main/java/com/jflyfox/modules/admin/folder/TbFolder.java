@@ -25,8 +25,11 @@ public class TbFolder extends BaseProjectModel<TbFolder> {
 	private String STATUS = "status"; // 状态：2 隐藏 1 显示
 	private String TYPE = "type"; // 类型 1 普通目录 2 a标签 3 a标签_blank 4 直接加载url信息
 	private String JUMP_URL = "jump_url"; // 跳转地址
-	private String HEAD_KEYWORDS = "head_keywords"; // keywords
-	private String HEAD_DESCRIPTION = "head_description"; // description
+	private String MATERIAL_TYPE = "material_type"; // 素材类型
+	private String SITE_ID = "site_id"; // 站点ID
+	private String SEO_TITLE = "seo_title"; // title
+	private String SEO_KEYWORDS = "seo_keywords"; // keywords
+	private String SEO_DESCRIPTION = "seo_description"; // description
 	private String UPDATE_TIME = "update_time"; // 更新时间
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String CREATE_ID = "create_id"; // 创建者
@@ -94,12 +97,12 @@ public class TbFolder extends BaseProjectModel<TbFolder> {
 		return get(SORT);
 	}
 
-	public TbFolder setStatus(java.lang.String value) {
+	public TbFolder setStatus(java.lang.Integer value) {
 		set(STATUS, value);
 		return this;
 	}
 
-	public java.lang.String getStatus() {
+	public java.lang.Integer getStatus() {
 		return get(STATUS);
 	}
 
@@ -121,22 +124,49 @@ public class TbFolder extends BaseProjectModel<TbFolder> {
 		return get(JUMP_URL);
 	}
 
-	public TbFolder setHeadKeywords(java.lang.String value) {
-		set(HEAD_KEYWORDS, value);
+	public TbFolder setMaterialType(java.lang.String value) {
+		set(MATERIAL_TYPE, value);
 		return this;
 	}
 
-	public java.lang.String getHeadKeywords() {
-		return get(HEAD_KEYWORDS);
+	public java.lang.String getMaterialType() {
+		return get(MATERIAL_TYPE);
 	}
 	
-	public TbFolder setHeadDescription(java.lang.String value) {
-		set(HEAD_DESCRIPTION, value);
+	public TbFolder setSiteId(java.lang.Integer value) {
+		set(SITE_ID, value);
 		return this;
 	}
 
-	public java.lang.String getHeadDescription() {
-		return get(HEAD_DESCRIPTION);
+	public java.lang.Integer getSiteId() {
+		return get(SITE_ID);
+	}
+	
+	public TbFolder setSeoTitle(java.lang.String value) {
+		set(SEO_TITLE, value);
+		return this;
+	}
+
+	public java.lang.String getSeoTitle() {
+		return get(SEO_TITLE);
+	}
+	
+	public TbFolder setSeoKeywords(java.lang.String value) {
+		set(SEO_KEYWORDS, value);
+		return this;
+	}
+
+	public java.lang.String getSeoKeywords() {
+		return get(SEO_KEYWORDS);
+	}
+	
+	public TbFolder setSeoDescription(java.lang.String value) {
+		set(SEO_DESCRIPTION, value);
+		return this;
+	}
+
+	public java.lang.String getSeoDescription() {
+		return get(SEO_DESCRIPTION);
 	}
 	
 	public TbFolder setUpdateTime(java.lang.String value) {

@@ -16,11 +16,11 @@
 		  	  if(strutil.isNotEmpty(item.image_url)) { 
 		  	  	picName = flyfox.getImage(item);
 		  	  } else if(flyfox.getNow()==item.publish_time){ // 当天图片
-		  	   	picName = "static/front/images/today.jpg";
+		  	   	picName = BASE_PATH + "static/front/images/today.jpg";
 		  	  } else if(strutil.isNotEmpty(defalutimg!'')) { // 默认图片，可设置
-		  	  	picName = defalutimg;
+		  	  	picName = BASE_PATH + defalutimg;
 		  	  } else { // 什么都没有~！~
-		  	  	picName = "static/front/images/documents.png";	
+		  	  	picName = BASE_PATH + "static/front/images/documents.png";	
 			  }
 			  %>
 			  <img src="${picName}" alt="${item.title}" height="85" data-holder-rendered="true"
@@ -29,7 +29,7 @@
 		  </div>
 		  <div class="col-md-10">
 				<h4>
-				<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+				<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
 				<% if (strutil.length(item.title) > 18) { %>
 					${strutil.subStringTo(item.title, 0, 18)}...
 				<% 	} else { %>
@@ -48,15 +48,15 @@
 					<% if (sessionUserId==item.create_id) { %>
 					<span>
 					(
-						<a href="front/person/editblog/${item.id}" target="_blank"><span>编辑</span></a>
+						<a href="${BASE_PATH }front/person/editblog/${item.id}" target="_blank"><span>编辑</span></a>
 					|
 						<a href="javascript:void(0);" onclick="delblog(${item.id});return false;"><span style="color: red;">删除</span></a>
 					|
-						<a href="front/article/${item.id}.html" target="_blank"><small>查看</small></a>
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank"><small>查看</small></a>
 					)
 					</span>
 					<% } else { %>
-						<a href="front/article/${item.id}.html" target="_blank"><span>查看全部</span></a>
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank"><span>查看全部</span></a>
 					<% } %>
 					</div>
 				</h4>
@@ -72,7 +72,7 @@
 					</div>
 					<div class="pull-right" >
 						<% if(item.is_comment==1){ %>
-						<a href="front/article/${item.id}.html#article_comment" style="vertical-align: middle;"   target="_blank"><small>评论(${temp.countComment(item.id)})</small></a>
+						<a href="${BASE_PATH }front/article/${item.id}.html#article_comment" style="vertical-align: middle;"   target="_blank"><small>评论(${temp.countComment(item.id)})</small></a>
 						&nbsp;
 						<% } %>
 						<small style="vertical-align: middle;" >浏览量(${temp.countView(item.id)})</small>

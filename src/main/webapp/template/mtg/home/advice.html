@@ -4,7 +4,7 @@ include("/template/mtg/includes/header.html"){} %>
 <script type="text/javascript">
 <!--
 function loadPicimageCode() {
-	document.getElementById("picimageCode").src = 'front/image_code?ran=' + Math.random();
+	document.getElementById("picimageCode").src = jflyfox.BASE_PATH + 'front/image_code?ran=' + Math.random();
 }
 
 
@@ -53,7 +53,7 @@ function oper_save(){
 	
 	jQuery.ajax({
 		type:'POST',
-		url:'front/advice/save',
+		url:jflyfox.BASE_PATH + 'front/advice/save',
 		data:$("form").serialize(),
 		success:function(data){
 			if(data.status==1){
@@ -88,7 +88,7 @@ include("/template/mtg/includes/header_menu.html"){} %>
 		<div class="panel panel-default">
 			 <div class="panel-body" style="padding:0px;">
 			<ol class="breadcrumb" style="margin:0px;">
-			  <li><a href="web">首页</a></li>
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
 			  <li>意见反馈</li>
 			</ol>
 			</div>
@@ -108,7 +108,7 @@ include("/template/mtg/includes/header_menu.html"){} %>
 		  		<% if(isEmpty(session.session_user)) { %>
 		  			<div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-12">
-					     没有<a href="front/login">登录</a>不能进行意见反馈，请您<a href="front/login">登录</a>
+					     没有<a href="${BASE_PATH }front/login">登录</a>不能进行意见反馈，请您<a href="${BASE_PATH }front/login">登录</a>
 					    </div>
 					</div>
 		  		<% } else { %>
@@ -159,7 +159,7 @@ include("/template/mtg/includes/header_menu.html"){} %>
 						      	 <div class="input-group-addon" style="padding:2px;">
 						      			<img id="picimageCode" align="middle" width="60" height="26"  
 						      				 style="line-height: 18px;cursor:pointer;"
-								 			 src="front/image_code" title="更换一张验证码图片" onclick="loadPicimageCode()"/>
+								 			 src="${BASE_PATH }front/image_code" title="更换一张验证码图片" onclick="loadPicimageCode()"/>
 							     </div>
 							    </div>
 						     

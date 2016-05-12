@@ -10,8 +10,8 @@ body { padding-top: 51px; }
 			$("#"+id).parent().parent().addClass('active');
 		}
 	}
-    
-    $(function(){
+	
+	$(function(){
 		$(window).resize(function(){
 			$('body').css('padding-top',$('nav.navbar.navbar-fixed-top').height()+'px');
 		});
@@ -19,12 +19,12 @@ body { padding-top: 51px; }
 	});
 	
 	/**
-	 * 设置主题
+	 * 设置站点
 	 */
-	function oper_theme(theme){
+	function oper_site(site){
 		jQuery.ajax({
 			type:'POST',
-			url:'admin/person/theme/'+theme,
+			url:'admin/person/site/'+site,
 			success:function(data){
 				if(data.status==1){
 					if(typeof oper=='undefined' && typeof form=='undefined') {
@@ -100,21 +100,36 @@ body { padding-top: 51px; }
       </ul>
       
       <ul class="nav navbar-nav navbar-right" style="margin-right: 2%">
-       	<li>
-		 <div class="dropdown" style="margin-top: 6px;">
-		  <button class="btn btn-default dropdown-toggle" title="主题" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-		    <span class="glyphicon glyphicon-th-list"></span> ${session.session_user.theme!'default'}
-		  </button>
-		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-		    <li><a href="#" onclick="oper_theme('default');return false;">主题：default</a></li>
-		    <li><a href="#" onclick="oper_theme('inverse');return false;">主题：inverse</a></li>
-		    <li><a href="#" onclick="oper_theme('flat-ui');return false;">主题：flat-ui</a></li>
-		  </ul>
-		</div>
-		</li>
         <li><p class="navbar-text"><a href="admin/person">${session.session_user.realname!session.session_user.username }</a>，您好</p></li>
         <li><p class="navbar-text"  style="margin-right: 10px;margin-left: 0px;"><a href="#"  onclick="window.location.href='admin/logout';return false;">退出</a></p></li>
        
+        <% 
+       if(!isEmpty(sites)) {
+       %>
+       	<li>
+       		
+       <% 
+       		var siteName = 'default';
+       		for(item in sites) {
+       			if(session.site.backSiteId==item.id)  siteName = item.name;
+       		}
+       	%>
+		 <div class="dropdown" style="margin-top: 6px;">
+		  <button class="btn btn-link dropdown-toggle" title="站点" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		   <span class="glyphicon glyphicon-globe"></span> ${siteName} <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		  	<% for(item in sites) { %>
+		    <li><a href="#" onclick="oper_site('${item.id}');return false;">站点：${item.name}</a></li>
+	    <% 
+	    	}
+	     %>
+		  </ul>
+		</div>
+		</li>
+		<% 
+	    }
+	     %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

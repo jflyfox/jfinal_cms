@@ -5,7 +5,6 @@ import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
-import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.admin.folder.TbFolder;
 import com.jflyfox.util.StrUtils;
 
@@ -30,6 +29,8 @@ public class FoldernoticeController extends BaseProjectController {
 			// 查询条件
 			sql.whereEquals("folder_id", model.getInt("folder_id"));
 		}
+		// 站点设置
+		sql.append(" and site_id = " + getSessionSite().getBackSiteId());
 
 		// 排序
 		String orderBy = getBaseForm().getOrderBy();
@@ -43,7 +44,7 @@ public class FoldernoticeController extends BaseProjectController {
 				sql.toString().toString());
 
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(model.getInt("folder_id")));
+		setAttr("selectFolder", selectFolder(model.getInt("folder_id")));
 
 		setAttr("page", page);
 		setAttr("attr", model);
@@ -52,7 +53,7 @@ public class FoldernoticeController extends BaseProjectController {
 
 	public void add() {
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(0));
+		setAttr("selectFolder", selectFolder(0));
 
 		render(path + "add.html");
 	}
@@ -82,7 +83,7 @@ public class FoldernoticeController extends BaseProjectController {
 	public void edit() {
 		TbFolderNotice model = TbFolderNotice.dao.findById(getParaToInt());
 		// 查询下拉框
-		setAttr("selectFolder", new FolderService().selectFolder(model.getInt("folder_id")));
+		setAttr("selectFolder", selectFolder(model.getInt("folder_id")));
 
 		setAttr("model", model);
 		render(path + "edit.html");

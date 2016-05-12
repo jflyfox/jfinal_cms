@@ -67,6 +67,25 @@ var bodyContent = {
 				</td>
 			</tr>
 			<tr>
+				<td>站点</td>
+				<td>
+				<select class="form-control" name="model.site_id">
+				<option value="0">--全部--</option>
+				
+				<% 
+				if(!isEmpty(sites)) {
+					for(item in sites) { 
+				%>
+				<option value="${item.id}" ${item.id==model.site_id?"selected='selected'":""}>${item.name}</option>
+			    <% 
+			    	}
+			    }
+			    %>
+			     
+				</select>
+				</td>
+			</tr>
+			<tr>
 				<td>备注</td>
 				<td>
 				<textarea class="form-control" rows="3" cols="30" name="model.remark">${model.remark}</textarea>

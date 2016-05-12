@@ -9,6 +9,7 @@ import com.jfinal.config.Interceptors;
 import com.jflyfox.component.beelt.BeeltFunctions;
 import com.jflyfox.component.interceptor.CommonInterceptor;
 import com.jflyfox.component.interceptor.PageViewInterceptor;
+import com.jflyfox.component.interceptor.SiteInterceptor;
 import com.jflyfox.component.interceptor.UpdateCacheInterceptor;
 import com.jflyfox.component.interceptor.UserKeyInterceptor;
 import com.jflyfox.component.util.JFlyFoxCache;
@@ -34,13 +35,15 @@ public class BaseConfig extends JflyfoxConfig {
 		groupTemplate.registerFunctionPackage("temp", TemplateService.class);
 		groupTemplate.registerFunctionPackage("tempImage", TemplateImageService.class);
 		groupTemplate.registerFunctionPackage("tempVideo", TemplateVideoService.class);
+
 	};
 
 	@Override
 	public void configHandler(Handlers me) {
 		// Beelt
 		// me.add(new BeeltHandler());
-		me.add(new HtmlHandler());	
+		
+		me.add(new HtmlHandler());
 		super.configHandler(me);
 	}
 
@@ -48,9 +51,6 @@ public class BaseConfig extends JflyfoxConfig {
 	 * 配置全局拦截器
 	 */
 	public void configInterceptor(Interceptors me) {
-		// 公共属性
-		me.add(new CommonInterceptor());
-
 		// session model转换
 		super.configInterceptor(me);
 		// 用户Key设置
@@ -61,6 +61,10 @@ public class BaseConfig extends JflyfoxConfig {
 		me.add(new UpdateCacheInterceptor());
 		// 用户认证
 		me.add(new UserInterceptor());
+		// 站点拦截
+		me.add(new SiteInterceptor());
+		// 公共属性
+		me.add(new CommonInterceptor());
 	}
 
 	/**

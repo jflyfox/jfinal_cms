@@ -9,6 +9,7 @@ import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyfoxUpload;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
+import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.modules.admin.video.model.TbVideo;
 import com.jflyfox.modules.admin.video.model.TbVideoTags;
 import com.jflyfox.modules.admin.video.service.VideoAlbumService;
@@ -130,15 +131,16 @@ public class VideoController extends BaseProjectController {
 	}
 
 	public void save() {
-		UploadFile uploadVideo = getFile("model.video_url", JFlyfoxUpload.UPLOAD_TMP_PATH, JFlyfoxUpload.UPLOAD_MAX);
+		TbSite site = getSessionSite().getBackModel();
+		UploadFile uploadVideo = getFile("model.video_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
 		
 		Integer pid = getParaToInt();
 		TbVideo model = getModel(TbVideo.class);
 		
 		// 视频附件
 		if (uploadVideo != null) {
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.UPLOAD_VIDEO_PATH, uploadVideo);
-			model.set("video_url", JFlyfoxUpload.VIDEO_PATH + File.separator + fileName);
+			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "video"), uploadVideo);
+			model.set("video_url", JFlyfoxUpload.getUploadPath(site, "video") + File.separator + fileName);
 		}
 		
 		// 设置图片信息

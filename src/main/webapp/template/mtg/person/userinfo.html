@@ -40,9 +40,17 @@
 		<li class="list-group-item">
 			<div class="row">
 			  <div class="col-md-3">
-			  		<a href="front/person">
+			  		<a href="${BASE_PATH }front/person">
+			  		<% 
+						var userPic = user.title_url;
+						if(isEmpty(userPic)){
+							userPic = BASE_PATH + 'static/images/user/user.png';
+						} else if(!strutil.startWith(userPic , 'http')) {
+							userPic = ASE_PATH + userPic;
+						}
+					 %>
 			  	  	<img id="title_pic" alt="${user.userName }头像"  width="64" height="64" 
-						 		class="img_radius"	 src="${user.title_url!'static/images/user/user.png'}">
+						 		class="img_radius"	 src="${userPic}">
 					</a>
 			  </div>
 			  <div class="col-md-9">
@@ -51,16 +59,16 @@
 			  </div>
 			 </div>
 		</li>
-	  <a href="front/person/newblog" class="list-group-item">
+	  <a href="${BASE_PATH }front/person/newblog" class="list-group-item">
 	  	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 	  	发布博文
 	  </a>
-	  <a href="front/person/article" class="list-group-item">
+	  <a href="${BASE_PATH }front/person/article" class="list-group-item">
 	  	<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 	  	<span class="badge">${userarticle!''}</span>
 	  	我的博文
 	  </a>
-	  <a href="front/person/articlelike" class="list-group-item">
+	  <a href="${BASE_PATH }front/person/articlelike" class="list-group-item">
 	  	<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
 	  	<span class="badge">${userlike!''}</span>
 	  	喜欢博文
@@ -77,7 +85,7 @@
 	  	我的粉丝
 	  </a>
 	   -->
-	  <a href="front/person/profile" class="list-group-item">
+	  <a href="${BASE_PATH }front/person/profile" class="list-group-item">
 	  	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 	 	 编辑信息
 	  </a>

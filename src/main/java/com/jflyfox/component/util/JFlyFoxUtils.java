@@ -4,14 +4,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.jflyfox.util.Config;
+import com.jflyfox.util.StrUtils;
 import com.jflyfox.util.encrypt.DESUtils;
 
 public class JFlyFoxUtils {
 
+	public static final String WEBSITE_TITLE = "WEBSITE_TITLE";
 	public static final String TITLE_ATTR = "HEAD_TITLE";
 	public static final String KEYWORDS_ATTR = "HEAD_KEYWORDS";
 	public static final String DESCRIPTION_ATTR = "HEAD_DESCRIPTION";
 
+	public static final int STATUS_SHOW = 1;
+	public static final int STATUS_HIDE = 2;
 	/**
 	 * 文章是否需要审核
 	 */
@@ -31,25 +35,35 @@ public class JFlyFoxUtils {
 	 * 第三方Oauth2部门ID
 	 */
 	public static final int DEPART_THIRD_ID = 3;
+	
+	/**
+	 * 管理员
+	 */
+	public static final int USER_TYPE_ADMIN = 1;
+	/**
+	 * 普通用户
+	 */
+	public static final int USER_TYPE_NORMAL = 2;
+	/**
+	 * 前台用户
+	 */
+	public static final int USER_TYPE_FRONT = 3;
+	/**
+	 * 第三方用户
+	 */
+	public static final int USER_TYPE_THIRD = 4;
+	/**
+	 * 其他用户
+	 */
+	public static final int USER_TYPE_OTHER = 9;
+	
 
 	/**
 	 * session唯一Key
 	 */
 	public static final String USER_KEY = "USER_KEY";
 
-	public static final int MENU_HOME = 1;
-	public static final int MENU_NEWS = 2;
-	public static final int MENU_FOOD = 3;
-	public static final int MENU_TRAVEL = 4;
-	public static final int MENU_EDUCATION = 5;
-	public static final int MENU_PARK = 10;
-	public static final int MENU_MARKET = 11;
-	public static final int MENU_HOUSE = 12;
-	public static final int MENU_TOPPIC = 13;
-
 	public static final int MENU_ABOUT = 90;
-
-	public static final int MENU_OTHER = 99;
 
 	/**
 	 * 博文目录
@@ -59,6 +73,16 @@ public class JFlyFoxUtils {
 	public static final int IS_DELETED_NO = 1;
 	
 	public static final int IS_DELETED_YES = 2;
+	
+	/**
+	 * 目录类型
+	 */
+	public static final int MATERIAL_TYPE_ARTICLE = 102; // 文章
+	public static final int MATERIAL_TYPE_IMAGE = 103; // 图片
+	public static final int MATERIAL_TYPE_VIDEO = 104; // 视频
+	public static final int MATERIAL_TYPE_OTHER = 105; // 其他
+	public static final int MATERIAL_TYPE_FOLDER = 106; // 栏目 
+	
 	
 	private static final DESUtils des = new DESUtils("flyfoxxx");
 
@@ -124,4 +148,26 @@ public class JFlyFoxUtils {
 		return htmlStr.trim();
 	}
 
+	
+	/**
+	 * 是否是后台请求地址
+	 * 
+	 * 2015年2月27日 上午11:38:37 flyfox 330627517@qq.com
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public static boolean isBack(String path) {
+		// 后台不需要认证页面
+		if (path.startsWith("admin/login")  //
+				|| path.startsWith("admin/logout") //
+				|| path.startsWith("admin/trans")) {
+			return false;
+		}
+		
+		return StrUtils.isNotEmpty(path) // 空是首页
+				&& (path.startsWith("system/") // 系统管理
+				|| path.startsWith("admin/") // 后台管理
+				);
+	}
 }

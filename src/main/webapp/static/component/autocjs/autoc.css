@@ -1,0 +1,143 @@
+.toc {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 80%;
+    margin: 0;
+    margin-top:10%;
+    padding: 0;
+    background-clip: padding-box;
+    background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    font-family: Arial, 'Courier New', "Helvetica Neue", Helvetica, sans-serif;
+    overflow: visible;
+}
+
+.toc-title {
+    height: 40px;
+    margin: 0 auto;
+    border-bottom: 1px solid #ddd;
+    line-height: 40px;
+    background-color: #f4f5f9;
+    font-family: 'Courier New', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    overflow: hidden;
+}
+
+.toc-bar {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: -49px;
+    width: 50px;
+    height: 80px;
+    margin: -40px 0 0;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-left: none;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    overflow: hidden;
+}
+
+.toc-switch {
+    margin: 0 auto;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    overflow: hidden;
+}
+
+.toc-top:link,
+.toc-top:visited,
+.toc-top:hover {
+    display: block;
+    margin: 0 auto;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    overflow: hidden;
+}
+
+.toc-title:hover,
+.toc-top:hover {
+    background-color: #f4f5f9;
+}
+
+.toc-bd {
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
+    background-color: #FFF;
+    overflow: auto;
+}
+
+.toc-list {
+    margin: 0 auto;
+    padding: 10px 0;
+    overflow: hidden;
+}
+
+.toc-sub-list {
+    margin: 0;
+    padding: 0 0 0 1em;
+    overflow: hidden;
+}
+
+.toc-item {
+    line-height: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.toc-item a:link,
+.toc-item a:visited,
+.toc-item a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.toc-item a:hover {
+    color: #008cff;
+}
+
+.toc-list li.divider {
+    background-color: #e5e5e5;
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+}
+
+.toc-chapter {
+    padding-right: 5px;
+}
+
+.toc-overlay {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    overflow: hidden;
+}
+
+.toc-hide {
+    display: none;
+}

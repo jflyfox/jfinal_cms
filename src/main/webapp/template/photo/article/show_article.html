@@ -3,7 +3,7 @@
 %>
 	<% include("/template/image/includes/header.html"){} %>
 	
-	<script type="text/javascript" src="template/image/article/show_article.js"></script>
+	<script type="text/javascript" src="${BASE_PATH }template/image/article/show_article.js"></script>
 <%
 };
 
@@ -26,9 +26,9 @@ var bodyContent = {
 			<ol class="breadcrumb" style="margin:0px;">
 			  <li><a href="home">首页</a></li>
 			  <% if(folder.id==100) { %>
-			  <li><a href="front/person/view/${item.create_id}.html">作者空间</a></li>
+			  <li><a href="${BASE_PATH }front/person/view/${item.create_id}.html">作者空间</a></li>
 			  <% } else { %>
-			  <li><a href="${flyfox.getMenu(folder.id)}">${folder.name}</a></li>
+			  <li><a href="${BASE_PATH }${flyfox.getMenu(folder.id)}">${folder.name}</a></li>
 			  <% } %>
 			  <li class="active">文章</li>
 			</ol>
@@ -89,7 +89,7 @@ var bodyContent = {
 					<% if(strutil.isNotEmpty(item.file_url)) { %>
 						<div>
 						<span style="color: gray;">附件:</span>
-						<a href="${item.file_url }" target="_blank" style="text-decoration:none;">
+						<a href="${BASE_PATH }${item.file_url }" target="_blank" style="text-decoration:none;">
 							${item.file_name}
 						</a>
 						</div>
@@ -108,7 +108,7 @@ var bodyContent = {
 							for(tagitem in taglist){ 
 						%>
 							<li class="q-tagitem">
-							<a class="a-tagitem" href="front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+							<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
 							</li>
 						<% 
 							}
@@ -149,12 +149,12 @@ var bodyContent = {
 					<div class="comment-item" id="comment_${comment.id}_${comment.article_id}">
 						<div class="item-top">
 							<% var user = flyfox.getUser(comment.create_id);  %>
-							<a href="front/person/view/${comment.create_id}.html" target="_blank"><img width="32" height="32" alt="头像" class="img_radius"
-								src="${user.title_url!'static/images/user/user.png'}" /></a>
-							<a href="front/person/view/${comment.create_id}.html" target="_blank" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
+							<a href="${BASE_PATH }front/person/view/${comment.create_id}.html" target="_blank"><img width="32" height="32" alt="头像" class="img_radius"
+								src="${user.title_url!(BASE_PATH  + 'static/images/user/user.png')}" /></a>
+							<a href="${BASE_PATH }front/person/view/${comment.create_id}.html" target="_blank" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
 							<% if(comment.status > 20) { %>
 							<span class="comment-txt">回复</span>
-							<a href="front/person/view/${comment.reply_userid}.html" target="_blank" class="user-name">${flyfox.getUserName(comment.reply_userid)}</a>
+							<a href="${BASE_PATH }front/person/view/${comment.reply_userid}.html" target="_blank" class="user-name">${flyfox.getUserName(comment.reply_userid)}</a>
 							<% } %>
 							<br>
 							<span>${comment.content}</span>
@@ -193,7 +193,7 @@ var bodyContent = {
 			  	<% for(item in articles.list){ %>
 					<li class="list-group-item">
 						<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-						<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
 						<% if (strutil.length(item.title) > 18) { %>
 							${strutil.subStringTo(item.title, 0, 18)}...
 						<% 	} else { %>

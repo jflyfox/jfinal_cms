@@ -3,7 +3,6 @@ package com.jflyfox.modules.front;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jflyfox.component.base.BaseProjectController;
-import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.admin.video.model.TbVideo;
@@ -37,7 +36,7 @@ public class FrontAlbumVideoController extends BaseProjectController {
 
 		// seo：title优化
 		String albumName = (album == null ? "" : album.getName() + " - ");
-		setAttr(JFlyFoxUtils.TITLE_ATTR, albumName + JFlyFoxCache.getHeadTitle());
+		setAttr(JFlyFoxUtils.TITLE_ATTR, albumName + getAttr(JFlyFoxUtils.TITLE_ATTR));
 
 		renderAuto(path + "common_album.html");
 	}
@@ -65,7 +64,7 @@ public class FrontAlbumVideoController extends BaseProjectController {
 
 		// seo：title优化
 		String videoName = (video == null ? "" : video.getName() + " - ");
-		setAttr(JFlyFoxUtils.TITLE_ATTR, videoName + JFlyFoxCache.getHeadTitle());
+		setAttr(JFlyFoxUtils.TITLE_ATTR, videoName + getAttr(JFlyFoxUtils.TITLE_ATTR));
 
 		renderAuto(path + "common_video.html");
 	}

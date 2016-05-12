@@ -9,7 +9,7 @@ jQuery(function($) {
 	// 页面方法
 	oper = {
 		width : 400,
-		height : 420,
+		height : 480,
 		form : document.form1,
 		list : function() {
 			var url = 'admin/friendlylink/list';
@@ -89,6 +89,7 @@ var bodyContent = {
 					<th name="type" class="sorting">类型</th>
 					<th name="sort" class="sorting">排序号</th> 
 					<th name="state" class="sorting">是否显示</th> 
+					<th>站点</th> 
 					<th>备注</th> 
  					<th>操作</th>
 				</tr>
@@ -97,28 +98,27 @@ var bodyContent = {
 			<% for(item in page.list){ %>
 				<tr>
 				<td>${itemLP.index }</td>
-					<%  // 列表内容 %>
-						<td>${item.name}</td> 
-					<td title="${item.url}">
-					<% if (strutil.length(item.url) > 20) { %>
-						${strutil.subStringTo(item.url, 0, 20)}...
-					<% 	} else { %>
-						${item.url}
-					<%  } %>
-					</td> 
-					<td>${flyfox.dictValue(item.type!'' )  }</td>
-					<td>${item.sort}</td> 
-						<td>
- 
-	<% if(item.state==1) { %>
-	显示
-	<%	} %>
-	<% if(item.state==2) { %>
-	不显示
-	<%	} %>
-
+				<%  // 列表内容 %>
+					<td>${item.name}</td> 
+				<td title="${item.url}">
+				<% if (strutil.length(item.url) > 20) { %>
+					${strutil.subStringTo(item.url, 0, 20)}...
+				<% 	} else { %>
+					${item.url}
+				<%  } %>
+				</td> 
+				<td>${flyfox.dictValue(item.type!'' )  }</td>
+				<td>${item.sort}</td> 
+				<td>
+				<% if(item.state==1) { %>
+				显示
+				<%	} %>
+				<% if(item.state==2) { %>
+				不显示
+				<%	} %>
 				</td>  
-						<td title="${item.remark}">
+				<td>${item.siteName!'全部'}</td>
+				<td title="${item.remark}">
 				<% if (strutil.length(item.remark) > 6) { %>
 					${strutil.subStringTo(item.remark, 0, 6)}...
 				<% 	} else { %>
@@ -134,7 +134,7 @@ var bodyContent = {
 			<% } %>
 			</tbody>
 		</table>
-		<%include("/static/component/include/paginator.html"){} %>
+		<%include("/pages/includes/paginator.html"){} %>
 	</form>
 <%}; %>
 

@@ -5,6 +5,7 @@ var headContent = {
 
 var bodyContent = {
 %>
+
 <form name="form1" action="" method="post" class="form-horizontal" role="form">
 	<!-- 数据列表 -->
 	<table class="table">
@@ -14,65 +15,79 @@ var bodyContent = {
 		<td>
 			${model.parentName!'根栏目' }
 		</td>
-	</tr>
-	<tr>
 		<td>名称</td>
 		<td>${model.name}</td>
 	</tr>
 	<tr>
-		<td>名称</td>
-		<td>${model.key}</td>
+		<td>栏目类型</td>
+		<td>
+			${flyfox.dictValue(model.material_type!'')  }
+		</td>
+		<td>url_key</td>
+		<td>
+			${model.key}
+		</td>
+	</tr>
+	<tr>
+		<td>模板路径</td>
+		<td colspan="3">
+			${model.path}
+		</td>
 	</tr>
 	<tr>
 		<td>排序</td>
 		<td>${model.sort}</td>
-	</tr>
-	<tr>
 		<td>状态</td>
 		<td>
-			<% if(model.status=='2') { %>
+			<% if(model.status==2) { %>
 			隐藏
 			<%	} %>
-			<% if(model.status=='1') { %>
+			<% if(model.status==1) { %>
 			显示
 			<%	} %>
 		</td> 
 	</tr>
 	<tr>
-		<td>类型</td>
+		<td>跳转类型</td>
 		<td>${flyfox.dictValue(model.type )  }</td>
-	</tr>
-	<tr>
-		<td>地址</td>
+		<td>跳转地址</td>
 		<td>${model.jump_url}</td>
 	</tr>
 	<tr>
 		<td>说明</td>
-		<td title="${model.content}">
-			<% if (strutil.length(model.content) > 15) { %>
-				${strutil.subStringTo(model.content, 0, 15)}...
+		<td title="${model.content}" colspan="3">
+			<% if (strutil.length(model.content) > 30) { %>
+				${strutil.subStringTo(model.content, 0, 30)}...
 			<%	} else {%>
 				${model.content }
 			<% } %>
 		</td>
 	</tr>
 	<tr>
-		<td>head_keywords</td>
-		<td>
-			<% if (strutil.length(model.head_keywords) > 15) { %>
-				${strutil.subStringTo(model.head_keywords, 0, 15)}...
+		<td>seo_title</td>
+		<td title="${model.seo_title}">
+			<% if (strutil.length(model.seo_title) > 15) { %>
+				${strutil.subStringTo(model.seo_title, 0, 15)}...
 			<%	} else {%>
-				${model.head_keywords }
+				${model.seo_title }
+			<% } %>
+		</td>
+		<td>seo_keywords</td>
+		<td title="${model.seo_keywords}">
+			<% if (strutil.length(model.seo_keywords) > 15) { %>
+				${strutil.subStringTo(model.seo_keywords, 0, 15)}...
+			<%	} else {%>
+				${model.seo_keywords }
 			<% } %>
 		</td>
 	</tr>
 	<tr>
-		<td>head_description</td>
-		<td>
-			<% if (strutil.length(model.head_description) > 15) { %>
-				${strutil.subStringTo(model.head_description, 0, 15)}...
+		<td>seo_description</td>
+		<td title="${model.seo_description}" colspan="3">
+			<% if (strutil.length(model.seo_description) > 15) { %>
+				${strutil.subStringTo(model.seo_description, 0, 15)}...
 			<%	} else {%>
-				${model.head_description }
+				${model.seo_description }
 			<% } %>
 		</td>
 	</tr>

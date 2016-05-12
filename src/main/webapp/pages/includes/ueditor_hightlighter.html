@@ -1,0 +1,78 @@
+<script
+	src="static/component/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<link
+	href="static/component/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css"
+	rel="stylesheet" type="text/css">
+
+<script src="static/component/syntaxhighlighter/scripts/shBrushBash.js"></script>
+<script src="static/component/syntaxhighlighter/scripts/shBrushCss.js"></script>
+<script src="static/component/syntaxhighlighter/scripts/shBrushJava.js"></script>
+<script
+	src="static/component/syntaxhighlighter/scripts/shBrushJavaFX.js"></script>
+<script
+	src="static/component/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script src="static/component/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+<script src="static/component/syntaxhighlighter/scripts/shBrushSql.js"></script>
+<script src="static/component/syntaxhighlighter/scripts/shBrushXml.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		SyntaxHighlighter.all();
+	});
+	$(function () {
+	    // Line wrap back
+	    var shLineWrap = function () {
+	        $('.syntaxhighlighter').each(function () {
+	            // Fetch
+	            var $sh = $(this),
+	                $gutter = $sh.find('td.gutter'),
+	                $code = $sh.find('td.code')
+	                ;
+	            // Cycle through lines
+	            $gutter.children('.line').each(function (i) {
+	                // Fetch
+	                var $gutterLine = $(this),
+	                    $codeLine = $code.find('.line:nth-child(' + (i + 1) + ')')
+	                    ;
+	                //alert($gutterLine);
+	                // Fetch height
+	                var height = $codeLine.height() || 0;
+	                if (!height) {
+	                    height = 'auto';
+	                }
+	                else {
+	                    height = height += 'px';
+	                    //alert(height);
+	                }
+	                // Copy height over
+	                $gutterLine.attr('style', 'height: ' + height + ' !important'); // fix by Edi, for JQuery 1.7+ under Firefox 15.0
+	                // console.debug($gutterLine.height(), height, $gutterLine.text(), $codeLine);
+	            });
+	        });
+	    };
+	    // Line wrap back when syntax highlighter has done it's stuff
+	    var shLineWrapWhenReady = function () {
+	        if ($('.syntaxhighlighter').length === 0) {
+	            setTimeout(shLineWrapWhenReady, 10);
+	        }
+	        else {
+	            shLineWrap();
+	        }
+	    };
+	    // Fire
+	    shLineWrapWhenReady();});
+</script>
+
+
+<style>
+.syntaxhighlighter {
+	width: 100% !important;
+	margin: .3em 0 .3em 0 !important;
+	position: relative !important;
+	overflow: auto !important;
+	background-color: #f5f5f5 !important;
+	border: 1px solid #ccc !important;
+	word-break: break-all;
+}
+
+</style>

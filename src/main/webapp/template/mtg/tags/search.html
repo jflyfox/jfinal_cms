@@ -18,8 +18,8 @@ var bodyContent = {
 		<div class="panel panel-default">
 			 <div class="panel-body" style="padding:0px;">
 			<ol class="breadcrumb" style="margin:0px;">
-			  <li><a href="web">首页</a></li>
-			  <li><a href="front/tags/all">搜索</a></li>
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <li><a href="${BASE_PATH }front/tags/all">搜索</a></li>
 			  <li class="active">${tagName }</li>
 			</ol>
 			</div>
@@ -30,36 +30,23 @@ var bodyContent = {
 
 	<div class="row">
 	<!-- 文章 -->
-	<div class="col-md-4">	
+	<div class="col-md-8">	
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			<h3 class="panel-title">查询结果<a class="more" href="front/tags/all">更多</a></h3>
+			<h3 class="panel-title">查询结果<a class="more" href="${BASE_PATH }front/tags/all">更多标签</a></h3>
 		  </div>
-		 	 <ul class="list-group">
-			  	<% for(item in page.list){ %>
-					<li class="list-group-item">
-						<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-						<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
-						<% if (strutil.length(item.title) > 18) { %>
-							${strutil.subStringTo(item.title, 0, 18)}...
-						<% 	} else { %>
-							${item.title}
-						<%  } %>
-						</a>
-					</li>
-				<% } %>
-				<li class="list-group-item">
-					<%include("/template/mtg/includes/paginator.html"){} %>
-				</li>
-			  </ul>
-		</div>
+		  	 <!-- 文章列表 -->
+		 	 <% include("/template/mtg/includes/articlelist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
+		</div> 	 
+		 	 
 	</div>
 	
-	<!-- 标签 -->
+	
+	<!-- 信息列表 -->
 	<div class="col-md-4">	
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			<h3 class="panel-title">其他标签<a class="more" href="front/tags/all">更多</a></h3>
+			<h3 class="panel-title">其他标签<a class="more" href="${BASE_PATH }front/tags/all">更多</a></h3>
 		  </div>
 		  <div class="panel-body">
 			<%  
@@ -71,7 +58,7 @@ var bodyContent = {
 					for(tagitem in taglist){ 
 				%>
 					<li class="q-tagitem">
-					<a class="a-tagitem" href="front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+					<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
 					</li>
 				<% 
 					}
@@ -82,11 +69,7 @@ var bodyContent = {
 			%>
 		 </div>
 		</div>
-	</div>
-	
-	<!-- 信息列表 -->
-	<div class="col-md-4">	
-	
+		
 		<!-- 推荐文章 -->
 		<%  include("/template/mtg/includes/recommend.html"){} %>
 		

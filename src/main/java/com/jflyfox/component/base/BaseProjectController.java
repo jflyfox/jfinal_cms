@@ -20,9 +20,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.jfinal.plugin.activerecord.Db;
+import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.base.SessionUser;
 import com.jflyfox.jfinal.component.util.Attr;
+import com.jflyfox.modules.admin.article.ArticleConstant;
+import com.jflyfox.modules.admin.folder.FolderService;
+import com.jflyfox.modules.admin.site.SessionSite;
+import com.jflyfox.modules.admin.site.SiteConstant;
+import com.jflyfox.modules.admin.site.SiteService;
+import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.system.log.SysLog;
 import com.jflyfox.system.menu.SysMenu;
 import com.jflyfox.system.user.SysUser;
@@ -41,6 +48,37 @@ import com.jflyfox.util.encrypt.DESUtils;
 public abstract class BaseProjectController extends BaseController {
 
 	private static final DESUtils COOKIE_DES = new DESUtils("ffcookie");
+
+	public void renderAuto(String view) {
+		String path = getAutoPath(view);
+
+		super.render(path);
+	}
+
+	public void redirectAuto(String view) {
+		String path = getAutoPath(view);
+
+		super.redirect(path);
+	}
+
+	protected String getAutoPath(String view) {
+		String path = view;
+
+		if (!view.startsWith("/")) {
+			path = "/" + path;
+		}
+
+		// path = (isMoblie() ? Attr.PATH_MOBILE : Attr.PATH_PC) + path;
+		TbSite site = new SiteService().getSite(getSessionSite().getSiteId());
+		path = SiteConstant.TEMPLATE_PATH + (isMoblie() ? site.getTemplateMobile() : site.getTemplate()) + path;
+
+		if (view.startsWith("/")) {
+			path = "/" + path;
+		}
+
+		path = path.replace("//", "/");
+		return path;
+	}
 
 	/**
 	 * 方法重写
@@ -71,7 +109,7 @@ public abstract class BaseProjectController extends BaseController {
 			// 异常cookie重新登陆
 			removeSessionAttr(Attr.SESSION_NAME);
 			removeCookie(Attr.SESSION_NAME);
-			
+
 			log.error("cooke user异常:", e);
 			return null;
 		}
@@ -114,7 +152,7 @@ public abstract class BaseProjectController extends BaseController {
 		// 删除cookie
 		removeCookie(Attr.SESSION_NAME);
 	}
-	
+
 	/**
 	 * 用户登录，登出记录
 	 * 
@@ -137,5 +175,46 @@ public abstract class BaseProjectController extends BaseController {
 			log.error("添加日志失败", e);
 		}
 	}
+
+	// ///////////////////栏目处理////////////
+	// 获取用户设置的SITE对象，设置默认
+	public SessionSite getSessionSite() {
+		SessionSite sessionSite = getSessionAttr(SiteConstant.SESSION_SITE);
+		// 获取用户设置的SITE对象，设置默认
+		if (sessionSite == null) {
+			sessionSite = new SessionSite();
+			sessionSite.setBackSiteId(SiteConstant.DEFAULT_SITE_ID);
+			sessionSite.setSiteId(SiteConstant.DEFAULT_SITE_ID);
+			setSessionAttr(SiteConstant.SESSION_SITE, sessionSite);
+		}
+		return sessionSite;
+	}
+
+	public SessionSite setSessionSite(SessionSite sessionSite) {
+		setSessionAttr(SiteConstant.SESSION_SITE, sessionSite);
+		return sessionSite;
+	}
+
+	public String selectFolder(Integer selected) {
+		return new FolderService().selectFolder(selected, getSessionSite().getBackSiteId());
+	}
+
+	public String selectFolder(Integer selected, Integer selfId) {
+		return new FolderService().selectFolder(selected, selfId, getSessionSite().getBackSiteId());
+	}
 	
+	/**
+	 * 公共文章查询sql
+	 * 
+	 * 2016年3月19日 下午7:03:11 flyfox 330627517@qq.com
+	 * 
+	 * @return
+	 */
+	public String getPublicWhere() {
+		return " t.status =  " + JFlyFoxUtils.STATUS_SHOW //
+				+ " and t.approve_status = " + ArticleConstant.APPROVE_STATUS_PASS // 审核通过
+				+ " and t.type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
+		;
+	}
+
 }

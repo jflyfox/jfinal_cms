@@ -3,11 +3,11 @@ package com.jflyfox.modules;
 import com.jfinal.aop.Before;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ImageCode;
-import com.jflyfox.component.util.JFlyFoxCache;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.admin.folder.TbFolder;
+import com.jflyfox.modules.admin.site.SessionSite;
 import com.jflyfox.modules.front.Home;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
 import com.jflyfox.system.dict.DictCache;
@@ -35,14 +35,26 @@ public class CommonController extends BaseProjectController {
 	@Before(FrontInterceptor.class)
 	public void index() {
 		// new FrontService().menu(this);
+		int folderRoot = TbFolder.ROOT;
+		SessionSite site = getSessionSite();
+		Integer siteFolderId = site.getModel().getSiteFolderId();
+		if (siteFolderId != null && siteFolderId > 0) {
+			folderRoot = siteFolderId;
+		}
 
 		String folderStr = getPara();
-		Integer folderId = TbFolder.ROOT;
+		Integer folderId = folderRoot;
+
 		if (folderStr != null) {
-			folderId = NumberUtils.parseInt(FolderService.getMenu(folderStr));
+			if (NumberUtils.parseInt(folderStr) > 0) {
+				folderId = NumberUtils.parseInt(folderStr);
+			} else {
+				folderId = NumberUtils.parseInt(FolderService.getMenu(folderStr));
+			}
 		}
+
 		if (folderId == null || folderId <= 0) {
-			folderId = TbFolder.ROOT;
+			folderId = folderRoot;
 		}
 		// 活动目录
 		setAttr("folders_selected", folderId);
@@ -53,27 +65,22 @@ public class CommonController extends BaseProjectController {
 		setAttr("paginator", getPaginator());
 
 		// seo：title优化
-		setAttr(JFlyFoxUtils.TITLE_ATTR, folder.getStr("name") + " - " + JFlyFoxCache.getHeadTitle());
+		String folderName = (folder == null ? "" : folder.getStr("name") + " - ");
+		setAttr(JFlyFoxUtils.TITLE_ATTR, folderName + getAttr(JFlyFoxUtils.TITLE_ATTR));
 
-		// 关于我们特殊处理
-		if (folderId == JFlyFoxUtils.MENU_ABOUT) {
-			redirect("/front/about");
+		// 栏目跳转规则
+		String jumpUrl = folder.getJumpUrl();
+		String path = folder.getPath();
+		String urlKey = folder.getKey();
+		if (StrUtils.isNotEmpty(jumpUrl)) {
+			redirect(jumpUrl);
+		} else if (StrUtils.isNotEmpty(path)) {
+			renderAuto(path);
 		} else {
-			renderAuto(Home.PATH + FolderService.getMenu(folderId + "") + ".html");
+			renderAuto(Home.PATH + urlKey + ".html");
 		}
-		
-	}
 
-//	@Before(FrontInterceptor.class)
-//	public void admin() {
-//		if (getSessionUser() != null) {
-//			// 如果session存在，不再验证
-//			redirect(firstPage);
-//		} else {
-//			renderAuto(loginPage);
-//		}
-//
-//	}
+	}
 
 	/**
 	 * 登录
@@ -112,7 +119,10 @@ public class CommonController extends BaseProjectController {
 			return;
 		}
 		String encryptPassword = JFlyFoxUtils.passwordEncrypt(password); // 加密
-		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? and password = ? ", username, encryptPassword);
+		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? and password = ? " //
+				+ " and usertype != " + JFlyFoxUtils.USER_TYPE_THIRD // 第三方的只能通过oauth登录
+				, username, encryptPassword);
+		
 		if (user == null || user.getInt("userid") <= 0) {
 			setAttr("msg", "认证失败，请您重新输入。");
 			renderAuto(loginPage);

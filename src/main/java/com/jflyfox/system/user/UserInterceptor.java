@@ -7,8 +7,8 @@ import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.jflyfox.component.base.BaseProjectController;
+import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.util.Attr;
-import com.jflyfox.util.StrUtils;
 
 /**
  * 用户认证拦截器
@@ -32,13 +32,13 @@ public class UserInterceptor implements Interceptor {
 			log.warn("####非法的请求");
 		}
 
-		String path_tmp = ai.getActionKey();
+		String tmpPath = ai.getActionKey();
 
-		if (path_tmp.startsWith("/")) {
-			path_tmp = path_tmp.substring(1, path_tmp.length());
+		if (tmpPath.startsWith("/")) {
+			tmpPath = tmpPath.substring(1, tmpPath.length());
 		}
-		if (path_tmp.endsWith("/")) {
-			path_tmp = path_tmp.substring(0, path_tmp.length() - 1);
+		if (tmpPath.endsWith("/")) {
+			tmpPath = tmpPath.substring(0, tmpPath.length() - 1);
 		}
 
 		// 每次访问获取session，没有可以从cookie取~
@@ -56,7 +56,7 @@ public class UserInterceptor implements Interceptor {
 		// controller.setSessionAttr(Attr.SESSION_NAME, user);
 		// }
 
-		if (isAuth(path_tmp)) {
+		if (JFlyFoxUtils.isBack(tmpPath)) {
 			if (user == null || user.getUserid() <= 0) {
 				controller.redirect("/trans");
 				return;
@@ -73,26 +73,5 @@ public class UserInterceptor implements Interceptor {
 
 		ai.invoke();
 	}
-
-	/**
-	 * 认证方法
-	 * 
-	 * 2015年2月27日 上午11:38:37 flyfox 330627517@qq.com
-	 * 
-	 * @param path_tmp
-	 * @return
-	 */
-	protected boolean isAuth(String path_tmp) {
-		// 后台不需要认证页面
-		if (path_tmp.startsWith("admin/login")  //
-				|| path_tmp.startsWith("admin/logout") //
-				|| path_tmp.startsWith("admin/trans")) {
-			return false;
-		}
-		
-		return StrUtils.isNotEmpty(path_tmp) // 空是首页
-				&& (path_tmp.startsWith("system/") // 系统管理
-				|| path_tmp.startsWith("admin/") // 后台管理
-				);
-	}
+	
 }

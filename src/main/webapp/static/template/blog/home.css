@@ -1,0 +1,514 @@
+html {
+	background: url(bamboo.jpg) left top repeat;
+}
+
+.mod-diary-top {
+	width: 990px;
+	height: 22px;
+	background: url(leather-top.png) no-repeat;
+}
+
+.mod-diary {
+	margin: 75px auto 20px;
+	width: 990px;
+	background: url(leather-tile.jpg) repeat-y;
+}
+
+.mod-diary-inner {
+	position: relative;
+	margin: 7px 25px 0;
+	padding: 130px 0 60px;
+	padding-top: 200px\9; /** 兼容IE8 **/
+	width: 940px;
+	min-height: 300px;
+	_height: 300px;
+	background: #fcf8e9 url(paper.png) repeat-y;
+}
+
+.mod-diary-pen {
+	position: absolute;
+	left: 10px;
+	top: 15px;
+	width: 53px;
+	height: 465px;
+	background: url(pen.png) no-repeat;
+}
+
+.mod-diary-nav {
+	position: absolute;
+	left: -27px;
+	top: 120px;
+	width: 955px;
+	height: 71px;
+	background: url(nav.png) no-repeat;
+	_background: none;
+	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,
+		src="nav.png");
+}
+
+.mod-diary-clip {
+	position: absolute;
+	right: -21px;
+	top: 10px;
+	width: 23px;
+	height: 256px;
+	background: url(clip.png) no-repeat;
+}
+
+.mod-diary-bottom {
+	width: 990px;
+	height: 23px;
+	background: url(leather-bottom.png) no-repeat;
+}
+
+.mod-topspaceinfo h1 {
+	position: absolute;
+	left: 0;
+	top: 5px;
+	margin: 15px 0 0 0;
+	padding: 0px;
+	width: 940px;
+	height: 90px;
+	overflow: hidden;
+	font-size: 50px;
+	line-height: 90px;
+	font-weight: normal;
+	text-align: center;
+	font-family: tahoma, helvetica, "Microsoft Yahei", "微软雅黑", arial;
+}
+
+.mod-topspaceinfo .space-name {
+	font-family: tahoma, helvetica, "Microsoft Yahei", "微软雅黑", arial;
+	zoom: 1;
+	color: #8cab4e;
+	text-decoration: none;
+}
+
+.mod-topspaceinfo .space-description {
+	position: absolute;
+	left: 118px;
+	top: 137px;
+	width: 770px;
+	height: 36px;
+	overflow: hidden;
+	font-size: 12px;
+	line-height: 18px;
+	color: #fff;
+	font-family: Tahoma, Arial, Helvetica, STHeiti;
+}
+
+.mod-bloglist {
+	display: block;
+}
+
+.mod-blogitem {
+	position: relative;
+	top: 15px;
+	left: 0px;
+	margin-top: 70px;
+	width: 940px;
+}
+
+.mod-blogitem .box-postdate {
+	float: left;
+	margin-left: 73px;
+	margin-top: 5px;
+	padding: 0;
+	width: 110px;
+	height: 18px;
+	line-height: 18px;
+	color: #9f5e41;
+	text-align: left;
+	zoom: 1;
+	font-style: italic;
+}
+
+.mod-blogitem .box-postdate p {
+	margin-top: 5px;
+}
+
+.mod-blogitem .box-postuser {
+	font-size: 14px;
+	color: #9f5e41;
+}
+
+.mod-blogitem .item-title {
+	/** float:left; **/
+	margin-left: 5px;
+	margin-top: 3px;
+	width: 722px;
+	line-height: 24px;
+	overflow: hidden;
+}
+
+.mod-blogitem .item-title h1 {
+	font-family: tahoma, helvetica, "Microsoft Yahei", "微软雅黑", arial;
+	font-size: 20px;
+	color: #8cab4e;
+	zoom: 1;
+}
+
+.mod-blogitem .item-title a {
+	font-family: tahoma, helvetica, "Microsoft Yahei", "微软雅黑", arial;
+	font-size: 20px;
+	color: #8cab4e;
+	zoom: 1;
+	text-decoration: none;
+}
+
+.mod-blogitem .item-title .item-right {
+	float: right;
+	margin-right: 25px;
+}
+
+.mod-blogitem .item-title .item-right span {
+	color: gray;
+	font-size: 12px;
+	margin-right: 5px;
+}
+
+.mod-blogitem .item-content {
+	width: 722px;
+	margin-top: 5px;
+	margin-left: 188px;
+	font-size: 12px;
+	/** line-height: 24px; **/
+	overflow: hidden;
+}
+
+.content-other-info {
+	position: absolute;
+	top: 3px;
+	left: -110px;
+	width: 110px;
+	height: 18px;
+	line-height: 18px;
+	color: #9f5e41;
+	text-align: left;
+	zoom: 1;
+	font-style: italic;
+}
+
+.mod-blogitem .item-footer {
+	margin-left: 188px;
+	margin-top: 5px;
+	width: 722px;
+	line-height: 24px;
+	overflow: hidden;
+}
+
+.mod-blogitem .item-footer .item-left {
+	float: left;
+	width: 500px;
+}
+
+.mod-blogitem .item-footer .item-right {
+	float: right;
+	margin-right: 40px;
+	font-size: 12px;
+}
+
+/********************* comment start ***********************/
+.mod-blogcommentitem {
+	position: relative;
+	top: 15px;
+	left: 0px;
+	margin-top: 10px;
+	width: 722px;
+	margin-top: 5px;
+	margin-left: 188px;
+	font-size: 12px;
+	/** line-height: 24px; **/
+	overflow: hidden;
+	border: 1px solid #dedede;
+	background: #fff;
+}
+
+.mod-blogcommentitem .comment-inner {
+	width: 682px;
+	margin: 20px 20px 0px 20px;
+	color: #ddd;
+}
+
+.mod-blogcommentitem .comment-inner .comment-title {
+	color: #89898b;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+
+.mod-blogcommentitem .comment-inner .comment-textarea {
+	overflow: hidden;
+	width: 675px;
+	height: 63px;
+}
+
+.mod-blogcommentitem .comment-inner .comment-btn {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	float: right;
+}
+
+.mod-blogcommentitem .comment-list {
+	width: 682px;
+	margin: 20px 20px 0px 20px;
+	float: left;
+}
+
+.mod-blogcommentitem .comment-list .comment-item {
+	border-bottom: 1px dotted #E6E6E6;
+	margin-top: 10px;
+}
+
+.comment-list .comment-item a {
+	float: left;
+	margin-right: 5px;
+}
+
+.comment-list .comment-item .item-top {
+	float: none;
+	line-height: 24px;
+	overflow: visible;
+}
+
+.comment-list .item-top .user-name {
+	float: left;
+	color: green;
+	margin-right: 10px;
+}
+
+.comment-list .item-top .comment-txt {
+	float: left;
+	margin-right: 10px;
+}
+
+.comment-list .comment-no-read {
+	font-weight: bold;
+}
+
+.comment-list .comment-item .item-bottom {
+	display: block;
+	margin-left: 30px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	overflow: visible;
+}
+
+.item-bottom span {
+	color: gray;
+	height: 17px;
+	font-family: Georgia, Tahoma, Helvetica, arial;
+}
+
+.item-bottom .item-edit {
+	float: right;
+}
+
+.mod-blogcommentitem a {
+	color: #8cab4e;
+	font-family: tahoma, helvetica, "Microsoft Yahei", "微软雅黑", arial;
+	zoom: 1;
+	text-decoration: none;
+}
+
+.mod-blogcommentitem a:hover {
+	color: #ddd;
+}
+
+/********************* comment end ***********************/
+
+/********************* clear start ***********************/
+.clearfix:after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both
+}
+
+.clearfix {
+	zoom: 1
+}
+
+.clear {
+	clear: both;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	visibility: hidden;
+	overflow: hidden
+}
+/********************* clear end ***********************/
+
+/********************* footer start ***********************/
+.mod-footer .hidden-box {
+	line-height: 0;
+	height: 0;
+	overflow: hidden
+}
+
+.mod-footer .footer-box {
+	text-align: center;
+	font-family: Arial, simsun;
+	font-size: 12px
+}
+
+.mod-footer .footer-box .inner-box {
+	margin-bottom: 10px;
+	line-height: 14px;
+	height: 14px;
+	overflow: hidden;
+	color: #3FA7CB
+}
+
+.mod-footer .footer-box .copy-box {
+	margin-bottom: 20px;
+	color: #959595;
+	line-height: 25px;
+	height: 25px;
+	overflow: hidden
+}
+
+.mod-footer .footer-box .copy-box img {
+	vertical-align: middle;
+}
+/********************* footer end ***********************/
+
+/********************* TOP start ***********************/
+#scrollTop {
+	width: 57px;
+	height: 57px;
+	position: fixed;
+	right: 40px;
+	bottom: 32px;
+	opacity: 1;
+	background: url(top.png) no-repeat;
+}
+
+#scrollTop:hover {
+	opacity: 0.6;
+	background: url(top.png) no-repeat;
+}
+/********************* TOP end ***********************/
+
+/********************* button start ***********************/
+.btn {
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;
+}
+
+.btn:focus,.btn:active:focus,.btn.active:focus {
+	outline: thin dotted;
+	outline: 5px auto -webkit-focus-ring-color;
+	outline-offset: -2px
+}
+
+.btn:hover,.btn:focus,.btn:active,.btn.active {
+	color: #333;
+	text-decoration: none;
+	color: #333;
+	background-color: #ebebeb;
+	border-color: #adadad;
+	outline: 0;
+	background-image: none;
+	-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+/********************* button end ***********************/
+
+/********** pic radius ***********/
+.img_radius {
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	-webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, .29), inset 1px 1px 1px
+		rgba(255, 255, 255, .44);
+	-moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, .29), inset 1px 1px 1px
+		rgba(255, 255, 255, .44);
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, .29), inset 1px 1px 1px
+		rgba(255, 255, 255, .44);
+}
+/********** pic radius ***********/
+
+/********** table td ***********/
+.item-content .right_td {
+	white-space: nowrap;
+	float: right;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333;
+}
+
+.item-content .left_td {
+	white-space: nowrap;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333;
+}
+/********** table td ***********/
+
+/************分页定位**************/
+.mod-blogpager {
+	position: relative;
+	top: 30px;
+	left: 0px;
+	margin-left: 168px;
+	width: 940px;
+	font-size: 12px;
+	overflow: hidden;
+}
+/************分页定位**************/
+
+/***************标签**********************/
+.q-taglist {
+	overflow: hidden;
+}
+
+.q-taglist .q-icon {
+	display: block;
+	float: left;
+	height: 14px;
+	width: 14px;
+	padding: 6px 4px;
+	background: url(q-tag.png) no-repeat 4px -10px;
+}
+
+.q-taglist .q-tagitem {
+	float: left;
+	font-size: 12px;
+	line-height: 26px;
+	padding: 0 2px;
+}
+
+.q-taglist .a-tagitem {
+	color: #454545;
+	padding: 2px 4px;
+	_padding: 4px 4px 0;
+	word-break: keep-all;
+	word-wrap: normal;
+}
+
+.q-taglist .a-tagitem:hover {
+	color: #fff;
+	background-color: #3fa7cb;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+/***************标签**********************/

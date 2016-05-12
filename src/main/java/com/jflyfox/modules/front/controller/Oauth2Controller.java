@@ -13,7 +13,9 @@ import com.jflyfox.jfinal.component.oauth.OauthSina;
 import com.jflyfox.jfinal.component.oauth.util.TokenUtil;
 import com.jflyfox.modules.CommonController;
 import com.jflyfox.modules.admin.article.TbArticle;
+import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
+import com.jflyfox.modules.front.service.Oauth2Service;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
 import com.jflyfox.util.StrUtils;
@@ -39,14 +41,16 @@ public class Oauth2Controller extends BaseProjectController {
 		setSessionAttr("pre_page", prePage);
 
 		try {
+			Oauth2Service svc = new Oauth2Service();
+			TbSite site = getSessionSite().getModel();
 			if ("qq".equals(login_type)) {
-				OauthQQ qq = OauthQQ.me();
+				OauthQQ qq = svc.getQQ(site); // OauthQQ.me();
 				url = qq.getAuthorizeUrl(TokenUtil.randomState());
 			} else if ("sina".equals(login_type)) {
-				OauthSina sina = OauthSina.me();
+				OauthSina sina = svc.getSina(site); // OauthSina.me();
 				url = sina.getAuthorizeUrl(TokenUtil.randomState());
 			} else if ("baidu".equals(login_type)) {
-				OauthBaidu baidu = OauthBaidu.me();
+				OauthBaidu baidu = svc.getBaidu(site); // OauthBaidu.me();
 				url = baidu.getAuthorizeUrl(TokenUtil.randomState());
 			} else {
 				redirect("admin");
@@ -65,10 +69,12 @@ public class Oauth2Controller extends BaseProjectController {
 	 */
 	public void qq_callback() {
 		String code = getPara("code");
-		OauthQQ baidu = OauthQQ.me();
+		Oauth2Service svc = new Oauth2Service();
+		TbSite site = getSessionSite().getModel();
+		OauthQQ oauth = svc.getQQ(site); // OauthQQ.me();
 		JSONObject json = null;
 		try {
-			json = baidu.getUserInfoByCode(code);
+			json = oauth.getUserInfoByCode(code);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,10 +89,12 @@ public class Oauth2Controller extends BaseProjectController {
 	 */
 	public void sina_callback() {
 		String code = getPara("code");
-		OauthSina baidu = OauthSina.me();
+		Oauth2Service svc = new Oauth2Service();
+		TbSite site = getSessionSite().getModel();
+		OauthSina oauth = svc.getSina(site); // OauthSina.me();
 		JSONObject json = null;
 		try {
-			json = baidu.getUserInfoByCode(code);
+			json = oauth.getUserInfoByCode(code);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -101,10 +109,12 @@ public class Oauth2Controller extends BaseProjectController {
 	 */
 	public void baidu_callback() {
 		String code = getPara("code");
+		Oauth2Service svc = new Oauth2Service();
+		TbSite site = getSessionSite().getModel();
+		OauthBaidu oauth = svc.getBaidu(site); // OauthBaidu.me();
 		JSONObject json = null;
-		OauthBaidu baidu = OauthBaidu.me();
 		try {
-			json = baidu.getUserInfoByCode(code);
+			json = oauth.getUserInfoByCode(code);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -129,21 +139,24 @@ public class Oauth2Controller extends BaseProjectController {
 			return;
 		}
 
-		SysUser user = SysUser.dao.findFirstByWhere(" where thirdid = ?", openid);
+		TbSite site = getSessionSite().getModel();
+		SysUser user = SysUser.dao.findFirstByWhere(" where thirdid = ? ", openid);
 		if (user == null) {
 			user = new SysUser();
 			user.set("username", username);
 			user.set("realname", username);
 			user.set("password", JFlyFoxUtils.getDefaultPassword());
-			user.set("usertype", 4); // 第三方用户
+			user.set("usertype", JFlyFoxUtils.USER_TYPE_THIRD); // 第三方用户
 			user.set("departid", JFlyFoxUtils.DEPART_THIRD_ID);
 			user.set("state", 1);
 			user.set("thirdid", openid);
+			user.set("back_site_id", 0);
+			user.set("create_site_id", site.getId());
 			user.set("create_time", getNow());
 			user.set("create_id", 0);
 			user.save();
 			UserCache.init();
-		} 
+		}
 
 		setSessionUser(user);
 

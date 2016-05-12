@@ -108,10 +108,14 @@ public class FrontCacheService extends BaseService {
 	 * @param paginator
 	 * @return
 	 */
-	public Page<TbTags> getTags(Paginator paginator) {
-		String key = ("tags_" + paginator.getPageNo() + "_" + paginator.getPageSize());
-		Page<TbTags> taglist = TbTags.dao.paginateCache(cacheName, key, paginator, " select tagname ", //
-				"from tb_tags group by tagname order by create_time desc ");
+	public Page<TbTags> getTags(Paginator paginator, int siteId) {
+		String key = ("tags_" + paginator.getPageNo() + "_" + paginator.getPageSize() + "_" + siteId);
+		Page<TbTags> taglist = TbTags.dao.paginateCache(cacheName, key, paginator, " select t.tagname ", //
+				"from tb_tags t" //
+						+ " left join tb_article ta on ta.id = t.article_id " //
+						+ " left join tb_folder tf on tf.id = ta.folder_id " //
+						+ " where tf.site_id = ? " //
+						+ " group by t.tagname order by t.create_time desc ", siteId);
 		return taglist;
 	}
 
@@ -124,12 +128,14 @@ public class FrontCacheService extends BaseService {
 	 * @param folder_id
 	 * @return
 	 */
-	public Page<TbArticle> getRecommendArticle(Paginator paginator) {
-		String key = ("recommendArticle_" + paginator.getPageNo() + "_" + paginator.getPageSize());
-		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_article  where " + getPublicWhere() + " and is_recommend = 1 " // 推荐文章
-						+ " and folder_id != " + JFlyFoxUtils.MENU_TOPPIC // 不搜索首页图片
-						+ " order by sort,create_time desc");
+	public Page<TbArticle> getRecommendArticle(Paginator paginator, int siteId) {
+		String key = ("recommendArticle_" + paginator.getPageNo() + "_" + paginator.getPageSize() + "_" + siteId);
+		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select t.* " //
+				, " from tb_article t " //
+						+ " left join tb_folder tf on tf.id = t.folder_id " //
+						+ " where " + getPublicWhere() + " and t.is_recommend = 1 " // 推荐文章
+						+ " and  tf.site_id = ? " //
+						+ " order by t.sort,t.create_time desc", siteId);
 		return articles;
 	}
 
@@ -141,11 +147,15 @@ public class FrontCacheService extends BaseService {
 	 * @param paginator
 	 * @return
 	 */
-	public Page<TbArticle> getNewArticle(Paginator paginator) {
-		String key = ("newArticle_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+	public Page<TbArticle> getNewArticle(Paginator paginator, int siteId) {
+		String key = ("newArticle_" + paginator.getPageNo() + "_" + paginator.getPageSize() + "_" + siteId);
 		// 推荐文章列表
-		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_article where " + getPublicWhere() + " order by publish_time desc,update_time desc");
+		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select t.* " //
+				, " from tb_article t " //
+						+ " left join tb_folder tf on tf.id = t.folder_id " //
+						+ "where " + getPublicWhere() //
+						+ " and  tf.site_id = ? " //
+						+ " order by t.publish_time desc,t.update_time desc", siteId);
 		return articles;
 	}
 
@@ -158,12 +168,14 @@ public class FrontCacheService extends BaseService {
 	 * @param folderId
 	 * @return
 	 */
-	public Page<TbArticle> getArticle(Paginator paginator) {
-		String key = ("article_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+	public Page<TbArticle> getArticleBySiteId(Paginator paginator, int siteId) {
+		String key = ("articleSite_" + paginator.getPageNo() + "_" + paginator.getPageSize() + "_" + siteId);
+		String fromSql = " from tb_article t " //
+				+ " left join tb_folder tf on tf.id = t.folder_id " //
+				+ " where " + getPublicWhere() //
+				+ " and tf.site_id = ? " + " order by t.sort,t.create_time desc";
 		// 推荐文章列表
-		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_article " //
-						+ " where " + getPublicWhere() + " order by sort,create_time desc");
+		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select t.* ", fromSql, siteId);
 		return articles;
 	}
 
@@ -178,11 +190,11 @@ public class FrontCacheService extends BaseService {
 	 */
 	public Page<TbArticle> getArticle(Paginator paginator, int folderId) {
 		String key = ("article_" + folderId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
+		String fromSql = " from tb_article t where " + getPublicWhere() + " and t.folder_id =  ? " //
+				+ " order by t.sort,t.create_time desc";
 		// 推荐文章列表
 		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select * " //
-				, " from tb_article " //
-						+ " where " + getPublicWhere() + " and folder_id =  ? " //
-						+ " order by sort,create_time desc", folderId);
+				, fromSql, folderId);
 		return articles;
 	}
 
@@ -196,11 +208,10 @@ public class FrontCacheService extends BaseService {
 	 * @return
 	 */
 	public Page<TbArticle> getArticleByNoCache(Paginator paginator, int folderId) {
+		String fromSql = " from tb_article t where " + getPublicWhere() + " and folder_id =  ? " //
+				+ " order by sort,create_time desc";
 		// 推荐文章列表
-		Page<TbArticle> articles = TbArticle.dao.paginate(paginator, "select * " //
-				, " from tb_article " //
-						+ " where " + getPublicWhere() + " and folder_id =  ? " //
-						+ " order by sort,create_time desc", folderId);
+		Page<TbArticle> articles = TbArticle.dao.paginate(paginator, "select * ", fromSql, folderId);
 		return articles;
 	}
 
@@ -230,10 +241,10 @@ public class FrontCacheService extends BaseService {
 	 */
 	public List<TbFolderRollPicture> getRollPicture(int folderId) {
 		String key = ("getRollPicture_" + folderId);
-		String sql = "select * from tb_folder_roll_picture t " //
+		String fromSql = "select * from tb_folder_roll_picture t " //
 				+ " where is_deleted = " + JFlyFoxUtils.IS_DELETED_NO //
 				+ " and folder_id = ? order by sort,create_time desc";
-		List<TbFolderRollPicture> list = TbFolderRollPicture.dao.findCache(cacheName, key, sql, folderId);
+		List<TbFolderRollPicture> list = TbFolderRollPicture.dao.findCache(cacheName, key, fromSql, folderId);
 		return list;
 	}
 
@@ -262,9 +273,9 @@ public class FrontCacheService extends BaseService {
 	 * @return
 	 */
 	public String getPublicWhere() {
-		return " status = 1 "
-				+ " and approve_status = " + ArticleConstant.APPROVE_STATUS_PASS // 审核通过
-				+ " and type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
+		return " t.status =  " + JFlyFoxUtils.STATUS_SHOW //
+				+ " and t.approve_status = " + ArticleConstant.APPROVE_STATUS_PASS // 审核通过
+				+ " and t.type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
 		;
 	}
 }

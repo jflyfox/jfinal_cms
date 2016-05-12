@@ -19,7 +19,8 @@ public class FriendlylinkController extends BaseProjectController {
 	public void list() {
 		TbFriendlylink model = getModelByAttr(TbFriendlylink.class);
 
-		SQLUtils sql = new SQLUtils(" from tb_friendlylink t where 1=1 ");
+		SQLUtils sql = new SQLUtils(" from tb_friendlylink t"
+				+ " left join tb_site s on s.id = t.site_id where 1=1 ");
 		if (model.getAttrValues().length != 0) {
 			sql.setAlias("t");
 			sql.whereLike("name", model.getStr("name"));
@@ -28,12 +29,12 @@ public class FriendlylinkController extends BaseProjectController {
 		// 排序
 		String orderBy = getBaseForm().getOrderBy();
 		if (StrUtils.isEmpty(orderBy)) {
-			sql.append(" order by sort,id ");
+			sql.append(" order by t.sort,t.id ");
 		} else {
 			sql.append(" order by ").append(orderBy);
 		}
 
-		Page<TbFriendlylink> page = TbFriendlylink.dao.paginate(getPaginator(), "select t.* ", //
+		Page<TbFriendlylink> page = TbFriendlylink.dao.paginate(getPaginator(), "select t.*,s.name as siteName ", //
 				sql.toString().toString());
 
 		// 下拉框

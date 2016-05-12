@@ -3,7 +3,7 @@
 var topPics = temp.rollPicture(1);
 
 // 最新动态
-var newArticles = temp.articlePageTop(1, 10);
+var newArticles = temp.articlePageTop(1, 10, session.site.siteId);
 
 // 新闻 2
 var news = temp.articlePage(1, 10, 2);
@@ -25,6 +25,8 @@ var noticeList = temp.notice(1);
 	var headContent = {
 %>
 	<% include("/template/mtg/includes/header.html"){} %>
+	<meta property="qc:admins" content="3746002437626416706375" />
+	<meta name="baidu-site-verification" content="HoZ9m8VIaf" />
 <script type="text/javascript">
 <!--
 	$(function(){
@@ -144,7 +146,7 @@ var bodyContent = {
 						<% } else { %>
 						<span class="label label-info">${itemLP.index}</span>
 						<% } %>
-						<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
 						<% if (strutil.length(item.title) > 16) { %>
 							${strutil.subStringTo(item.title, 0, 16)}...
 						<% 	} else { %>
@@ -167,7 +169,7 @@ var bodyContent = {
 						<% } else { %>
 						<span class="label label-info">${itemLP.index}</span>
 						<% } %>
-						<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
 						<% if (strutil.length(item.title) > 16) { %>
 							${strutil.subStringTo(item.title, 0, 16)}...
 						<% 	} else { %>
@@ -209,8 +211,8 @@ var bodyContent = {
 	  	<div class="panel panel-default">
 		  <div class="panel-heading">
 		  	<h3 class="panel-title">
-				<a href="${flyfox.getMenu(4)}" target="_blank">旅游</a>
-				<a class="more" href="${flyfox.getMenu(4)}" target="_blank">更多</a>
+				<a href="${BASE_PATH }${flyfox.getMenu(4)}.html" target="_blank">旅游</a>
+				<a class="more" href="${BASE_PATH }${flyfox.getMenu(4)}.html" target="_blank">更多</a>
 			</h3>
 		  </div>
 		  <div class="panel-body">
@@ -219,11 +221,11 @@ var bodyContent = {
 		  <% for(item in travels.list){ %>
 			<div class="col-sm-6 col-md-4">
 		        <div class="thumbnail">
-		          <a href="front/article/${item.id}.html" target="_blank">
+		          <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
 		          <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 		          </a>
 		          <div class="caption">
-		            <a href="front/article/${item.id}.html" target="_blank">${item.title}</a>
+		            <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
 		          </div>
 		        </div>
 		      </div>
@@ -256,8 +258,8 @@ var bodyContent = {
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		  	<h3 class="panel-title">
-				<a href="${flyfox.getMenu(3)}" target="_blank">美食</a>
-				<a class="more" href="${flyfox.getMenu(3)}" target="_blank">更多</a>
+				<a href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">美食</a>
+				<a class="more" href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">更多</a>
 			</h3>
 		  </div>
 		  <div class="panel-body" style="padding-bottom:0px;">
@@ -266,11 +268,11 @@ var bodyContent = {
 			  	<% if(itemLP.index <= 2){ %>
 			  	 <div class="col-md-6">
 					<div class="thumbnail">
-					  <a href="front/article/${item.id}.html" target="_blank">
+					  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
 					  <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
 					  </a>
 					  <div class="caption">
-						<a href="front/article/${item.id}.html" target="_blank">${item.title}</a>
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
 					  </div>
 					</div>
 				  </div>
@@ -284,7 +286,7 @@ var bodyContent = {
 		  		<% if(itemLP.index > 2){ %>
 				<li class="list-group-item">
 					<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-					<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+					<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
 					<% if (strutil.length(item.title) > 18) { %>
 						${strutil.subStringTo(item.title, 0, 18)}...
 					<% 	} else { %>
@@ -302,8 +304,8 @@ var bodyContent = {
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 			<h3 class="panel-title">
-				<a href="${flyfox.getMenu(5)}" target="_blank">教育</a>
-				<a class="more" href="${flyfox.getMenu(5)}" target="_blank">更多</a>
+				<a href="${BASE_PATH }${flyfox.getMenu(5)}.html" target="_blank">教育</a>
+				<a class="more" href="${BASE_PATH }${flyfox.getMenu(5)}.html" target="_blank">更多</a>
 			</h3>
 		  </div>
 		  
@@ -313,11 +315,11 @@ var bodyContent = {
 			  	<% if(itemLP.index <= 2){ %>
 			  	 <div class="col-md-6">
 					<div class="thumbnail">
-					  <a href="front/article/${item.id}.html" target="_blank">
+					  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
 					  <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
 					  </a>
 					  <div class="caption">
-						<a href="front/article/${item.id}.html" target="_blank">${item.title}</a>
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
 					  </div>
 					</div>
 				  </div>
@@ -331,7 +333,7 @@ var bodyContent = {
 		  		<% if(itemLP.index > 2){ %>
 				<li class="list-group-item">
 					<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-					<a href="front/article/${item.id}.html" target="_blank" title="${item.title}">
+					<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
 					<% if (strutil.length(item.title) > 18) { %>
 						${strutil.subStringTo(item.title, 0, 18)}...
 					<% 	} else { %>
