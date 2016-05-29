@@ -15,6 +15,9 @@
 		  	  var picName ="";
 		  	  if(strutil.isNotEmpty(item.image_url)) { 
 		  	  	picName = flyfox.getImage(item);
+				if(!strutil.startWith(picName , 'http')) {
+					picName = BASE_PATH + picName;
+				}
 		  	  } else if(flyfox.getNow()==item.publish_time){ // 当天图片
 		  	   	picName = BASE_PATH + "static/front/images/today.jpg";
 		  	  } else if(strutil.isNotEmpty(defalutimg!'')) { // 默认图片，可设置
