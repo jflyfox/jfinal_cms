@@ -41,6 +41,7 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.log.Log;
 import com.jflyfox.util.Config;
 import com.jflyfox.util.NumberUtils;
+import com.jflyfox.util.StrUtils;
 
 public class FileManager {
 
@@ -875,11 +876,11 @@ public class FileManager {
 		}
 
 		// 备份目录下面文件不需要再进行备份
-//		String srcPath = FileManagerUtils.rebulid(src.getParent());
-//		if (srcPath.startsWith(rootPath + BAKUP)) {
-//			logger.debug("file is bakup:" + src.getPath());
-//			return;
-//		}
+		// String srcPath = FileManagerUtils.rebulid(src.getParent());
+		// if (srcPath.startsWith(rootPath + BAKUP)) {
+		// logger.debug("file is bakup:" + src.getPath());
+		// return;
+		// }
 
 		targetPath = rootPath + BAKUP //
 				+ targetPath.substring(targetPath.indexOf(this.fileRoot) + this.fileRoot.length());
@@ -928,6 +929,11 @@ public class FileManager {
 	 */
 	protected String getFilePath(String path) {
 		String contextPath = this.get.get("contextPath");
+		// 根目录
+		if (StrUtils.isEmpty(contextPath)) {
+			return path;
+		}
+
 		if (path.startsWith(contextPath)) {
 			path = path.replaceFirst(contextPath, "");
 		}
