@@ -14,16 +14,13 @@ jfinal cms
 
 > 1. 下载项目代码，安装jdk、maven、mysql。
 > 2. 在项目目录下运行mvn install，提示BUILD SUCCESS即可。
-> 3. 创建mysql用户和数据库，运行/jfinal_cms/sql下对应jfinal_cms.sql。
+> 3. 创建mysql用户和数据库，运行/jfinal_cms/sql下对应jfinal_cms_v4.sql。
 > 4. 数据库配置文件：/jfinal_cms/src/main/resources/conf/db.properties
 > 5. 如需要oauth2的，设置src/conf/oauth.properties
-> 6. 通过config.properties的ATTR.PATH_PC=/template/mtg配置可以切换模板，记得数据库数据对应哦。
-> 7.运行：mvn tomcat:run
+> 6. 运行：mvn tomcat:run
+> 7. 各个模板的切换已通过系统中“站点管理”模块进行操作。站点管理是通过域名解析实现各个模板的对应。
+> 8. 如果只使用单站点，可以将sites.properties文件中SITE.MULTI.FLAG = true改为false。然后通过config.properties的ATTR.PATH_PC=/template/mtg配置模板。
 
-* 如果是/template/mtg模板，请运行jfinal_cms.sql脚本
-* 如果是/template/website模板，请运行jfinal_cms_website.sql脚本
-* 如果是/template/photo模板，请运行jfinal_cms_photo.sql脚本
-* 如果是/template/video模板，请运行jfinal_cms_video.sql脚本
 
 其他说明
 ------------------------
