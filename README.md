@@ -5,6 +5,7 @@ jfinal cms
 > 2. 后台模块包含：栏目管理，栏目公告，栏目滚动图片，文章管理，回复管理，意见反馈，我的相册，相册管理，图片管理，专辑管理、视频管理、缓存更新，友情链接，访问统计，联系人管理，模板管理，组织机构管理，用户管理，角色管理，菜单管理，数据字典管理。
 > 3. 后端模板支持：bootstrap默认样式、bootstrap黑色样式和flat-ui样式
 > 4. 前端模板支持：默认内容发布、官网模板、图片模板和视频模板
+> 5. jfinal cms交流群：568909653。 文档见doc/jfinal cms文档.docx
 
 * 管理地址：http://${ip:port}/${project_name}/admin
 * 测试账号: admin/admin123 或 test/123456
@@ -62,6 +63,10 @@ jfinal cms
 开源赞助
 ------------------------
 
-* 支付宝账号：15801297319 张彪
+* 支付宝支付
 
-![OSC@GIT](http://static.oschina.net/uploads/space/2015/0213/104940_ZKNb_166354.png "开源赞助我(支付宝)")
+![jflyfox](http://ww1.sinaimg.cn/mw690/3fc7e281jw1eqec436tzwj2074074mxr.jpg "Open source support(alipay)")
+
+* 微信支付
+
+![jflyfox](http://ww1.sinaimg.cn/mw690/3fc7e281jw1es3jr0k25xj20a50a5q3v.jpg "Open source support(weixin)")
