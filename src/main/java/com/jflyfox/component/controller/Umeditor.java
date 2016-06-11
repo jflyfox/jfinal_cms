@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.ueditor.Uploader;
 import com.jflyfox.jfinal.component.umeditor.UmeditorController;
-import com.jflyfox.modules.error.TbError;
+import com.jflyfox.modules.admin.error.TbError;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.util.Config;
 

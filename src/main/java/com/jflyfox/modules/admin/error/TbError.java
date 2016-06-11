@@ -1,4 +1,4 @@
-package com.jflyfox.modules.error;
+package com.jflyfox.modules.admin.error;
 
 import com.jflyfox.component.base.BaseProjectModel;
 import com.jflyfox.jfinal.component.annotation.ModelBind;
