@@ -160,7 +160,7 @@ public class FrontCacheService extends BaseService {
 	}
 
 	/**
-	 * 返回对应文章
+	 * 返回对应文章列表
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
 	 * 
@@ -180,7 +180,7 @@ public class FrontCacheService extends BaseService {
 	}
 
 	/**
-	 * 返回对应文章
+	 * 返回对应文章列表
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
 	 * 
@@ -199,7 +199,7 @@ public class FrontCacheService extends BaseService {
 	}
 
 	/**
-	 * 返回对应文章
+	 * 返回对应文章列表
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
 	 * 
