@@ -1,0 +1,164 @@
+<% 
+	var headContent = {
+%>
+	<% include("/template/project/includes/header.html"){} %>
+	
+	<script type="text/javascript" src="${BASE_PATH }template/project/article/show_article.js"></script>
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/project/includes/header_menu.html"){} %>	
+
+	<input type="hidden" name="article_id" value="${item.id}">
+	<input type="hidden" name="create_id" value="${item.create_id}">
+	<input type="hidden" name="count_comment" value="${item.count_comment!'0'}">
+
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-12">	
+	
+		<div class="panel panel-default">
+			 <div class="panel-body" style="padding:0px;">
+			<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <% if(folder.id==100) { %>
+			  <li><a href="${BASE_PATH }front/person/view/${item.create_id}.html">作者空间</a></li>
+			  <% } else { %>
+			  <li><a href="${BASE_PATH }${flyfox.getMenu(folder.id)}">${folder.name}</a></li>
+			  <% } %>
+			  <li class="active">文章</li>
+			</ol>
+			</div>
+		</div>
+	
+		</div>
+	</div>
+
+	<div class="row">
+	<!-- 文章 -->
+	<div class="col-md-8">	
+	
+		<div class="panel panel-default">
+		 <div class="panel-body">
+
+			<article class="art-container">
+				<header class="text-center">
+					<h3 class="art-title">${item.title}</h3>
+					<section class="art-title-info">
+						<div class="art-left">
+							<!-- 百度分享 -->
+							<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+							<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+						</div>
+						<div class="art-right">
+							<span style="vertical-align: middle;" class="art-author" title="${item.publish_user!''}">作者：${flyfox.suojin(item.publish_user!'',10)}</span> •
+							<time style="vertical-align: middle;" class="art-date" datetime="${item.publish_time!''}" title="${item.publish_time!''}">${item.publish_time!''}</time>
+							<span style="vertical-align: middle;margin-left: 2px;">浏览（${item.count_view!'0'}）</span>
+							
+						
+						</div>
+					</section>
+					
+				</header>
+
+				<section class="art-content" style="word-break:break-all;word-wrap:break-word;">
+					<% if(strutil.isNotEmpty(item.image_net_url) ) { %>
+					<div class="thumbnail center-block" style="width:320px;">
+				  	  <img src="${item.image_net_url }"  alt="${item.title}" class="img-rounded"
+				  	  	data-holder-rendered="true" style="height: 200px; width: 320px; display: block;">
+				  	 </div>
+					<% } else if(strutil.isNotEmpty(item.image_url) ) { %>
+					<div class="thumbnail center-block" style="width:320px;">
+				  	  <img src="${ctx}${item.image_url }"  alt="${item.title}" class="img-rounded"
+				  	  	data-holder-rendered="true" style="height: 200px; width: 320px; display: block;">
+				  	 </div>
+					 <% } %>
+					${item.content!'' }
+					<% if(strutil.isNotEmpty(item.file_url)) { %>
+						<div>
+						<span style="color: gray;">附件:</span>
+						<a href="${BASE_PATH }${item.file_url }" target="_blank" style="text-decoration:none;">
+							${item.file_name}
+						</a>
+						</div>
+					<% } %>
+				</section>
+				
+
+				<footer class="art-footer clearfix">
+					<div class="text-left">
+					<%  
+						if(taglist != null && taglist.~size > 0) {
+					%>
+						<ul class="q-taglist clearfix">
+							<li title="标签"><span class="q-icon"></span></li>
+						<%
+							for(tagitem in taglist){ 
+						%>
+							<li class="q-tagitem">
+							<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+							</li>
+						<% 
+							}
+						%>
+						</ul>
+					<%
+					} 
+					%>
+					</div>
+					
+					<div class="text-right">
+					</div>
+				</footer>
+			</article>
+
+		</div>
+	</div>
+	</div>
+	
+	<!-- 信息列表 -->
+	<div class="col-md-4">	
+	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">相关文章<a class="more" href="${flyfox.getMenu(folder.id)}">更多</a></h3>
+		  </div>
+		 	 <ul class="list-group">
+			  	<% for(item in articles.list){ %>
+					<li class="list-group-item">
+						<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
+						<% if (strutil.length(item.title) > 18) { %>
+							${strutil.subStringTo(item.title, 0, 18)}...
+						<% 	} else { %>
+							${item.title}
+						<%  } %>
+						</a>
+					</li>
+				<% } %>
+			  </ul>
+		</div>
+		
+		<!-- 推荐文章 -->
+		<%  include("/template/project/includes/recommend.html"){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/template/project/includes/friendly.html"){} %>
+	</div>
+	</div>
+
+</div>
+	
+<%  include("/template/project/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

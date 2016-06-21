@@ -1,0 +1,122 @@
+<% var headContent = { %> <%
+include("/template/project/includes/header.html"){} %>
+
+<script type="text/javascript">
+	function login() {
+		var username = $('[name="username"]').val();
+		if(username==''){
+			alert('用户名不能为空！');
+			return;
+		}
+		
+		var pwd = $('[name="password"]').val();
+		if(pwd==''){
+			alert('密码不能为空！');
+			return;
+		}
+		var imageCode = $('[name="imageCode"]').val();
+		if(imageCode==''){
+			alert('验证码不能为空！');
+			return;
+		}
+		if(imageCode.length != 4){
+			alert('验证码输入错误！');
+			return;
+		}
+		
+		form1.action = "login";
+		form1.submit();
+	}
+
+	<!-- jQuery 当键盘敲击【ENTER】键时，系统登录 -->
+	$(document).ready(function() {
+		$("body").keydown(function(event) {
+			if (event.which == 13) {
+				login();
+			}
+		});
+	});
+</script>
+
+<% }; var bodyContent = { %> <%
+include("/template/project/includes/header_menu.html"){} %>
+
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-8">
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">用户登陆</h3>
+		  </div>
+		   <div class="panel-body">
+		  
+				<form class="form-horizontal" name="form1" action="" method="post">
+						<input type="hidden" name="pre_page" value="${pre_page!'' }" />
+						
+						  <div class="form-group">
+						    <label for="email" class="col-sm-2 control-label">账户名：</label>
+						    <div class="col-sm-10">
+						    	<input name="username" class="form-control" id="username" placeholder="登录账号"
+						    		 autofocus="autofocus" autocomplete="off" tabindex="1" value="" maxlength="100" >
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="password" class="col-sm-2 control-label">登录密码：</label>
+						    <div class="col-sm-10">
+						      <input name="password" type="password"class="form-control" id="password" placeholder="登录密码"
+						      	autocomplete="off" tabindex="2" value="" maxlength="100" >
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="imageCode" class="col-sm-2 control-label">验证码：</label>
+						    <div class="col-sm-10">
+						      <div class="input-group">
+						      	 <input name="imageCode" type="text"  class="form-control" id="imageCode" 
+						      	  	tabindex="3" placeholder="验证码">
+						      	 <div class="input-group-addon" style="padding:2px;">
+						      			<img id="picimageCode" align="middle" width="60" height="26"  
+						      				 style="line-height: 18px;cursor:pointer;"
+								 			 src="front/image_code" title="更换一张验证码图片" onclick="loadPicimageCode()"/>
+							     </div>
+							    </div>
+						     
+						    </div>
+						  </div>
+						  <% if(strutil.isNotEmpty(msg!'')) { %>
+						  <div class="form-group">
+						  	<label for="imageCode" class="col-sm-2 control-label">
+							提示：
+							</label>
+							<div class="col-sm-10">
+								<p class="form-control-static" style="color: red;font-weight:bold ;">${msg!}</p>
+						    </div>
+						  </div>
+						  <% } %>
+						   <div class="form-group">
+							    <div class="col-sm-offset-2 col-sm-10">
+							      <input type="button" value="登 录"  class="btn btn-success btn-block"
+							      	tabindex="4"   onclick="login();"/>
+							    </div>
+							</div>
+						
+						</form>
+				
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+</div>
+
+<%  include("/template/project/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

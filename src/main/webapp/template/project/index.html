@@ -1,0 +1,87 @@
+<%
+// 获取前20个文章
+var articlePage = temp.articlePage(1, 100, session.site.model.site_folder_id);
+%>
+
+<% 
+	var headContent = {
+%>
+	<% include("/template/project/includes/header.html"){} %>
+	
+	<script type="text/javascript" src="${BASE_PATH }template/project/article/show_article.js"></script>
+	<style>
+	#project_thumbnail {
+		height: 250px;
+		width: 100%;
+		display: block;
+	}
+	
+	@media (max-width:991px) {
+	    #project_thumbnail {
+			height: 16em;
+			width: 100%;
+			display: block;
+		}
+	}
+	</style>
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/project/includes/header_menu.html"){} %>	
+	
+
+<div class="container">
+	<div class="row">
+	
+		<% for(item in articlePage.list){ %>
+			<% 
+		  	  // 图片设置
+		  	  var picName ="";
+		  	  if(strutil.isNotEmpty(item.image_url) || strutil.isNotEmpty(item.image_net_url) ) { 
+		  	  	picName = flyfox.getImage(item);
+				if(!strutil.startWith(picName , 'http')) {
+					picName = BASE_PATH + picName;
+				}
+		  	  } else if(flyfox.getNow()==item.publish_time){ // 当天图片
+		  	   	picName = BASE_PATH + "static/front/images/today.jpg";
+		  	  } else if(strutil.isNotEmpty(defalutimg!'')) { // 默认图片，可设置
+		  	  	picName = BASE_PATH + defalutimg;
+		  	  } else { // 什么都没有~！~
+		  	  	picName = BASE_PATH + "static/front/images/documents.png";	
+			  }
+			  %>
+			<div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}"><img src="${picName}" id="project_thumbnail" alt="${item.title}"></a>
+			      <div class="caption">
+			        <h4>
+			        <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
+			        <% if (strutil.length(item.title) > 18) { %>
+							${strutil.subStringTo(item.title, 0, 18)}...
+					<% 	} else { %>
+							${item.title}
+					<%  } %>
+					</a>
+			        </h4>
+			        <% var article_content = flyfox.showHTML(item.content!'',80,'  ......'); %>
+			        <p style="height: 62px;overflow: hidden;">&nbsp;&nbsp;&nbsp;&nbsp;${article_content!'' }</p>
+			        <p><a href="${BASE_PATH }front/article/${item.id}.html" class="btn btn-link" role="button">查看全部</a></p>
+			      </div>
+			    </div>
+			</div>
+		<% } %>
+	
+	  </div>
+</div>
+
+
+<%  include("/template/project/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
