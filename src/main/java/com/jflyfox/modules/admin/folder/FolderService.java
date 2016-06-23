@@ -43,20 +43,43 @@ public class FolderService extends BaseService {
 	private final static String urlkeyCacheName = "JFlyFoxUtils";
 	private static Cache urlkeyCache = CacheManager.get(urlkeyCacheName);
 
-	public static void initMenuKey() {
-		log.info("####目录Key初始化......");
+    public static void initMenuKey() {
+    	log.info("####目录Key初始化......");
 		urlkeyCache.clear();
 		List<TbFolder> folders = TbFolder.dao.findByWhere(" where status = 1 order by sort");
 		for (TbFolder tbFolder : folders) {
 			if (StrUtils.isNotEmpty(tbFolder.getKey())) {
-				urlkeyCache.add(tbFolder.getKey(), tbFolder.getId() + "");
+				// 分站点存储
+				urlkeyCache.add(tbFolder.getKey() + "_" + tbFolder.getSiteId(), tbFolder.getId() + "");
 				urlkeyCache.add(tbFolder.getId() + "", tbFolder.getKey());
 			}
 		}
 	}
 
+	/**
+	 * 通过ID获取URLKey
+	 * 
+	 * 2016年6月23日 下午5:54:17
+	 * flyfox 330627517@qq.com
+	 * @param key
+	 * @return
+	 */
 	public static String getMenu(String key) {
 		return (urlkeyCache.get(key) == null) ? key : urlkeyCache.get(key).toString();
+	}
+	
+	/**
+	 * 通过URLKey获取ID
+	 * 
+	 * 2016年6月23日 下午5:51:26
+	 * flyfox 330627517@qq.com
+	 * @param key
+	 * @param siteId
+	 * @return
+	 */
+	public static String getMenu(String key, int siteId) {
+		String urlKey = key + "_" + siteId;
+		return (urlkeyCache.get(urlKey) == null) ? key : urlkeyCache.get(urlKey).toString();
 	}
 
 	/**
