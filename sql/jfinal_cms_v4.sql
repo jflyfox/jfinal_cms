@@ -563,7 +563,7 @@ INSERT INTO `tb_folder` VALUES ('101', '103', '意见反馈', 'advice', null, nu
 INSERT INTO `tb_folder` VALUES ('103', '0', '其他', 'others', null, null, '10', '1', '1', null, '102', '2', null, null, null, '2016-03-31 23:50:26', '1', '2016-03-31 23:50:26', '1');
 INSERT INTO `tb_folder` VALUES ('230', '0', '首页', 'home', 'home/home.html', null, '1', '1', '1', null, '102', '3', 'FLY的狐狸', 'FLY的狐狸，门头沟信息，生活，新闻，美食，旅游，教育，公园，商场，房产，生活记录,开发记录', 'FLY的狐狸，门头沟信息，生活，新闻，美食，旅游，教育，公园，商场，房产，生活记录,开发记录', '2016-04-07 01:13:40', '1', '2016-04-07 01:13:40', '1');
 INSERT INTO `tb_folder` VALUES ('231', '0', '关于我们', 'about', '', null, '81', '1', '1', null, '1', '3', null, null, null, '2015-05-26 16:40:46', '0', '2015-05-26 10:36:30', '1');
-INSERT INTO `tb_folder` VALUES ('253', '0', '首页', 'home', 'index.html', null, '10', '1', '1', null, '102', '8', null, null, null, '2016-06-17 16:48:11', '1', '2016-06-17 16:48:11', '1');
+INSERT INTO `tb_folder` VALUES ('253', '0', '首页', 'index', 'index.html', null, '10', '1', '1', null, '102', '8', null, null, null, '2016-06-17 16:48:11', '1', '2016-06-17 16:48:11', '1');
 INSERT INTO `tb_folder` VALUES ('254', '0', '意见反馈', null, null, null, '10', '1', '3', 'http://mtg.jflyfox.com/advice.html', '102', '8', null, null, null, '2016-06-21 12:21:19', '1', '2016-06-21 12:21:19', '1');
 INSERT INTO `tb_folder` VALUES ('255', '0', '关于我们', null, null, null, '10', '1', '3', 'http://blog.jflyfox.com/245.html', '102', '8', null, null, null, '2016-06-21 12:21:58', '1', '2016-06-21 12:21:58', '1');
 
