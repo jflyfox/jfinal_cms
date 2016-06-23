@@ -96,7 +96,7 @@ public class FrontCacheService extends BaseService {
 		String key = ("tagsFolder_" + folderId + "_" + paginator.getPageNo() + "_" + paginator.getPageSize());
 		Page<TbTags> taglist = TbTags.dao.paginateCache(cacheName, key, paginator, " select tagname ", //
 				"from tb_tags where article_id in (select id from tb_article where folder_id = ? )" //
-						+ " group by tagname order by create_time desc ", folderId);
+						+ " group by tagname order by max(create_time) desc ", folderId);
 		return taglist;
 	}
 
@@ -115,7 +115,7 @@ public class FrontCacheService extends BaseService {
 						+ " left join tb_article ta on ta.id = t.article_id " //
 						+ " left join tb_folder tf on tf.id = ta.folder_id " //
 						+ " where tf.site_id = ? " //
-						+ " group by t.tagname order by t.create_time desc ", siteId);
+						+ " group by t.tagname order by max(t.create_time) desc ", siteId);
 		return taglist;
 	}
 
