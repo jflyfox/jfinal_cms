@@ -49,7 +49,7 @@ public class CommonController extends BaseProjectController {
 			if (NumberUtils.parseInt(folderStr) > 0) {
 				folderId = NumberUtils.parseInt(folderStr);
 			} else {
-				folderId = NumberUtils.parseInt(FolderService.getMenu(folderStr));
+				folderId = NumberUtils.parseInt(FolderService.getMenu(folderStr, site.getSiteId()));
 			}
 		}
 
