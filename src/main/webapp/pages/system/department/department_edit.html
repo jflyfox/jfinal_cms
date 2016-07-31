@@ -1,8 +1,5 @@
-<% 
-DIRECTIVE SAFE_OUTPUT_OPEN;
-var headContent = {
-	include("/pages/template/head.html"){}
-%>
+<% DIRECTIVE SAFE_OUTPUT_OPEN; var headContent = {
+include("/pages/template/head.html"){} %>
 <script type="text/javascript">
 	var oper = {
 		save:function(id){
@@ -18,52 +15,65 @@ var headContent = {
 	};
 </script>
 
-<%
-};
-var bodyContent = {
-%>
+<% }; var bodyContent = { %>
 <form name="form1" action="" method="post" class="form-horizontal"
-		role="form" >
+	role="form">
 	<input type="hidden" name="model.id" value="${model.id}" />
 	<table class="table">
-		<%  // 列表头部%>
-								<tr>
-					<td>部门</td>
-					<td>
-					<input class="form-control" type="text" name="model.name" value="${model.name }"  valid='vtext' validname='部门'  />
-											</td>
-				</tr>
-								<tr>
-					<td>序号</td>
-					<td>
-					<input class="form-control" type="text" name="model.sort" value="${model.sort }"  valid='vnum' validname='序号'  />
-											</td>
-				</tr>
-								<tr>
-					<td>联系人</td>
-					<td>
-					<input class="form-control" type="text" name="model.linkman" value="${model.linkman }"  />
-											</td>
-				</tr>
-								<tr>
-					<td>联系人电话</td>
-					<td>
-					<input class="form-control" type="text" name="model.linkman_no" value="${model.linkman_no }"  />
-											</td>
-				</tr>
+		<% // 列表头部%>
+		<tr>
+			<td style="text-align: right;">父节点</td>
+			<td>
+				<select name="model.parent_id" class="form-control" valid="vselect" validname="父节点">
+				<option value="0">--根节点--</option>
+				${selectParentDepartments }
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right;">机构名称</td>
+			<td><input class="form-control" type="text" name="model.name"
+				value="${model.name }" valid='vtext' validname='机构名称' /></td>
+		</tr>
+		<tr>
+			<td style="text-align: right;">序号</td>
+			<td><input class="form-control" type="text" name="model.sort"
+				value="${model.sort }" valid='vnum' validname='序号' /></td>
+		</tr>
+		<tr>
+			<td style="text-align: right;">机构编码</td>
+			<td><input class="form-control" type="text" name="model.code"
+				value="${model.code }" validname='编码' /></td>
+		</tr>
+		<tr>
+			<td style="text-align: right;">联系人</td>
+			<td><input class="form-control" type="text" name="model.linkman"
+				value="${model.linkman }" /></td>
+		</tr>
+		<tr>
+			<td style="text-align: right;">联系人电话</td>
+			<td><input class="form-control" type="text"
+				name="model.linkman_no" value="${model.linkman_no }" /></td>
+		</tr>
+		<tr>
+			<td style="text-align: right;">机构描述</td>
+			<td>
+				<textarea class="form-control" rows="3" cols="40" name="model.remark">${model.remark}</textarea>
+			</td>
+		</tr>
 	</table>
-	
-	<div style="height: 50px;clear: both;">&nbsp;</div>
+
+	<div style="height: 50px; clear: both;">&nbsp;</div>
 	<nav class="navbar navbar-default navbar-fixed-bottom">
-	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
-		<button class="btn btn-primary" onclick="return oper.save(${model.id!'0'});">保 存</button>
-		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
-	  </div>
+		<div class="container"
+			style="padding: 5px 0px 5px 0px; text-align: center;">
+			<button class="btn btn-primary"
+				onclick="return oper.save(${model.id!'0'});">保 存</button>
+			<button class="btn btn-default" onclick="closeIframe();return false;">关
+				闭</button>
+		</div>
 	</nav>
 </form>
-<%}; %>
-
-<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
-<%}
-DIRECTIVE SAFE_OUTPUT_CLOSE; 
-%>
+<%}; %> <%
+layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){
+%> <%} DIRECTIVE SAFE_OUTPUT_CLOSE; %>
