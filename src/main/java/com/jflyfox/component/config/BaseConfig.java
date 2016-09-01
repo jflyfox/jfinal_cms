@@ -77,5 +77,15 @@ public class BaseConfig extends JflyfoxConfig {
 		System.out.println("############系统启动完成##########");
 		System.out.println("##################################");
 	}
+	
+	@Override
+	public void beforeJFinalStop() {
+		super.beforeJFinalStop();
+		// 关闭模板
+		BeetlRenderFactory.groupTemplate.close();
+		System.out.println("##################################");
+		System.out.println("############系统停止完成##########");
+		System.out.println("##################################");
+	}
 
 }
