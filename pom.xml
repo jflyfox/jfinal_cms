@@ -7,25 +7,18 @@
 	<version>4.1.1</version>
 
 	<properties>
+		<!-- 文件拷贝时的编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- 编译时的编码 -->
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 	</properties>
 
 	<repositories>
 		<repository>
-			<id>nexus-osc</id>
-			<name>Maven China OSC Mirror</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>nexus-osc-thirdparty</id>
-			<name>Nexus osc thirdparty</name>
-			<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+			<id>nexus</id>
+			<name>Maven Mirror</name>
+			<url>http://repo1.maven.org/maven2/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
