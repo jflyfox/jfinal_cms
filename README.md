@@ -36,20 +36,24 @@ jfinal cms
 演示效果截图
 ------------------------
 
-#### 网站地址：[http://www.jflyfox.com/mtg](http://www.jflyfox.com/mtg) ####
+
+#### 网站CMS地址：[http://mtg.jflyfox.com/](http://mtg.jflyfox.com/) ####
 ![网站](http://static.oschina.net/uploads/img/201601/21022316_Nk5M.gif "jfinal cms")
 
-#### 网站官网模板：[http://www.jflyfox.com/website](http://www.jflyfox.com/website) ####
+#### 网站官网模板：[http://website.jflyfox.com/](http://website.jflyfox.com/) ####
 ![官网](http://static.oschina.net/uploads/img/201601/21022316_XkxY.gif "jfinal cms")
 
-#### 相册管理模板：[http://www.jflyfox.com/photo](http://www.jflyfox.com/photo) ####
-![官网](http://i11.tietuku.cn/2428dbfd83dee15b.gif "jfinal cms")
+#### 博客模板模板：[http://blog.jflyfox.com/](http://blog.jflyfox.com) ####
+![官网](http://static.oschina.net/uploads/space/2016/0622/002206_Rla0_166354.jpg "jfinal cms")
 
-#### 视频管理模板：[http://www.jflyfox.com/video](http://www.jflyfox.com/photo) ####
-![官网](http://i11.tietuku.cn/1ef2bd3516244ff3.gif "jfinal cms")
+#### 相册管理模板：[http://photo.jflyfox.com/](http://photo.jflyfox.com/) ####
+![官网](http://static.oschina.net/uploads/space/2016/0306/144741_ldOJ_166354.gif "jfinal cms")
+
+#### 视频管理模板：[http://video.jflyfox.com/](http://video.jflyfox.com/) ####
+![官网](http://static.oschina.net/uploads/space/2016/0306/144754_FXhR_166354.gif "jfinal cms")
 
 #### 后台页面主题： ####
-![后台管理](http://i4.tietuku.cn/3fd03e19f8c4e33b.gif "jfinal cms")
+![后台管理](http://static.oschina.net/uploads/img/201601/28091447_rQtD.gif "jfinal cms")
 
 鸣谢
 ------------------------
