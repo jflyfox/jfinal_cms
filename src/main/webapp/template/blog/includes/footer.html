@@ -1,0 +1,51 @@
+<footer class="mod-footer">
+	<div class="clearfix hidden-box"></div>
+	<div class="footer-box">
+		<div class="inner-box">
+			<span style="color: gray;font-weight: bold;">+友情链接：</span>
+			<% 
+			if(friendlylinkList !=null ) {
+			%>
+			<% for(item in friendlylinkList){ %>
+				<a href="${item.url}" target="_blank">${item.name}</a>
+				<% if(itemLP.index!=friendlylinkList.~size) { %>
+					<span>&nbsp;|&nbsp;</span>
+			<% 		
+					}
+			 	}
+			 }
+			 %>
+		</div>
+	</div>
+	
+	<% // 分界线 %>
+	<div style="margin-top: 25px;"></div>
+	<div style="width: 990px;margin: 0 auto;text-align: center;border: 1px solid rgb(213, 198, 146);">
+	</div>
+	<div style="margin-bottom: 10px;"></div>
+	
+	<div class="clearfix hidden-box"></div>
+	<div class="footer-box">
+		<div class="inner-box">
+			<% 
+			if(aboutList !=null ) {
+			for(item in aboutList){ 
+			%>
+				<a href="${item.url}" target="_blank">${item.name}</a>
+				<% if(itemLP.index!=aboutList.~size) { %>
+					<span>&nbsp;|&nbsp;</span>
+			<% 		
+					}
+			 	}
+			 }
+			 %>
+		</div>
+		<div class="copy-box">
+			<span>©2015&nbsp;FLY的狐狸</span>
+			<!-- 站长统计 -->
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255091723'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1255091723%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+		
+		
+	</div>
+</footer>

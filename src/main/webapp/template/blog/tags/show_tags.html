@@ -1,0 +1,92 @@
+<% var headContent = { %>
+		<% include("/template/blog/includes/header.html"){} %>
+
+<script type="text/javascript">
+<!--
+	function search_tags(){
+		var tagname = $('#tagname').val();
+		tagname = tagname || '';
+		if(tagname!=''){
+			var url = jflyfox.BASE_PATH + 'front/tags/' + tagname;
+			tag_form.action = url;
+			tag_form.submit();
+		}
+	}
+	
+	<!-- jQuery 当键盘敲击【ENTER】键时，系统登录 -->
+	$(document).ready(function() {
+		$("body").keydown(function(event) {
+			if (event.which == 13) {
+				search_tags();
+				return false;
+			}
+		});
+	});
+//-->
+</script>
+
+<% }; var bodyContent = { %> 
+
+<% include("/template/blog/includes/header_menu.html"){} %>
+
+	<div class="x-page-container">
+		<div class="mod-diary">
+			<div class="mod-diary-top"></div>
+			<div class="mod-diary-inner">
+				<div class="mod-diary-pen"></div>
+				<div class="mod-diary-nav"></div>
+				<div class="mod-diary-clip"></div>
+				<div class="mod-topspaceinfo">
+					<h1>
+						<a class="space-name" href="javascript:void(0);">标签</a>
+					</h1>
+				</div>
+	
+				<div class="mod-bloglist">
+					<div class="mod-blogitem">
+						<div class="box-postdate">
+						</div>
+						<div class="item-title">
+							<form name="tag_form" action="">
+							<input id="tagname" value=""  placeholder="请输入查询内容"
+							style="height-line: 26px;height: 26px;width:300px;border-radius: 4px;margin-left: 10px;padding-left: 10px;">
+							<input type="button" value="查 询"  class="btn" name="search" onclick="search_tags();"/>
+							</form>
+						</div>
+						
+						<div class="item-content">
+							<%  
+									if(taglist != null && taglist.~size > 0) {
+								%>
+									<ul class="q-taglist clearfix">
+										<li title="标签"><span class="q-icon"></span></li>
+									<%
+										for(tagitem in taglist){ 
+									%>
+										<li class="q-tagitem">
+										<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+										</li>
+									<% 
+										}
+									%>
+									</ul>
+								<%
+								} 
+								%>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="mod-diary-bottom"></div>
+		</div>
+	</div>
+	
+	<%  include("/template/blog/includes/footer.html"){} %>
+	
+<%}; %> 
+
+<%
+layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){
+%> 
+<%} %>

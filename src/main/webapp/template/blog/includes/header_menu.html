@@ -1,0 +1,46 @@
+	<header id="container" class="mod-topbar">
+		<div class="mod-topbar-pseudo-real">
+			<div class="wrapper-box clearfix">
+				<div class="center-box">
+					<ul class="q-menubox">
+					
+						 <% if (!isEmpty(folders)){ %>
+							<% for(item in folders["0"]){ %>
+								<% // 如果是跳转到admin后台管理页面，那么必须是登录并且是管理员 %>
+								
+								<% if(item.type==1){ %>
+								<li class="q-menuitem  ${flyfox.isNew(item.update_time,7)?'q-newicon':''} ${item.id==folders_selected!''?'q-selected':''} "><a href="${BASE_PATH }${item.id}.html">${item.name}</a></li>
+								<% } else if(item.type==2){ %>
+								<li class="q-menuitem  ${flyfox.isNew(item.update_time,7)?'q-newicon':''}  ${item.id==folders_selected!''?'q-selected':''} "><a href="${strutil.startWith(item.jump_url,'http')?'':BASE_PATH}${item.jump_url}">${item.name}</a></li>
+								<% } else if(item.type==3){ %>
+								<li class="q-menuitem  ${flyfox.isNew(item.update_time,7)?'q-newicon':''}  ${item.id==folders_selected!''?'q-selected':''} "><a href="${strutil.startWith(item.jump_url,'http')?'':BASE_PATH}${item.jump_url}" target="_blank">${item.name}</a></li>
+								<% } else if(item.type==4){ %>
+								${item.jump_url}
+								<% } %>
+								
+							<% } %>
+						<% } %>
+						
+						
+					</ul>
+				</div>
+				
+				<div class="right-box">
+					<ul class="q-menubox">
+						<% if(isEmpty(session.session_user)){ %>
+						<li class="q-menuitem"><a href="${BASE_PATH }front/login">登录</a></li>
+						<li class="q-menuitem ${'regist'==folders_selected!''?'q-selected':''}"><a href="${BASE_PATH }front/regist" >注册</a></li>
+						<% } else { %>
+						<li class="q-menuitem ${'message'==folders_selected!''?'q-selected':''}"><a href="${BASE_PATH }front/message" id="front/message" >我的消息</a></li>
+						<!-- 
+						<li class="q-menuitem ${'space'==folders_selected!''?'q-selected':''}"><a href="front/space" id="web_space" >我的空间</a></li>
+						 -->
+						<li class="q-menuitem ${'person'==folders_selected!''?'q-selected':''}"><a href="${BASE_PATH }front/person/profile">${session.session_user.realname!session.session_user.username }</a></li>
+						<li class="q-menuitem"><a href="${BASE_PATH }front/logout" >退出</a></li>
+						<% } %>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+	

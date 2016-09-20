@@ -1,0 +1,124 @@
+<% var headContent = { %>
+		<% include("/template/blog/includes/header.html"){} %>
+		<script type="text/javascript" src="${BASE_PATH }template/blog/person/show_person.js"></script>
+		
+<% }; var bodyContent = { %> 
+
+<% include("/template/blog/includes/header_menu.html"){} %>
+
+	<div class="x-page-container">
+		<div class="mod-diary">
+			<div class="mod-diary-top"></div>
+			<div class="mod-diary-inner">
+				<div class="mod-diary-pen"></div>
+				<div class="mod-diary-nav"></div>
+				<div class="mod-diary-clip"></div>
+				<div class="mod-topspaceinfo">
+					<h1>
+						<a class="space-name" href="javascript:void(0);">个人信息</a>
+					</h1>
+				</div>
+	
+				<div class="mod-bloglist">
+					<div class="mod-blogitem">
+						<div class="box-postdate">
+						</div>
+						<div class="item-title">
+							<a href="javascript:void(0);"></a>
+						</div>
+						
+						<form name="form1" action="" method="post">
+						<input type="hidden" name="model.userid" value="${model.userid}" />
+						
+						<%
+							var userPic = model.title_url;
+							if(isEmpty(userPic)){
+								userPic = BASE_PATH + 'static/images/user/user.png';
+							} else if(!strutil.startWith(userPic , 'http')) {
+								userPic = ASE_PATH + userPic;
+							}
+						%>
+						<div class="item-content" style="margin-left: 280px;">
+							<div style="float: left;margin-right: 20px;">
+								<img id="title_pic" alt="头像"  width="64" height="64" 
+							 class="img_radius" src="${userPic}">
+							</div>
+							
+							<table>
+								<tr>
+									<td class="right_td">登录名：</td>
+									<td class="left_td">${model.username!''}</td>
+								</tr>
+								<tr>
+									<td class="right_td">昵称：</td>
+									<td class="left_td"><input name="model.realname"
+										value="${model.realname!''}"></td>
+								</tr>
+								<% if(model.usertype!=4) { %>
+								<tr>
+									<td class="right_td">原始密码：</td>
+									<td class="left_td"><input name="old_password" type="password"
+										value=""></td>
+								</tr>
+								<tr>
+									<td class="right_td">新密码：</td>
+									<td class="left_td"><input name="new_password" type="password"
+										value=""></td>
+								</tr>
+								<tr>
+									<td class="right_td">再次密码：</td>
+									<td class="left_td"><input name="new_password2" type="password"
+										value=""></td>
+								</tr>
+								<% } %>
+								<tr>
+									<td class="right_td">email：</td>
+									<td class="left_td"><input name="model.email"  type="EMAIL"
+									 value="${model.email!''}"></td>
+								</tr>
+								<tr>
+									<td class="right_td">手机号：</td>
+									<td class="left_td"><input name="model.tel"
+									 value="${model.tel!''}"></td>
+								</tr>
+								<tr>
+									<td class="right_td">头像地址：</td>
+									<td class="left_td"><input name="model.title_url"
+									 value="${model.title_url!''}"></td>
+								</tr>
+								<tr>
+									<td class="right_td">备注：</td>
+									<td class="left_td"><textarea rows="3" cols="30"
+									 name="model.remark">${model.remark!''}</textarea></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align: center;">
+										<input type="button" value="保 存"  class="btn" onclick="oper_save();"/>
+										&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="重 置"  class="btn" />
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align: left;font-size: 14px;color: green;padding-top: 10px;">
+										1. 修改基本信息需要输入原始密码。<br>
+										2. 修改密码需要输入原始密码、新密码。
+									</td>
+								</tr>
+							</table>
+						</div>
+						
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="mod-diary-bottom"></div>
+		</div>
+	</div>
+	
+	<%  include("/template/blog/includes/footer.html"){} %>
+	
+<%}; %> 
+
+<%
+layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){
+%> 
+<%} %>

@@ -28,6 +28,10 @@ include("/template/photo/includes/header.html"){} %>
 		form1.submit();
 	}
 
+	function loadPicimageCode() {
+		document.getElementById("picimageCode").src = '${BASE_PATH }front/image_code?ran=' + Math.random();
+	}
+	
 	<!-- jQuery 当键盘敲击【ENTER】键时，系统登录 -->
 	$(document).ready(function() {
 		$("body").keydown(function(event) {
@@ -79,7 +83,7 @@ include("/template/photo/includes/header_menu.html"){} %>
 						      	 <div class="input-group-addon" style="padding:2px;">
 						      			<img id="picimageCode" align="middle" width="60" height="26"  
 						      				 style="line-height: 18px;cursor:pointer;"
-								 			 src="front/image_code" title="更换一张验证码图片" onclick="loadPicimageCode()"/>
+								 			 src="${BASE_PATH }front/image_code" title="更换一张验证码图片" onclick="loadPicimageCode()"/>
 							     </div>
 							    </div>
 						     

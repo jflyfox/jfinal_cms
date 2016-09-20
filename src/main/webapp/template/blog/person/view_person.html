@@ -1,0 +1,111 @@
+<%
+// 获取文章
+	articlelist = page;
+%>
+
+<% 
+	var headContent = {
+%>
+	<% include("/template/blog/includes/header.html"){} %>
+	<% // 百度联盟 %>
+	<meta name="baidu_union_verify" content="e70735959d604d6a2282fb2ce926b23d">
+<%
+};
+
+var bodyContent = {
+%>
+
+<%  include("/template/blog/includes/header_menu.html"){} %>	
+	
+	<div class="x-page-container">
+		<div class="mod-diary">
+			<div class="mod-diary-top"></div>
+			<div class="mod-diary-inner">
+				<div class="mod-diary-pen"></div>
+				<div class="mod-diary-nav"></div>
+				<div class="mod-diary-clip"></div>
+				<div class="mod-topspaceinfo">
+					<h1>
+						<a class="space-name" href="javascript:void(0);">${WEBSITE_TITLE! }</a>
+					</h1>
+				</div>
+
+				<div class="mod-bloglist">
+
+					<% for(item in articlelist.list){ %>
+						<div class="mod-blogitem">
+							<div class="box-postdate">
+							${item.publish_time}
+							<p title="${item.publish_user!''}" >
+							<a class="box-postuser" href="${BASE_PATH }front/person/view/${item.create_id}.html"  target="_blank">${flyfox.suojin(item.publish_user!'',6)}</a>
+							</p>
+							</div>
+							<div class="item-title">
+								<a href="${BASE_PATH }front/article/${item.id}.html"  target="_blank">${item.title}</a>
+								<div class="item-right">
+									<% if(item.is_comment==1){ %>
+									<a href="${BASE_PATH }front/article/${item.id}.html#article_comment"  target="_blank"><span>评论(${temp.countComment(item.id)})</span></a>
+									<% } %>
+									<span>浏览量(${temp.countView(item.id)})</span>
+								</div>
+							</div>
+							<div class="item-content">
+							<% if(item.type==12) { %>
+							${item.content!'' }
+							<% } else { // type ==11 %>
+							<% var article_content = flyfox.showHTML(item.content!'',200,'  ......'); %>
+							${article_content!'' }
+							<% } %>
+							
+							</div>
+							
+							<div class="item-footer">
+								<div class="item-left">
+								<%  
+									var tags = temp.tagsListByArticle(item.id);
+									//var tags = flyfox.split(item.tagsname!,','); 
+									if(tags != null && tags.~size > 0 ) {
+								%>
+									<ul class="q-taglist clearfix">
+										<li title="标签"><span class="q-icon"></span></li>
+									<%
+										for(tagitem in tags){ 
+									%>
+										<li class="q-tagitem">
+										<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+										</li>
+									<% 
+										}
+									%>
+									</ul>
+								<%
+								} 
+								%>
+								</div>
+								
+								<div class="item-right">
+									<a href="${BASE_PATH }front/article/${item.id}.html"  target="_blank">查看全部</a>
+								</div>
+							</div>
+						</div>
+					<% } %>
+
+				</div>
+				
+				<div class="mod-blogpager">
+					<%include("/template/blog/includes/paginator.html",{page:articlelist}){} %>
+				</div>
+			</div>
+			
+			<div class="mod-diary-bottom"></div>
+		</div>
+	</div>
+	
+	<%  include("/template/blog/includes/footer.html"){} %>	
+	
+	<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

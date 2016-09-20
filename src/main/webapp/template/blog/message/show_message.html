@@ -1,0 +1,108 @@
+<% 
+	var headContent = {
+%>
+	<% include("/template/blog/includes/header.html"){} %>
+	<script type="text/javascript" src="${BASE_PATH }template/blog/message/show_message.js"></script>
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/blog/includes/header_menu.html"){} %>	
+	
+	<div class="x-page-container">
+		<div class="mod-diary">
+			<div class="mod-diary-top"></div>
+			<div class="mod-diary-inner">
+				<div class="mod-diary-pen"></div>
+				<div class="mod-diary-nav"></div>
+				<div class="mod-diary-clip"></div>
+				<div class="mod-topspaceinfo">
+					<h1>
+						<a class="space-name" href="javascript:void(0);">我的消息</a>
+					</h1>
+				</div>
+
+				<div class="mod-bloglist" id="article_comment">
+					<div class="mod-blogcommentitem" style="margin-top: 100px;">
+					
+					
+					<div class="comment-list">
+					
+						<% for(comment in page.list){ %>
+						<div class="comment-item" id="comment_${comment.id}_${comment.article_id}">
+							<%  // 回复给当前用户 并且 未读的数据
+								var is_no_read = (session.session_user.userid==comment.reply_userid) 
+										&& (comment.status==11 || comment.status==21); 
+							%>
+							<div class="item-top ${is_no_read ? 'comment-no-read':'' }" >
+								<% 
+									var user = flyfox.getUser(comment.create_id); 
+									var userPic = user.title_url;
+									if(isEmpty(userPic)){
+										userPic = BASE_PATH + 'static/images/user/user.png';
+									} else if(!strutil.startWith(userPic , 'http')) {
+										userPic = ASE_PATH + userPic;
+									}
+								%>
+								<a href="#"><img width="32" height="32" alt="头像" class="img_radius" src="${userPic}" /></a>
+								<a href="${BASE_PATH }front/article/${comment.article_id}#article_comment" target="_blank" class="user-name">${comment.title}</a>
+								<span class="comment-txt">文章中</span>
+								<a href="${BASE_PATH }front/person/view/${comment.create_id}" target="_blank" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
+								<% if(comment.status > 20) { %>
+								<span class="comment-txt">回复</span>
+								<a href="${BASE_PATH }front/person/view/${comment.reply_userid}" target="_blank" class="user-name">${flyfox.getUserName(comment.reply_userid)}</a>
+								<% } %>
+								<br>
+								<span>${comment.content}</span>
+							</div>
+							
+							<div class="item-bottom">
+								<span>${comment.create_time}</span>
+								<% if(!isEmpty(session.session_user) && comment.create_id==session.session_user.userid){ %>
+									<a href="javascript:comment.oper_del(${comment.id},${comment.article_id});" style="float: right;">删除</a>
+								<% } %>
+								<% if(!isEmpty(session.session_user) && comment.create_id!=session.session_user.userid){ %>
+									<a href="javascript:show_reply_comment(${comment.id},${comment.article_id});" style="float: right;">回复</a>
+								<% } %>
+							</div>
+							
+							<div id="reply_${comment.id}_${comment.article_id}" class="comment-inner" style="display:none;">
+								<div>
+								<textarea class="comment-textarea" name="comment"></textarea>
+								</div>
+								<div class="comment-btn">
+									<input id="comment-btn" type="button" value="发  布"  
+										onclick="oper_reply_comment(${comment.id},${comment.article_id},${comment.create_id},${comment.article_create_id},'${comment.title}');"
+										class="btn" style="background-color: #FF9933;"/>
+								</div>
+							</div>
+						</div>
+						<%  } %>
+						
+						<% if(page.list == null || page.list.~size <=0) { %>
+							<div class="comment-item" style="margin-bottom: 20px;font-size: 14px;font-weight: bold;">
+								暂无消息
+							</div>
+						<% } %>
+						
+					</div>
+					
+					<%include("/template/blog/includes/paginator.html"){} %>
+					</div>
+					
+				</div>
+				
+			</div>
+			<div class="mod-diary-bottom"></div>
+		</div>
+	</div>
+	
+	<%  include("/template/blog/includes/footer.html"){} %>
+	
+	<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

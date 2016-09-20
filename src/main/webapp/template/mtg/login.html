@@ -29,6 +29,10 @@ include("/template/mtg/includes/header.html"){} %>
 		form1.submit();
 	}
 
+	function loadPicimageCode() {
+		document.getElementById("picimageCode").src = '${BASE_PATH }front/image_code?ran=' + Math.random();
+	}
+	
 	<!-- jQuery 当键盘敲击【ENTER】键时，系统登录 -->
 	$(document).ready(function() {
 		$("body").keydown(function(event) {

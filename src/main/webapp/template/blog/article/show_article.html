@@ -1,0 +1,158 @@
+<% 
+	var headContent = {
+%>
+	<% include("/template/blog/includes/header.html"){} %>
+	
+	<script type="text/javascript" src="${BASE_PATH }template/blog/article/show_article.js"></script>
+	
+	<% include("/template/includes/ueditor_hightlighter.html"){} %>
+	<% include("/template/includes/autojs.html"){} %>
+	
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/blog/includes/header_menu.html"){} %>	
+
+	<input type="hidden" name="article_id" value="${item.id}">
+	<input type="hidden" name="create_id" value="${item.create_id}">
+	<input type="hidden" name="count_comment" value="${item.count_comment!'0'}">
+	
+	<div class="x-page-container">
+		<div class="mod-diary">
+			<div class="mod-diary-top"></div>
+			<div class="mod-diary-inner">
+				<div class="mod-diary-pen"></div>
+				<div class="mod-diary-nav"></div>
+				<div class="mod-diary-clip"></div>
+				<div class="mod-topspaceinfo" id="top">
+					<h1>
+						<a class="space-name" href="javascript:void(0);">${WEBSITE_TITLE! }</a>
+					</h1>
+				</div>
+
+				<div class="mod-bloglist">
+					<div class="mod-blogitem">
+						<div class="box-postdate">
+						${item.publish_time!''}
+						<p title="${item.publish_user!''}" >
+						<a class="box-postuser" href="${BASE_PATH }front/person/view/${item.create_id}.html"  target="_blank">${flyfox.suojin(item.publish_user!'',6)}</a>
+						</p>
+						</div>
+						<div id="article_content">
+							<div class="item-title">
+								<a href="${BASE_PATH }front/article/${item.id}.html">${item.title}</a>
+								<div class="item-right">
+								<% if(item.is_comment==1){ %>
+								<a href="${BASE_PATH }front/article/${item.id}#article_comment" style="font-size: 12px;"><span id="count_comment_show">评论(${item.count_comment!'0'})</span></a>
+								<% } %>
+								<span>浏览量(${item.count_view!'0'})</span>
+								</div>
+							</div>
+							<div class="item-content" >${item.content!'' }</div>
+							<div class="item-footer">
+									<div class="item-left">
+									<%  
+										if(taglist != null && taglist.~size > 0) {
+									%>
+										<ul class="q-taglist clearfix">
+											<li title="标签"><span class="q-icon"></span></li>
+										<%
+											for(tagitem in taglist){ 
+										%>
+											<li class="q-tagitem">
+											<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+											</li>
+										<% 
+											}
+										%>
+										</ul>
+									<%
+									} 
+									%>
+									</div>
+									
+									<div class="item-right">
+										<!-- 百度分享 -->
+										<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+										<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+				
+				<% if(item.is_comment==1){ %>
+				<div class="mod-bloglist" id="article_comment">
+					<div class="mod-blogcommentitem">
+					<% if(!isEmpty(session.session_user)){ %>
+					<div class="comment-inner ">
+						<div class="comment-title">评论</div>
+						<div>
+						<textarea class="comment-textarea" name="comment"></textarea>
+						</div>
+						<div class="comment-btn">
+							<input id="comment-btn" type="button" value="发  布"  class="btn" style="background-color: #FF9933;"/>
+						</div>
+					</div>
+					<% } else { %>
+					<div class="comment-inner ">
+						<div class="comment-title">没有<a href="front/login">登录</a>不能评论</div>
+					</div>
+					<% } %>
+					<div class="comment-list">
+					
+						<% for(comment in page.list){ %>
+						<div class="comment-item" id="comment_${comment.id}_${comment.article_id}">
+							<div class="item-top">
+								<%  
+									var user = flyfox.getUser(comment.create_id); 
+									var userPic = user.title_url;
+									if(isEmpty(userPic)){
+										userPic = BASE_PATH + 'static/images/user/user.png';
+									} else if(!strutil.startWith(userPic , 'http')) {
+										userPic = ASE_PATH + userPic;
+									}
+								 %>
+								<a href="#"><img width="32" height="32" alt="头像" class="img_radius" src="${userPic }" /></a>
+								<a href="${BASE_PATH }front/person/view/${comment.create_id}.html" class="user-name">${flyfox.getUserName(comment.create_id)}</a>
+								<% if(comment.status > 20) { %>
+								<span class="comment-txt">回复</span>
+								<a href="${BASE_PATH }front/person/view/${comment.reply_userid}.html" class="user-name">${flyfox.getUserName(comment.reply_userid)}</a>
+								<% } %>
+								<br>
+								<span>${comment.content}</span>
+							</div>
+							<div class="item-bottom">
+								<span>${comment.create_time}</span>
+								<% if(!isEmpty(session.session_user) && comment.create_id==session.session_user.userid){ %>
+									<a href="javascript:oper_del_comment(${comment.id});" style="float: right;">删除</a>
+								<% } %>
+								<% if(!isEmpty(session.session_user) && comment.create_id!=session.session_user.userid){ %>
+									<a href="javascript:oper_reply_comment(${comment.create_id},'${flyfox.getUserName(comment.create_id)}');" style="float: right;">回复</a>
+								<% } %>
+							</div>
+						</div>
+						<%  } %>
+						
+					</div>
+					<%include("/template/blog/includes/paginator.html",{suffix:'#article_comment'}){} %>
+					</div>
+					
+				</div>
+				<% } %>
+				
+			</div>
+			<div class="mod-diary-bottom"></div>
+		</div>
+	</div>
+	
+	<%  include("/template/blog/includes/footer.html"){} %>	
+	
+	<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

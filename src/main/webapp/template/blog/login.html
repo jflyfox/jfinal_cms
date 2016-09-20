@@ -45,15 +45,17 @@
 			return;
 		}
 		
-		form1.action = "admin/login";
+		form1.action = "login";
 		form1.submit();
 		// submit_js("login_login.action", "loginform");
 	}
-	
+	function toRegist() {
+		form1.action = "front/regist";
+		form1.submit();
+	}
 	function loadPicimageCode() {
 		document.getElementById("picimageCode").src = '${BASE_PATH }front/image_code?ran=' + Math.random();
 	}
-	
 	<!-- jQuery 当键盘敲击【ENTER】键时，系统登录 -->
 	$(document).ready(function() {
 		$("body").keydown(function(event) {
@@ -78,10 +80,10 @@ body {
 
 	<div class="login login-modern login-position">
 		<form id="form1" action="" method="post" class="ui-form">
-			<input type="hidden" name="pre_page" value="" />
+			<input type="hidden" name="pre_page" value="${pre_page!'' }" />
 
 			<fieldset>
-				<h2 class="ui-form-title">用户登陆</h2>
+				<h2 class="ui-form-title">欢迎登录博客管理</h2>
 
 				<div class="ui-form-item ui-form-item-focus">
 					<label class="ui-label"> <span
@@ -127,6 +129,8 @@ body {
 						<!-- 
 			<a class="login_sina" href="javascript:void(0);" onclick='toLogin("sina")' title="新浪登录"></a>
 			 -->
+						<a class="register" href="javascript:void(0);" target="_blank"
+							title="注册" tabindex="8" onclick="toRegist();return false;">注册</a>
 					</p>
 				</div>
 			</fieldset>
