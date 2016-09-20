@@ -19,8 +19,9 @@ jfinal cms
 > 4. 数据库配置文件：/jfinal_cms/src/main/resources/conf/db.properties
 > 5. 如需要oauth2的，设置src/conf/oauth.properties
 > 6. 运行：mvn tomcat:run
-> 7. 各个模板的切换已通过系统中“站点管理”模块进行操作。站点管理是通过域名解析实现各个模板的对应。
-> 8. 如果只使用单站点，可以将sites.properties文件中SITE.MULTI.FLAG = true改为false。然后通过config.properties的ATTR.PATH_PC=/template/mtg配置模板。
+> 7. 默认站点通过配置src/conf/sites.properties文件中SITE.DEFAULT.ID即可实现。
+> 8. 多站点各个模板的切换已通过系统中“站点管理”模块进行操作。站点管理是通过域名解析实现各个模板的对应。
+> 9. 如果只使用单站点，可以将sites.properties文件中SITE.MULTI.FLAG = true改为false。然后通过config.properties的ATTR.PATH_PC=/template/mtg配置模板。
 
 
 其他说明
