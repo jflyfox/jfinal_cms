@@ -45,7 +45,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * 获取图片路径
 	 * 
-	 * 2015年6月2日 下午6:36:37 flyfox 330627517@qq.com
+	 * 2015年6月2日 下午6:36:37 flyfox 369191470@qq.com
 	 * 
 	 * @param article
 	 * @return
@@ -61,7 +61,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * 获取视频路径
 	 * 
-	 * 2015年6月2日 下午6:36:37 flyfox 330627517@qq.com
+	 * 2015年6月2日 下午6:36:37 flyfox 369191470@qq.com
 	 * 
 	 * @param video
 	 * @return
@@ -78,7 +78,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * 获取菜单，数字和字符串转换
 	 * 
-	 * 2015年5月26日 上午8:57:48 flyfox 330627517@qq.com
+	 * 2015年5月26日 上午8:57:48 flyfox 369191470@qq.com
 	 * 
 	 * @param key
 	 * @return
@@ -90,7 +90,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * 获取菜单，数字和字符串转换
 	 * 
-	 * 2015年5月26日 上午8:57:48 flyfox 330627517@qq.com
+	 * 2015年5月26日 上午8:57:48 flyfox 369191470@qq.com
 	 * 
 	 * @param key
 	 * @return
@@ -102,7 +102,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * 字符串截取
 	 * 
-	 * 2015年5月25日 下午3:58:45 flyfox 330627517@qq.com
+	 * 2015年5月25日 下午3:58:45 flyfox 369191470@qq.com
 	 * 
 	 * @param str
 	 * @param start
@@ -128,7 +128,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * split
 	 * 
-	 * 2015年5月17日 下午11:03:39 flyfox 330627517@qq.com
+	 * 2015年5月17日 下午11:03:39 flyfox 369191470@qq.com
 	 * 
 	 * @param str
 	 * @param split
@@ -144,7 +144,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * html预览
 	 * 
-	 * 2015年2月2日 下午3:40:34 flyfox 330627517@qq.com
+	 * 2015年2月2日 下午3:40:34 flyfox 369191470@qq.com
 	 * 
 	 * @param htmlStr
 	 * @return
@@ -158,7 +158,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * 获取用户
 	 * 
-	 * 2015年2月26日 下午4:24:39 flyfox 330627517@qq.com
+	 * 2015年2月26日 下午4:24:39 flyfox 369191470@qq.com
 	 * 
 	 * @param pid
 	 * @return
@@ -171,7 +171,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * 获取用户名
 	 * 
-	 * 2015年2月26日 下午4:24:39 flyfox 330627517@qq.com
+	 * 2015年2月26日 下午4:24:39 flyfox 369191470@qq.com
 	 * 
 	 * @param pid
 	 * @return
@@ -190,7 +190,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	/**
 	 * 判断date距当前时间是否相差before天
 	 * 
-	 * 2015年5月11日 下午2:07:40 flyfox 330627517@qq.com
+	 * 2015年5月11日 下午2:07:40 flyfox 369191470@qq.com
 	 * 
 	 * @param date
 	 * @param before

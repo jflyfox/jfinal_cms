@@ -32,7 +32,7 @@ public class ArticleController extends BaseProjectController {
 	 * 
 	 * @see 不用缓存便于实时更新，访问量大再优化
 	 * 
-	 *      2015年2月26日 下午1:46:14 flyfox 330627517@qq.com
+	 *      2015年2月26日 下午1:46:14 flyfox 369191470@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void index() {
@@ -99,7 +99,7 @@ public class ArticleController extends BaseProjectController {
 	/**
 	 * 查看文章某用户发布文章
 	 * 
-	 * 2015年2月26日 下午1:46:14 flyfox 330627517@qq.com
+	 * 2015年2月26日 下午1:46:14 flyfox 369191470@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void recommend() {

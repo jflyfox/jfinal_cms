@@ -12,7 +12,7 @@ import com.jflyfox.util.StrUtils;
 /**
  * 意见反馈
  * 
- * 2016年1月28日 下午6:12:22 flyfox 330627517@qq.com
+ * 2016年1月28日 下午6:12:22 flyfox 369191470@qq.com
  */
 @ControllerBind(controllerKey = "/front/advice")
 public class AdviceController extends BaseProjectController {

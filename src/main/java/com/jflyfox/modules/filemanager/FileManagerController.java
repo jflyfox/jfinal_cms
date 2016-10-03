@@ -12,7 +12,7 @@ import com.jflyfox.jfinal.component.annotation.ControllerBind;
 /**
  * 文件管理
  * 
- * 2016年2月26日 下午2:33:03 flyfox 330627517@qq.com
+ * 2016年2月26日 下午2:33:03 flyfox 369191470@qq.com
  */
 @ControllerBind(controllerKey = "/admin/filemanager")
 public class FileManagerController extends BaseProjectController {
@@ -28,7 +28,7 @@ public class FileManagerController extends BaseProjectController {
 	/**
 	 * 跳转到操作页面
 	 * 
-	 * 2015年3月16日 下午5:33:55 flyfox 330627517@qq.com
+	 * 2015年3月16日 下午5:33:55 flyfox 369191470@qq.com
 	 */
 	public void index() {
 		HttpServletRequest request = getRequest();
@@ -156,7 +156,7 @@ public class FileManagerController extends BaseProjectController {
 	 * 管理员才可以
 	 * 
 	 * 2016年3月6日 上午9:39:10
-	 * flyfox 330627517@qq.com
+	 * flyfox 369191470@qq.com
 	 * @return
 	 */
 	public boolean auth() {

@@ -28,7 +28,7 @@ public class FriendlylinkCache extends BaseService {
 	/**
 	 * 更新友情链接缓存
 	 * 
-	 * 2015年4月24日 下午3:11:40 flyfox 330627517@qq.com
+	 * 2015年4月24日 下午3:11:40 flyfox 369191470@qq.com
 	 */
 	public static void update() {
 		cache.clear();
@@ -49,7 +49,7 @@ public class FriendlylinkCache extends BaseService {
 	 * 友情链接
 	 * 
 	 * 2016年5月4日 下午2:50:27
-	 * flyfox 330627517@qq.com
+	 * flyfox 369191470@qq.com
 	 * @param siteId
 	 * @return
 	 */
@@ -70,7 +70,7 @@ public class FriendlylinkCache extends BaseService {
 	 * 关于我们
 	 * 
 	 * 2016年5月4日 下午2:50:34
-	 * flyfox 330627517@qq.com
+	 * flyfox 369191470@qq.com
 	 * @param siteId
 	 * @return
 	 */

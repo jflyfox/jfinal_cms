@@ -83,7 +83,7 @@ public abstract class BaseProjectController extends BaseController {
 	/**
 	 * 方法重写
 	 * 
-	 * 2015年8月2日 下午3:17:29 flyfox 330627517@qq.com
+	 * 2015年8月2日 下午3:17:29 flyfox 369191470@qq.com
 	 * 
 	 * @return
 	 */
@@ -119,7 +119,7 @@ public abstract class BaseProjectController extends BaseController {
 	/**
 	 * 方法重写
 	 * 
-	 * 2015年8月2日 下午3:17:29 flyfox 330627517@qq.com
+	 * 2015年8月2日 下午3:17:29 flyfox 369191470@qq.com
 	 * 
 	 * @return
 	 */
@@ -143,7 +143,7 @@ public abstract class BaseProjectController extends BaseController {
 	/**
 	 * 方法重写
 	 * 
-	 * 2015年8月2日 下午3:17:29 flyfox 330627517@qq.com
+	 * 2015年8月2日 下午3:17:29 flyfox 369191470@qq.com
 	 * 
 	 * @return
 	 */
@@ -156,7 +156,7 @@ public abstract class BaseProjectController extends BaseController {
 	/**
 	 * 用户登录，登出记录
 	 * 
-	 * 2015年10月16日 下午2:36:39 flyfox 330627517@qq.com
+	 * 2015年10月16日 下午2:36:39 flyfox 369191470@qq.com
 	 * 
 	 * @param user
 	 * @param operType
@@ -206,7 +206,7 @@ public abstract class BaseProjectController extends BaseController {
 	/**
 	 * 公共文章查询sql
 	 * 
-	 * 2016年3月19日 下午7:03:11 flyfox 330627517@qq.com
+	 * 2016年3月19日 下午7:03:11 flyfox 369191470@qq.com
 	 * 
 	 * @return
 	 */

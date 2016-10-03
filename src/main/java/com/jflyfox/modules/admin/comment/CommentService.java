@@ -23,7 +23,7 @@ public class CommentService extends BaseService {
 	/**
 	 * 更新缓存,清空
 	 * 
-	 * 2015年4月29日 下午4:37:40 flyfox 330627517@qq.com
+	 * 2015年4月29日 下午4:37:40 flyfox 369191470@qq.com
 	 */
 	public void clearCache() {
 		cache.clear();
@@ -32,7 +32,7 @@ public class CommentService extends BaseService {
 	/**
 	 * 保存评论
 	 * 
-	 * 2015年4月29日 下午3:11:37 flyfox 330627517@qq.com
+	 * 2015年4月29日 下午3:11:37 flyfox 369191470@qq.com
 	 * 
 	 * @param user
 	 * @param comment
@@ -75,7 +75,7 @@ public class CommentService extends BaseService {
 	 * 
 	 * TODO 删除评论~这里是个大工程，估计需要优化
 	 * 
-	 * 2015年4月29日 下午3:14:27 flyfox 330627517@qq.com
+	 * 2015年4月29日 下午3:14:27 flyfox 369191470@qq.com
 	 * 
 	 * @param comment
 	 */
@@ -90,7 +90,7 @@ public class CommentService extends BaseService {
 	/**
 	 * 删除评论
 	 * 
-	 * 2015年4月29日 下午3:14:27 flyfox 330627517@qq.com
+	 * 2015年4月29日 下午3:14:27 flyfox 369191470@qq.com
 	 * 
 	 * @param comment
 	 */
@@ -110,7 +110,7 @@ public class CommentService extends BaseService {
 	/**
 	 * 更新文章评论数据
 	 * 
-	 * 2015年3月10日 下午3:25:46 flyfox 330627517@qq.com
+	 * 2015年3月10日 下午3:25:46 flyfox 369191470@qq.com
 	 * 
 	 * @param article_id
 	 */
@@ -123,7 +123,7 @@ public class CommentService extends BaseService {
 	/**
 	 * 更新状态
 	 * 
-	 * 2015年3月10日 下午4:10:00 flyfox 330627517@qq.com
+	 * 2015年3月10日 下午4:10:00 flyfox 369191470@qq.com
 	 * 
 	 * @param userid
 	 * @param status
@@ -143,7 +143,7 @@ public class CommentService extends BaseService {
 	 * 
 	 * 由于评论数量会有大量请求，通过缓存实现
 	 * 
-	 * 2015年4月29日 下午2:53:23 flyfox 330627517@qq.com
+	 * 2015年4月29日 下午2:53:23 flyfox 369191470@qq.com
 	 * 
 	 * @param userid
 	 * @return
@@ -157,7 +157,7 @@ public class CommentService extends BaseService {
 	 * 
 	 * 由于评论数量会有大量请求，通过缓存实现
 	 * 
-	 * 2015年4月29日 下午2:53:23 flyfox 330627517@qq.com
+	 * 2015年4月29日 下午2:53:23 flyfox 369191470@qq.com
 	 * 
 	 * @param userid
 	 * @param userCache

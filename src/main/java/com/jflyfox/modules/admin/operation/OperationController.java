@@ -23,7 +23,7 @@ public class OperationController extends BaseProjectController {
 	/**
 	 * 跳转到操作页面
 	 * 
-	 * 2015年3月16日 下午5:33:55 flyfox 330627517@qq.com
+	 * 2015年3月16日 下午5:33:55 flyfox 369191470@qq.com
 	 */
 	public void index() {
 		render(path + "operation.html");
@@ -32,7 +32,7 @@ public class OperationController extends BaseProjectController {
 	/**
 	 * 更新缓存
 	 * 
-	 * 2015年3月16日 下午5:33:55 flyfox 330627517@qq.com
+	 * 2015年3月16日 下午5:33:55 flyfox 369191470@qq.com
 	 */
 	public void updateCache() {
 		JSONObject json = new JSONObject();

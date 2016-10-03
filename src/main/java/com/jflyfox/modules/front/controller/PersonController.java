@@ -25,7 +25,7 @@ import com.jflyfox.util.extend.HtmlUtils;
 /**
  * 个人信息
  * 
- * 2015年3月10日 下午5:36:22 flyfox 330627517@qq.com
+ * 2015年3月10日 下午5:36:22 flyfox 369191470@qq.com
  */
 @ControllerBind(controllerKey = "/front/person")
 public class PersonController extends BaseProjectController {
@@ -154,7 +154,7 @@ public class PersonController extends BaseProjectController {
 	/**
 	 * 列表公共方法，展示文章和喜欢文章数量以及SEO title
 	 * 
-	 * 2015年8月16日 下午8:48:35 flyfox 330627517@qq.com
+	 * 2015年8月16日 下午8:48:35 flyfox 369191470@qq.com
 	 * 
 	 * @param user
 	 */
@@ -178,7 +178,7 @@ public class PersonController extends BaseProjectController {
 	/**
 	 * 跳转到发布博文页面
 	 * 
-	 * 2015年6月17日 下午9:53:04 flyfox 330627517@qq.com
+	 * 2015年6月17日 下午9:53:04 flyfox 369191470@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void newblog() {
@@ -199,7 +199,7 @@ public class PersonController extends BaseProjectController {
 	/**
 	 * 跳转到编辑博文页面
 	 * 
-	 * 2015年6月17日 下午9:53:04 flyfox 330627517@qq.com
+	 * 2015年6月17日 下午9:53:04 flyfox 369191470@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void editblog() {
@@ -234,7 +234,7 @@ public class PersonController extends BaseProjectController {
 	/**
 	 * 保存博文
 	 * 
-	 * 2015年6月17日 下午10:12:18 flyfox 330627517@qq.com
+	 * 2015年6月17日 下午10:12:18 flyfox 369191470@qq.com
 	 */
 	public void saveblog() {
 		JSONObject json = new JSONObject();
@@ -316,7 +316,7 @@ public class PersonController extends BaseProjectController {
 	/**
 	 * 跳转到编辑博文页面
 	 * 
-	 * 2015年6月17日 下午9:53:04 flyfox 330627517@qq.com
+	 * 2015年6月17日 下午9:53:04 flyfox 369191470@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void delblog() {
@@ -419,7 +419,7 @@ public class PersonController extends BaseProjectController {
 	/**
 	 * 查看文章某用户发布文章
 	 * 
-	 * 2015年2月26日 下午1:46:14 flyfox 330627517@qq.com
+	 * 2015年2月26日 下午1:46:14 flyfox 369191470@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void view() {

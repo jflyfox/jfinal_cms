@@ -19,7 +19,7 @@ public class FrontAlbumImageController extends BaseProjectController {
 	/**
 	 * 图片专辑
 	 * 
-	 * 2016年2月10日 上午3:43:39 flyfox 330627517@qq.com
+	 * 2016年2月10日 上午3:43:39 flyfox 369191470@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void index() {
@@ -44,7 +44,7 @@ public class FrontAlbumImageController extends BaseProjectController {
 	/**
 	 * 图片
 	 * 
-	 * 2016年2月10日 上午3:43:47 flyfox 330627517@qq.com
+	 * 2016年2月10日 上午3:43:47 flyfox 369191470@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void img() {

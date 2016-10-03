@@ -30,7 +30,7 @@ public class CommonController extends BaseProjectController {
 	/**
 	 * 首页，菜单
 	 * 
-	 * 2015年5月25日 下午11:00:28 flyfox 330627517@qq.com
+	 * 2015年5月25日 下午11:00:28 flyfox 369191470@qq.com
 	 */
 	@Before(FrontInterceptor.class)
 	public void index() {

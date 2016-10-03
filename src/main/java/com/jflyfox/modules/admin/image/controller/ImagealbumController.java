@@ -14,7 +14,7 @@ import com.jflyfox.util.StrUtils;
  * 目录
  * 
  * 2016年2月5日 上午11:23:29
- * flyfox 330627517@qq.com
+ * flyfox 369191470@qq.com
  */
 @ControllerBind(controllerKey = "/admin/imagealbum")
 public class ImagealbumController extends BaseProjectController {
@@ -81,7 +81,7 @@ public class ImagealbumController extends BaseProjectController {
 	 * Iframe删除
 	 * 
 	 * 2016年2月5日 下午5:51:03
-	 * flyfox 330627517@qq.com
+	 * flyfox 369191470@qq.com
 	 */
 	public void del() {
 		int id = getParaToInt();
@@ -134,7 +134,7 @@ public class ImagealbumController extends BaseProjectController {
 	/**
 	 * 目录复选框
 	 * 
-	 * 2015年1月28日 下午5:28:40 flyfox 330627517@qq.com
+	 * 2015年1月28日 下午5:28:40 flyfox 369191470@qq.com
 	 * 
 	 * @return
 	 */

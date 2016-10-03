@@ -65,7 +65,7 @@ public class Oauth2Controller extends BaseProjectController {
 	/**
 	 * openid是qq的唯一标识
 	 * 
-	 * 2015年2月25日 下午7:57:19 flyfox 330627517@qq.com
+	 * 2015年2月25日 下午7:57:19 flyfox 369191470@qq.com
 	 */
 	public void qq_callback() {
 		String code = getPara("code");
@@ -85,7 +85,7 @@ public class Oauth2Controller extends BaseProjectController {
 	/**
 	 * uid是sina的唯一标示
 	 * 
-	 * 2015年2月25日 下午7:57:29 flyfox 330627517@qq.com
+	 * 2015年2月25日 下午7:57:29 flyfox 369191470@qq.com
 	 */
 	public void sina_callback() {
 		String code = getPara("code");
@@ -105,7 +105,7 @@ public class Oauth2Controller extends BaseProjectController {
 	/**
 	 * userid是百度的唯一标识
 	 * 
-	 * 2015年2月25日 下午7:57:40 flyfox 330627517@qq.com
+	 * 2015年2月25日 下午7:57:40 flyfox 369191470@qq.com
 	 */
 	public void baidu_callback() {
 		String code = getPara("code");

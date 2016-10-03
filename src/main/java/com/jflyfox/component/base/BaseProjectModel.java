@@ -27,7 +27,7 @@ import com.jflyfox.util.NumberUtils;
  * Model 优化修改
  * 
  * 2016年1月16日 下午4:57:39
- * flyfox 330627517@qq.com
+ * flyfox 369191470@qq.com
  */
 public class BaseProjectModel<M extends Model<M>> extends BaseModel<M> {
 

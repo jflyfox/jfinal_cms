@@ -15,7 +15,7 @@ import com.jflyfox.util.StrUtils;
 /**
  * 个人信息
  * 
- * 2015年3月10日 下午5:36:22 flyfox 330627517@qq.com
+ * 2015年3月10日 下午5:36:22 flyfox 369191470@qq.com
  */
 @ControllerBind(controllerKey = "/admin/person")
 public class PersonController extends BaseProjectController {

@@ -17,7 +17,7 @@ public class ArticleLikeController extends BaseProjectController {
 	 * 喜欢
 	 * 
 	 * 2015年8月16日 下午4:20:10
-	 * flyfox 330627517@qq.com
+	 * flyfox 369191470@qq.com
 	 */
 	public void yes() {
 		Integer articleId = getParaToInt();
@@ -58,7 +58,7 @@ public class ArticleLikeController extends BaseProjectController {
 	 * 取消喜欢
 	 * 
 	 * 2015年8月16日 下午4:20:27
-	 * flyfox 330627517@qq.com
+	 * flyfox 369191470@qq.com
 	 */
 	public void no() {
 		Integer articleId = getParaToInt();

@@ -25,7 +25,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 更新缓存,清空
 	 * 
-	 * 2015年4月29日 下午4:37:40 flyfox 330627517@qq.com
+	 * 2015年4月29日 下午4:37:40 flyfox 369191470@qq.com
 	 */
 	public void clearCache() {
 		cache.clear();
@@ -34,7 +34,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 加入文章访问量和评论数缓存
 	 * 
-	 * 2015年5月26日 上午8:53:27 flyfox 330627517@qq.com
+	 * 2015年5月26日 上午8:53:27 flyfox 369191470@qq.com
 	 * 
 	 * @param article
 	 * @return
@@ -51,7 +51,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 获取缓存量
 	 * 
-	 * 2015年5月26日 上午8:56:26 flyfox 330627517@qq.com
+	 * 2015年5月26日 上午8:56:26 flyfox 369191470@qq.com
 	 * 
 	 * @param articleId
 	 * @return
@@ -68,7 +68,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 获取标签信息
 	 * 
-	 * 2015年5月25日 下午11:49:58 flyfox 330627517@qq.com
+	 * 2015年5月25日 下午11:49:58 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
 	 * @param folderId
@@ -85,7 +85,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 获取标签信息
 	 * 
-	 * 2015年5月25日 下午11:49:58 flyfox 330627517@qq.com
+	 * 2015年5月25日 下午11:49:58 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
 	 * @param folderId
@@ -103,7 +103,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 获取标签信息
 	 * 
-	 * 2015年5月25日 下午11:49:03 flyfox 330627517@qq.com
+	 * 2015年5月25日 下午11:49:03 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
 	 * @return
@@ -122,7 +122,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 查询文章，展示的和类型为11,12的推荐文件,前10个
 	 * 
-	 * 2015年4月29日 下午4:48:24 flyfox 330627517@qq.com
+	 * 2015年4月29日 下午4:48:24 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
 	 * @param folder_id
@@ -142,7 +142,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 返回最新文章
 	 * 
-	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
+	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
 	 * @return
@@ -162,7 +162,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 返回对应文章列表
 	 * 
-	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
+	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
 	 * @param folderId
@@ -182,7 +182,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 返回对应文章列表
 	 * 
-	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
+	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
 	 * @param folderId
@@ -201,7 +201,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 返回对应文章列表
 	 * 
-	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
+	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
 	 * @param folderId
@@ -218,7 +218,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 返回对应文章
 	 * 
-	 * 2015年5月24日 下午10:52:05 flyfox 330627517@qq.com
+	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
 	 * @param folderId
@@ -234,7 +234,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 获取栏目滚动图片
 	 * 
-	 * 2016年1月28日 下午5:28:25 flyfox 330627517@qq.com
+	 * 2016年1月28日 下午5:28:25 flyfox 369191470@qq.com
 	 * 
 	 * @param folderId
 	 * @return
@@ -251,7 +251,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 获取公告信息
 	 * 
-	 * 2016年1月28日 下午5:29:47 flyfox 330627517@qq.com
+	 * 2016年1月28日 下午5:29:47 flyfox 369191470@qq.com
 	 * 
 	 * @param folderId
 	 * @return
@@ -268,7 +268,7 @@ public class FrontCacheService extends BaseService {
 	/**
 	 * 公共文章查询sql
 	 * 
-	 * 2016年3月19日 下午7:03:11 flyfox 330627517@qq.com
+	 * 2016年3月19日 下午7:03:11 flyfox 369191470@qq.com
 	 * 
 	 * @return
 	 */

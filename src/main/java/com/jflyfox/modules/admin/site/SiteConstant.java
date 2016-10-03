@@ -12,7 +12,7 @@ public class SiteConstant {
 	/**
 	 * 多站点判断
 	 * 
-	 * 2016年4月25日 下午5:41:35 flyfox 330627517@qq.com
+	 * 2016年4月25日 下午5:41:35 flyfox 369191470@qq.com
 	 * 
 	 * @return
 	 */

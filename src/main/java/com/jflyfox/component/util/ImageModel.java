@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 图片
  * 
- * 2016年2月5日 下午2:03:27 flyfox 330627517@qq.com
+ * 2016年2月5日 下午2:03:27 flyfox 369191470@qq.com
  */
 public class ImageModel implements Serializable {
 

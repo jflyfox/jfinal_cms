@@ -10,7 +10,7 @@ public class ImageAlbumService {
 	 * 查询相册
 	 * 
 	 * 2016年2月10日 上午1:13:09
-	 * flyfox 330627517@qq.com
+	 * flyfox 369191470@qq.com
 	 * @param albumId
 	 * @return
 	 */
@@ -21,7 +21,7 @@ public class ImageAlbumService {
 	/**
 	 * 相册复选框
 	 * 
-	 * 2015年1月28日 下午5:28:40 flyfox 330627517@qq.com
+	 * 2015年1月28日 下午5:28:40 flyfox 369191470@qq.com
 	 * 
 	 * @return
 	 */

@@ -10,7 +10,7 @@ import com.jflyfox.modules.admin.article.TbArticle;
  * 
  * @see 1.同一用户访问同一文章，一段时间（MAX_TIME）内只记录一次。
  * 
- *      2015年2月26日 上午11:35:56 flyfox 330627517@qq.com
+ *      2015年2月26日 上午11:35:56 flyfox 369191470@qq.com
  */
 public class ArticleCountCache {
 
@@ -26,7 +26,7 @@ public class ArticleCountCache {
 	/**
 	 * 传入的必须是数据库时间article对象，这里会更新
 	 * 
-	 * 2015年2月26日 上午11:45:31 flyfox 330627517@qq.com
+	 * 2015年2月26日 上午11:45:31 flyfox 369191470@qq.com
 	 * 
 	 * @param article
 	 */

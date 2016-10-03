@@ -13,7 +13,7 @@ import com.jflyfox.modules.front.interceptor.FrontInterceptor;
 
 /**
  * 
- * 2015年5月11日 下午4:11:02 flyfox 330627517@qq.com
+ * 2015年5月11日 下午4:11:02 flyfox 369191470@qq.com
  */
 @ControllerBind(controllerKey = "/front")
 public class Home extends BaseProjectController {
@@ -40,7 +40,7 @@ public class Home extends BaseProjectController {
 	/**
 	 * 生成注册码
 	 * 
-	 * 2015年2月28日 下午1:50:25 flyfox 330627517@qq.com
+	 * 2015年2月28日 下午1:50:25 flyfox 369191470@qq.com
 	 */
 	public void image_code() {
 		try {

@@ -18,7 +18,7 @@ public class PageViewCache {
 	/**
 	 * 初始化
 	 * 
-	 * 2015年3月2日 上午10:46:52 flyfox 330627517@qq.com
+	 * 2015年3月2日 上午10:46:52 flyfox 369191470@qq.com
 	 */
 	public static void init() {
 		initNowDay();
@@ -35,7 +35,7 @@ public class PageViewCache {
 	/**
 	 * 添加PV，需进行代码同步
 	 * 
-	 * 2015年3月2日 上午10:46:29 flyfox 330627517@qq.com
+	 * 2015年3月2日 上午10:46:29 flyfox 369191470@qq.com
 	 * 
 	 * @param ip
 	 */
@@ -57,7 +57,7 @@ public class PageViewCache {
 	/**
 	 * 今日访问量
 	 * 
-	 * 2015年3月2日 上午11:10:11 flyfox 330627517@qq.com
+	 * 2015年3月2日 上午11:10:11 flyfox 369191470@qq.com
 	 */
 	public static Integer size() {
 		return cacheList.size();
@@ -66,7 +66,7 @@ public class PageViewCache {
 	/**
 	 * 当前日期处理
 	 * 
-	 * 2015年3月2日 上午10:19:19 flyfox 330627517@qq.com
+	 * 2015年3月2日 上午10:19:19 flyfox 369191470@qq.com
 	 */
 	private static void initNowDay() {
 		if (nowDay == null) {

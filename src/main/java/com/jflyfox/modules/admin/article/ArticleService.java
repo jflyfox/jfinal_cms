@@ -11,7 +11,7 @@ public class ArticleService {
 	 * 获取tag标签
 	 * 
 	 * 2016年4月17日 下午9:14:02
-	 * flyfox 330627517@qq.com
+	 * flyfox 369191470@qq.com
 	 * @param model
 	 * @return
 	 */
@@ -25,7 +25,7 @@ public class ArticleService {
 	 * 复制文章
 	 * 
 	 * 2016年4月17日 下午9:14:09
-	 * flyfox 330627517@qq.com
+	 * flyfox 369191470@qq.com
 	 * @param id
 	 * @param userid
 	 * @param folders

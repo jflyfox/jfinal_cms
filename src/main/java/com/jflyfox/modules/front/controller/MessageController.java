@@ -13,7 +13,7 @@ import com.jflyfox.system.user.SysUser;
 /**
  * 我的消息
  * 
- * 2015年3月10日 下午5:38:24 flyfox 330627517@qq.com
+ * 2015年3月10日 下午5:38:24 flyfox 369191470@qq.com
  */
 @ControllerBind(controllerKey = "/front/message")
 public class MessageController extends BaseProjectController {

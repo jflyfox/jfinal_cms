@@ -13,7 +13,7 @@ import com.jflyfox.modules.front.service.FrontCacheService;
 /**
  * 关于我们
  * 
- * 2015年5月26日 上午10:42:54 flyfox 330627517@qq.com
+ * 2015年5月26日 上午10:42:54 flyfox 369191470@qq.com
  */
 @ControllerBind(controllerKey = "/front/about")
 public class AboutController extends BaseProjectController {

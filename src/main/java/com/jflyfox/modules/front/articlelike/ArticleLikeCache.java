@@ -27,7 +27,7 @@ public class ArticleLikeCache extends BaseService {
 	/**
 	 * 获取缓存量
 	 * 
-	 * 2015年8月16日 上午8:56:26 flyfox 330627517@qq.com
+	 * 2015年8月16日 上午8:56:26 flyfox 369191470@qq.com
 	 * 
 	 * @param articleId
 	 * @return

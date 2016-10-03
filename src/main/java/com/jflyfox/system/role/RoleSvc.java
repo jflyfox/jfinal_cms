@@ -13,7 +13,7 @@ public class RoleSvc extends BaseService {
 	/**
 	 * 获取角色授权的菜单
 	 * 
-	 * 2015年4月28日 下午5:01:54 flyfox 330627517@qq.com
+	 * 2015年4月28日 下午5:01:54 flyfox 369191470@qq.com
 	 * 
 	 * @param roleid
 	 * @return
@@ -28,7 +28,7 @@ public class RoleSvc extends BaseService {
 	/**
 	 * 保存授权信息
 	 * 
-	 * 2015年4月28日 下午5:00:30 flyfox 330627517@qq.com
+	 * 2015年4月28日 下午5:00:30 flyfox 369191470@qq.com
 	 * 
 	 * @param roleid
 	 * @param menus

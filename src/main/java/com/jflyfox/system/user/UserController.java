@@ -122,7 +122,7 @@ public class UserController extends BaseProjectController {
 	/**
 	 * 跳转到授权页面
 	 * 
-	 * 2015年4月28日 下午12:00:05 flyfox 330627517@qq.com
+	 * 2015年4月28日 下午12:00:05 flyfox 369191470@qq.com
 	 */
 	public void auth() {
 		int userid = getParaToInt();
@@ -139,7 +139,7 @@ public class UserController extends BaseProjectController {
 	/**
 	 * 保存角色信息
 	 * 
-	 * 2015年4月28日 下午3:18:33 flyfox 330627517@qq.com
+	 * 2015年4月28日 下午3:18:33 flyfox 369191470@qq.com
 	 */
 	public void auth_save() {
 		int userid = getParaToInt("userid");

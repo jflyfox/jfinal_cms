@@ -35,7 +35,7 @@ public class SysLog extends BaseProjectModel<SysLog> {
 	/**
 	 * 获取表中文备注
 	 * 
-	 * 2015年10月16日 上午11:59:45 flyfox 330627517@qq.com
+	 * 2015年10月16日 上午11:59:45 flyfox 369191470@qq.com
 	 * 
 	 * @param tableName
 	 * @return

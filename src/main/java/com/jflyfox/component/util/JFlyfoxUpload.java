@@ -31,7 +31,7 @@ public class JFlyfoxUpload {
 	/**
 	 * 临时路径
 	 * 
-	 * 2016年4月27日 下午4:07:23 flyfox 330627517@qq.com
+	 * 2016年4月27日 下午4:07:23 flyfox 369191470@qq.com
 	 * 
 	 * @param site
 	 * @param type
@@ -48,7 +48,7 @@ public class JFlyfoxUpload {
 	/**
 	 * 上传路径
 	 * 
-	 * 2016年4月27日 下午4:07:28 flyfox 330627517@qq.com
+	 * 2016年4月27日 下午4:07:28 flyfox 369191470@qq.com
 	 * 
 	 * @param site
 	 * @param type
@@ -69,7 +69,7 @@ public class JFlyfoxUpload {
 	/**
 	 * 上传绝对路径
 	 * 
-	 * 2016年4月27日 下午4:07:34 flyfox 330627517@qq.com
+	 * 2016年4月27日 下午4:07:34 flyfox 369191470@qq.com
 	 * 
 	 * @param site
 	 * @param type
@@ -90,7 +90,7 @@ public class JFlyfoxUpload {
 	/**
 	 * 重命名
 	 * 
-	 * 2015年9月25日 下午10:37:55 flyfox 330627517@qq.com
+	 * 2015年9月25日 下午10:37:55 flyfox 369191470@qq.com
 	 * 
 	 * @param uploadFile
 	 * @return
