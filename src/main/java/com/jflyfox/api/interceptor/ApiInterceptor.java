@@ -66,7 +66,7 @@ public class ApiInterceptor implements Interceptor {
 		// 调试日志
 		if (ApiUtils.DEBUG) {
 			log.info("API DEBUG INTERCEPTOR \n[path=" + path + "/" + para + "]" //
-					+ "\n[time=" + (System.currentTimeMillis() - start) * 1000 + "ms]");
+					+ "\n[time=" + (System.currentTimeMillis() - start) + "ms]");
 		}
 	}
 

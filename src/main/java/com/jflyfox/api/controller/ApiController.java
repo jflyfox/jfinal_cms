@@ -59,7 +59,7 @@ public class ApiController extends BaseProjectController {
 		if (ApiUtils.DEBUG) {
 			log.info("API DEBUG ACTION \n[from=" + from + "]" //
 					+ "\n[resp=" + JsonKit.toJson(resp) + "]" //
-					+ "\n[time=" + (System.currentTimeMillis() - start) * 1000 + "ms]");
+					+ "\n[time=" + (System.currentTimeMillis() - start) + "ms]");
 		}
 		renderJson(resp);
 	}
