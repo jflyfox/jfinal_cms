@@ -4,6 +4,7 @@ import com.jfinal.log.Log;
 import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.admin.friendlylink.FriendlylinkCache;
 import com.jflyfox.modules.admin.pageview.PageViewCache;
+import com.jflyfox.system.config.ConfigCache;
 import com.jflyfox.system.dict.DictCache;
 import com.jflyfox.system.dict.SysDictDetail;
 import com.jflyfox.system.log.SysLog;
@@ -25,6 +26,8 @@ public class JFlyFoxCache {
 		DictCache.init();
 		// 用户信息
 		UserCache.init();
+		// 系统参数配置初始化
+		ConfigCache.init();
 		// PV缓存绑定
 		PageViewCache.init();
 		// 友情链接缓存

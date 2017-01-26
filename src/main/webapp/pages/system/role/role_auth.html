@@ -28,8 +28,8 @@
 				
 				// 子节点被选中，根节点也需要被选择
 				if($(this).is(":checked") && parentid!=0) {
-					$("[id^='menu_"+ parentid +"']").attr("checked",$(this).is(":checked")); 
-					$("[id^='menu_"+ parentid +"']").prop("checked",$(this).is(":checked")); 
+					$("[id^='menu_"+ parentid +"_']").attr("checked",$(this).is(":checked")); 
+					$("[id^='menu_"+ parentid +"_']").prop("checked",$(this).is(":checked")); 
 				}
 			});
 			

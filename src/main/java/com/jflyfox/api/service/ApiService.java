@@ -4,10 +4,13 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jfinal.log.Log;
+import com.jflyfox.api.constant.ApiConstant;
 import com.jflyfox.api.form.ApiResp;
 import com.jflyfox.api.form.BaseApiForm;
 import com.jflyfox.api.util.ApiUtils;
 import com.jflyfox.jfinal.base.BaseService;
+import com.jflyfox.system.config.ConfigCache;
 import com.jflyfox.util.ReflectionUtils;
 
 /**
@@ -17,6 +20,7 @@ import com.jflyfox.util.ReflectionUtils;
  */
 public class ApiService extends BaseService {
 
+	private final static Log log = Log.getLog(ApiService.class);
 	private static List<String> methodList;
 
 	static {
@@ -36,7 +40,8 @@ public class ApiService extends BaseService {
 	}
 
 	public IApiLogic getApiLogic(BaseApiForm form) {
-		return ApiUtils.getApiLogic(form.getVersion());
+		IApiLogic apiLogic = ApiUtils.getApiLogic(form.getVersion());
+		return apiLogic;
 	}
 
 	/**
@@ -48,22 +53,31 @@ public class ApiService extends BaseService {
 	 * @return
 	 */
 	public ApiResp action(BaseApiForm form) {
-		// 利用反射更简洁
-		if (methodList.contains(form.getMethod())) {
-			return (ApiResp)ReflectionUtils.invokeMethod(getApiLogic(form), form.getMethod(), //
-					new Class<?>[] { BaseApiForm.class }, new Object[] { form });
-		}
+		try {
+			// 
+			if (methodList.contains(form.getMethod())) {
+				
+				// 登陆验证标识
+				boolean validFlag = ConfigCache.getValueToBoolean("API.LOGIN.VALID");
+				if (validFlag) {
+					// 先进行登陆验证。如果验证失败，直接返回错误
+					ApiResp validResp = getApiLogic(form).valid(form);
+					if (validResp.getCode() != ApiConstant.CODE_SUCCESS) {
+						return validResp;
+					}
+				}
 
-		// if ("folders".equals(form.getMethod())) {
-		// return getApiLogic(form).folders(form);
-		// } else if ("pageArticleSite".equals(form.getMethod())) {
-		// return getApiLogic(form).pageArticleSite(form);
-		// } else if ("pageArticle".equals(form.getMethod())) {
-		// return getApiLogic(form).pageArticle(form);
-		// } else if ("article".equals(form.getMethod())) {
-		// return getApiLogic(form).article(form);
-		// }
-		return ApiUtils.getMethodError();
+				// 调用接口方法，利用反射更简洁
+				ApiResp apiResp = (ApiResp) ReflectionUtils.invokeMethod(getApiLogic(form), form.getMethod(), //
+						new Class<?>[] { BaseApiForm.class }, new Object[] { form });
+				return apiResp;
+			}
+			
+			return ApiUtils.getMethodError();
+		} catch (Exception e) {
+			log.error("action handler error", e);
+			return ApiUtils.getMethodHandlerError();
+		}
 	}
 
 }

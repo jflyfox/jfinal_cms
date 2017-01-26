@@ -18,6 +18,10 @@ public class DepartmentController extends BaseProjectController {
 
 	private static final String path = "/pages/system/department/department_";
 
+	public void index() {
+		list();
+	}
+	
 	public void list() {
 		SysDepartment model = getModelByAttr(SysDepartment.class);
 

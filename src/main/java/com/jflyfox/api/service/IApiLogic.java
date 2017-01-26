@@ -8,17 +8,7 @@ import com.jflyfox.api.form.BaseApiForm;
  * 
  * 2016年9月29日 上午11:45:08 flyfox 369191470@qq.com
  */
-public interface IApiLogic {
-
-	/**
-	 * 获取配置信息
-	 * 
-	 * 2016年10月1日 下午9:20:12 flyfox 369191470@qq.com
-	 * 
-	 * @param form
-	 * @return
-	 */
-	public ApiResp config(BaseApiForm form);
+public interface IApiLogic extends IApiCommon {
 
 	/**
 	 * 返回栏目列表

@@ -12,11 +12,11 @@ import com.jflyfox.modules.admin.folder.TbFolder;
 import com.jflyfox.modules.front.service.FrontCacheService;
 
 /**
- * v1.0.0
+ * Api基础方法
  * 
  * 2016年9月29日 上午11:19:00 flyfox 369191470@qq.com
  */
-public class ApiV100Logic implements IApiLogic {
+public class ApiV100Logic extends BaseApiLogic implements IApiLogic {
 
 	private FrontCacheService service = new FrontCacheService();
 	private FolderService folderServer = new FolderService();

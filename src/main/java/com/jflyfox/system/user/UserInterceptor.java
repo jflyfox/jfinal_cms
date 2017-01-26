@@ -1,5 +1,7 @@
 package com.jflyfox.system.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.jfinal.aop.Interceptor;
@@ -9,6 +11,8 @@ import com.jfinal.log.Log;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.util.Attr;
+import com.jflyfox.system.menu.SysMenu;
+import com.jflyfox.util.StrUtils;
 
 /**
  * 用户认证拦截器
@@ -69,9 +73,39 @@ public class UserInterceptor implements Interceptor {
 				return;
 			}
 
+			// 判断url是否有权限
+			if (!urlAuth(controller, tmpPath)) {
+				controller.redirect("/trans/auth");
+				return;
+			}
+
 		}
 
 		ai.invoke();
 	}
-	
+
+	/**
+	 * 判断Url是否有权限
+	 * 
+	 * 2016年12月18日 上午12:12:51 flyfox 369191470@qq.com
+	 * 
+	 * @param controller
+	 * @param tmpPath
+	 * @return
+	 */
+	protected boolean urlAuth(Controller controller, String tmpPath) {
+		List<SysMenu> list = controller.getSessionAttr("nomenu");
+		for (SysMenu sysMenu : list) {
+			String url = sysMenu.getStr("url");
+			if (StrUtils.isEmpty(url)) {
+				continue;
+			}
+			if (tmpPath.startsWith(url)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

@@ -1,0 +1,141 @@
+<% 
+	var headContent = {
+	include("/pages/template/head.html"){}
+%>
+
+<script type="text/javascript">
+		
+	var oper;
+	jQuery(function($) {
+		// 页面方法
+		oper = {
+			width : 500,
+			height : 550,
+			form : document.form1,
+			list : function() {
+				var url = 'system/config/list';
+				this.form.action = url;
+				this.form.submit();
+			},
+			view : function(id) {
+				var url = 'system/config/view/'+id;
+				var title = '查看系统配置表';
+				Iframe(url, this.width, this.height, title, false, false, false, EmptyFunc);
+			},
+			add : function(oper_type) {
+				var type = $('[name="attr.type"]').val();
+				var url = 'system/config/add' + "?oper_type=" + oper_type + "&type=" + type;
+				var title = '添加系统配置表';
+				Iframe(url, this.width, this.height, title);
+			},
+			edit : function(id,oper_type) {
+				var url = 'system/config/edit/'+id + "?oper_type=" + oper_type;
+				var title = '修改系统配置表';
+				Iframe(url, this.width, this.height, title);
+			},
+			del : function(id) {
+				var url = 'system/config/delete/'+id;
+				var title = '确认要删除该系统配置表信息？';
+				Confirm(title, function() {
+					form1.action = url;
+					form1.submit();
+				});
+			}
+		};
+		//显示Menu索引
+		showMenu('page_config');
+	});
+	
+	//分页
+	var paginator = function(page) {
+		oper.list();
+	};
+</script>
+
+<%
+};
+
+var bodyContent = {
+%>
+	<form name="form1" action="" method="post"  class="form-inline" role="form">
+		<input type="hidden" name="oper_type" id="oper_type" value="${oper_type!1}" />
+		<!-- 菜单 -->
+		<% include("/pages/template/menu.html"){} %>
+		
+		<div class="tableSearch">
+			<button type="button" class="btn btn-success" onclick="$('#oper_type').val(${oper_type==1?2:1});oper.list();">
+			 		<span class="glyphicon glyphicon-refresh"></span> 切换到${oper_type==1?'类型设置':'参数配置'}
+			</button>
+			<%  //查询列表 %>
+			<div class="form-group">
+					<input class="form-control" type="text" name="attr.name" value="${attr.name!''}" 
+						placeholder="请输入名称" />
+			</div>
+			<div class="form-group">
+					<input class="form-control" type="text" name="attr.key" value="${attr.key!''}" 
+						placeholder="请输入键" />
+			</div>
+			<% if (oper_type == 1 ){ %>
+			<div class="form-group">
+		   	<select name="attr.type" class="form-control" style="width: 200px;">
+					<option value="-1">请选择类型</option> ${selectOption! }
+			</select> 
+			</div>
+			<% } %>
+			<button type="button" class="btn btn-default" onclick="oper.list();" name="search">
+			 		<span class="glyphicon glyphicon-search"></span> 查 询
+			</button>
+			<button type="button" class="btn btn-default" onclick="resetForm();">
+			 		<span class="glyphicon glyphicon-refresh"></span> 重 置
+			</button>
+			<button type="button" class="btn btn-default" onclick="oper.add(${oper_type});">
+			 		<span class="glyphicon glyphicon-plus"></span> 新 增
+			</button>
+		</div>
+		
+		<!-- 数据列表 -->
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<%  // 列表头部 %>
+					<th name="name" class="sorting">名称</th> 
+					<th name="key" class="sorting">键</th> 
+					<% if (oper_type == 1 ){ %>
+					<th name="value" class="sorting">值</th> 
+					<th name="code" class="sorting">编码</th> 
+					<th name="type" class="sorting">类型</th> 
+					<% } %>
+					<th name="sort" class="sorting">排序号</th> 
+ 					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% for(item in page.list){ %>
+				<tr>
+				<td>${itemLP.index }</td>
+					<%  // 列表内容 %>
+						<td>${item.name}</td> 
+					<td>${item.key}</td> 
+					<% if (oper_type == 1 ){ %>
+					<td>${item.value}</td> 
+					<td>${item.code}</td> 
+					<td>${item.typeName}</td>
+					<% } %> 
+					<td>${item.sort}</td> 
+				<td>
+				<a href="javascript:void(0);" class="btn btn-sm btn-success" onclick="oper.view(${item.id});">查看</a> 
+				<a href="javascript:void(0);" class="btn btn-sm btn-primary" onclick="oper.edit(${item.id},${oper_type});">修改</a> 
+				<a href="javascript:void(0);" class="btn btn-sm btn-danger" onclick="oper.del(${item.id});">删除</a>
+				</td>
+				</tr>
+			<% } %>
+			</tbody>
+		</table>
+		<%include("/pages/includes/paginator.html"){} %>
+	</form>
+<%}; %>
+
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

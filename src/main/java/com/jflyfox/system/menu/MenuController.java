@@ -17,6 +17,10 @@ public class MenuController extends BaseProjectController {
 	private static final String path = "/pages/system/menu/menu_";
 	MenuSvc svc = new MenuSvc();
 
+	public void index() {
+		list();
+	}
+	
 	public void list() {
 		SysMenu model = getModelByAttr(SysMenu.class);
 

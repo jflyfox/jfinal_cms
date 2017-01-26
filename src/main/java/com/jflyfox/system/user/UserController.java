@@ -22,6 +22,10 @@ public class UserController extends BaseProjectController {
 
 	private static final String path = "/pages/system/user/user_";
 
+	public void index() {
+		list();
+	}
+	
 	public void list() {
 		SysUser model = getModelByAttr(SysUser.class);
 

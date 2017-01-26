@@ -23,6 +23,10 @@ public class RoleController extends BaseProjectController {
 
 	private static final String path = "/pages/system/role/role_";
 
+	public void index() {
+		list();
+	}
+	
 	public void list() {
 		SysRole model = getModelByAttr(SysRole.class);
 

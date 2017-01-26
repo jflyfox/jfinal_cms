@@ -1,5 +1,6 @@
 package com.jflyfox.system.user;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,36 @@ import com.jflyfox.util.StrUtils;
 
 public class UserSvc extends BaseService {
 
+	/**
+	 * 获取没有权限的菜单
+	 * 
+	 * 2016年12月17日 下午11:57:49
+	 * flyfox 369191470@qq.com
+	 * @param map 可以访问的菜单
+	 * @return
+	 */
+	public List<SysMenu> getNoAuthMap(Map<Integer, List<SysMenu>> map) {
+		List<SysMenu> list = SysMenu.dao.findByWhere("");
+		List<SysMenu> returnList = new ArrayList<SysMenu>();
+		
+		List<Integer> idList = new ArrayList<Integer>();
+		for (Integer key : map.keySet()) {
+			List<SysMenu> childList = map.get(key);
+			for (SysMenu sysMenu : childList) {
+				idList.add(sysMenu.getInt("id"));
+			}
+			idList.add(key);
+		}
+		
+		for (SysMenu sysMenu : list) {
+			if (!idList.contains(sysMenu.getInt("id"))) {
+				returnList.add(sysMenu);
+			}
+		}
+		
+		return returnList;
+	}
+	
 	/**
 	 * 返回菜单权限
 	 * 

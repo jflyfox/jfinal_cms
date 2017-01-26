@@ -1,6 +1,7 @@
 package com.jflyfox.api.form;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.log.Log;
 import com.jflyfox.jfinal.base.Paginator;
@@ -14,7 +15,7 @@ import com.jflyfox.util.NumberUtils;
 public class BaseApiForm {
 
 	private final static Log log = Log.getLog(BaseApiForm.class);
-	
+
 	private Integer pageNo; // 页数
 	private Integer pageSize; // 页码
 	private String method; // 方法名
@@ -26,8 +27,8 @@ public class BaseApiForm {
 	/**
 	 * 获取分页信息
 	 * 
-	 * 2016年10月3日 下午9:03:02
-	 * flyfox 369191470@qq.com
+	 * 2016年10月3日 下午9:03:02 flyfox 369191470@qq.com
+	 * 
 	 * @return
 	 */
 	public Paginator getPaginator() {
@@ -38,42 +39,97 @@ public class BaseApiForm {
 			paginator.setPageSize(this.pageSize.intValue());
 		return paginator;
 	}
-	
+
 	/**
 	 * 获取参数
 	 * 
-	 * 2016年10月3日 下午9:02:45
-	 * flyfox 369191470@qq.com
+	 * 2016年10月3日 下午9:02:45 flyfox 369191470@qq.com
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public double getDouble(String key) {
+		return NumberUtils.parseDbl(get(key));
+	}
+
+	/**
+	 * 获取参数
+	 * 
+	 * 2016年10月3日 下午9:02:45 flyfox 369191470@qq.com
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public long getLong(String key) {
+		return NumberUtils.parseLong(get(key));
+	}
+
+	/**
+	 * 获取参数
+	 * 
+	 * 2016年10月3日 下午9:02:45 flyfox 369191470@qq.com
+	 * 
 	 * @param key
 	 * @return
 	 */
 	public int getInt(String key) {
-		String value = get(key);
-		return NumberUtils.parseInt(value);
+		return NumberUtils.parseInt(get(key));
 	}
-	
+
 	/**
 	 * 获取参数
 	 * 
-	 * 2016年10月3日 下午9:02:45
-	 * flyfox 369191470@qq.com
+	 * 2016年10月3日 下午9:02:45 flyfox 369191470@qq.com
+	 * 
 	 * @param key
 	 * @return
 	 */
 	public String get(String key) {
+		return getParams().getString(key);
+	}
+
+	/**
+	 * 获取参数
+	 * 
+	 * 2016年10月3日 下午9:02:45 flyfox 369191470@qq.com
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public JSONObject getJSONObject(String key) {
+		return getParams().getJSONObject(key);
+	}
+
+	/**
+	 * 获取参数
+	 * 
+	 * 2016年10月3日 下午9:02:45 flyfox 369191470@qq.com
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public JSONArray getJSONArray(String key) {
+		return getParams().getJSONArray(key);
+	}
+
+	/**
+	 * 获取P参数
+	 * 
+	 * 2016年10月3日 下午9:02:45 flyfox 369191470@qq.com
+	 * 
+	 * @param key
+	 * @return
+	 */
+	private JSONObject getParams() {
 		JSONObject json = null;
 		try {
 			json = JSON.parseObject(p);
 		} catch (Exception e) {
 			log.error("apiform json parse fail:" + p);
-			return null;
+			return new JSONObject();
 		}
-		
-		if (json.containsKey(key)) {
-			return json.getString(key);
-		}
-		
-		return null;
+
+		return json;
 	}
 
 	public Integer getPageNo() {

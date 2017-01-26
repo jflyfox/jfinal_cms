@@ -5,6 +5,8 @@ import java.util.Date;
 import com.jflyfox.jfinal.base.BaseModel;
 import com.jflyfox.jfinal.template.TemplateFunctions;
 import com.jflyfox.modules.admin.folder.FolderService;
+import com.jflyfox.system.config.ConfigCache;
+import com.jflyfox.system.config.SysConfig;
 import com.jflyfox.system.dict.DictCache;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
@@ -41,6 +43,12 @@ public class BeeltFunctions extends TemplateFunctions {
 		return dictCode(NumberUtils.parseInt(key));
 	}
 
+	// //////////////////////////系统参数配置///////////////////////////////////////////
+
+	public static SysConfig getConfig(String key) {
+		return ConfigCache.getSysConfig(key);
+	}
+	
 	// //////////////////////自定义方法///////////////////////////
 	/**
 	 * 获取图片路径

@@ -136,6 +136,8 @@ public abstract class BaseProjectController extends BaseController {
 			Map<Integer, List<SysMenu>> map = new UserSvc().getAuthMap(sysUser);
 			// 注入菜单
 			setSessionAttr("menu", map);
+			// 不能访问的菜单
+			setSessionAttr("nomenu", new UserSvc().getNoAuthMap(map));
 		}
 		return user;
 	}

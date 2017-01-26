@@ -4,7 +4,7 @@
 * 接口方法扩展方便。只需要在接口IApiLogic中添加方法，完善各个版本实现即可。
 * 支持多版本并行。只需要实现接口IApiLogic，集成上一个版本，将需要修改的方法重写即可。
 * 支持接口开关、黑名单、版本控制功能。
-* 接口验证功能暂时未实现。
+* 支持接口登陆验证以及验证开关。
 
 ## 接口使用说明
 ------------------------
@@ -34,7 +34,10 @@ String p; // 参数
 
 3. 分页有默认值pageNo=1,pageSize=20
 
-4. 验证功能后续完善
+4. 登陆验证功能说明
+> 1）通过login接口进行登陆，获取key。
+> 2）其他接口调用需要携带两个公共请求参数：apiUser为用户名，checkSum为登陆接口返回key。
+> 3）如果退出调用logout接口。
 
 5. p为json参数，携带我们接口想要的自定义参数。
 p={siteId:1,test:"ok"}
@@ -57,7 +60,7 @@ p={siteId:1,test:"ok"}
 * 请求参数
 
 ```
-version:1.0.0 版本号
+无
 ```
 
 * 示例
@@ -86,7 +89,7 @@ version:1.0.0 版本号
 * 请求参数
 
 ```
-version:1.0.0 版本号
+无
 ```
 
 * 示例
@@ -106,6 +109,64 @@ version:1.0.0 版本号
 	msg: "success"
 }
 ```
+####  登陆接口
+
+* 接口说明：获取配置信息
+* 请求方式： **_GET/POST_**
+* 请求地址：**_/api/action/login_**
+* 请求参数
+
+```
+username:用户名
+password:密码
+```
+
+* 示例
+
+```
+/api/action/login?version=1.0.1&p={username:"admin",password:"123"}
+```
+
+* 返回结果
+
+```json
+{
+	data: {
+		key: "oTkt"
+	},
+	code: 0,
+	msg: "success"
+}
+```
+
+####  登出接口
+
+* 接口说明：获取配置信息
+* 请求方式： **_GET/POST_**
+* 请求地址：**_/api/action/logout_**
+* 请求参数
+
+```
+无
+```
+
+* 示例
+
+```
+/api/action/logout?version=1.0.1&apiUser=admin&checkSum=YBrs
+```
+
+* 返回结果
+
+```json
+{
+	data: {
+		r: "ok"
+	},
+	code: 0,
+	msg: "success"
+}
+```
 
 ####  配置接口
 
@@ -115,13 +176,13 @@ version:1.0.0 版本号
 * 请求参数
 
 ```
-version:1.0.0 版本号
+无
 ```
 
 * 示例
 
 ```
-/api/action/config?version=1.0.0
+/api/action/config?version=1.0.0&apiUser=admin&checkSum=YBrs
 ```
 
 * 返回结果
@@ -152,7 +213,7 @@ siteId:1 站点ID
 * 示例
 
 ```
-/api/action/folders?version=1.0.1&siteId=1
+/api/action/folders?version=1.0.1&apiUser=admin&checkSum=YBrs&p={siteId:2}
 ```
 
 * 返回结果
@@ -207,7 +268,7 @@ siteId:1 站点ID
 * 示例
 
 ```
-/api/action/pageArticleSite?version=1.0.1&pageNo=1&pageSize=20&p={siteId:1}
+/api/action/pageArticleSite?version=1.0.1&apiUser=admin&checkSum=YBrs&pageNo=1&pageSize=20&p={siteId:2}
 ```
 
 * 返回结果
@@ -268,7 +329,7 @@ siteId:1 站点ID
 * 示例
 
 ```
-/api/action/pageArticle?version=1.0.1&pageNo=1&pageSize=1&p={folderId:1}
+/api/action/pageArticle?version=1.0.1&apiUser=admin&checkSum=YBrs&pageNo=1&pageSize=1&p={folderId:2}
 ```
 
 * 返回结果
@@ -329,7 +390,7 @@ siteId:1 站点ID
 * 示例
 
 ```
-/api/action/article?version=1.0.1&p={articleId:1}
+/api/action/article?version=1.0.1&apiUser=admin&checkSum=YBrs&p={articleId:1}
 ```
 
 * 返回结果

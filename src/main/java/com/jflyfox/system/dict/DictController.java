@@ -16,6 +16,10 @@ public class DictController extends BaseProjectController {
 	private static final String path = "/pages/system/dict/dict_";
 	DictSvc svc = new DictSvc();
 
+	public void index() {
+		list();
+	}
+	
 	public void list() {
 		SysDictDetail attr = getModelByAttr(SysDictDetail.class);
 		StringBuffer sql = new StringBuffer(" from sys_dict_detail t,sys_dict d where t.dict_type = d.dict_type ");

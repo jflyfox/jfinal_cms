@@ -1,10 +1,15 @@
 package com.jflyfox.modules.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ImageCode;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.system.log.SysLog;
+import com.jflyfox.system.menu.SysMenu;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.util.Config;
 import com.jflyfox.util.StrUtils;
@@ -69,14 +74,74 @@ public class AdminController extends BaseProjectController {
 			setSessionUser(user);
 		}
 
+		// 第一个页面跳转
+		String tmpMainPage = setFirstPage();
+
+		if (tmpMainPage == null) {
+			setAttr("msg", "没有权限，请联系管理员。");
+			render(loginPage);
+			return;
+		}
+		
 		// 添加日志
 		user.put("update_id", user.getUserid());
 		user.put("update_time", getNow());
 		saveLog(user, SysLog.SYSTEM_LOGIN);
 
-		redirect(homePage);
+		redirect(tmpMainPage);
 	}
 
+	/**
+	 * 获取第一个跳转页面
+	 * 
+	 * 2015年10月30日 上午8:51:14 flyfox 330627517@qq.com
+	 * 
+	 * @param map
+	 * @return
+	 */
+	protected String setFirstPage() {
+		Map<Integer, List<SysMenu>> map = getSessionAttr("menu");
+		if (map == null || map.size() <= 0) {
+			return null;
+		}
+
+		String tmpMainPage = "";
+		List<String> menuList = new ArrayList<String>();
+
+		List<SysMenu> list = map.get(0);
+		for (SysMenu menu : list) {
+			if (StrUtils.isNotEmpty(menu.getStr("url"))) {
+				menuList.add("/" + menu.getStr("url"));
+			}
+			List<SysMenu> list2 = map.get(menu.getInt("id"));
+			if (list2 == null || list2.size() < 0) {
+				continue;
+			}
+
+			for (SysMenu menu2 : list2) {
+				if (StrUtils.isNotEmpty(menu2.getStr("url"))) {
+					menuList.add("/" + menu2.getStr("url"));
+				}
+			}
+
+		}
+
+		if (menuList.size() <= 0) {
+			return null;
+		}
+
+		if (menuList.contains(homePage)) {
+			tmpMainPage = homePage;
+		} else {
+			tmpMainPage = menuList.get(0);
+		}
+
+		if (!tmpMainPage.startsWith("/")) {
+			tmpMainPage = "/" + tmpMainPage;
+		}
+		return tmpMainPage;
+	}
+	
 	/**
 	 * 登出
 	 * 

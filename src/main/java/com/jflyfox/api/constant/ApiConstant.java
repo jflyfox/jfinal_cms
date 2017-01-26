@@ -19,9 +19,13 @@ public class ApiConstant {
 	 */
 	public static final int CODE_VERSION_ERROR = -101;
 	/**
-	 * 方法调用错误
+	 * 调用方法不存在
 	 */
 	public static final int CODE_METHOD_ERROR = -103;
+	/**
+	 * 调用方法异常
+	 */
+	public static final int CODE_METHOD_HANDLER_ERROR = -103;
 	/**
 	 * 传递参数异常
 	 */
@@ -30,12 +34,19 @@ public class ApiConstant {
 	 * IP黑名单
 	 */
 	public static final int CODE_IP_BLACK = -201;
-	
+
+	/**
+	 * 登陆验证异常
+	 */
+	public static final int CODE_LOGIN_VALID_ERROR = -501;
+
 	public static final String MSG_SUCCESS = "success";
 	public static final String MSG_FAIL = "fail";
 	public static final String MSG_VERSION_ERROR = "版本号错误";
-	public static final String MSG_METHOD_ERROR = "方法调用错误";
+	public static final String MSG_METHOD_ERROR = "调用方法不存在";
+	public static final String MSG_METHOD_HANDLER_ERROR = "调用方法异常";
 	public static final String MSG_PARAM_ERROR = "传递参数异常";
-	public static final String MSG_IP_BLACK  = "传递参数异常";
-	public static final String MSG_SERVER_MAINTAIN  = "API服务维护中";
+	public static final String MSG_IP_BLACK = "IP黑名单拦截";
+	public static final String MSG_SERVER_MAINTAIN = "API服务维护中";
+	public static final String MSG_LOGIN_VALID_ERROR = "登陆验证失败";
 }

@@ -10,7 +10,7 @@ import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
 import com.jflyfox.api.util.ApiUtils;
-import com.jflyfox.util.Config;
+import com.jflyfox.system.config.ConfigCache;
 import com.jflyfox.util.IpUtils;
 import com.jflyfox.util.StrUtils;
 
@@ -24,9 +24,9 @@ public class ApiInterceptor implements Interceptor {
 		Controller controller = ai.getController();
 		String path = ai.getActionKey();
 		String para = controller.getPara();
-		
+
 		// 开关
-		boolean flag = Config.getToBoolean("API.FLAG");
+		boolean flag = ConfigCache.getValueToBoolean("API.FLAG");
 		if (!flag) {
 			controller.renderJson(ApiUtils.getServerMaintain());
 			return;
@@ -34,7 +34,7 @@ public class ApiInterceptor implements Interceptor {
 
 		// 黑名单
 		String ip = IpUtils.getClientIP(controller.getRequest());
-		String blackIps = Config.getStr("API.IP.BLACK");
+		String blackIps = ConfigCache.getValue("API.IP.BLACK");
 		if (!StrUtils.isEmpty(ip) && !StrUtils.isEmpty(blackIps)) {
 			List<String> ipList = Arrays.asList(blackIps.split(","));
 			// 如果黑名单包含该IP返回错误信息
@@ -48,7 +48,7 @@ public class ApiInterceptor implements Interceptor {
 
 		// 版本验证
 		String version = controller.getPara("version");
-		String versions = Config.getStr("API.VERSIONS");
+		String versions = ConfigCache.getValue("API.VERSIONS");
 		if (StrUtils.isEmpty(version)) {
 			controller.renderJson(ApiUtils.getVersionErrorResp());
 			return;

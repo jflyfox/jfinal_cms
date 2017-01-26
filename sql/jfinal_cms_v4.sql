@@ -167,18 +167,18 @@ CREATE TABLE `sys_menu` (
 -- Records of sys_menu
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', 'system_root', null, '1', '1', '90', '1', '2015-04-27 17:28:06', '1');
-INSERT INTO `sys_menu` VALUES ('2', '1', '组织机构', 'department', 'system/department/list', '1', '1', '91', '2', '2015-04-27 17:28:25', '1');
-INSERT INTO `sys_menu` VALUES ('3', '1', '用户管理', 'user', 'system/user/list', '1', '1', '92', '2', '2015-04-27 17:28:46', '1');
-INSERT INTO `sys_menu` VALUES ('4', '1', '角色管理', 'role', 'system/role/list', '1', '1', '94', '2', '2015-04-27 17:29:13', '1');
-INSERT INTO `sys_menu` VALUES ('5', '1', '菜单管理', 'menu', 'system/menu/list', '1', '1', '96', '2', '2015-04-27 17:29:43', '1');
-INSERT INTO `sys_menu` VALUES ('6', '1', '数据字典', 'dict', 'system/dict/list', '1', '1', '97', '2', '2015-04-27 17:30:05', '1');
+INSERT INTO `sys_menu` VALUES ('2', '1', '组织机构', 'department', 'system/department', '1', '1', '91', '2', '2015-04-27 17:28:25', '1');
+INSERT INTO `sys_menu` VALUES ('3', '1', '用户管理', 'user', 'system/user', '1', '1', '92', '2', '2015-04-27 17:28:46', '1');
+INSERT INTO `sys_menu` VALUES ('4', '1', '角色管理', 'role', 'system/role', '1', '1', '94', '2', '2015-04-27 17:29:13', '1');
+INSERT INTO `sys_menu` VALUES ('5', '1', '菜单管理', 'menu', 'system/menu', '1', '1', '96', '2', '2015-04-27 17:29:43', '1');
+INSERT INTO `sys_menu` VALUES ('6', '1', '数据字典', 'dict', 'system/dict', '1', '1', '97', '2', '2015-04-27 17:30:05', '1');
 INSERT INTO `sys_menu` VALUES ('7', '20', '联系人管理', 'contact', 'admin/contact/list', '1', '1', '38', '2', '2015-04-28 12:38:04', '1');
 INSERT INTO `sys_menu` VALUES ('8', '18', '栏目管理', 'folder', 'admin/folder/list', '1', '1', '11', '2', '2015-04-28 22:34:46', '1');
 INSERT INTO `sys_menu` VALUES ('9', '18', '文章管理', 'article', 'admin/article/list', '1', '1', '14', '2', '2015-04-28 22:35:24', '1');
 INSERT INTO `sys_menu` VALUES ('10', '20', '友情链接', 'friendlylink', 'admin/friendlylink/list', '1', '1', '32', '2', '2015-04-28 22:35:56', '1');
 INSERT INTO `sys_menu` VALUES ('11', '20', '访问量统计', 'pageview', 'admin/pageview', '1', '1', '33', '2', '2015-04-28 22:36:34', '1');
 INSERT INTO `sys_menu` VALUES ('12', '19', '回复管理', 'comment', 'admin/comment/list', '1', '1', '21', '2', '2015-05-06 09:40:46', '1');
-INSERT INTO `sys_menu` VALUES ('13', '20', '缓存更新', 'operation', 'admin/operation', '1', '1', '32', '2', '2015-05-06 11:41:33', '1');
+INSERT INTO `sys_menu` VALUES ('13', '20', '缓存更新', 'operation', 'admin/operation', '1', '1', '31', '2', '2015-05-06 11:41:33', '1');
 INSERT INTO `sys_menu` VALUES ('14', '1', '日志管理', 'log', 'system/log/list', '1', '1', '98', '2', '2016-01-03 18:09:18', '1');
 INSERT INTO `sys_menu` VALUES ('15', '19', '意见反馈', 'advicefeedback', 'admin/advicefeedback/list', '1', '1', '22', '2', '2016-01-29 01:06:46', '1');
 INSERT INTO `sys_menu` VALUES ('16', '18', '栏目公告', 'foldernotice', 'admin/foldernotice/list', '1', '1', '12', '2', '2016-01-29 01:07:35', '1');
@@ -196,7 +196,7 @@ INSERT INTO `sys_menu` VALUES ('27', '22', '视频管理', 'video', 'admin/video
 INSERT INTO `sys_menu` VALUES ('28', '0', '模板管理', 'filemanager', 'admin/filemanager/list', '1', '1', '60', '1', '2016-03-06 09:36:36', '1');
 INSERT INTO `sys_menu` VALUES ('29', '18', '文章审核', 'article_approve', 'admin/article/list_approve', '1', '1', '15', '2', '2016-03-16 00:21:12', '1');
 INSERT INTO `sys_menu` VALUES ('30', '20', '站点管理', 'site', 'admin/site/list', '1', '1', '31', '2', '2016-04-02 22:26:33', '1');
-
+INSERT INTO `sys_menu` VALUES ('31', '1', '参数配置', 'config', 'system/config', '1', '1', '97', '2', '2016-12-17 23:34:13', '1');
 -- ----------------------------
 -- Table structure for `sys_role`
 -- ----------------------------
@@ -1412,3 +1412,33 @@ CREATE TABLE `tb_video_tags` (
 -- ----------------------------
 -- Records of tb_video_tags
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `sys_config`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_config`;
+CREATE TABLE `sys_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL COMMENT '名称',
+  `key` varchar(64) NOT NULL COMMENT '键',
+  `value` varchar(1000) NOT NULL COMMENT '值',
+  `code` varchar(64) DEFAULT NULL COMMENT '编码',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '类型',
+  `sort` int(11) NOT NULL DEFAULT '10' COMMENT '排序号',
+  `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT '0' COMMENT '更新人',
+  `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT '0' COMMENT '创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='系统配置表';
+
+-- ----------------------------
+-- Records of sys_config
+-- ----------------------------
+INSERT INTO `sys_config` VALUES ('1', '系统参数', 'systemParam', '0', null, '0', '10', '2016-12-17 22:32:35', '1', '2016-12-17 22:32:35', '1');
+INSERT INTO `sys_config` VALUES ('2', 'API参数', 'apiParam', '0', null, '0', '11', '2016-12-17 22:33:41', '1', '2016-12-17 22:33:41', '1');
+INSERT INTO `sys_config` VALUES ('4', '版权', 'copyright', '©FLY的狐狸 版权所有', null, '1', '10', '2016-12-17 23:07:21', '1', '2016-12-17 23:07:21', '1');
+INSERT INTO `sys_config` VALUES ('5', 'API是否开启', 'API.FLAG', 'true', null, '2', '110', '2016-12-17 23:12:26', '1', '2016-12-17 23:12:26', '1');
+INSERT INTO `sys_config` VALUES ('6', 'ip黑名单，逗号分隔', 'API.IP.BLACK', '127.0.0.122,localhost22', null, '2', '111', '2016-12-17 23:16:29', '1', '2016-12-17 23:16:29', '1');
+INSERT INTO `sys_config` VALUES ('7', '支持的版本，逗号分隔', 'API.VERSIONS', '1.0.0,1.0.1', null, '2', '112', '2016-12-17 23:17:00', '1', '2016-12-17 23:17:00', '1');
+INSERT INTO `sys_config` VALUES ('8', '登陆验证是否开启', 'API.LOGIN.VALID', 'false', null, '2', '114', '2016-12-17 23:17:23', '1', '2016-12-17 23:17:23', '1');

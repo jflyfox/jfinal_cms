@@ -1,0 +1,93 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+var headContent = {
+	include("/pages/template/head.html"){}
+%>
+<script type="text/javascript">
+	var oper = {
+		save:function(id){
+			if(!validForm()) {
+				return false;
+			}
+			id = id || '0';
+			var url = 'system/config/save/'+id;
+			form1.action = url;
+			form1.submit();
+			return true;
+		}	
+	};
+</script>
+
+<%
+};
+var bodyContent = {
+%>
+<form name="form1" action="" method="post" class="form-horizontal"
+		role="form" >
+	<input type="hidden" name="model.id" value="${model.id}" />
+	<table class="table">
+		<%  // 列表头部%>
+				<tr>
+					<td>类型</td>
+					<td>
+					<% if (oper_type == 1 ){ %>
+						<select name="model.type" class="form-control" valid='vselect' validname='类型' >
+								<option value="-1">请选择类型</option> 
+								${selectOption! }
+						</select>
+					<% } else { %>
+						系统类型设置
+						<input class="form-control" type="hidden" name="model.type" value="0"  />
+						<input class="form-control" type="hidden" name="model.value" value="0"  />
+						<input class="form-control" type="hidden" name="model.code" value=""  />
+					<% } %>
+					</td>
+				</tr>
+				<tr>
+					<td>名称</td>
+					<td>
+					<input class="form-control" type="text" name="model.name" value="${model.name }"  valid='vtext' validname='名称'  />
+											</td>
+				</tr>
+								<tr>
+					<td>键</td>
+					<td>
+					<input class="form-control" type="text" name="model.key" value="${model.key }"  valid='vtext' validname='键'  />
+											</td>
+				</tr>
+				<% if (oper_type == 1 ){ %>
+								<tr>
+					<td>值</td>
+					<td>
+					<textarea class="form-control" rows="5" name="model.value" valid='vtext' validname='值'  >${model.value!0 }</textarea>
+					</td>
+				</tr>
+								<tr>
+					<td>编码</td>
+					<td>
+					<input class="form-control" type="text" name="model.code" value="${model.code }" placeholder="不需要可以不填写" />
+											</td>
+				</tr>
+				<% } %>
+				<tr>
+					<td>排序号</td>
+					<td>
+					<input class="form-control" type="text" name="model.sort" value="${model.sort!10 }"  valid='vnum_y' validname='排序号'  />
+											</td>
+				</tr>
+	</table>
+	
+	<div style="height: 50px;clear: both;">&nbsp;</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
+		<button class="btn btn-primary" onclick="return oper.save(${model.id});">保 存</button>
+		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+	  </div>
+	</nav>
+</form>
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%}
+DIRECTIVE SAFE_OUTPUT_CLOSE; 
+%>
