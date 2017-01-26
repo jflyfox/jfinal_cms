@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.BaseService;
-import com.jflyfox.system.user.SysUser;
 import com.jflyfox.util.cache.Cache;
 import com.jflyfox.util.cache.CacheManager;
 
@@ -20,12 +19,16 @@ public class SiteService extends BaseService {
 		cache.clear();
 	}
 
+	public int getDefaultId() {
+		return getDefaultSite().getId();
+	}
+	
 	public TbSite getDefaultSite() {
 		return TbSite.dao.findFirstCache(cacheName, "getDefaultSite" //
-				, "select * from tb_site where id = ?", SiteConstant.DEFAULT_SITE_ID);
+				, "select * from tb_site where site_defalut = ?", SiteConstant.SITE_DEFAULT_YES);
 	}
 
-	public List<TbSite> getSiteList(SysUser user) {
+	public List<TbSite> getSiteList() {
 		return TbSite.dao.findCache(cacheName, "getSiteList", "select * from tb_site where status =  "
 				+ JFlyFoxUtils.STATUS_SHOW);
 	}

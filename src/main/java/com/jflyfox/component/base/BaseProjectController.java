@@ -19,6 +19,7 @@ package com.jflyfox.component.base;
 import java.util.List;
 import java.util.Map;
 
+import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.BaseController;
@@ -36,6 +37,8 @@ import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserSvc;
 import com.jflyfox.util.NumberUtils;
 import com.jflyfox.util.StrUtils;
+import com.jflyfox.util.cache.Cache;
+import com.jflyfox.util.cache.CacheManager;
 import com.jflyfox.util.encrypt.DESUtils;
 
 /**
@@ -70,7 +73,7 @@ public abstract class BaseProjectController extends BaseController {
 
 		// path = (isMoblie() ? Attr.PATH_MOBILE : Attr.PATH_PC) + path;
 		TbSite site = new SiteService().getSite(getSessionSite().getSiteId());
-		path = SiteConstant.TEMPLATE_PATH + (isMoblie() ? site.getTemplateMobile() : site.getTemplate()) + path;
+		path = SiteConstant.getTemplatePath() + (isMoblie() ? site.getTemplateMobile() : site.getTemplate()) + path;
 
 		if (view.startsWith("/")) {
 			path = "/" + path;
@@ -138,6 +141,7 @@ public abstract class BaseProjectController extends BaseController {
 			setSessionAttr("menu", map);
 			// 不能访问的菜单
 			setSessionAttr("nomenu", new UserSvc().getNoAuthMap(map));
+			
 		}
 		return user;
 	}
@@ -181,19 +185,20 @@ public abstract class BaseProjectController extends BaseController {
 	// ///////////////////栏目处理////////////
 	// 获取用户设置的SITE对象，设置默认
 	public SessionSite getSessionSite() {
-		SessionSite sessionSite = getSessionAttr(SiteConstant.SESSION_SITE);
+		SessionSite sessionSite = getSessionAttr(SiteConstant.getSessionSite());
 		// 获取用户设置的SITE对象，设置默认
 		if (sessionSite == null) {
 			sessionSite = new SessionSite();
-			sessionSite.setBackSiteId(SiteConstant.DEFAULT_SITE_ID);
-			sessionSite.setSiteId(SiteConstant.DEFAULT_SITE_ID);
-			setSessionAttr(SiteConstant.SESSION_SITE, sessionSite);
+			int defaultSiteId = new SiteService().getDefaultId();
+			sessionSite.setBackSiteId(defaultSiteId);
+			sessionSite.setSiteId(defaultSiteId);
+			setSessionAttr(SiteConstant.getSessionSite(), sessionSite);
 		}
 		return sessionSite;
 	}
 
 	public SessionSite setSessionSite(SessionSite sessionSite) {
-		setSessionAttr(SiteConstant.SESSION_SITE, sessionSite);
+		setSessionAttr(SiteConstant.getSessionSite(), sessionSite);
 		return sessionSite;
 	}
 
@@ -204,7 +209,7 @@ public abstract class BaseProjectController extends BaseController {
 	public String selectFolder(Integer selected, Integer selfId) {
 		return new FolderService().selectFolder(selected, selfId, getSessionSite().getBackSiteId());
 	}
-	
+
 	/**
 	 * 公共文章查询sql
 	 * 
@@ -217,6 +222,25 @@ public abstract class BaseProjectController extends BaseController {
 				+ " and t.approve_status = " + ArticleConstant.APPROVE_STATUS_PASS // 审核通过
 				+ " and t.type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
 		;
+	}
+
+	Cache cache = CacheManager.get("JFLYFOX_SESSION");
+
+	public Controller setSessionAttrCache(String key, Object value) {
+		String id = getSession().getId();
+		cache.add(key + "_" + id, value);
+		return this;
+	}
+
+	public <T> T getSessionAttrCache(String key) {
+		String id = getSession().getId();
+		return cache.get(key + "_" + id);
+	}
+
+	public Controller removeSessionAttrCache(String key) {
+		String id = getSession().getId();
+		cache.remove(key + "_" + id);
+		return this;
 	}
 
 }

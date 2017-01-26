@@ -1,7 +1,12 @@
 package com.jflyfox.modules.admin.site;
 
+import java.io.File;
+
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.upload.UploadFile;
 import com.jflyfox.component.base.BaseProjectController;
+import com.jflyfox.component.util.JFlyfoxUpload;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.util.StrUtils;
@@ -76,9 +81,31 @@ public class SiteController extends BaseProjectController {
 		render(path + "edit.html");
 	}
 
+	public void defalut() {
+		Integer pid = getParaToInt();
+
+		if (pid != null && pid > 0) {
+			Db.update("update tb_site set site_defalut = ? where 1=1", SiteConstant.SITE_DEFAULT_NO);
+			Db.update("update tb_site set site_defalut = ? where id=?", SiteConstant.SITE_DEFAULT_YES, pid);
+			new SiteService().clearCache();
+		}
+
+		list();
+	}
+	
 	public void save() {
+		TbSite site = getSessionSite().getBackModel();
+		UploadFile thumbnailFile = getFile("thumbnail_file", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
+		
 		Integer pid = getParaToInt();
 		TbSite model = getModel(TbSite.class);
+		
+		// 缩略图附件
+		if (thumbnailFile != null) {
+			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "site_thumbnail"), thumbnailFile);
+			model.set("thumbnail", JFlyfoxUpload.getUploadPath(site, "site_thumbnail")+ File.separator + fileName);
+			// model.set("thumbnail_name", uploadFile.getFileName());
+		}
 
 		Integer userid = getSessionUser().getUserID();
 		String now = getNow();
@@ -87,6 +114,7 @@ public class SiteController extends BaseProjectController {
 		if (pid != null && pid > 0) { // 更新
 			model.update();
 		} else { // 新增
+			model.set("site_defalut", SiteConstant.SITE_DEFAULT_NO);
 			model.remove("id");
 			model.put("create_id", userid);
 			model.put("create_time", now);

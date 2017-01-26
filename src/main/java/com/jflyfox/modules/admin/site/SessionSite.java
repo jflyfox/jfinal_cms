@@ -6,12 +6,21 @@ public class SessionSite implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private int siteDefalutId; // 默认站点ID
 	private String lastSite; // 上一次访问的域名
 	private int siteId; // 前端站点ID
 	private int backSiteId; // 后端站点ID
 	private TbSite model; // 站点对象
 	private TbSite backModel; // 后台站点对象
 
+	public int getSiteDefalutId() {
+		return siteDefalutId;
+	}
+
+	public void setSiteDefalutId(int siteDefalutId) {
+		this.siteDefalutId = siteDefalutId;
+	}
+	
 	public String getLastSite() {
 		return lastSite;
 	}
@@ -51,4 +60,5 @@ public class SessionSite implements Serializable {
 	public void setBackModel(TbSite backModel) {
 		this.backModel = backModel;
 	}
+
 }

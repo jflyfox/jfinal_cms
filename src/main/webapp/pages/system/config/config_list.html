@@ -23,7 +23,7 @@
 				Iframe(url, this.width, this.height, title, false, false, false, EmptyFunc);
 			},
 			add : function(oper_type) {
-				var type = $('[name="attr.type"]').val();
+				var type = $('[name="oper_type"]').val();
 				var url = 'system/config/add' + "?oper_type=" + oper_type + "&type=" + type;
 				var title = '添加系统配置表';
 				Iframe(url, this.width, this.height, title);

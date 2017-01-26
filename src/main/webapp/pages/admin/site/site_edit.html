@@ -23,7 +23,7 @@ var headContent = {
 var bodyContent = {
 %>
 <form name="form1" action="" method="post" class="form-horizontal"
-		role="form" >
+		enctype="multipart/form-data" role="form" >
 	<input type="hidden" name="model.id" value="${model.id}" />
 	<table class="table">
 		<%  // 列表头部%>
@@ -89,6 +89,28 @@ var bodyContent = {
 					<td>其他域名</td>
 					<td colspan="3">
 					<input class="form-control" type="text" name="model.domain_others" value="${model.domain_others }"  />
+					</td>
+				</tr>
+				<tr>
+					<td>图片
+						<% if(!strutil.isEmpty(model.thumbnail)){ %>
+							<a href="${model.thumbnail}" target="_blank" style="text-decoration:none;">
+								<img alt="图片" title="点击浏览" src="${model.thumbnail}" width="40" height="40">
+							</a>
+						<% } %>
+					</td>
+					<td>
+						<input type="file" accept="image/*" class="form-control" name="thumbnail_file" />
+					</td>
+					<td colspan="2">
+						<input type="text" class="form-control" name="model.thumbnail" 
+							value="${model.thumbnail}" placeholder="图片url" />
+					</td>
+				</tr>
+				<tr>
+					<td>备注</td>
+					<td colspan="3">
+						<textarea class="form-control" rows="2" cols="30" name="model.remark">${model.remark}</textarea>
 					</td>
 				</tr>
 				<!-- 

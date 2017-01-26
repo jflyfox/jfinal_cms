@@ -26,6 +26,7 @@ public class TbSite extends BaseProjectModel<TbSite> {
 	private String DB_DRIVER = "db_driver"; // 数据库驱动
 	private String SORT = "sort"; // 序号
 	private String STATUS = "status"; // 状态//radio/2,禁用,1,启用
+	private String SITE_DEFALUT = "site_defalut"; // 默认站点：1,是,2,否
 	private String UPDATE_TIME = "update_time"; // 更新时间
 	private String UPDATE_ID = "update_id"; // 更新人
 	private String CREATE_TIME = "create_time"; // 创建时间
@@ -111,7 +112,7 @@ public class TbSite extends BaseProjectModel<TbSite> {
 	public java.lang.Integer getSiteFolderId() {
 		return get(SITE_FOLDER_ID);
 	}
-
+	
 	public TbSite setSiteArticleId(java.lang.Integer value) {
 		set(SITE_ARTICLE_ID, value);
 		return this;
@@ -175,6 +176,15 @@ public class TbSite extends BaseProjectModel<TbSite> {
 		return get(STATUS);
 	}
 
+	public TbSite setSiteDefalut(java.lang.Integer value) {
+		set(SITE_DEFALUT, value);
+		return this;
+	}
+
+	public java.lang.Integer getSiteDefalut() {
+		return get(SITE_DEFALUT);
+	}
+	
 	public TbSite setUpdateTime(java.lang.String value) {
 		set(UPDATE_TIME, value);
 		return this;

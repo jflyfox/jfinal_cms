@@ -1,0 +1,92 @@
+<link rel="stylesheet" type="text/css" href="static/theme/flat/flat.css" />
+
+<style>
+<% //分页  %>
+.smartpager {
+	height: 36px;
+    padding-top: 4px;
+}
+/*flat-ui*/ .flat {
+	background-color: #1abc9c;
+}
+
+.flat.normal {
+	background-color: #1abc9c;
+	color: #fff;
+	border: solid 1px #909A9E;
+}
+
+.flat.active {
+	background-color: #21D3B0;
+	color: #006652;
+	border: solid 1px #909A9E;
+}
+
+.smartpager.flat .btn {
+	background-color: #1abc9c;
+	color: #fff;
+	border: solid 1px #909A9E;
+	width: 30px;
+    height: 25px;
+    margin: 2px;
+}
+
+.smartpager.flat span {
+	margin-top: 5px;
+	margin-left: 4px;
+	color: #fff;
+	float: left;
+	font-size: 16px;
+}
+
+.smartpager ul {
+    padding-top: 6px;
+}
+
+.smartpager ul li a {
+	text-decoration: none;
+	display: inherit;
+	width: 22px;
+	height: 20px;
+	text-align: center;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	padding: 4px 12px;
+}
+
+.smartpager div.short input {
+    width: 30px;
+    height: 22px;
+    border: none;
+    margin-left: 8px;
+    margin-right: 4px;
+    margin-top: 3px;
+    padding-left: 2px;
+    float: left;
+}
+
+/**** 退出按钮 *******/
+.navbar-inverse .navbar-text a {
+	color: #969494;
+}
+
+/**** ym弹出框 *******/
+.ym-tl {
+	padding-left: 1px;
+	background: #1abc9c;
+}
+
+.modal-dialog {
+    margin: 150px auto;
+}
+</style>
+
+<script type="text/javascript">
+
+jQuery(function($) {
+	// 所有按钮统一用小一号
+	$('.btn').addClass('btn-sm');
+	$('.btn-default').removeClass('btn-default').addClass('btn-primary');
+});
+
+</script>

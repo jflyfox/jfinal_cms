@@ -262,7 +262,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', '1', '1', '1', null, null, 'zcool321@sina.com', '123', null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', 'default', '5', '1', '2016-06-06 06:06:06', '1');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', '1', '1', '1', null, null, 'zcool321@sina.com', '123', null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', 'flat', '5', '1', '2016-06-06 06:06:06', '1');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`
@@ -920,12 +920,15 @@ CREATE TABLE `tb_site` (
   `site_title` varchar(256) DEFAULT NULL COMMENT '标题',
   `site_folder_id` int(11) DEFAULT NULL COMMENT '默认标题ID',
   `site_article_id` int(11) DEFAULT NULL COMMENT '默认文章ID',
+  `thumbnail` varchar(256) DEFAULT NULL COMMENT '缩略图',
   `db_url` varchar(200) DEFAULT NULL COMMENT '数据库',
   `db_user` varchar(64) DEFAULT NULL COMMENT '数据库用户',
   `db_pwd` varchar(64) DEFAULT NULL COMMENT '数据库密码',
   `db_driver` varchar(64) DEFAULT NULL COMMENT '数据库驱动',
   `sort` int(11) DEFAULT '10' COMMENT '序号',
-  `status` int(11) DEFAULT '1' COMMENT '状态//radio/2,禁用,1,启用',
+  `status` int(2) DEFAULT '1' COMMENT '状态//radio/2,禁用,1,启用',
+  `site_defalut` int(2) DEFAULT '2' COMMENT '默认站点：1,是,2,否',
+  `remark` varchar(1000) DEFAULT NULL COMMENT '备注',
   `update_time` varchar(64) DEFAULT NULL COMMENT '更新时间',
   `update_id` int(11) DEFAULT '0' COMMENT '更新人',
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
@@ -936,12 +939,12 @@ CREATE TABLE `tb_site` (
 -- ----------------------------
 -- Records of tb_site
 -- ----------------------------
-INSERT INTO `tb_site` VALUES ('1', '视频管理', 'video', 'video', 'video.demo.com', 'video.demo.com', null, 'FLY的狐狸', null, null, null, null, null, null, '12', '1', '2016-04-04 19:57:22', '1', '2016-04-04 19:57:22', '1');
-INSERT INTO `tb_site` VALUES ('2', '门头沟', 'mtg', 'mtg', 'mtg.demo.com', 'mtg.demo.com', null, '门头沟信息网', '1', '1', null, null, null, null, '8', '1', '2016-04-07 01:10:22', '1', '2016-04-07 01:10:22', '1');
-INSERT INTO `tb_site` VALUES ('3', '网站', 'website', 'website', 'website.demo.com', 'website.demo.com', null, 'FLY的狐狸', '230', '2301', 'jdbc:mysql://127.0.0.1:3306/jfinal_cms_website?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull', 'root', '123456', 'com.mysql.jdbc.Driver', '10', '1', '2016-03-21 23:58:54', '1', '2016-03-21 23:58:54', '1');
-INSERT INTO `tb_site` VALUES ('4', '照片管理', 'photo', 'photo', 'photo.demo.com', 'photo.demo.com', null, 'FLY的狐狸', null, null, 'jdbc:mysql://127.0.0.1:3306/jfinal_cms_photo?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull', 'root', '123456', 'com.mysql.jdbc.Driver', '11', '1', '2016-03-22 22:25:21', '1', '2016-03-22 22:25:21', '1');
-INSERT INTO `tb_site` VALUES ('5', '博客', 'blog', 'blog', 'blog.demo.com', 'blog.demo.com', null, 'FLY的狐狸', '241', '3001', 'jdbc:mysql://127.0.0.1:3306/jflyfox_mtg?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull', 'root', '123456', 'com.mysql.jdbc.Driver', '15', '1', '2016-03-23 22:07:47', '1', '2016-03-23 22:07:47', '1');
-INSERT INTO `tb_site` VALUES ('8', '项目', 'project', 'project', 'project.demo.com', 'project.demo.com', null, 'FLY的狐狸', '253', null, null, null, null, null, '20', '1', '2016-06-17 16:47:44', '1', '2016-06-17 16:47:44', '1');
+INSERT INTO `tb_site` VALUES ('1', '视频管理', 'video', 'video', 'video.demo.com', 'video.demo.com', null, 'FLY的狐狸', null, null, 'jflyfox\\website\\site_thumbnail\\20170101_002223_487110.png', null, null, null, null, '12', '1', '2', null, '2016-04-04 19:57:22', '1', '2016-04-04 19:57:22', '1');
+INSERT INTO `tb_site` VALUES ('2', '门头沟', 'mtg', 'mtg', 'mtg.demo.com', 'mtg.demo.com', null, '门头沟信息网', '1', '1', 'jflyfox\\website\\site_thumbnail\\20170101_002130_323416.png', null, null, null, null, '8', '1', '2', null, '2016-04-07 01:10:22', '1', '2016-04-07 01:10:22', '1');
+INSERT INTO `tb_site` VALUES ('3', '网站', 'website', 'website', 'website.demo.com', 'website.demo.com', null, 'FLY的狐狸', '230', '2301', 'jflyfox\\website\\site_thumbnail\\20170101_002147_613266.gif', 'jdbc:mysql://127.0.0.1:3306/jfinal_cms_website?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull', 'root', '123456', 'com.mysql.jdbc.Driver', '10', '1', '2', null, '2016-03-21 23:58:54', '1', '2016-03-21 23:58:54', '1');
+INSERT INTO `tb_site` VALUES ('4', '照片管理', 'photo', 'photo', 'photo.demo.com', 'photo.demo.com', null, 'FLY的狐狸', null, null, 'jflyfox\\website\\site_thumbnail\\20170101_002209_956776.png', 'jdbc:mysql://127.0.0.1:3306/jfinal_cms_photo?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull', 'root', '123456', 'com.mysql.jdbc.Driver', '11', '1', '2', null, '2016-03-22 22:25:21', '1', '2016-03-22 22:25:21', '1');
+INSERT INTO `tb_site` VALUES ('5', '博客', 'blog', 'blog', 'blog.demo.com', 'blog.demo.com', null, 'FLY的狐狸', '241', '3001', 'jflyfox\\website\\site_thumbnail\\20170101_002344_503232.png', 'jdbc:mysql://127.0.0.1:3306/jflyfox_mtg?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull', 'root', '123456', 'com.mysql.jdbc.Driver', '15', '1', '1', null, '2016-03-23 22:07:47', '1', '2016-03-23 22:07:47', '1');
+INSERT INTO `tb_site` VALUES ('8', '项目', 'project', 'project', 'project.demo.com', 'project.demo.com', null, 'FLY的狐狸', '253', null, 'jflyfox\\website\\site_thumbnail\\20170101_002358_867823.png', null, null, null, null, '20', '1', '2', null, '2016-06-17 16:47:44', '1', '2016-06-17 16:47:44', '1');
 
 -- ----------------------------
 -- Table structure for `tb_tags`
@@ -1442,3 +1445,8 @@ INSERT INTO `sys_config` VALUES ('5', 'API是否开启', 'API.FLAG', 'true', nul
 INSERT INTO `sys_config` VALUES ('6', 'ip黑名单，逗号分隔', 'API.IP.BLACK', '127.0.0.122,localhost22', null, '2', '111', '2016-12-17 23:16:29', '1', '2016-12-17 23:16:29', '1');
 INSERT INTO `sys_config` VALUES ('7', '支持的版本，逗号分隔', 'API.VERSIONS', '1.0.0,1.0.1', null, '2', '112', '2016-12-17 23:17:00', '1', '2016-12-17 23:17:00', '1');
 INSERT INTO `sys_config` VALUES ('8', '登陆验证是否开启', 'API.LOGIN.VALID', 'false', null, '2', '114', '2016-12-17 23:17:23', '1', '2016-12-17 23:17:23', '1');
+INSERT INTO `sys_config` VALUES ('9', '站点参数', 'siteParam', '0', null, '0', '12', '2016-12-31 16:27:12', '1', '2016-12-31 16:27:12', '1');
+INSERT INTO `sys_config` VALUES ('10', '多站点标示', 'SITE.MULTI.FLAG', 'false', null, '9', '211', '2016-12-31 16:28:02', '1', '2016-12-31 16:28:02', '1');
+INSERT INTO `sys_config` VALUES ('11', '站点根目录', 'SITE.TEMPLATE.PATH', '/template/', null, '9', '212', '2016-12-31 16:28:43', '1', '2016-12-31 16:28:43', '1');
+INSERT INTO `sys_config` VALUES ('12', 'Session站点列表', 'SITE.SESSION.SITES', 'sites', null, '9', '213', '2016-12-31 16:30:17', '1', '2016-12-31 16:30:17', '1');
+INSERT INTO `sys_config` VALUES ('13', 'Session站点', 'SITE.SESSION.SITE', 'site', null, '9', '214', '2016-12-31 16:30:38', '1', '2016-12-31 16:30:38', '1');

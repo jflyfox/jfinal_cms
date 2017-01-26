@@ -21,7 +21,7 @@ public class CommonInterceptor implements Interceptor {
 
 		Controller controller = ai.getController();
 
-		SessionSite sessionSite = controller.getSessionAttr(SiteConstant.SESSION_SITE);
+		SessionSite sessionSite = controller.getSessionAttr(SiteConstant.getSessionSite());
 		if (sessionSite == null) {
 			// 设置公共属性
 			controller.setAttr(JFlyFoxUtils.WEBSITE_TITLE, TITLE);

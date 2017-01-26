@@ -50,6 +50,26 @@ var bodyContent = {
 				<td>其他域名</td>
 				<td colspan="3">${model.domain_others}</td>
 			</tr>
+			<tr>
+				<td>图片<td>
+				<td colspan="3">
+					<% if(!strutil.isEmpty(model.thumbnail)){ %>
+						<a href="${model.thumbnail}" target="_blank" style="text-decoration:none;">
+							<img alt="图片" title="点击浏览" src="${model.thumbnail}" width="128" height="128">
+						</a>
+					<% } %>
+				</td>
+			</tr>
+			<tr>
+				<td>说明</td>
+				<td title="${model.remark}" colspan="3">
+					<% if (strutil.length(model.remark) > 30) { %>
+						${strutil.subStringTo(model.remark, 0, 30)}...
+					<%	} else {%>
+						${model.remark }
+					<% } %>
+				</td>
+			</tr>
 			<!-- 
 			<tr>
 				<td>数据库</td>

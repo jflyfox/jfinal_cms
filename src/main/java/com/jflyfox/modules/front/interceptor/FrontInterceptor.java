@@ -33,7 +33,7 @@ public class FrontInterceptor implements Interceptor {
 		if (controller instanceof BaseProjectController) {
 			site = ((BaseProjectController) controller).getSessionSite();
 		} else {
-			site = controller.getSessionAttr(SiteConstant.SESSION_SITE);
+			site = controller.getSessionAttr(SiteConstant.getSessionSite());
 		}
 		Map<String, List<TbFolder>> folders = new FolderService().getFolderMenus(site.getSiteId());
 		controller.setAttr("folders", folders);
