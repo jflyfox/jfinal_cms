@@ -1,0 +1,247 @@
+.badge {
+    color: #337ab7;
+    font-size: 14px;
+    font-weight: normal;
+    background: 0
+}
+
+.more {
+    float: right;
+    font-size: 12px;
+    color: green
+}
+
+#scrollTop {
+    width: 57px;
+    height: 57px;
+    position: fixed;
+    right: 40px;
+    bottom: 62px;
+    opacity: .6;
+    background: url(top.png) no-repeat
+}
+
+#scrollTop:hover {
+    opacity: 1;
+    background: url(top.png) no-repeat
+}
+
+.img_radius {
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,.29),inset 1px 1px 1px rgba(255,255,255,.44);
+    -moz-box-shadow: 1px 1px 1px rgba(0,0,0,.29),inset 1px 1px 1px rgba(255,255,255,.44);
+    box-shadow: 1px 1px 1px rgba(0,0,0,.29),inset 1px 1px 1px rgba(255,255,255,.44)
+}
+
+.art-container {
+    padding: 2px
+}
+
+.art-title {
+    font-weight: bold
+}
+
+.art-title-info {
+    font-size: 12px;
+    color: gray;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle
+}
+
+.art-title-info .art-left {
+    float: left;
+    margin-left: 60px
+}
+
+.art-title-info .art-right {
+    float: right;
+    margin-right: 60px
+}
+
+.art-title-right {
+    float: right;
+    margin-right: 60px;
+    font-size: 12px;
+    color: gray;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle
+}
+
+.art-content {
+    margin: 30px 0
+}
+
+.mod-blogcommentitem {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 12px;
+    overflow: hidden;
+    border: 1px solid #dedede;
+    background: #fafafa
+}
+
+.mod-blogcommentitem .comment-inner {
+    width: 100%;
+    padding: 20px 20px 0 20px;
+    color: #ddd
+}
+
+.mod-blogcommentitem .comment-inner .comment-title {
+    color: #89898b;
+    font-size: 15px;
+    margin-bottom: 10px
+}
+
+.mod-blogcommentitem .comment-inner .comment-textarea {
+    overflow: hidden;
+    width: 100%;
+    height: 63px;
+    color: #000
+}
+
+.mod-blogcommentitem .comment-inner .comment-btn {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    float: right
+}
+
+.mod-blogcommentitem .comment-list {
+    width: 682px;
+    margin: 20px 20px 0 20px;
+    float: left
+}
+
+.mod-blogcommentitem .comment-list .comment-item {
+    border-bottom: 1px dotted #e6e6e6;
+    margin-top: 10px
+}
+
+.comment-list .comment-item a {
+    float: left;
+    margin-right: 5px
+}
+
+.comment-list .comment-item .item-top {
+    float: none;
+    line-height: 24px;
+    overflow: visible
+}
+
+.comment-list .item-top .user-name {
+    float: left;
+    color: green;
+    margin-right: 10px
+}
+
+.comment-list .item-top .comment-txt {
+    float: left;
+    margin-right: 10px
+}
+
+.comment-list .comment-no-read {
+    font-weight: bold
+}
+
+.comment-list .comment-item .item-bottom {
+    display: block;
+    margin-left: 30px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    overflow: visible
+}
+
+.item-bottom span {
+    color: gray;
+    height: 17px;
+    font-family: Georgia,Tahoma,Helvetica,arial
+}
+
+.item-bottom .item-edit {
+    float: right
+}
+
+.mod-blogcommentitem a {
+    color: #8cab4e;
+    font-family: tahoma,helvetica,"Microsoft Yahei","å¾®è½¯é›…é»‘",arial;
+    zoom:1;text-decoration: none
+}
+
+.mod-blogcommentitem a:hover {
+    color: #ddd
+}
+
+.q-taglist {
+    padding: 0;
+    overflow: hidden;
+    list-style: none
+}
+
+.q-taglist .q-icon {
+    display: block;
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    width: 26px;
+    padding: 6px 4px;
+    background: url(q-tag.png) no-repeat 4px -10px
+}
+
+.q-taglist .q-tagitem {
+    float: left;
+    font-size: 12px;
+    line-height: 26px;
+    padding: 0 2px
+}
+
+.q-taglist .a-tagitem {
+    color: #454545;
+    padding: 2px 4px;
+    _padding: 4px 4px 0;
+    word-break: keep-all;
+    word-wrap: normal;
+    text-decoration: none
+}
+
+.q-taglist .a-tagitem:hover {
+    color: #fff;
+    background-color: #3fa7cb;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px
+}
+
+.mod-footer .hidden-box {
+    line-height: 0;
+    height: 0;
+    overflow: hidden
+}
+
+.mod-footer .footer-box {
+    text-align: center;
+    font-family: Arial,simsun;
+    font-size: 12px
+}
+
+.mod-footer .footer-box .inner-box {
+    margin-bottom: 10px;
+    line-height: 14px;
+    height: 14px;
+    overflow: hidden;
+    color: #3fa7cb
+}
+
+.mod-footer .footer-box .copy-box {
+    margin-bottom: 20px;
+    color: #959595;
+    line-height: 25px;
+    height: 25px;
+    overflow: hidden
+}
+
+.mod-footer .footer-box .copy-box img {
+    vertical-align: middle
+}

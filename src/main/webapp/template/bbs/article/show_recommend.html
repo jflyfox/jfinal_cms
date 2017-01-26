@@ -1,0 +1,53 @@
+<% 
+	var headContent = {
+%>
+	<% include("/template/bbs/includes/header.html"){} %>
+	
+	<script type="text/javascript" src="${BASE_PATH }template/bbs/article/show_article.js"></script>
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/bbs/includes/header_menu.html"){} %>	
+
+<div id="main" style="margin:0 2%;">
+
+	<div class="row">
+	<!-- 文章 -->
+	<div class="col-md-8">	
+		<div class="panel panel-default">
+		  <div class="panel-heading" style="padding:0;">
+			<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <li class="active"><a href="${BASE_PATH }front/article/recommend.html">推荐文章</a></li>
+			</ol>
+		  </div>
+		  
+		  <!-- 文章列表 -->
+	  <% include("/template/bbs/includes/articlelist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
+	  
+		</div>
+	</div>
+	
+	<div class="col-md-4">	
+		<!-- 标签 -->
+		<% var tagPage = temp.tagsPage(1, 50, session.site.siteId); %>
+		<%  include("/template/bbs/includes/tags.html",{taglist:tagPage}){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/template/bbs/includes/friendly.html"){} %>
+	</div>
+	</div>
+
+</div>
+	
+<%  include("/template/bbs/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

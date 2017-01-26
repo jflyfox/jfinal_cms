@@ -1,0 +1,80 @@
+<!-- List reply -->
+<% var showArticle = showArticleFlag!false; %>
+
+
+<ul class="media-list comment-reply-list">
+
+<% if(!isEmpty(page) && page.list.~size > 0 ){ %>
+	<% for(comment in page.list){ %>
+	<li class="media" id="comment_${comment.id}_${comment.article_id}">
+		<% 
+			var user = flyfox.getUser(comment.create_id); 
+			var userPic = user.title_url!;
+			if(isEmpty(userPic)){
+				userPic = BASE_PATH + 'static/images/user/user.png';
+			} else if(!strutil.startWith(userPic , 'http')) {
+				userPic = ASE_PATH + userPic;
+			}
+		 %>
+		<a class="media-left" href="${BASE_PATH }front/person/view/${comment.create_id}.html"> 
+		<img alt="64x64" class="img-circle img_radius" src="${userPic }"
+				data-holder-rendered="true" style="width: 48px; height: 48px;">
+		</a>
+		<div class="media-body">
+			<div>
+				<% if(showArticle) { %>
+					<a href="${BASE_PATH }front/article/${comment.article_id}#article_comment" target="_blank" class="user-name">${comment.title}</a>
+					<span class="comment-txt">文章中</span>
+				<% } %>
+				
+				<a href="${BASE_PATH }front/person/view/${comment.create_id}.html" target="_blank">${flyfox.getUserName(comment.create_id)}</a> 
+				<% if(comment.status > 20) { %>
+				<span class="comment-txt">回复</span> 
+				<a href="${BASE_PATH }front/person/view/${comment.reply_userid}.html" target="_blank">${flyfox.getUserName(comment.reply_userid)}</a>
+				<% } %>
+			</div>
+			
+			<!-- 回复内容 -->
+			<div>${comment.content}</div>
+			
+			<div class="row">
+				<div class="col-md-8">
+					<span class="comment-time">${comment.create_time}</span>
+				</div>
+				<div class="col-md-4 text-right">
+				<% if(!isEmpty(session.session_user) && comment.create_id==session.session_user.userid){ %>
+					<a href="javascript:comment.reply_del(${comment.id},${comment.article_id});"><i class="fa fa-remove"></i> 删除</a>
+				<% } %>
+				<% if(!isEmpty(session.session_user) && comment.create_id!=session.session_user.userid){ %>
+					<a href="javascript:comment.reply_show(${comment.id},${comment.article_id});"><i class="fa fa-reply"></i> 回复</a>
+				<% } %>
+				</div>
+			</div>
+			
+			<% if(!isEmpty(session.session_user) && comment.create_id!=session.session_user.userid){ %>
+			<div class="panel-body comment-reply"  id="reply_${comment.id}_${comment.article_id}"  style="display:none;">
+				 <form class="form-horizontal" name="form1" action="" method="post">
+				 <div class="form-group">
+				    <div class="col-sm-12" >
+				 		<textarea name="comment" class="form-control"></textarea>
+				 	</div>
+				 </div>
+					 <div class="form-group">
+				    <div class="col-sm-12 text-right">
+				 	  <a onclick="comment.reply_submit(${comment.id},${comment.article_id},${comment.create_id},${comment.article_create_id},'${comment.title}')"
+				 	  	id="reply-btn"  style="color: black;" class="btn btn-default" >发  布</a>
+				    </div>
+				</div>
+				 </form>
+			</div>
+			<% } %>
+		</div>
+	</li>
+	<%  } %>
+<% } %>
+
+</ul>
+
+<div class="comment-paging">
+	<%include("/template/bbs/includes/paginator.html",{suffix:'#article_comment'}){} %>
+</div>

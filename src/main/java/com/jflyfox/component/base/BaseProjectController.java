@@ -242,5 +242,18 @@ public abstract class BaseProjectController extends BaseController {
 		cache.remove(key + "_" + id);
 		return this;
 	}
+	
+	/**
+	 * 是否是管理员
+	 * 
+	 * 2017年1月21日 下午11:55:16
+	 * flyfox 369191470@qq.com
+	 * @param user
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public boolean isAdmin(SessionUser user){
+		return user.getInt("usertype") == 1;
+	}
 
 }

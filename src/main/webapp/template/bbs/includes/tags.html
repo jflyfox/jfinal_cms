@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<span class="glyphicon glyphicon-tags fox-color-1" aria-hidden="true"></span> 推荐标签
+			<a class="more" href="${BASE_PATH }front/tags/all">更多</a>
+		</h3>
+	</div>
+	<div class="panel-body">
+	<%   if(taglist != null && taglist.list.~size > 0) { %>
+		<ul class="q-taglist clearfix">
+			<li title="标签"><span class="q-icon"></span></li>
+		<% for(tagitem in taglist.list){ %>
+			<li class="q-tagitem">
+				<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+			</li>
+		<%  } %>
+		</ul>
+	<% } else {  %>
+	期待你的发布......
+	<% } %>
+	</div>
+</div>

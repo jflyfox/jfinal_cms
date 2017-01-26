@@ -1,0 +1,225 @@
+<% 
+	var headContent = {
+%>
+	<% include("/template/bbs/includes/header.html"){} %>
+	
+<!-- jquery -->
+<% include("/template/includes/jquery.html"){} %> 
+<% include("/template/includes/ueditor.html"){} %>
+	
+<script type="text/javascript">
+	var ue;
+	$(document).ready(function(){
+		ue = UE.getEditor('editor',{
+			initialFrameHeight:350  //初始化编辑器高度,默认320
+			,compressSide:1
+			,imageScaleEnabled:false // 图片不允许拖拽
+       		, toolbars: [[
+                       'source', '|',
+                      'bold', 'italic', 'underline', 'strikethrough', 'insertorderedlist', 'insertunorderedlist', 'paragraph', '|',
+                      'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+                      'link', 'unlink', '|',
+                      'simpleupload', 'insertimage', 'emotion' , 'insertcode'
+                  ]]
+		});
+		
+	});
+
+	function oper_save(id) {
+		var folderId = $('[name="model.folder_id"]').val();
+		if(folderId=='-1') {
+			Alert('请选择栏目');
+			return false;
+		}
+		
+		var title = $('[name="model.title"]').val();
+		if(title=='') {
+			Alert('请输入博文题目');
+			return false;
+		}
+		if(title.length > 80 ) {
+			Alert('博文（'+title.length+'字）题目过长，请输入小于80个字');
+			return false;
+		}
+		
+		if(!ue.hasContents()){
+			Alert('请输入博文内容');
+			return false;
+		}
+		if(ue.getContentTxt().length > 1200){
+			Alert('博文（'+ue.getContentTxt().length+'字）文字过长，请输入小于1200个字');
+			return false;
+		}
+		
+		var tags = $('#tags_content').val().replace(/，/g, ",");
+		if(tags!='' && tags.length > 150 ) {
+			Alert('关键词（'+tags.length+'字）过长，请输入小于150个字');
+			return false;
+		}
+		
+		if(tags!='') {
+			$('[name="tags"]').val(tags);
+		}
+		
+		jQuery.ajax({
+			type:'POST',
+			url:jflyfox.BASE_PATH + 'front/person/saveblog/'+id,
+			data:$("form").serialize(),
+			success:function(data){
+				if(data.status==1){
+					alert('发布成功');
+					form1.action = jflyfox.BASE_PATH + "front/person";
+					form1.submit();
+					return true;
+				} else {
+					alert('发布失败：'+data.msg);
+				}
+				$('[name="old_password"]').val('');
+				$('[name="new_password"]').val('');
+				$('[name="new_password2"]').val('');
+			},
+			error:function(html){
+				var flag = (typeof console != 'undefined');
+				if(flag) console.log("服务器忙，提交数据失败，代码:" +html.status+ "，请联系管理员！");
+				alert("服务器忙，提交数据失败，请联系管理员！");
+			}
+		});
+		
+		
+		return false;
+	}
+	
+</script>
+
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/bbs/includes/header_menu.html"){} %>	
+
+<div id="main" style="margin:0 2%;">
+
+	<div class="row">
+	<!-- 文章 -->
+	<div class="col-md-8">	
+		<div class="panel panel-default">
+		  <div class="panel-heading" style="padding:0px;">
+			<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <li><a href="${BASE_PATH }front/person">我的空间</a></li>
+			  <li>发布博文</li>
+			</ol>
+		  </div>
+		 	 
+	 	  <div class="panel-body">
+	  
+			<form class="form-horizontal" name="form1" action="" method="post">
+					 <input type="hidden" name="model.id" class="form-control" id="model.id"  
+					 value="${model.id!'0'}">
+					 
+					 <div class="form-group">
+					 <label for="model.folder_id" class="col-sm-2 control-label">栏目</label>
+					    <div class="col-sm-10" >
+					 	<select  class="form-control" name="model.folder_id">
+					 		<option value="-1">--请选择栏目--</option>
+					 		<% if (!isEmpty(folders)){
+								for(item in folders["0"]){
+									if(item.key == 'home' || item.key == 'tags' || item.key == 'advice'){
+										continue;
+									}
+									var childs = folders[item.id+''];
+									if(isEmpty(childs)) {
+							%>
+									<option value="${item.id}" ${item.id==model.folder_id!0?'selected':''} >${item.name}</option>
+							<% 		
+									}else {
+							%>
+									<option value="${item.id}" disabled="disabled">${item.name}</option>
+									<% for(childsItem in childs){ %>
+										<option value="${childsItem.id}" ${item.id==model.folder_id!0?'selected':''}>|-- ${childsItem.name}</option>
+									<% } %>
+							<%		
+									}
+								}
+							} 
+							%>
+					 	</select>
+					 	</div>
+					 </div>
+		
+		
+					 <div class="form-group">
+					    <label for="model.title" class="col-sm-2 control-label">题目</label>
+					    <div class="col-sm-10">
+					    	<input name="model.title" class="form-control" id="model.title" 
+					      	value="${model.title!''}" placeholder="博文题目">
+					    </div>
+					  </div>
+					 
+					  <div class="form-group">
+					    <label for="remark" class="col-sm-2 control-label">内容</label>
+					    <div class="col-sm-10">
+					    	<script id="editor" type="text/plain" name="model.content"
+									style="width: 98%; height: 320px;">${model.content!''}</script>
+					    </div>
+					  </div>
+						  
+					  <div class="form-group">
+					    <label for="title_url" class="col-sm-2 control-label">关键词</label>
+					    <div class="col-sm-10">
+					      <input name="tags" type="hidden" value="${tags!''}" />
+					      <input name="tags_content" type="text" class="form-control" id="tags_content" 
+					      	value="${tags!''}" placeholder="关键词">
+					    </div>
+					  </div>
+						 
+						 
+					  
+					  
+					   <div class="form-group">
+						    <div class="col-sm-offset-2 col-sm-10">
+						      <input type="button" value="发 布"  class="btn btn-primary" onclick="oper_save(${model.id!'0'});"/>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+							  <input type="reset" value="重 置"  class="btn btn-default" />
+						    </div>
+						</div>
+						<div class="form-group">
+						    <div class="col-sm-offset-2 col-sm-10" style="color: red;">
+						      1. 博文题目必须填写，并且不能超过80个文字。<br>
+						      2. 博文内容尽量控制在1200个文字内，内容合法健康，否则可能会被删除。<br>
+							  3. 关键词请使用逗号分隔不同标签，最多5个哦，并且不能超过150个文字。 <br>
+						    </div>
+						</div>
+					
+					</form>
+			
+			</div>
+		</div>
+
+	</div>
+	
+	<!-- 信息列表 -->
+	<div class="col-md-4">	
+		<!-- 用户信息 -->
+		<%include("/template/bbs/includes/userinfo.html"){} %>
+		
+		<!-- 推荐文章 -->
+		<%  include("/template/bbs/includes/recommend.html"){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/template/bbs/includes/friendly.html"){} %>
+	</div>
+	</div>
+
+</div>
+	
+<%  include("/template/bbs/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

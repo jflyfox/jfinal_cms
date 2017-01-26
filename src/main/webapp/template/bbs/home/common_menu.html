@@ -1,0 +1,92 @@
+<%
+		// 显示50个标签
+		var taglist = temp.tagsPageByFolder(1, 50, folder.id);
+		
+		// 列表数据
+		var page = temp.articlePage(paginator.pageNo, paginator.pageSize, folder.id);
+		
+		// 公告
+		var noticeList = temp.notice(folder.id);
+%>
+
+<% 
+	var headContent = {
+%>
+	<% include("/template/bbs/includes/header.html"){} %>
+	
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/bbs/includes/header_menu.html"){} %>	
+
+<div id="main" style="margin:0 2%;">
+<div class="row">
+
+	<!-- 文章 -->
+	<div class="col-md-8">	
+		<div class="panel panel-default">
+		  <div class="panel-heading" style="padding:0;">
+						<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <li class="active"><a href="${BASE_PATH }${flyfox.getMenu(folder.id)}">${folder.name }</a></li>
+			</ol>
+		  </div>
+		  	 <!-- 文章列表 -->
+		 	 <% include("/template/bbs/includes/articlelist.html",{articlelist:page,defalutimg:defalutimg!''}){} %>
+		</div>
+	</div>
+	
+	<!-- 信息列表 -->
+	<div class="col-md-4">	
+			
+		<!-- 用户信息 -->
+		<%include("/template/bbs/includes/userinfo.html"){} %>		
+		
+		<%  
+			if(noticeList != null && noticeList.~size > 0) {
+		%>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">公告</h3>
+		  </div>
+		  <div class="panel-body">
+	  		<%
+				for(item in noticeList){ 
+			%>
+			<p><span class="label label-info">${itemLP.index}</span> <a href="${item.url}" target="_blank">${item.content}</a></p>
+			<% 
+				}
+			%>
+		 </div>
+		</div>
+		<%
+			} 
+		%>
+		
+		<!-- 标签 -->
+		<%  include("/template/bbs/includes/tags.html",{taglist:taglist!}){} %>
+		
+		<!-- 推荐文章 -->
+		<%  include("/template/bbs/includes/recommend.html"){} %>
+		
+		<!-- 广告 -->
+		<%  include("/template/bbs/includes/advertise.html"){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/template/bbs/includes/friendly.html"){} %>
+	</div>
+	</div>
+
+</div>
+	
+<%  include("/template/bbs/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

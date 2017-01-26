@@ -72,6 +72,8 @@ public class BaseConfig extends JflyfoxConfig {
 	 */
 	@Override
 	public void afterJFinalStart() {
+		// super.afterJFinalStart();
+		
 		JFlyFoxCache.init();
 		System.out.println("##################################");
 		System.out.println("############系统启动完成##########");

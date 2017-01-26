@@ -17,11 +17,7 @@ import com.jflyfox.util.cache.CacheManager;
 public class FrontCacheService extends BaseService {
 
 	private final static String cacheName = "FrontCacheService";
-	/**
-	 * 目录缓存
-	 */
-	private static Cache cache = CacheManager.get(cacheName);
-
+	private final static Cache cache = CacheManager.get(cacheName);
 	/**
 	 * 更新缓存,清空
 	 * 
@@ -179,6 +175,35 @@ public class FrontCacheService extends BaseService {
 		return articles;
 	}
 
+	/**
+	 * 返回对应文章列表
+	 * 
+	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
+	 * 
+	 * @param paginator
+	 * @param folderId
+	 * @return
+	 */
+	public Page<TbArticle> getArticleByOrder(Paginator paginator, int siteId, int orderType) {
+		String key = ("articleOrder_" + paginator.getPageNo() + "_" + paginator.getPageSize() + "_" + siteId + "_" + orderType);
+		String fromSql = " from tb_article t " //
+				+ " left join tb_folder tf on tf.id = t.folder_id " //
+				+ " where " + getPublicWhere() //
+				+ " and tf.site_id = ? ";
+		if (orderType==1) { // 默认
+			fromSql +=" order by t.sort,t.create_time desc";
+		} else if (orderType==2){ // 最新
+			fromSql +=" order by t.create_time desc";
+		} else if (orderType==3){ // 精品
+			fromSql +=" order by (t.count_comment*10+t.count_view) desc";
+		} else if (orderType==4){ // 待回复的
+			fromSql +=" and t.count_comment = 0 order by t.create_time desc";
+		}
+		// 推荐文章列表
+		Page<TbArticle> articles = TbArticle.dao.paginateCache(cacheName, key, paginator, "select t.* ", fromSql, siteId);
+		return articles;
+	}
+	
 	/**
 	 * 返回对应文章列表
 	 * 

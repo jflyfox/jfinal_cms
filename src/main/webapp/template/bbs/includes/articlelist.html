@@ -1,0 +1,106 @@
+	 <%
+	 	// 传递变量  
+	 	// 文章列表 articlelist 必填
+	 	// 默认图片 defalutimg 选填
+	 	var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+	 %>
+	 <ul class="list-group">
+<% if( articlelist != null && articlelist.list.~size > 0 ){ %>
+	 	<% for(item in articlelist.list){ %>
+	 	<li class="list-group-item">
+		<div class="row">
+		  <div class="col-md-2">
+		  	<div class="thumbnail">
+		  	  <% 
+		  	  // 图片设置
+		  	  var picName ="";
+		  	  if(strutil.isNotEmpty(item.image_url) || strutil.isNotEmpty(item.image_net_url) ) { 
+		  	  	picName = flyfox.getImage(item);
+				if(!strutil.startWith(picName , 'http')) {
+					picName = BASE_PATH + picName;
+				}
+		  	  } else if(flyfox.getNow()==item.publish_time){ // 当天图片
+		  	   	picName = BASE_PATH + "static/front/images/today.jpg";
+		  	  } else if(strutil.isNotEmpty(defalutimg!'')) { // 默认图片，可设置
+		  	  	picName = BASE_PATH + defalutimg;
+		  	  } else { // 什么都没有~！~
+		  	  	picName = BASE_PATH + "static/front/images/documents.png";	
+			  }
+			  %>
+			  <img src="${picName}" alt="${item.title}" height="85" data-holder-rendered="true"
+			  	 style="height: 85px; width: 100%; display: block;" >
+			</div>
+		  </div>
+		  <div class="col-md-10">
+				<h4>
+				<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
+				<% if (strutil.length(item.title) > 30) { %>
+					${strutil.subStringTo(item.title, 0, 30)}...
+				<% 	} else { %>
+					${item.title}
+				<%  } %>
+				</a>
+				<% if(item.sort < 10) { %>
+				<span class="label label-primary">置顶</span>
+				<% } %>
+				<% if(item.is_recommend == 1) { %>
+				<span class="label  label-success">推荐</span>
+				<% } %> 
+					<div class="pull-right" style="font-size:12px;">
+					
+					<!-- 编辑区 -->
+					<% if (sessionUserId==item.create_id) { %>
+					<span>
+					(
+						<a href="${BASE_PATH }front/person/editblog/${item.id}" target="_blank"><span>编辑</span></a>
+					|
+						<a href="javascript:void(0);" onclick="delblog(${item.id});return false;"><span style="color: red;">删除</span></a>
+					|
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank"><small>查看</small></a>
+					)
+					</span>
+					<% } else { %>
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank"><span>查看全部</span></a>
+					<% } %>
+					</div>
+				</h4>
+				
+				<% var article_content = flyfox.showHTML(item.content!'',100,'  ......'); %>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;${article_content!'' }
+				</p>
+				
+				<footer>
+					<div class="pull-left" style="color:gray;">
+						<small>发布时间：${item.publish_time }</small>
+						&nbsp;
+						<small>作者：${item.publish_user }</small>
+					</div>
+					<div class="pull-right" >
+						<% if(item.is_comment==1){ %>
+						<a href="${BASE_PATH }front/article/${item.id}.html#article_comment" style="vertical-align: middle;"   target="_blank"><small>评论(${temp.countComment(item.id)})</small></a>
+						&nbsp;
+						<% } %>
+						<small style="vertical-align: middle;" >浏览量(${temp.countView(item.id)})</small>
+						&nbsp;
+						<% 
+							var isLike = (sessionUserId==0? false: temp.isLike(sessionUserId,item.id)); 
+						%>
+						<span style="vertical-align: middle;cursor: pointer;"  id="articlelike_${item.id}" onclick="articlelike.click(${item.id});" 
+							class="glyphicon glyphicon-heart${isLike?'':'-empty'}"
+							title="${isLike?'取消':''}喜欢" aria-hidden="true"></span>
+					</div>
+				</footer>
+		  </div>
+		 </div>
+	</li>
+	<% } %>
+	<li class="list-group-item">
+		<%include("/template/bbs/includes/paginator.html",{page:articlelist}){} %>
+	</li>
+<% } else { %>	
+	<li class="list-group-item">
+		期待你的发布......
+	</li>
+<% } %>
+  </ul>

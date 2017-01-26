@@ -11,6 +11,7 @@ import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.CommonController;
+import com.jflyfox.modules.admin.article.ArticleConstant;
 import com.jflyfox.modules.admin.article.TbArticle;
 import com.jflyfox.modules.admin.comment.CommentService;
 import com.jflyfox.modules.admin.tags.TbTags;
@@ -270,15 +271,26 @@ public class PersonController extends BaseProjectController {
 
 		model.setUpdateTime(getNow());
 		if (pid != null && pid > 0) { // 更新
+			// 管理员或者自己才能修改
+			if (isAdmin(user) //
+					|| model.getCreateId().intValue() == user.getUserID().intValue()) {
+				json.put("msg", "你没有权限修改博文！");
+				renderJson(json.toJSONString());
+				return;
+			}
+			
 			model.update();
 		} else { // 新增
 			model.remove("id");
-			model.setFolderId(JFlyFoxUtils.MENU_BLOG); // 博文目录
+			if (model.getFolderId() == null || model.getFolderId() <= 0) {
+				model.setFolderId(JFlyFoxUtils.MENU_BLOG); // 博文目录
+			}
 			model.setStatus("1"); // 显示
 			model.setType(11);
 			model.setIsComment(1); // 能评论
 			model.setIsRecommend(2);// 不推荐
 			model.setSort(20); // 排序
+			model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS); // 需要审核改为update
 			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
 			model.setPublishUser(user.getUserName()); // 发布人
 			model.setCreateId(getSessionUser().getUserID());

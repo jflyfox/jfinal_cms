@@ -138,6 +138,21 @@ public class TemplateService extends BaseService {
 	public Page<TbArticle> articlePageSite(int pageNo, int pageSize, int siteId) {
 		return service.getArticleBySiteId(new Paginator(pageNo, pageSize), siteId);
 	}
+	
+	/**
+	 * 按照特定排序，返回文章列表
+	 * 
+	 * 2017年1月17日 下午5:37:16
+	 * flyfox 330627517@qq.com
+	 * @param pageNo
+	 * @param pageSize
+	 * @param siteId
+	 * @param orderType
+	 * @return
+	 */
+	public Page<TbArticle> articleOrder(int pageNo, int pageSize, int siteId, int orderType) {
+		return service.getArticleByOrder(new Paginator(pageNo, pageSize), siteId, orderType);
+	}
 
 	/**
 	 * 返回文章列表

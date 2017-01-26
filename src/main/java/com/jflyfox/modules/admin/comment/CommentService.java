@@ -3,6 +3,7 @@ package com.jflyfox.modules.admin.comment;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
+import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.BaseService;
 import com.jflyfox.modules.admin.article.TbArticle;
 import com.jflyfox.modules.front.service.FrontCacheService;
@@ -10,7 +11,6 @@ import com.jflyfox.system.user.SysUser;
 import com.jflyfox.util.DateUtils;
 import com.jflyfox.util.cache.Cache;
 import com.jflyfox.util.cache.CacheManager;
-import com.jflyfox.util.extend.HtmlUtils;
 
 public class CommentService extends BaseService {
 
@@ -40,8 +40,9 @@ public class CommentService extends BaseService {
 	public void saveComment(SysUser user, TbComment comment) {
 		// 评论
 		// 删除标签
-		String content = HtmlUtils.delHTMLTag(comment.getStr("content"));
-		content = HtmlUtils.changeTag(content);
+		// String content = HtmlUtils.delHTMLTag(comment.getStr("content"));
+		// content = HtmlUtils.changeTag(content);
+		String content = JFlyFoxUtils.delScriptTag(comment.getStr("content"));
 
 		comment.put("content", content);
 		// 评论
@@ -57,7 +58,7 @@ public class CommentService extends BaseService {
 		}
 		comment.put("status", status);
 
-		comment.put("fatherId", 0);
+		// comment.put("fatherId", 0);
 		comment.put("create_id", user.getUserID());
 		comment.put("create_time", DateUtils.getNow(DateUtils.DEFAULT_REGEX_YYYY_MM_DD_HH_MIN_SS));
 		comment.save();

@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+	<h3 class="panel-title"><i class="fa fa-bookmark fox-color-1" aria-hidden="true"></i> 推荐文章<a class="more" href="${BASE_PATH }front/article/recommend.html">更多</a></h3>
+  </div>
+	<ul class="list-group">
+	  	<% if(recommendArticles.list.~size > 0) {
+	  	for(item in recommendArticles.list){ 
+	  	%>
+			<li class="list-group-item">
+				<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
+				
+				<% if(itemLP.index <= 3) { %>
+				<span class="label label-success">${itemLP.index}</span>
+				<% } else { %>
+				<span class="label label-info">${itemLP.index}</span>
+				<% } %>
+						
+				<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
+				<% if (strutil.length(item.title) > 18) { %>
+					${strutil.subStringTo(item.title, 0, 18)}...
+				<% 	} else { %>
+					${item.title}
+				<%  } %>
+				</a>
+			</li>
+		<% }
+		} else { 
+		%>
+			<li class="list-group-item">
+				等待更好的文章......
+			</li>
+		<% } %>
+	  </ul>
+</div>

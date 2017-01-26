@@ -1,0 +1,214 @@
+<% 
+	var headContent = {
+%>
+	<% include("/template/bbs/includes/header.html"){} %>
+	<% include("/template/includes/ueditor.html"){} %>
+	<% include("/template/includes/ueditor_hightlighter.html"){} %>
+	<script type="text/javascript" src="${BASE_PATH }template/bbs/article/show_article.js"></script>
+	
+<style>
+<!--
+.syntaxhighlighter a, .syntaxhighlighter div, .syntaxhighlighter code, .syntaxhighlighter, .syntaxhighlighter td, .syntaxhighlighter tr, .syntaxhighlighter tbody, .syntaxhighlighter thead, .syntaxhighlighter caption, .syntaxhighlighter textarea {
+	vertical-align: middle!important;
+}
+-->
+</style>
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/bbs/includes/header_menu.html"){} %>	
+
+	<input type="hidden" name="article_id" value="${item.id}">
+	<input type="hidden" name="create_id" value="${item.create_id}">
+	<input type="hidden" name="count_comment" value="${item.count_comment!'0'}">
+
+
+<div id="main" style="margin:0 2%;">
+
+<div class="row">
+	<!-- 文章 -->
+	<div class="col-md-8">	
+	
+	<div class="panel panel-default">
+	  <div class="panel-heading" style="padding:0;">
+		    <div class="panel-body" style="padding:0px;">
+			<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <% if(folder.id==100) { %>
+			  <li><a href="${BASE_PATH }front/person/view/${item.create_id}.html">作者空间</a></li>
+			  <% } else { %>
+			  <li><a href="${BASE_PATH }${flyfox.getMenu(folder.id)}">${folder.name}</a></li>
+			  <% } %>
+			  <li class="active">文章</li>
+			</ol>
+			</div>
+	  </div><!-- end panel-heading  -->
+		  
+		 <div class="panel-body">
+
+			<article class="art-container">
+				<header class="text-center">
+					<h3 class="art-title">${item.title}</h3>
+					<section class="art-title-info">
+						<div class="art-left">
+							<!-- 百度分享 -->
+							<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+							<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+						</div>
+						<div class="art-right">
+							<span style="vertical-align: middle;" class="art-author" title="${item.publish_user!''}">作者：${flyfox.suojin(item.publish_user!'',10)}</span> •
+							<time style="vertical-align: middle;" class="art-date" datetime="${item.publish_time!''}" title="${item.publish_time!''}">${item.publish_time!''}</time>
+							<span style="vertical-align: middle;margin-left: 2px;">浏览（${item.count_view!'0'}）</span>
+							<% if(item.is_comment==1){ %>
+							<a style="vertical-align: middle;margin-left: 2px;" href="${BASE_PATH }front/article/${item.id}.html#article_comment" ><span id="count_comment_show">评论（${item.count_comment!'0'}）</span></a>
+							<% } %>
+							<% 
+								var sessionUserId = isEmpty(session.session_user) ? 0: session.session_user.userid;
+								var isLike = (sessionUserId==0? false: temp.isLike(sessionUserId,item.id)); 
+							%>
+							<span style="vertical-align: middle;cursor: pointer;"  id="articlelike_${item.id}" onclick="articlelike.click(${item.id});" 
+								class="glyphicon glyphicon-heart${isLike?'':'-empty'}"
+								title="${isLike?'取消':''}喜欢" aria-hidden="true"></span>
+						</div>
+					</section>
+					
+				</header>
+
+				<section class="art-content" style="word-break:break-all;word-wrap:break-word;">
+					<% if(strutil.isNotEmpty(item.image_net_url) ) { %>
+					<div class="thumbnail center-block" style="width:320px;">
+				  	  <img src="${item.image_net_url }"  alt="${item.title}" class="img-rounded"
+				  	  	data-holder-rendered="true" style="height: 200px; width: 320px; display: block;">
+				  	 </div>
+					<% } else if(strutil.isNotEmpty(item.image_url) ) { %>
+					<div class="thumbnail center-block" style="width:320px;">
+				  	  <img src="${ctx}${item.image_url }"  alt="${item.title}" class="img-rounded"
+				  	  	data-holder-rendered="true" style="height: 200px; width: 320px; display: block;">
+				  	 </div>
+					 <% } %>
+					${item.content!'' }
+					<% if(strutil.isNotEmpty(item.file_url)) { %>
+						<div>
+						<span style="color: gray;">附件:</span>
+						<a href="${BASE_PATH }${item.file_url }" target="_blank" style="text-decoration:none;">
+							${item.file_name}
+						</a>
+						</div>
+					<% } %>
+				</section>
+				
+
+				<footer class="art-footer clearfix">
+					<div class="text-left">
+					<%  
+						if(taglist != null && taglist.~size > 0) {
+					%>
+						<ul class="q-taglist clearfix">
+							<li title="标签"><span class="q-icon"></span></li>
+						<%
+							for(tagitem in taglist){ 
+						%>
+							<li class="q-tagitem">
+							<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+							</li>
+						<% 
+							}
+						%>
+						</ul>
+					<%
+					} 
+					%>
+					</div>
+					
+					<div class="text-right">
+					</div>
+				</footer>
+			</article>
+
+	<% if(item.is_comment==1){ %>
+			
+	<div class="panel panel-default jflyfox-comment" id="article_comment">
+		<div class="panel-heading">
+					评论
+		</div>
+		<div class="panel-body comment-reply">
+		<% if(!isEmpty(session.session_user)){ %>
+			 <form class="form-horizontal" name="form1" action="" method="post">
+			 <div class="form-group">
+			    <div class="col-sm-12" >
+			    	<!-- 
+			 		<textarea name="comment"   class="form-control"></textarea>
+			 		 -->
+			 		<script id="editor" type="text/plain" name="comment"
+									style="width: 100%; height: 320px;">${model.content!''}</script>
+			 	</div>
+			 </div>
+				 <div class="form-group">
+			    <div class="col-sm-12 text-right">
+			 	  <input id="comment-btn" type="button" value="发  布"  class="btn btn-default" />
+			    </div>
+			</div>
+			 </form>
+		<% } else { %>	 
+			 <p class="comment-nologin">没有<a href="${BASE_PATH }front/login" >登录</a>不能评论</p>
+		 <% } %>
+		</div>
+			
+		<%  include("/template/bbs/includes/reply_list.html"){} %>
+	</div>
+					
+	<% } %>
+			
+
+		</div><!-- panel-body -->
+	</div><!-- end panel panel-default -->
+	</div><!-- end col-md-8 -->
+	
+	<!-- 信息列表 -->
+	<div class="col-md-4">	
+	
+		<!-- 广告 -->
+		<%  include("/template/bbs/includes/advertise.html"){} %>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">相关文章<a class="more" href="${flyfox.getMenu(folder.id)}">更多</a></h3>
+		  </div>
+		 	 <ul class="list-group">
+			  	<% for(item in articles.list){ %>
+					<li class="list-group-item">
+						<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
+						<% if (strutil.length(item.title) > 18) { %>
+							${strutil.subStringTo(item.title, 0, 18)}...
+						<% 	} else { %>
+							${item.title}
+						<%  } %>
+						</a>
+					</li>
+				<% } %>
+			  </ul>
+		</div>
+		
+		<!-- 推荐文章 -->
+		<%  include("/template/bbs/includes/recommend.html"){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/template/bbs/includes/friendly.html"){} %>
+	</div>
+	</div>
+
+</div>
+</div>
+	
+<%  include("/template/bbs/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

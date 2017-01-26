@@ -1,0 +1,70 @@
+<%
+var orderType = parseInt(parameter.orderType!1);
+// 获取文章
+var articlelist = temp.articleOrder(paginator.pageNo, paginator.pageSize, session.site.siteId, orderType);
+%>
+
+<% 
+	var headContent = {
+%>
+	<% include("/template/bbs/includes/header.html"){} %>
+	
+<%
+};
+%>
+
+<%
+var bodyContent = {
+%>
+
+<%  include("/template/bbs/includes/header_menu.html"){} %>	
+
+<div id="main" style="margin:0 2%;">
+<div class="row">
+
+	<!--  文章 -->
+	<div class="col-md-8">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+				<ul class="nav nav-pills fox-nav">
+				  <li role="presentation" class="${orderType==1?'active':''}"><a href="${ctx }?orderType=1" class="fox-pills"><i class="fa fa-newspaper-o fox-color-1"></i> 默认</a></li>
+				  <li role="presentation" class="${orderType==2?'active':''}"><a href="${ctx }?orderType=2" class="fox-pills"><i class="fa fa-calendar fox-color-1"></i> 最新</a></li>
+				  <li role="presentation" class="${orderType==3?'active':''}"><a href="${ctx }?orderType=3"><i class="fa fa-thumbs-up fox-color-1"></i> 精品</a></li>
+				  <li role="presentation" class="${orderType==4?'active':''}"><a href="${ctx }?orderType=4"><i class="fa fa-commenting fox-color-1"></i> 待回复</a></li>
+				</ul>
+		  </div>
+	  
+	  <!-- 文章列表 -->
+	  <% include("/template/bbs/includes/articlelist.html",{articlelist:articlelist,defalutimg:defalutimg!''}){} %>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<!-- 用户信息 -->
+		<%include("/template/bbs/includes/userinfo.html"){} %>		
+		
+		<!-- 标签 -->
+		<% var tagPage = temp.tagsPage(1, 50, session.site.siteId); %>
+		<%  include("/template/bbs/includes/tags.html",{taglist:tagPage}){} %>
+		
+		<!-- 推荐文章 -->
+		<%  include("/template/bbs/includes/recommend.html"){} %>
+		
+		<!-- 广告 -->
+		<%  include("/template/bbs/includes/advertise.html"){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/template/bbs/includes/friendly.html"){} %>	
+	</div>
+
+</div>
+</div>
+
+<%  include("/template/bbs/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

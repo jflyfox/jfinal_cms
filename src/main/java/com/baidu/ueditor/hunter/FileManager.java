@@ -82,8 +82,10 @@ public class FileManager {
 	private String getPath ( File file ) {
 		
 		String path = file.getAbsolutePath();
-		
-		return path.replace( this.rootPath, "/" );
+		path = PathFormat.format(path);
+		path = path.replace( this.rootPath, "/" );
+		path = path.replace( "//", "/" );
+		return path;
 		
 	}
 	

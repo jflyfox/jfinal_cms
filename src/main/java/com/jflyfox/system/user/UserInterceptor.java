@@ -95,6 +95,11 @@ public class UserInterceptor implements Interceptor {
 	 */
 	protected boolean urlAuth(Controller controller, String tmpPath) {
 		List<SysMenu> list = controller.getSessionAttr("nomenu");
+		// nomenuList 应该是size等于0，而不是空
+		if (list == null) {
+			return false;
+		}
+		
 		for (SysMenu sysMenu : list) {
 			String url = sysMenu.getStr("url");
 			if (StrUtils.isEmpty(url)) {

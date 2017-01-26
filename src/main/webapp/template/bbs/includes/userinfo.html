@@ -1,0 +1,84 @@
+<style>
+<!--
+.userinfo .badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #777;
+}
+-->
+</style>
+
+<% if(isEmpty(session.session_user)){ %>
+	<div class="panel panel-default userinfo">
+		  <div class="panel-heading">
+			<h3 class="panel-title"><span class="glyphicon glyphicon-user fox-color-1" aria-hidden="true"></span> 用户信息</h3>
+		  </div>
+		  <div class="list-group">
+			<a href="${BASE_PATH }front/login.html" class="list-group-item">
+		  	请先进行 <i class="fa fa-sign-in"></i> 登陆
+		  	</a>
+		  </div>
+	</div>
+<% } else { %>
+	<div class="panel panel-default userinfo">
+		  <div class="panel-heading">
+			<h3 class="panel-title"><span class="glyphicon glyphicon-user fox-color-1" aria-hidden="true"></span> 用户信息</h3>
+		  </div>
+		  <div class="list-group">
+			<li class="list-group-item">
+				<div class="row">
+				  <div class="col-md-3">
+				  		<a href="${BASE_PATH }front/person">
+						<%
+							var user = session.session_user;
+							var userPic = user.title_url;
+							if(isEmpty(userPic)){
+								userPic = BASE_PATH + 'static/images/user/user.png';
+							} else if(!strutil.startWith(userPic , 'http')) {
+								userPic = ASE_PATH + userPic;
+							}
+						 %>
+				  	  	<img id="title_pic" alt="${user.userName }头像"  width="64" height="64" 
+							 		class="img_radius"	 src="${userPic}">
+						</a>
+				  </div>
+				  <div class="col-md-9">
+						<strong>${user.realname!''}</strong>
+						<p style="word-break: break-all;word-wrap: break-word;">${user.remark!'这个家伙太懒了，暂无说明'}</p>
+				  </div>
+				 </div>
+			</li>
+		  <a href="${BASE_PATH }front/person/newblog" class="list-group-item">
+		  	<span class="glyphicon glyphicon-send fox-color-1" aria-hidden="true"></span>
+		  	发布博文
+		  </a>
+		  <a href="${BASE_PATH }front/person/article" class="list-group-item">
+		  	<span class="glyphicon glyphicon-book fox-color-1" aria-hidden="true"></span>
+		  	<span class="badge">735</span>
+		  	我的博文
+		  </a>
+		  <a href="${BASE_PATH }front/person/articlelike" class="list-group-item">
+		  	<span class="glyphicon glyphicon-heart fox-color-1" aria-hidden="true"></span>
+		  	<span class="badge">1</span>
+		  	喜欢博文
+		  </a>
+		  <!-- 
+		  <a href="#" class="list-group-item">
+		  	<span class="glyphicon glyphicon-star fox-color-1" aria-hidden="true"></span>
+		  	<span class="badge">17</span>
+		  	关注用户
+		  </a>
+		  <a href="#" class="list-group-item">
+		  	<span class="glyphicon glyphicon-sunglasses fox-color-1" aria-hidden="true"></span>
+		  	<span class="badge">22</span>
+		  	我的粉丝
+		  </a>
+		   -->
+		  <a href="${BASE_PATH }front/person/profile" class="list-group-item">
+		  	<span class="glyphicon glyphicon-edit fox-color-1" aria-hidden="true"></span>
+		 	 编辑信息
+		  </a>
+		</div>	 
+	</div>	
+<% } %>

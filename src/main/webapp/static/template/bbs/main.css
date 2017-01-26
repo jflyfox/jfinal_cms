@@ -1,0 +1,74 @@
+
+.fox-color-1 {
+	color: #CC9933;
+}
+
+.fox-color-2 {
+	color: #FFFFCC;
+}
+
+.fox-color-3 {
+	color: #CC9933;
+}
+
+.fox-nav>li>a {
+	padding: 5px;
+}
+
+/** ************comment reply************** **/
+.media {
+	margin-top: 0px;
+}
+
+.jflyfox-comment {
+	background-color: #fafafa;
+	font-family: tahoma, helvetica, "Microsoft Yahei", 微软雅黑, arial;
+}
+
+.jflyfox-comment .comment-reply {
+	
+}
+
+.jflyfox-comment .comment-nologin {
+	font-family: arial;
+	color: #89898b;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+
+.jflyfox-comment .comment-nologin a {
+	color: #8cab4e;
+	zoom: 1;
+	text-decoration: none;
+}
+
+.jflyfox-comment .comment-reply-list {
+	background-color: #fafafa;
+	font-size: 14px;
+}
+
+.jflyfox-comment .comment-reply-list li {
+	border-bottom: 1px dotted #e6e6e6;
+	padding: 15px;
+}
+
+.jflyfox-comment .comment-reply-list li:hover {
+	background-color: #f1f1f1;
+}
+
+.jflyfox-comment .comment-reply-list a {
+	color: green;
+	text-decoration: none;
+}
+
+.jflyfox-comment .comment-reply-list .comment-time {
+	color: gray;
+}
+
+.jflyfox-comment .comment-txt {
+	padding: 5px;
+}
+
+.jflyfox-comment .comment-paging {
+	padding: 5px;
+}

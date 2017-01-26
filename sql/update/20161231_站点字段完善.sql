@@ -11,3 +11,5 @@ INSERT INTO `sys_config` VALUES ('12', 'Session站点列表', 'SITE.SESSION.SITE
 INSERT INTO `sys_config` VALUES ('13', 'Session站点', 'SITE.SESSION.SITE', 'site', null, '9', '214', '2016-12-31 16:30:38', '1', '2016-12-31 16:30:38', '1');
 
 update tb_site set site_defalut = 1 where id = 5;
+
+INSERT INTO `sys_menu` VALUES ('31', '1', '参数配置', 'config', 'system/config', '1', '1', '97', '2', '2016-12-17 23:34:13', '1');

@@ -82,12 +82,11 @@ var bodyContent = {
 				 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					  <!-- Indicators -->
 					  <ol class="carousel-indicators">
-						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+						  <% for(item in topPics){ %>
+						  	<li data-target="#carousel-example-generic" data-slide-to="${itemLP.index-1}" ${itemLP.index==1?"class=\"active\"":""}></li>
+						  <%}%>
 					  </ol>
-	
+
 					  <!-- Wrapper for slides -->
 					  <div class="carousel-inner" role="listbox">
 						<% for(item in topPics){ %>

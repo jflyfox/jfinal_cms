@@ -242,3 +242,11 @@ articlelike = {
 };
 
 
+function delblog(id) {
+	var url = jflyfox.BASE_PATH + 'front/person/delblog/'+id;
+	var title = '确认要删除该博文？';
+	Confirm(title, function() {
+		form1.action = url;
+		form1.submit();
+	});
+}

@@ -1,0 +1,93 @@
+<% 
+	var headContent = {
+%>
+	<% include("/template/bbs/includes/header.html"){} %>
+
+<script type="text/javascript">
+<!--
+	function delblog(id) {
+		var url = jflyfox.BASE_PATH + 'front/person/delblog/'+id;
+		var title = '确认要删除该博文？';
+		Confirm(title, function() {
+			form1.action = url;
+			form1.submit();
+		});
+	}
+//-->
+</script>	
+<%
+};
+
+var bodyContent = {
+%>
+<%  include("/template/bbs/includes/header_menu.html"){} %>	
+
+<div id="main" style="margin:0 2%;">
+	
+	<form name="form1" action=""></form>
+	
+	<div class="row">
+	<!-- 文章 -->
+	<div class="col-md-8">	
+		<div class="panel panel-default">
+		  <div class="panel-heading" style="padding:0px;">
+			<ol class="breadcrumb" style="margin:0px;">
+			  <li><a href="${BASE_PATH }home.html">首页</a></li>
+			  <li>我的空间</li>
+			</ol>
+		  </div>
+		 	  <% include("/template/bbs/includes/articlelist.html",{articlelist:page}){} %>
+		</div>
+
+	</div>
+	
+	<!-- 信息列表 -->
+	<div class="col-md-4">	
+		<!-- 用户信息 -->
+		<%include("/template/bbs/includes/userinfo.html"){} %>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">其他标签<a class="more" href="${BASE_PATH }front/tags/all">更多</a></h3>
+		  </div>
+		  <div class="panel-body">
+			<%  
+					if(taglist != null && taglist.~size > 0) {
+			%>
+				<ul class="q-taglist clearfix">
+					<li title="标签"><span class="q-icon"></span></li>
+				<%
+					for(tagitem in taglist){ 
+				%>
+					<li class="q-tagitem">
+					<a class="a-tagitem" href="${BASE_PATH }front/tags/${tagitem.tagname}">${tagitem.tagname}</a>
+					</li>
+				<% 
+					}
+				%>
+				</ul>
+			<%
+			} 
+			%>
+		 </div>
+		</div>
+		
+		<!-- 推荐文章 -->
+		<%  include("/template/bbs/includes/recommend.html"){} %>
+		
+		<!-- 友情链接 -->
+		<%  include("/template/bbs/includes/friendly.html"){} %>
+	</div>
+	</div>
+
+</div>
+	
+<%  include("/template/bbs/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
+

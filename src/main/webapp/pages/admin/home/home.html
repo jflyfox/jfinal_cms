@@ -148,12 +148,8 @@ var bodyContent = {
 						</td> 
 						<td>${flyfox.getUserName(item.create_id)}</td> 
 						<td>${flyfox.getUserName(item.reply_userid)}</td> 
-						<td title="${item.content}">
-						<% if (strutil.length(item.content) > 20) { %>
-							${strutil.subStringTo(item.content, 0, 20)}...
-						<%	} else {%>
-							${item.content }
-						<% } %>
+						<td title="${flyfox.showHTML(item.content, 200, '...')}">
+							${flyfox.showHTML(item.content, 30, '...')}
 						</td> 
 					</tr>
 				<% } %>

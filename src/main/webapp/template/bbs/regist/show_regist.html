@@ -1,0 +1,93 @@
+<% var headContent = { %> <%
+include("/template/bbs/includes/header.html"){} %>
+
+<script type="text/javascript" src="${BASE_PATH }template/bbs/regist/show_regist.js"></script>
+<% }; var bodyContent = { %> <%
+include("/template/bbs/includes/header_menu.html"){} %>
+
+
+<div id="main" style="margin:0 2%;">
+
+	<div class="row">
+		<div class="col-md-8">
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">用户注册</h3>
+		  </div>
+		   <div class="panel-body">
+		  
+				<form class="form-horizontal" name="form1" action="" method="post">
+						<input type="hidden" name="pre_page" value="${pre_page!'' }" />
+						
+						  <div class="form-group">
+						    <label for="email" class="col-sm-2 control-label">email</label>
+						    <div class="col-sm-10">
+						    	<input name="model.email" class="form-control" type="email" id="email" placeholder="Email">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="realname" class="col-sm-2 control-label">昵称</label>
+						    <div class="col-sm-10">
+						      <input name="model.realname" class="form-control" id="realname" placeholder="昵称">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="password" class="col-sm-2 control-label">新密码</label>
+						    <div class="col-sm-10">
+						      <input name="password" type="password"class="form-control" id="password" placeholder="新密码">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="password2" class="col-sm-2 control-label">重复密码</label>
+						    <div class="col-sm-10">
+						      <input name="password2" type="password" class="form-control" id="password2" placeholder="重复密码">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="imageCode" class="col-sm-2 control-label">验证码</label>
+						    <div class="col-sm-10">
+						      <div class="input-group">
+						      	 <input name="imageCode" type="text"  class="form-control" id="imageCode" placeholder="验证码">
+						      	 <div class="input-group-addon" style="padding:2px;">
+						      			<img id="picimageCode" align="middle" width="60" height="26"  
+						      				 style="line-height: 18px;cursor:pointer;"
+								 			 src="${BASE_PATH }front/image_code" title="更换一张验证码图片" onclick="loadPicimageCode()"/>
+							     </div>
+							    </div>
+						     
+						    </div>
+						  </div>
+						   <div class="form-group">
+							    <div class="col-sm-offset-2 col-sm-10">
+							      <input type="button" value="注 册"  class="btn btn-primary" onclick="oper_save();"/>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+								  <input type="reset" value="重 置"  class="btn btn-default" />
+							    </div>
+							</div>
+						
+						</form>
+				
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+			<!-- 推荐文章 -->
+			<%  include("/template/bbs/includes/recommend.html"){} %>
+			
+			<!-- 友情链接 -->
+		  	<%  include("/template/bbs/includes/friendly.html"){} %>
+		</div>
+		
+	</div>
+</div>
+
+<%  include("/template/bbs/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>

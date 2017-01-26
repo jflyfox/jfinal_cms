@@ -1,0 +1,55 @@
+<% var headContent = { %> <%
+include("/template/bbs/includes/header.html"){} %>
+
+<script type="text/javascript" src="${BASE_PATH }template/bbs/message/show_message.js"></script>
+<% }; var bodyContent = { %> <%
+include("/template/bbs/includes/header_menu.html"){} %>
+
+
+<div id="main" style="margin:0 2%;">
+
+	<div class="row">
+		<div class="col-md-8">
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">我的消息</h3>
+		  </div>
+		  
+		  
+		   <div class="panel-body">
+			  <div class="panel panel-default jflyfox-comment" id="article_comment">
+			  	<%  include("/template/bbs/includes/reply_list.html",{showArticleFlag:true}){} %>
+			  </div>
+				<% if(page.list == null || page.list.~size <=0) { %>
+					<div class="comment-item" style="margin-bottom: 20px;font-size: 14px;font-weight: bold;">
+					暂无消息
+					</div>
+				<% } %>
+			  
+			</div>
+		</div>
+		</div>
+		
+		<div class="col-md-4">
+			<!-- 推荐文章 -->
+			<%  include("/template/bbs/includes/recommend.html"){} %>
+			
+			<!-- 友情链接 -->
+		  	<%  include("/template/bbs/includes/friendly.html"){} %>
+		</div>
+		
+	</div>
+</div>	
+
+		
+					
+				
+<%  include("/template/bbs/includes/footer.html"){} %>
+	
+<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
+	
+<%}; %>
+
+<% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>
+<%} %>
