@@ -73,7 +73,7 @@ public class CommonController extends BaseProjectController {
 		String path = folder.getPath();
 		String urlKey = folder.getKey();
 		if (StrUtils.isNotEmpty(jumpUrl)) {
-			redirect(jumpUrl);
+			redirectAuto(jumpUrl);
 		} else if (StrUtils.isNotEmpty(path)) {
 			renderAuto(path);
 		} else {

@@ -9,11 +9,10 @@ import com.jflyfox.util.cache.CacheManager;
 
 public class ArticleLikeCache extends BaseService {
 
-	private final static String cacheName = "ArticleLikeCache";
 	/**
 	 * 目录缓存
 	 */
-	private static Cache cache = CacheManager.get(cacheName);
+	private final static String cacheName = "ArticleLikeCache";
 
 	protected List<String> init(int userId) {
 		List<TbArticleLike> listModel = TbArticleLike.dao.findByWhere(" where create_id = ? ", userId);
@@ -33,6 +32,7 @@ public class ArticleLikeCache extends BaseService {
 	 * @return
 	 */
 	public boolean isLike(int userId, int articleId) {
+		Cache cache = CacheManager.get(cacheName);
 		String key = ("articleLike_" + userId);
 		List<String> list = cache.get(key);
 		if (list == null) {
@@ -44,6 +44,7 @@ public class ArticleLikeCache extends BaseService {
 	}
 
 	public void add(int userId, int articleId) {
+		Cache cache = CacheManager.get(cacheName);
 		String key = ("articleLike_" + userId);
 		List<String> list = cache.get(key);
 		if (list == null) {
@@ -57,6 +58,7 @@ public class ArticleLikeCache extends BaseService {
 	}
 
 	public void delete(int userId, int articleId) {
+		Cache cache = CacheManager.get(cacheName);
 		String key = ("articleLike_" + userId);
 		List<String> list = cache.get(key);
 		if (list == null) {

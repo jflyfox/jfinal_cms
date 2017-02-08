@@ -78,7 +78,6 @@ public class ArticleController extends BaseProjectController {
 					+ " where article_id = ? order by create_time desc ";
 			Page<TbComment> comments = TbComment.dao.paginate(getPaginator() //
 					, "select t.*,art.title,art.create_id as article_create_id ", sql, articleId);
-				 	
 			setAttr("page", comments);
 		}
 

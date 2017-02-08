@@ -24,7 +24,7 @@ public class ApiInterceptor implements Interceptor {
 		Controller controller = ai.getController();
 		String path = ai.getActionKey();
 		String para = controller.getPara();
-
+		
 		// 开关
 		boolean flag = ConfigCache.getValueToBoolean("API.FLAG");
 		if (!flag) {

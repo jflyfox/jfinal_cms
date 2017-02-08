@@ -7,16 +7,11 @@ import com.jflyfox.jfinal.base.BaseService;
 import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.modules.admin.image.model.TbImage;
 import com.jflyfox.modules.admin.image.model.TbImageAlbum;
-import com.jflyfox.util.cache.Cache;
 import com.jflyfox.util.cache.CacheManager;
 
 public class FrontImageService extends BaseService {
 
 	private final static String cacheName = "FrontImageService";
-	/**
-	 * 目录缓存
-	 */
-	private static Cache cache = CacheManager.get(cacheName);
 
 	/**
 	 * 更新缓存,清空
@@ -24,7 +19,7 @@ public class FrontImageService extends BaseService {
 	 * 2015年4月29日 下午4:37:40 flyfox 369191470@qq.com
 	 */
 	public void clearCache() {
-		cache.clear();
+		 CacheManager.get(cacheName).clear();
 	}
 
 	/**

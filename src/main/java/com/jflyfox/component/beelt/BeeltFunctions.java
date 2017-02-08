@@ -42,13 +42,13 @@ public class BeeltFunctions extends TemplateFunctions {
 	public static String dictCode(String key) {
 		return dictCode(NumberUtils.parseInt(key));
 	}
-
+	
 	// //////////////////////////系统参数配置///////////////////////////////////////////
 
 	public static SysConfig getConfig(String key) {
 		return ConfigCache.getSysConfig(key);
 	}
-	
+
 	// //////////////////////自定义方法///////////////////////////
 	/**
 	 * 获取图片路径

@@ -28,7 +28,7 @@ public class AdminHomeController extends BaseProjectController {
 		Page<TbArticle> articlePage = TbArticle.dao.paginate(new Paginator(1, 10), "select t.*,f.name as folderName " //
 				, " from tb_article t left join tb_folder f on f.id = t.folder_id " //
 						+ " where t.status = 1 and t.type in (11,12) " // 查询状态为显示，类型是预览和正常的文章
-						+"  and f.site_id="+getSessionSite().getBackSiteId()
+						+ "  and f.site_id="+getSessionSite().getBackSiteId()
 						+ " order by t.update_time desc,t.id desc");
 		setAttr("articles", articlePage.getList());
 

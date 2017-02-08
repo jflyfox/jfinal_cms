@@ -17,14 +17,14 @@ import com.jflyfox.util.cache.CacheManager;
 public class FrontCacheService extends BaseService {
 
 	private final static String cacheName = "FrontCacheService";
-	private final static Cache cache = CacheManager.get(cacheName);
+
 	/**
 	 * 更新缓存,清空
 	 * 
 	 * 2015年4月29日 下午4:37:40 flyfox 369191470@qq.com
 	 */
 	public void clearCache() {
-		cache.clear();
+		 CacheManager.get(cacheName).clear();
 	}
 
 	/**
@@ -40,6 +40,7 @@ public class FrontCacheService extends BaseService {
 		TbArticle articleCount = new TbArticle().setId(article.getId()) //
 				.setCountView(article.getCountView()) //
 				.setCountComment(article.getCountComment());
+		Cache cache = CacheManager.get(cacheName);
 		cache.add(key, articleCount);
 		return articleCount;
 	}

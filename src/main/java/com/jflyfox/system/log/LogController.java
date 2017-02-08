@@ -16,6 +16,10 @@ public class LogController extends BaseProjectController {
 
 	private static final String path = "/pages/system/log/log_";
 
+	public void index() {
+		list();
+	}
+	
 	public void list() {
 		SysLog model = getModelByAttr(SysLog.class);
 

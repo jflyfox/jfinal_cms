@@ -37,9 +37,9 @@ public class FolderController extends BaseProjectController {
 		// 排序
 		String orderBy = getBaseForm().getOrderBy();
 		if (StrUtils.isEmpty(orderBy)) {
-			sql.append(" order by sort,id ");
+			sql.append(" order by t.sort,t.id ");
 		} else {
-			sql.append(" order by ").append(orderBy);
+			sql.append(" order by t.").append(orderBy);
 		}
 
 		Page<TbFolder> page = TbFolder.dao.paginate(getPaginator(), "select t.*,f.name as parentName ", //

@@ -11,17 +11,17 @@ import com.jflyfox.util.cache.CacheManager;
 
 public class Oauth2Service {
 
-	private final static String cacheName = "Oauth2Controller";
 	/**
-	 * 目录缓存
+	 * oauth2认证
 	 */
-	private static Cache cache = CacheManager.get(cacheName);
+	private final static String cacheName = "Oauth2Controller";
 
 	public void clearCahce() {
-		cache.clear();
+		CacheManager.get(cacheName).clear();
 	}
 
 	public OauthBaidu getBaidu(TbSite site) {
+		Cache cache = CacheManager.get(cacheName);
 		OauthBaidu oauth = cache.get("baidu_" + site.getId());
 		if (oauth == null) {
 			oauth = new OauthBaidu();
@@ -38,6 +38,7 @@ public class Oauth2Service {
 	}
 
 	public OauthSina getSina(TbSite site) {
+		Cache cache = CacheManager.get(cacheName);
 		OauthSina oauth = cache.get("sina_" + site.getId());
 		if (oauth == null) {
 			oauth = new OauthSina();
@@ -54,6 +55,7 @@ public class Oauth2Service {
 	}
 
 	public OauthQQ getQQ(TbSite site) {
+		Cache cache = CacheManager.get(cacheName);
 		OauthQQ oauth = cache.get("qq_" + site.getId());
 		if (oauth == null) {
 			oauth = new OauthQQ();

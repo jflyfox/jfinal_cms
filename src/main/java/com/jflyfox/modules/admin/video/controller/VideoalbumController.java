@@ -34,9 +34,9 @@ public class VideoalbumController extends BaseProjectController {
 		// 排序
 		String orderBy = getBaseForm().getOrderBy();
 		if (StrUtils.isEmpty(orderBy)) {
-			sql.append(" order by sort,id desc");
+			sql.append(" order by t.sort,t.id desc");
 		} else {
-			sql.append(" order by ").append(orderBy);
+			sql.append(" order by t.").append(orderBy);
 		}
 
 		Page<TbVideoAlbum> page = TbVideoAlbum.dao.paginate(getPaginator(), "select t.*,f.name as parentName ", //

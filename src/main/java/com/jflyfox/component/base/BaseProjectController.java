@@ -242,7 +242,7 @@ public abstract class BaseProjectController extends BaseController {
 		cache.remove(key + "_" + id);
 		return this;
 	}
-	
+
 	/**
 	 * 是否是管理员
 	 * 
@@ -255,5 +255,4 @@ public abstract class BaseProjectController extends BaseController {
 	public boolean isAdmin(SessionUser user){
 		return user.getInt("usertype") == 1;
 	}
-
 }

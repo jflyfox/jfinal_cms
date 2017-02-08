@@ -24,9 +24,9 @@ public abstract class BaseApiLogic implements IApiLogic {
 	private static Cache cache;
 
 	public static void init() {
+		log.info("####API Cache初始化......");
 		if (cache == null) {
 			cache = CacheManager.get(cacheName);
-			log.info("####API Cache初始化......");
 		}
 	}
 

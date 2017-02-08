@@ -129,7 +129,7 @@ public class TbFolder extends BaseProjectModel<TbFolder> {
 		return this;
 	}
 
-	public java.lang.String getMaterialType() {
+	public java.lang.Integer getMaterialType() {
 		return get(MATERIAL_TYPE);
 	}
 	

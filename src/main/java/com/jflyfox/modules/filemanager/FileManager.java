@@ -876,11 +876,11 @@ public class FileManager {
 		}
 
 		// 备份目录下面文件不需要再进行备份
-		// String srcPath = FileManagerUtils.rebulid(src.getParent());
-		// if (srcPath.startsWith(rootPath + BAKUP)) {
-		// logger.debug("file is bakup:" + src.getPath());
-		// return;
-		// }
+//		String srcPath = FileManagerUtils.rebulid(src.getParent());
+//		if (srcPath.startsWith(rootPath + BAKUP)) {
+//			logger.debug("file is bakup:" + src.getPath());
+//			return;
+//		}
 
 		targetPath = rootPath + BAKUP //
 				+ targetPath.substring(targetPath.indexOf(this.fileRoot) + this.fileRoot.length());
@@ -933,7 +933,7 @@ public class FileManager {
 		if (StrUtils.isEmpty(contextPath)) {
 			return path;
 		}
-
+		
 		if (path.startsWith(contextPath)) {
 			path = path.replaceFirst(contextPath, "");
 		}

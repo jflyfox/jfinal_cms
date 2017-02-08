@@ -22,11 +22,10 @@ public class FolderService extends BaseService {
 
 	private final static Log log = Log.getLog(SysLog.class);
 
-	private final static String cacheName = "FolderService";
 	/**
 	 * 目录缓存
 	 */
-	private static Cache cache = CacheManager.get(cacheName);
+	private final static String cacheName = "FolderService";
 
 	/**
 	 * 更新缓存
@@ -34,17 +33,20 @@ public class FolderService extends BaseService {
 	 * 2015年4月29日 下午4:37:40 flyfox 369191470@qq.com
 	 */
 	public void updateCache() {
-		cache.clear();
+		CacheManager.get(cacheName).clear();
 
 		// 初始化urlKey
 		initMenuKey();
 	}
 
 	private final static String urlkeyCacheName = "JFlyFoxUtils";
-	private static Cache urlkeyCache = CacheManager.get(urlkeyCacheName);
+	private static Cache urlkeyCache ;
 
-    public static void initMenuKey() {
-    	log.info("####目录Key初始化......");
+	public static void initMenuKey() {
+		log.info("####目录Key初始化......");
+		if (urlkeyCache == null) {
+			urlkeyCache = CacheManager.get(urlkeyCacheName);
+		}
 		urlkeyCache.clear();
 		List<TbFolder> folders = TbFolder.dao.findByWhere(" where status = 1 order by sort");
 		for (TbFolder tbFolder : folders) {

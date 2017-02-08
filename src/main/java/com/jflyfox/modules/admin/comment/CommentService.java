@@ -14,11 +14,10 @@ import com.jflyfox.util.cache.CacheManager;
 
 public class CommentService extends BaseService {
 
-	private final static String cacheName = "CommentService";
 	/**
 	 * 未读评论缓存
 	 */
-	private static Cache cache = CacheManager.get(cacheName);
+	private final static String cacheName = "CommentService";
 
 	/**
 	 * 更新缓存,清空
@@ -26,7 +25,7 @@ public class CommentService extends BaseService {
 	 * 2015年4月29日 下午4:37:40 flyfox 369191470@qq.com
 	 */
 	public void clearCache() {
-		cache.clear();
+		CacheManager.get(cacheName).clear();
 	}
 
 	/**
@@ -40,8 +39,8 @@ public class CommentService extends BaseService {
 	public void saveComment(SysUser user, TbComment comment) {
 		// 评论
 		// 删除标签
-		// String content = HtmlUtils.delHTMLTag(comment.getStr("content"));
-		// content = HtmlUtils.changeTag(content);
+//		String content = HtmlUtils.delHTMLTag(comment.getStr("content"));
+//		content = HtmlUtils.changeTag(content);
 		String content = JFlyFoxUtils.delScriptTag(comment.getStr("content"));
 
 		comment.put("content", content);
@@ -166,6 +165,7 @@ public class CommentService extends BaseService {
 	 * @return
 	 */
 	public Object getAndUpdateCommentUnreadCount(int userid, boolean updateCache) {
+		Cache cache = CacheManager.get(cacheName);
 		Object cnt = cache.get(userid + "");
 		if (cnt == null || updateCache) {
 			String sql = "select count(*) AS cnt from tb_comment t " //

@@ -62,7 +62,7 @@ jfinal cms
  2. [beetl](http://ibeetl.com/community/)
  3. [oschina](http://www.oschina.net/)
 
-# support
+support
 ------------------------
 
 项目的发展，离不开大家得支持~！~

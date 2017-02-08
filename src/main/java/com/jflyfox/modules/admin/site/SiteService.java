@@ -4,19 +4,17 @@ import java.util.List;
 
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.BaseService;
-import com.jflyfox.util.cache.Cache;
 import com.jflyfox.util.cache.CacheManager;
 
 public class SiteService extends BaseService {
 
-	private final static String cacheName = "SiteService";
 	/**
 	 * 缓存
 	 */
-	private static Cache cache = CacheManager.get(cacheName);
+	private final static String cacheName = "SiteService";
 
 	public void clearCache() {
-		cache.clear();
+		CacheManager.get(cacheName).clear();
 	}
 
 	public int getDefaultId() {

@@ -1,7 +1,7 @@
 package com.jflyfox.component.config;
 
 import org.beetl.core.GroupTemplate;
-import org.beetl.ext.jfinal.BeetlRenderFactory;
+import org.beetl.ext.jfinal3.JFinal3BeetlRenderFactory;
 
 import com.beetl.functions.BeetlStrUtils;
 import com.jfinal.config.Handlers;
@@ -27,9 +27,15 @@ public class BaseConfig extends JflyfoxConfig {
 
 	public void configConstant(com.jfinal.config.Constants me) {
 		super.configConstant(me);
-		me.setMainRenderFactory(new BeetlRenderFactory());
+		// 开启日志
+		// SqlReporter.setLog(true);
+
+		JFinal3BeetlRenderFactory rf = new JFinal3BeetlRenderFactory();
+		rf.config();
+		me.setRenderFactory(rf);
+
 		// 获取GroupTemplate ,可以设置共享变量等操作
-		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate;
+		GroupTemplate groupTemplate = rf.groupTemplate;
 		groupTemplate.registerFunctionPackage("strutil", BeetlStrUtils.class);
 		groupTemplate.registerFunctionPackage("flyfox", BeeltFunctions.class);
 		groupTemplate.registerFunctionPackage("temp", TemplateService.class);
@@ -42,7 +48,8 @@ public class BaseConfig extends JflyfoxConfig {
 	public void configHandler(Handlers me) {
 		// Beelt
 		// me.add(new BeeltHandler());
-		
+		// me.add(new ImageHandler());
+
 		me.add(new HtmlHandler());
 		super.configHandler(me);
 	}
@@ -72,22 +79,23 @@ public class BaseConfig extends JflyfoxConfig {
 	 */
 	@Override
 	public void afterJFinalStart() {
-		// super.afterJFinalStart();
-		
+		super.afterJFinalStart();
+
 		JFlyFoxCache.init();
 		System.out.println("##################################");
 		System.out.println("############系统启动完成##########");
 		System.out.println("##################################");
 	}
-	
+
 	@Override
 	public void beforeJFinalStop() {
 		super.beforeJFinalStop();
+
 		// 关闭模板
-		BeetlRenderFactory.groupTemplate.close();
+		// BeetlRenderFactory.groupTemplate.close();
+
 		System.out.println("##################################");
 		System.out.println("############系统停止完成##########");
 		System.out.println("##################################");
 	}
-
 }

@@ -16,10 +16,15 @@ public class JFlyFoxCache {
 
 	private final static Log log = Log.getLog(JFlyFoxCache.class);
 	private final static String cacheName = "JFlyFoxCache";
-	private static Cache cache = CacheManager.get(cacheName);
+	private static Cache cache;
 
 	public static void init() {
 		log.info("####缓存初始化开始......");
+		
+		if (cache == null) {
+			cache = CacheManager.get(cacheName);
+		}
+		
 		// 系统常量
 		JFlyFoxCache.updateCache();
 		// 数据字典

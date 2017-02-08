@@ -18,10 +18,13 @@ public class FriendlylinkCache extends BaseService {
 
 	private final static Log log = Log.getLog(FriendlylinkCache.class);
 	private final static String cacheName = "FriendlylinkCache";
-	private static Cache cache = CacheManager.get(cacheName);
+	private static Cache cache;
 
 	public static void init() {
 		log.info("####FriendlylinkCache初始化......");
+		if (cache == null) {
+			cache = CacheManager.get(cacheName);
+		}
 		update();
 	}
 
