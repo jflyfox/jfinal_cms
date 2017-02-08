@@ -4,7 +4,7 @@
 	<groupId>com.jflyfox</groupId>
 	<artifactId>jfinal_cms</artifactId>
 	<packaging>war</packaging>
-	<version>4.2.0</version>
+	<version>4.3.0</version>
 
 	<properties>
 		<!-- 文件拷贝时的编码 -->
@@ -200,7 +200,7 @@
 				<configuration>
 					<port>80</port>
 					<path>/${project.artifactId}</path>
-                    <!-- <warSourceDirectory>${basedir}/target/${artifactId}</warSourceDirectory> -->
+                    <warSourceDirectory>${basedir}/target/${artifactId}</warSourceDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
