@@ -75,7 +75,7 @@ public class ArticleController extends BaseProjectController {
 			// 评论
 			String sql = " from tb_comment t" //
 					+ " left join tb_article art on art.id = t.article_id " //
-					+ " where article_id = ? order by create_time desc ";
+					+ " where article_id = ? order by t.create_time desc ";
 			Page<TbComment> comments = TbComment.dao.paginate(getPaginator() //
 					, "select t.*,art.title,art.create_id as article_create_id ", sql, articleId);
 			setAttr("page", comments);
