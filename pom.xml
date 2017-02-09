@@ -138,9 +138,16 @@
 		</dependency>
 	</dependencies>
 
-
+	<!-- 使用aliyun maven -->
+	<repositories>
+	  <repository>
+	    <id>aliyun</id>
+	    <name>aliyun</name>
+	    <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+	  </repository>
+	</repositories>
+  
 	<build>
-
 		<!-- 打包目录 -->
 		<directory>target</directory>
 		<!-- 打包名称 -->
