@@ -21,6 +21,7 @@
 	media="all">
 
 <script type="text/javascript" src="static/oauth2/oauth2.js"></script>
+<script type="text/javascript" src="resources/js/encrypt/md5.js"></script>
 
 <script type="text/javascript">
 	function login() {
@@ -44,6 +45,8 @@
 			alert('验证码输入错误！');
 			return;
 		}
+		
+		$('[name="password"]').val(hex_md5(pwd));
 		
 		form1.action = "admin/login";
 		form1.submit();

@@ -13,6 +13,7 @@ import com.jflyfox.system.menu.SysMenu;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.util.Config;
 import com.jflyfox.util.StrUtils;
+import com.jflyfox.util.encrypt.Md5Utils;
 
 /**
  * adminController
@@ -62,16 +63,35 @@ public class AdminController extends BaseProjectController {
 			render(loginPage);
 			return;
 		}
-		String encryptPassword = JFlyFoxUtils.passwordEncrypt(password); // 加密
-		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? and password = ? " //
+		// String encryptPassword = JFlyFoxUtils.passwordEncrypt(password); // 加密
+		// 前台md5加密
+		String encryptPassword = password;
+				
+		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? " //
 				+ " and usertype in ( " + JFlyFoxUtils.USER_TYPE_ADMIN + "," + JFlyFoxUtils.USER_TYPE_NORMAL + ")",
-				username, encryptPassword);
+				username);
 		if (user == null || user.getInt("userid") <= 0) {
 			setAttr("msg", "认证失败，请您重新输入。");
 			render(loginPage);
 			return;
 		} else {
-			setSessionUser(user);
+			try {
+				String userPassword = user.get("password");
+				String decryptPassword = JFlyFoxUtils.passwordDecrypt(userPassword);
+				String md5Password = new Md5Utils().getMD5(decryptPassword).toLowerCase();
+				if (md5Password.equals(encryptPassword)) {
+					setSessionUser(user);
+				} else {
+					setAttr("msg", "认证错误，请您重新输入。");
+					render(loginPage);
+					return;
+				}
+			} catch (Exception e) {
+				log.error("认证异常", e);
+				setAttr("msg", "认证异常，请您重新输入。");
+				render(loginPage);
+				return;
+			}
 		}
 
 		// 第一个页面跳转
