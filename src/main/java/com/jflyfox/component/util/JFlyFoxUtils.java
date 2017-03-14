@@ -53,6 +53,10 @@ public class JFlyFoxUtils {
 	 */
 	public static final int USER_TYPE_THIRD = 4;
 	/**
+	 * API用户
+	 */
+	public static final int USER_TYPE_API = 5;
+	/**
 	 * 其他用户
 	 */
 	public static final int USER_TYPE_OTHER = 9;

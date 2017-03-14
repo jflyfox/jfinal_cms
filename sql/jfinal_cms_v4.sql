@@ -282,7 +282,7 @@ CREATE TABLE `sys_user` (
   `password` varchar(32) NOT NULL COMMENT '密码',
   `realname` varchar(32) DEFAULT NULL COMMENT '真实姓名',
   `departid` int(11) DEFAULT '0' COMMENT '部门/11111/dict',
-  `usertype` int(11) DEFAULT '2' COMMENT '类型//select/1,管理员,2,普通用户,3,前台用户,4,第三方用户',
+  `usertype` int(11) DEFAULT '2' COMMENT '类型//select/1,管理员,2,普通用户,3,前台用户,4,第三方用户,5,API用户',
   `state` int(11) DEFAULT '10' COMMENT '状态',
   `thirdid` varchar(200) DEFAULT NULL COMMENT '第三方ID',
   `endtime` varchar(32) DEFAULT NULL COMMENT '结束时间',

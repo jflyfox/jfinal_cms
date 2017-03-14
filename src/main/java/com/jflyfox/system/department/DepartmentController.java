@@ -56,7 +56,7 @@ public class DepartmentController extends BaseProjectController {
 	public void add() {
 		// 获取页面信息,设置目录传入
 		SysDepartment model = SysDepartment.dao.findById(getParaToInt());
-		setAttr("selectParentDepartments", selectFolder(model == null ? 0 : model.getId(), 0));
+		setAttr("selectParentDepartments", new DepartmentSvc().selectDepart(model == null ? 0 : model.getId()));
 				
 		render(path + "add.html");
 	}
@@ -89,7 +89,7 @@ public class DepartmentController extends BaseProjectController {
 		setAttr("model", model);
 		
 		// 下拉框
-		setAttr("selectParentDepartments", selectFolder(model.getParentId(), model.getId()));
+		setAttr("selectParentDepartments", new DepartmentSvc().selectDepart(model.getParentId(), model.getId()));
 				
 		render(path + "edit.html");
 	}
@@ -114,32 +114,4 @@ public class DepartmentController extends BaseProjectController {
 		renderMessage("保存成功");
 	}
 
-	/**
-	 * 目录复选框
-	 * 
-	 * 2015年1月28日 下午5:28:40 flyfox 369191470@qq.com
-	 * 
-	 * @return
-	 */
-	public String selectFolder(Integer selected, Integer selfId) {
-		String where = " where 1 = 1 ";
-		if (selfId != null && selfId > 0) {
-			where += "and id !=" + selfId;
-		}
-		List<SysDepartment> list = SysDepartment.dao.find(" select id,name from sys_department " //
-				+ where + " order by sort,create_time desc ");
-		StringBuffer sb = new StringBuffer("");
-		if (list != null && list.size() > 0) {
-			for (SysDepartment department : list) {
-				sb.append("<option value=\"");
-				sb.append(department.getInt("id"));
-				sb.append("\" ");
-				sb.append((selected != null && department.getInt("id").intValue() == selected) ? "selected" : "");
-				sb.append(">");
-				sb.append(department.getStr("name"));
-				sb.append("</option>");
-			}
-		}
-		return sb.toString();
-	}
 }

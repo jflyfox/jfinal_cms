@@ -83,6 +83,7 @@ var bodyContent = {
 					<option value="2" ${attr.usertype==2?"selected":"" }>普通用户</option>
 					<option value="3" ${attr.usertype==3?"selected":"" }>前台用户</option>
 					<option value="4" ${attr.usertype==4?"selected":"" }>第三方用户</option>
+					<option value="5" ${attr.usertype==5?"selected":"" }>API用户</option>
 					<option value="9" ${attr.usertype==9?"selected":"" }>其他用户</option>
 				</select>
 				
@@ -143,6 +144,9 @@ var bodyContent = {
 					<%	} %>
 					<% if(item.usertype==4) { %>
 					第三方用户
+					<%	} %>
+					<% if(item.usertype==5) { %>
+					API用户
 					<%	} %>
 					<% if(item.usertype==9) { %>
 					其他用户

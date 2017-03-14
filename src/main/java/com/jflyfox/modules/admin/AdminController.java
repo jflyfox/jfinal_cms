@@ -63,10 +63,10 @@ public class AdminController extends BaseProjectController {
 			render(loginPage);
 			return;
 		}
-		// String encryptPassword = JFlyFoxUtils.passwordEncrypt(password); // 加密
+		// String encryptPassword = JFlyFoxUtils.passwordEncrypt(password); //
 		// 前台md5加密
 		String encryptPassword = password;
-				
+
 		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? " //
 				+ " and usertype in ( " + JFlyFoxUtils.USER_TYPE_ADMIN + "," + JFlyFoxUtils.USER_TYPE_NORMAL + ")",
 				username);
@@ -74,25 +74,33 @@ public class AdminController extends BaseProjectController {
 			setAttr("msg", "认证失败，请您重新输入。");
 			render(loginPage);
 			return;
-		} else {
-			try {
-				String userPassword = user.get("password");
-				String decryptPassword = JFlyFoxUtils.passwordDecrypt(userPassword);
-				String md5Password = new Md5Utils().getMD5(decryptPassword).toLowerCase();
-				if (md5Password.equals(encryptPassword)) {
-					setSessionUser(user);
-				} else {
-					setAttr("msg", "认证错误，请您重新输入。");
-					render(loginPage);
-					return;
-				}
-			} catch (Exception e) {
-				log.error("认证异常", e);
-				setAttr("msg", "认证异常，请您重新输入。");
-				render(loginPage);
-				return;
-			}
 		}
+		
+		String md5Password = "";
+		try {
+			String userPassword = user.get("password");
+			String decryptPassword = JFlyFoxUtils.passwordDecrypt(userPassword);
+			md5Password = new Md5Utils().getMD5(decryptPassword).toLowerCase();
+		} catch (Exception e) {
+			log.error("认证异常", e);
+			setAttr("msg", "认证异常，请您重新输入。");
+			render(loginPage);
+			return;
+		}
+		
+		if (!md5Password.equals(encryptPassword)) {
+			setAttr("msg", "认证错误，请您重新输入。");
+			render(loginPage);
+			return;
+		}
+
+		if (!(user.getInt("usertype") == 1 || user.getInt("usertype") == 2)) {
+			setAttr("msg", "您没有登录权限，请您重新输入。");
+			render(loginPage);
+			return;
+		}
+		
+		setSessionUser(user);
 
 		// 第一个页面跳转
 		String tmpMainPage = setFirstPage();
@@ -102,7 +110,7 @@ public class AdminController extends BaseProjectController {
 			render(loginPage);
 			return;
 		}
-		
+
 		// 添加日志
 		user.put("update_id", user.getUserid());
 		user.put("update_time", getNow());
