@@ -7,15 +7,34 @@ import com.jflyfox.api.constant.ApiConstant;
 
 public class ApiResp {
 
+	private String apiNo = "";
 	private int code = ApiConstant.CODE_SUCCESS;
 	private String msg = ApiConstant.MSG_SUCCESS;
 	private Map<String, Map<String, Object>> data = new HashMap<String, Map<String, Object>>();
 
-	public ApiResp() {
+	public ApiResp(ApiForm from) {
+		setFrom(from);
 	}
 
-	public ApiResp(Map<String, Object> map) {
+	public ApiResp(ApiForm from, Map<String, Object> map) {
+		setFrom(from);
 		data.put("data", map);
+	}
+
+	public ApiResp setFrom(ApiForm from) {
+		if (from != null) {
+			this.apiNo = from.getApiNo();
+		}
+		return this;
+	}
+
+	public String getApiNo() {
+		return apiNo;
+	}
+
+	public ApiResp setApiNo(String apiNo) {
+		this.apiNo = apiNo;
+		return this;
 	}
 
 	public int getCode() {
@@ -57,8 +76,10 @@ public class ApiResp {
 
 	@Override
 	public String toString() {
-		return "[code=" + this.code + "]" //
+		return "[apiNo=" + this.apiNo + "]" //
+				+ "[code=" + this.code + "]" //
 				+ "[msg=" + this.msg + "]" //
 				+ "[data=" + this.data + "]";
 	}
+
 }

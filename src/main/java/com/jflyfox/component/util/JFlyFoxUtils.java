@@ -37,6 +37,11 @@ public class JFlyFoxUtils {
 	public static final int DEPART_THIRD_ID = 3;
 	
 	/**
+	 * 正常
+	 */
+	public static final int USER_STATE_NORMAL = 10;
+	
+	/**
 	 * 管理员
 	 */
 	public static final int USER_TYPE_ADMIN = 1;

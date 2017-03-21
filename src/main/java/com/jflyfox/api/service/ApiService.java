@@ -7,7 +7,7 @@ import java.util.List;
 import com.jfinal.log.Log;
 import com.jflyfox.api.constant.ApiConstant;
 import com.jflyfox.api.form.ApiResp;
-import com.jflyfox.api.form.BaseApiForm;
+import com.jflyfox.api.form.ApiForm;
 import com.jflyfox.api.util.ApiUtils;
 import com.jflyfox.jfinal.base.BaseService;
 import com.jflyfox.system.config.ConfigCache;
@@ -32,15 +32,15 @@ public class ApiService extends BaseService {
 		Method[] methods = IApiLogic.class.getMethods();
 		for (int i = 0; i < methods.length; i++) {
 			Class<?>[] params = methods[i].getParameterTypes();
-			if (params.length == 1 && (params[0] == BaseApiForm.class)) {
+			if (params.length == 1 && (params[0] == ApiForm.class)) {
 				methodList.add(methods[i].getName());
 			}
 		}
 		return methodList;
 	}
 
-	public IApiLogic getApiLogic(BaseApiForm form) {
-		IApiLogic apiLogic = ApiUtils.getApiLogic(form.getVersion());
+	public IApiLogic getApiLogic(ApiForm form) {
+		IApiLogic apiLogic = ApiUtils.getApiLogic(form);
 		return apiLogic;
 	}
 
@@ -52,11 +52,11 @@ public class ApiService extends BaseService {
 	 * @param form
 	 * @return
 	 */
-	public ApiResp action(BaseApiForm form) {
+	public ApiResp action(ApiForm form) {
 		try {
-			// 
+			//
 			if (methodList.contains(form.getMethod())) {
-				
+
 				// 登陆验证标识
 				boolean validFlag = ConfigCache.getValueToBoolean("API.LOGIN.VALID");
 				if (validFlag) {
@@ -69,14 +69,14 @@ public class ApiService extends BaseService {
 
 				// 调用接口方法，利用反射更简洁
 				ApiResp apiResp = (ApiResp) ReflectionUtils.invokeMethod(getApiLogic(form), form.getMethod(), //
-						new Class<?>[] { BaseApiForm.class }, new Object[] { form });
+						new Class<?>[] { ApiForm.class }, new Object[] { form });
 				return apiResp;
 			}
-			
-			return ApiUtils.getMethodError();
+
+			return ApiUtils.getMethodError(form);
 		} catch (Exception e) {
 			log.error("action handler error", e);
-			return ApiUtils.getMethodHandlerError();
+			return ApiUtils.getMethodHandlerError(form);
 		}
 	}
 

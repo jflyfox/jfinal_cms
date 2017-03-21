@@ -1,7 +1,7 @@
 package com.jflyfox.api.service;
 
 import com.jflyfox.api.form.ApiResp;
-import com.jflyfox.api.form.BaseApiForm;
+import com.jflyfox.api.form.ApiForm;
 
 /**
  * API通用接口
@@ -18,7 +18,7 @@ public interface IApiCommon {
 	 * @param form
 	 * @return
 	 */
-	public ApiResp login(BaseApiForm form);
+	public ApiResp login(ApiForm form);
 
 	/**
 	 * 登陆后，验证接口
@@ -28,7 +28,7 @@ public interface IApiCommon {
 	 * @param form
 	 * @return
 	 */
-	public ApiResp valid(BaseApiForm form);
+	public ApiResp valid(ApiForm form);
 
 	/**
 	 * 登出接口
@@ -38,7 +38,7 @@ public interface IApiCommon {
 	 * @param form
 	 * @return
 	 */
-	public ApiResp logout(BaseApiForm form);
+	public ApiResp logout(ApiForm form);
 
 	/**
 	 * 获取配置信息
@@ -48,6 +48,6 @@ public interface IApiCommon {
 	 * @param form
 	 * @return
 	 */
-	public ApiResp config(BaseApiForm form);
+	public ApiResp config(ApiForm form);
 
 }

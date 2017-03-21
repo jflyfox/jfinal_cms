@@ -1,15 +1,17 @@
 package com.jflyfox.api.service.impl;
 
-import com.jfinal.log.Log;
+import java.util.TreeMap;
+
 import com.jflyfox.api.constant.ApiConstant;
+import com.jflyfox.api.form.ApiForm;
 import com.jflyfox.api.form.ApiResp;
-import com.jflyfox.api.form.BaseApiForm;
+import com.jflyfox.api.service.ApiCache;
 import com.jflyfox.api.service.IApiLogic;
+import com.jflyfox.api.util.ApiUtils;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.util.StrUtils;
-import com.jflyfox.util.cache.Cache;
-import com.jflyfox.util.cache.CacheManager;
+import com.jflyfox.util.encrypt.Md5Utils;
 import com.jflyfox.util.extend.RandomStrUtils;
 
 /**
@@ -19,89 +21,79 @@ import com.jflyfox.util.extend.RandomStrUtils;
  */
 public abstract class BaseApiLogic implements IApiLogic {
 
-	private final static Log log = Log.getLog(BaseApiLogic.class);
-	private final static String cacheName = "BaseApiLogic";
-	private static Cache cache;
-
-	public static void init() {
-		log.info("####API Cache初始化......");
-		if (cache == null) {
-			cache = CacheManager.get(cacheName);
-		}
-	}
-
-	public Object getCache(String key) {
-		if (StrUtils.isEmpty(key)) {
-			return null;
-		}
-
-		init();
-		return cache.get(key);
-	}
-
-	public Object removeCache(String key) {
-		if (StrUtils.isEmpty(key)) {
-			return null;
-		}
-
-		init();
-		return cache.remove(key);
-	}
-
-	public Cache addCache(String key, Object value) {
-		if (StrUtils.isEmpty(key)) {
-			return null;
-		}
-
-		init();
-		cache.add(key, value);
-		return cache;
-	}
-
 	@Override
-	public ApiResp login(BaseApiForm form) {
+	public ApiResp login(ApiForm form) {
 		// 初始化数据字典Map
 		String username = form.get("username");
 		String password = form.get("password");
+		try {
+			if (StrUtils.isEmpty(username)) {
+				return new ApiResp(form).setCode(-1).setMsg("用户名不能为空");
+			} else if (StrUtils.isEmpty(password)) {
+				return new ApiResp(form).setCode(-2).setMsg("密码不能为空");
+			}
+			String sql = " where username = ? and usertype = " + JFlyFoxUtils.USER_TYPE_API;
+			SysUser user = SysUser.dao.findFirstByWhere(sql, username);
 
-		if (StrUtils.isEmpty(username)) {
-			return new ApiResp().setCode(-1).setMsg("用户名不能为空");
-		} else if (StrUtils.isEmpty(password)) {
-			return new ApiResp().setCode(-2).setMsg("密码不能为空");
+			if (user == null || user.getInt("userid") <= 0) {
+				return new ApiResp(form).setCode(-3).setMsg("认证失败");
+			}
+
+			if (!(user.getInt("usertype") == JFlyFoxUtils.USER_TYPE_API)) {
+				return new ApiResp(form).setCode(-4).setMsg("您没有登录权限");
+			}
+
+			if (!(user.getInt("state") == JFlyFoxUtils.USER_STATE_NORMAL)) {
+				return new ApiResp(form).setCode(-5).setMsg("您的帐号没有API权限");
+			}
+
+			String encryptPassword = password; // 加密
+			String md5Password = "";
+			String userPassword = user.get("password");
+			md5Password = new Md5Utils().getMD5(userPassword).toLowerCase();
+
+			if (!md5Password.equals(encryptPassword)) {
+				return new ApiResp(form).setCode(-6).setMsg("认证错误");
+			}
+		} catch (Exception e) {
+			return new ApiResp(form).setCode(-99).setMsg("认证异常");
 		}
-		String encryptPassword = JFlyFoxUtils.passwordEncrypt(password); // 加密
-		SysUser user = SysUser.dao.findFirstByWhere(" where username = ? and password = ? ", username, encryptPassword);
-		if (user == null || user.getInt("userid") <= 0) {
-			return new ApiResp().setCode(-3).setMsg("认证失败，请您重新输入。");
-		}
+		
 		// 验证成功加入缓存，返回key
-		String key = RandomStrUtils.randomAlphabetic(4);
-		addCache(username, key);
+		String key = RandomStrUtils.randomAlphabetic(6);
+		ApiCache.addCache(username, key);
 
-		return new ApiResp().addData("key", key);
+		return new ApiResp(form).addData("key", key);
 	}
 
 	@Override
-	public ApiResp valid(BaseApiForm form) {
+	public ApiResp valid(ApiForm form) {
 		// 不需要验证的方法
 		if (notValid(form)) {
-			return new ApiResp();
+			return new ApiResp(form);
 		}
 
 		String checkSum = form.getCheckSum();
 		String apiUser = form.getApiUser();
 
 		if (StrUtils.isEmpty(apiUser)) {
-			return new ApiResp().setCode(ApiConstant.CODE_LOGIN_VALID_ERROR).setMsg(ApiConstant.MSG_LOGIN_VALID_ERROR);
+			return new ApiResp(form).setCode(ApiConstant.CODE_LOGIN_VALID_ERROR).setMsg(ApiConstant.MSG_LOGIN_VALID_ERROR);
 		}
 
-		Object value = getCache(apiUser);
-		if (value != null && value.toString().equals(checkSum)) {
-			return new ApiResp();
+		Object value = ApiCache.getCache(apiUser);
+		if (value == null) {
+			return new ApiResp(form).setCode(ApiConstant.CODE_LOGIN_VALID_ERROR).setMsg(ApiConstant.MSG_LOGIN_VALID_ERROR);
 		}
-		return new ApiResp().setCode(ApiConstant.CODE_LOGIN_VALID_ERROR).setMsg(ApiConstant.MSG_LOGIN_VALID_ERROR);
+		
+		TreeMap<String, String> tree = form.getTreeMap();
+		String serverSign = ApiUtils.getSign(tree, String.valueOf(value));
+		if (!serverSign.equals(checkSum)) {
+			return new ApiResp(form).setCode(ApiConstant.CODE_CHECKSUM_VALID_ERROR).setMsg(ApiConstant.MSG_CHECKSUM_VALID_ERROR);
+		}
+		
+		return new ApiResp(form);
 	}
-
+	
 	/**
 	 * 不需要验证的方法
 	 * 
@@ -110,12 +102,12 @@ public abstract class BaseApiLogic implements IApiLogic {
 	 * @param form
 	 * @return
 	 */
-	protected boolean notValid(BaseApiForm form) {
+	protected boolean notValid(ApiForm form) {
 		return form.getMethod().equals("login");
 	}
 
 	@Override
-	public ApiResp logout(BaseApiForm form) {
+	public ApiResp logout(ApiForm form) {
 		String apiUser = form.getApiUser();
 		// 如果验证失败，直接返回错误
 		ApiResp validResp = valid(form);
@@ -123,12 +115,12 @@ public abstract class BaseApiLogic implements IApiLogic {
 			return validResp;
 		}
 
-		removeCache(apiUser);
-		return new ApiResp().addData("r", "ok");
+		ApiCache.removeCache(apiUser);
+		return new ApiResp(form).addData("r", "ok");
 	}
 
 	@Override
-	public ApiResp config(BaseApiForm form) {
+	public ApiResp config(ApiForm form) {
 		return null;
 	}
 

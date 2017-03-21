@@ -9,6 +9,7 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log;
+import com.jflyfox.api.form.ApiForm;
 import com.jflyfox.api.util.ApiUtils;
 import com.jflyfox.system.config.ConfigCache;
 import com.jflyfox.util.IpUtils;
@@ -25,10 +26,13 @@ public class ApiInterceptor implements Interceptor {
 		String path = ai.getActionKey();
 		String para = controller.getPara();
 		
+		// 获取传递参数
+		ApiForm form = controller.getBean(ApiForm.class, null);
+		
 		// 开关
 		boolean flag = ConfigCache.getValueToBoolean("API.FLAG");
 		if (!flag) {
-			controller.renderJson(ApiUtils.getServerMaintain());
+			controller.renderJson(ApiUtils.getServerMaintain(form));
 			return;
 		}
 
@@ -39,7 +43,7 @@ public class ApiInterceptor implements Interceptor {
 			List<String> ipList = Arrays.asList(blackIps.split(","));
 			// 如果黑名单包含该IP返回错误信息
 			if (ipList.contains(ip)) {
-				controller.renderJson(ApiUtils.getIpBlackResp());
+				controller.renderJson(ApiUtils.getIpBlackResp(form));
 				return;
 			}
 		} else {
@@ -47,16 +51,16 @@ public class ApiInterceptor implements Interceptor {
 		}
 
 		// 版本验证
-		String version = controller.getPara("version");
+		String version = form.getVersion();
 		String versions = ConfigCache.getValue("API.VERSIONS");
 		if (StrUtils.isEmpty(version)) {
-			controller.renderJson(ApiUtils.getVersionErrorResp());
+			controller.renderJson(ApiUtils.getVersionErrorResp(form));
 			return;
 		} else if (!StrUtils.isEmpty(versions)) {
 			List<String> versionList = Arrays.asList(versions.split(","));
 			// 如果不支持该版本返回错误信息
 			if (!versionList.contains(version)) {
-				controller.renderJson(ApiUtils.getVersionErrorResp());
+				controller.renderJson(ApiUtils.getVersionErrorResp(form));
 				return;
 			}
 		}
@@ -66,6 +70,7 @@ public class ApiInterceptor implements Interceptor {
 		// 调试日志
 		if (ApiUtils.DEBUG) {
 			log.info("API DEBUG INTERCEPTOR \n[path=" + path + "/" + para + "]" //
+					+ "[from:" + form.toString() + "]" //
 					+ "\n[time=" + (System.currentTimeMillis() - start) + "ms]");
 		}
 	}
@@ -83,4 +88,5 @@ public class ApiInterceptor implements Interceptor {
 		}
 		return ip;
 	}
+	
 }

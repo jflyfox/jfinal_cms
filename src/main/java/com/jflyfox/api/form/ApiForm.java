@@ -1,26 +1,34 @@
 package com.jflyfox.api.form;
 
+import java.io.UnsupportedEncodingException;
+import java.util.TreeMap;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.log.Log;
+import com.jflyfox.api.util.ApiUtils;
 import com.jflyfox.jfinal.base.Paginator;
+import com.jflyfox.system.config.ConfigCache;
 import com.jflyfox.util.NumberUtils;
+import com.jflyfox.util.StrUtils;
 
 /**
  * api 基础form
  * 
  * 2016年9月29日 上午10:29:27 flyfox 369191470@qq.com
  */
-public class BaseApiForm {
+public class ApiForm {
 
-	private final static Log log = Log.getLog(BaseApiForm.class);
+	private final static Log log = Log.getLog(ApiForm.class);
 
+	private String apiNo; // 接口码
 	private Integer pageNo; // 页数
 	private Integer pageSize; // 页码
 	private String method; // 方法名
 	private String version; // 版本
 	private String apiUser; // 调用用户
+	private String time; // 时间戳
 	private String checkSum; // 校验和
 	private String p; // 参数
 
@@ -38,6 +46,36 @@ public class BaseApiForm {
 		if (this.pageSize != null && this.pageSize.intValue() > 0)
 			paginator.setPageSize(this.pageSize.intValue());
 		return paginator;
+	}
+
+	public TreeMap<String, String> getTreeMap() {
+		TreeMap<String, String> treeMap = new TreeMap<String, String>();
+		treeMap.put("apiNo", this.apiNo);
+		if (this.pageNo != null) {
+			treeMap.put("pageNo", this.pageNo + "");
+		}
+		if (this.pageSize != null) {
+			treeMap.put("pageSize", this.pageSize + "");
+		}
+		treeMap.put("apiUser", this.apiUser);
+		treeMap.put("time", this.time);
+		treeMap.put("method", this.method);
+		treeMap.put("version", this.version);
+		String params = "";
+		try {
+			params = this.p;
+			params = StrUtils.isEmpty(params) ? "" : params;
+			
+			boolean flag = ConfigCache.getValueToBoolean("API.PARAM.ENCRYPT"); // API参数是否加密
+			if (StrUtils.isNotEmpty(params) && flag) {
+				params = ApiUtils.decode(params);
+			}
+		} catch (UnsupportedEncodingException e) {
+			log.error("p参数解析失败", e);
+		}
+		treeMap.put("p", params);
+
+		return treeMap;
 	}
 
 	/**
@@ -123,13 +161,28 @@ public class BaseApiForm {
 	private JSONObject getParams() {
 		JSONObject json = null;
 		try {
-			json = JSON.parseObject(p);
+			String params = "";
+			params = this.p;
+			boolean flag = ConfigCache.getValueToBoolean("API.PARAM.ENCRYPT");
+			if (flag) {
+				params = ApiUtils.decode(params);
+			}
+
+			json = JSON.parseObject(params);
 		} catch (Exception e) {
 			log.error("apiform json parse fail:" + p);
 			return new JSONObject();
 		}
 
 		return json;
+	}
+
+	public String getApiNo() {
+		return apiNo;
+	}
+
+	public void setApiNo(String apiNo) {
+		this.apiNo = apiNo;
 	}
 
 	public Integer getPageNo() {
@@ -172,6 +225,14 @@ public class BaseApiForm {
 		this.apiUser = apiUser;
 	}
 
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 	public String getCheckSum() {
 		return checkSum;
 	}
@@ -190,10 +251,12 @@ public class BaseApiForm {
 
 	@Override
 	public String toString() {
-		return "[page=" + this.pageNo + "/" + this.pageSize + "]" //
+		return "[apiNo=" + this.apiNo + "]" //
+				+ "[page=" + this.pageNo + "/" + this.pageSize + "]" //
 				+ "[method=" + this.method + "]" //
 				+ "[version=" + this.version + "]" //
 				+ "[apiUser=" + this.apiUser + "]" //
+				+ "[time=" + this.time + "]" //
 				+ "[checkSum=" + this.checkSum + "]" //
 				+ "[p=" + this.p + "]";
 	}

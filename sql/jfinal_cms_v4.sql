@@ -32,7 +32,7 @@ CREATE TABLE `sys_config` (
   `create_time` varchar(64) DEFAULT NULL COMMENT '创建时间',
   `create_id` int(11) DEFAULT '0' COMMENT '创建者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='系统配置表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='系统配置表';
 
 -- ----------------------------
 -- Records of sys_config
@@ -49,6 +49,7 @@ INSERT INTO `sys_config` VALUES ('10', '多站点标示', 'SITE.MULTI.FLAG', 'fa
 INSERT INTO `sys_config` VALUES ('11', '站点根目录', 'SITE.TEMPLATE.PATH', '/template/', null, '9', '212', '2016-12-31 16:28:43', '1', '2016-12-31 16:28:43', '1');
 INSERT INTO `sys_config` VALUES ('12', 'Session站点列表', 'SITE.SESSION.SITES', 'sites', null, '9', '213', '2016-12-31 16:30:17', '1', '2016-12-31 16:30:17', '1');
 INSERT INTO `sys_config` VALUES ('13', 'Session站点', 'SITE.SESSION.SITE', 'site', null, '9', '214', '2016-12-31 16:30:38', '1', '2016-12-31 16:30:38', '1');
+INSERT INTO `sys_config` VALUES ('14', 'API参数加密是否开启', 'API.PARAM.ENCRYPT', 'false', null, '2', '115', '2017-03-17 23:17:23', '1', '2017-03-17 23:17:23', '1');
 
 -- ----------------------------
 -- Table structure for `sys_department`
@@ -302,7 +303,8 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', '1', '1', '1', null, null, 'zcool321@sina.com', '123', null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', 'flat', '5', '1', '2016-06-06 06:06:06', '1');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', '1', '1', '10', null, null, 'zcool321@sina.com', '123', null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', 'flat', '5', '1', '2016-06-06 06:06:06', '1');
+INSERT INTO `sys_user` VALUES ('2', 'testapi', 'ldKI9edsQVM=', 'api测试', '1', '5', '10', null, null, null, null, null, null, null, 'default', '0', '1', '2017-03-19 20:41:25', '1');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`

@@ -1,7 +1,7 @@
 package com.jflyfox.api.service;
 
 import com.jflyfox.api.form.ApiResp;
-import com.jflyfox.api.form.BaseApiForm;
+import com.jflyfox.api.form.ApiForm;
 
 /**
  * api实现接口
@@ -18,7 +18,7 @@ public interface IApiLogic extends IApiCommon {
 	 * @param form
 	 * @return ApiResp
 	 */
-	public ApiResp folders(BaseApiForm form);
+	public ApiResp folders(ApiForm form);
 
 	/**
 	 * 返回文章列表
@@ -28,7 +28,7 @@ public interface IApiLogic extends IApiCommon {
 	 * @param form
 	 * @return ApiResp
 	 */
-	public ApiResp pageArticleSite(BaseApiForm form);
+	public ApiResp pageArticleSite(ApiForm form);
 
 	/**
 	 * 返回文章列表
@@ -38,7 +38,7 @@ public interface IApiLogic extends IApiCommon {
 	 * @param form
 	 * @return ApiResp
 	 */
-	public ApiResp pageArticle(BaseApiForm form);
+	public ApiResp pageArticle(ApiForm form);
 
 	/**
 	 * 返回对应文章
@@ -48,5 +48,5 @@ public interface IApiLogic extends IApiCommon {
 	 * @param form
 	 * @return ApiResp
 	 */
-	public ApiResp article(BaseApiForm form);
+	public ApiResp article(ApiForm form);
 }

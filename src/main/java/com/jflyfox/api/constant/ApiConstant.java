@@ -3,6 +3,19 @@ package com.jflyfox.api.constant;
 public class ApiConstant {
 
 	/**
+	 * API参数是否加密
+	 */
+	public static final boolean ENCRYPT_FLAG = false;
+	/**
+	 * 是
+	 */
+	public static final int OPER_YES = 1;
+	/**
+	 * 否
+	 */
+	public static final int OPER_NO = 2;
+	
+	/**
 	 * 成功
 	 */
 	public static final int CODE_SUCCESS = 0;
@@ -39,6 +52,10 @@ public class ApiConstant {
 	 * 登陆验证异常
 	 */
 	public static final int CODE_LOGIN_VALID_ERROR = -501;
+	/**
+	 * 协议校验失败
+	 */
+	public static final int CODE_CHECKSUM_VALID_ERROR = -502;
 
 	public static final String MSG_SUCCESS = "success";
 	public static final String MSG_FAIL = "fail";
@@ -49,4 +66,5 @@ public class ApiConstant {
 	public static final String MSG_IP_BLACK = "IP黑名单拦截";
 	public static final String MSG_SERVER_MAINTAIN = "API服务维护中";
 	public static final String MSG_LOGIN_VALID_ERROR = "登陆验证失败";
+	public static final String MSG_CHECKSUM_VALID_ERROR = "协议校验失败";
 }
