@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>com.jflyfox</groupId>
 			<artifactId>jflyfox_jfinal</artifactId>
-			<version>4.3</version>
+			<version>4.4</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.servlet</groupId>
