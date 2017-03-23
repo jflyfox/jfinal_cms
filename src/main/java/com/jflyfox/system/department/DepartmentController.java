@@ -25,7 +25,8 @@ public class DepartmentController extends BaseProjectController {
 	public void list() {
 		SysDepartment model = getModelByAttr(SysDepartment.class);
 
-		SQLUtils sql = new SQLUtils(" from sys_department t where 1=1 ");
+		SQLUtils sql = new SQLUtils(" from sys_department t "
+				+ " left join sys_department p on t.parent_id = p.id  where 1=1 ");
 		if (model.getAttrValues().length != 0) {
 			sql.setAlias("t");
 			// 查询条件
@@ -40,7 +41,7 @@ public class DepartmentController extends BaseProjectController {
 			sql.append(" order by ").append(orderBy);
 		}
 
-		Page<SysDepartment> page = SysDepartment.dao.paginate(getPaginator(), "select t.* ", //
+		Page<SysDepartment> page = SysDepartment.dao.paginate(getPaginator(), "select t.*,p.name as parentName ", //
 				sql.toString().toString());
 
 		// 下拉框
