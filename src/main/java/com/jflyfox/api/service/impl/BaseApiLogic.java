@@ -28,23 +28,23 @@ public abstract class BaseApiLogic implements IApiLogic {
 		String password = form.get("password");
 		try {
 			if (StrUtils.isEmpty(username)) {
-				return new ApiResp(form).setCode(-1).setMsg("用户名不能为空");
+				return new ApiResp(form).setCode(-1001).setMsg("用户名不能为空");
 			} else if (StrUtils.isEmpty(password)) {
-				return new ApiResp(form).setCode(-2).setMsg("密码不能为空");
+				return new ApiResp(form).setCode(-1002).setMsg("密码不能为空");
 			}
 			String sql = " where username = ? and usertype = " + JFlyFoxUtils.USER_TYPE_API;
 			SysUser user = SysUser.dao.findFirstByWhere(sql, username);
 
 			if (user == null || user.getInt("userid") <= 0) {
-				return new ApiResp(form).setCode(-3).setMsg("认证失败");
+				return new ApiResp(form).setCode(-1003).setMsg("认证失败");
 			}
 
 			if (!(user.getInt("usertype") == JFlyFoxUtils.USER_TYPE_API)) {
-				return new ApiResp(form).setCode(-4).setMsg("您没有登录权限");
+				return new ApiResp(form).setCode(-1004).setMsg("您没有登录权限");
 			}
 
 			if (!(user.getInt("state") == JFlyFoxUtils.USER_STATE_NORMAL)) {
-				return new ApiResp(form).setCode(-5).setMsg("您的帐号没有API权限");
+				return new ApiResp(form).setCode(-1005).setMsg("您的帐号没有API权限");
 			}
 
 			String encryptPassword = password; // 加密
@@ -53,10 +53,10 @@ public abstract class BaseApiLogic implements IApiLogic {
 			md5Password = new Md5Utils().getMD5(userPassword).toLowerCase();
 
 			if (!md5Password.equals(encryptPassword)) {
-				return new ApiResp(form).setCode(-6).setMsg("认证错误");
+				return new ApiResp(form).setCode(-1006).setMsg("认证错误");
 			}
 		} catch (Exception e) {
-			return new ApiResp(form).setCode(-99).setMsg("认证异常");
+			return new ApiResp(form).setCode(-1099).setMsg("认证异常");
 		}
 		
 		// 验证成功加入缓存，返回key

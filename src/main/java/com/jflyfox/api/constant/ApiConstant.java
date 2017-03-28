@@ -38,7 +38,7 @@ public class ApiConstant {
 	/**
 	 * 调用方法异常
 	 */
-	public static final int CODE_METHOD_HANDLER_ERROR = -103;
+	public static final int CODE_METHOD_HANDLER_ERROR = -104;
 	/**
 	 * 传递参数异常
 	 */
