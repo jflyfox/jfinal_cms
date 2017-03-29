@@ -45,7 +45,7 @@ var bodyContent = {
 						  <img src="${BASE_PATH }static/front/images/news.jpg" alt="${item.title}" height="85" 
 						  	 style="height: 85px; width: 100%; display: block;" >
 					  	  <% } else { %>	
-					  	  <img src="${flyfox.getImage(item)}"  alt="${item.title}" height="85"
+					  	  <img src="${BASE_PATH }${flyfox.getImage(item)}"  alt="${item.title}" height="85"
 					  	  	data-holder-rendered="true" style="height: 85px; width: 100%; display: block;">
 						  <% } %>
 						</div>
