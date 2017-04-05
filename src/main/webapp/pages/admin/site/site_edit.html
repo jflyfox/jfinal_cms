@@ -93,11 +93,12 @@ var bodyContent = {
 				</tr>
 				<tr>
 					<td>图片
-						<% if(!strutil.isEmpty(model.thumbnail)){ %>
-							<a href="${model.thumbnail}" target="_blank" style="text-decoration:none;">
-								<img alt="图片" title="点击浏览" src="${model.thumbnail}" width="40" height="40">
-							</a>
-						<% } %>
+						<% 
+						var img = isEmpty(model.thumbnail)?'static/images/video/no_image.jpg':flyfox.getFile(model,'thumbnail');
+						%>
+						<a href="${img}" target="_blank" style="text-decoration:none;">
+							<img alt="图片" title="点击浏览" src="${model.thumbnail}" width="40" height="40">
+						</a>
 					</td>
 					<td>
 						<input type="file" accept="image/*" class="form-control" name="thumbnail_file" />

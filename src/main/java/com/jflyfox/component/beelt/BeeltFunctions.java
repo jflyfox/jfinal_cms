@@ -8,6 +8,7 @@ import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.system.config.ConfigCache;
 import com.jflyfox.system.config.SysConfig;
 import com.jflyfox.system.dict.DictCache;
+import com.jflyfox.system.file.service.FileUploadService;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
 import com.jflyfox.util.DateUtils;
@@ -16,6 +17,8 @@ import com.jflyfox.util.StrUtils;
 import com.jflyfox.util.extend.HtmlUtils;
 
 public class BeeltFunctions extends TemplateFunctions {
+
+	private static FileUploadService uploadSvc = new FileUploadService();
 
 	// //////////////////////////数据字典///////////////////////////////////////////
 
@@ -42,7 +45,7 @@ public class BeeltFunctions extends TemplateFunctions {
 	public static String dictCode(String key) {
 		return dictCode(NumberUtils.parseInt(key));
 	}
-	
+
 	// //////////////////////////系统参数配置///////////////////////////////////////////
 
 	public static SysConfig getConfig(String key) {
@@ -50,6 +53,25 @@ public class BeeltFunctions extends TemplateFunctions {
 	}
 
 	// //////////////////////自定义方法///////////////////////////
+	/**
+	 * 获取文件
+	 * 
+	 * 2017年4月5日 下午10:08:57 flyfox 369191470@qq.com
+	 * 
+	 * @param article
+	 * @param attrName
+	 * @return
+	 */
+	public static String getFile(BaseModel<?> article, String attrName) {
+		String fileName = article.getStr(attrName);
+
+		if (StrUtils.isNotEmpty(fileName)) {
+			uploadSvc.restore(fileName);
+		}
+
+		return fileName;
+	}
+
 	/**
 	 * 获取图片路径
 	 * 
@@ -63,9 +85,12 @@ public class BeeltFunctions extends TemplateFunctions {
 		if (StrUtils.isEmpty(imageUrl)) {
 			imageUrl = article.getStr("image_url");
 		}
+
+		uploadSvc.restore(imageUrl);
+
 		return imageUrl;
 	}
-	
+
 	/**
 	 * 获取视频路径
 	 * 
@@ -80,9 +105,12 @@ public class BeeltFunctions extends TemplateFunctions {
 			videoUrl = video.getStr("video_url");
 		}
 		videoUrl = videoUrl.replaceAll("\\\\", "\\/");
+
+		uploadSvc.restore(videoUrl);
+
 		return videoUrl;
 	}
-	
+
 	/**
 	 * 获取菜单，数字和字符串转换
 	 * 
@@ -148,7 +176,7 @@ public class BeeltFunctions extends TemplateFunctions {
 		}
 		return str.split(split);
 	}
-	
+
 	/**
 	 * html预览
 	 * 

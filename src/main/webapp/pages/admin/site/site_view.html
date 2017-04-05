@@ -53,11 +53,12 @@ var bodyContent = {
 			<tr>
 				<td>图片<td>
 				<td colspan="3">
-					<% if(!strutil.isEmpty(model.thumbnail)){ %>
-						<a href="${model.thumbnail}" target="_blank" style="text-decoration:none;">
-							<img alt="图片" title="点击浏览" src="${model.thumbnail}" width="128" height="128">
-						</a>
-					<% } %>
+					<% 
+					var img = isEmpty(model.thumbnail)?'static/images/video/no_image.jpg':flyfox.getFile(model,'thumbnail');
+					%>
+					<a href="${img}" target="_blank" style="text-decoration:none;">
+						<img alt="图片" title="点击浏览" src="${model.thumbnail}" width="128" height="128">
+					</a>
 				</td>
 			</tr>
 			<tr>

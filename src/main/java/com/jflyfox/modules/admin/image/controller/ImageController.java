@@ -9,13 +9,13 @@ import com.jfinal.upload.UploadFile;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.ImageModel;
 import com.jflyfox.component.util.ImageUtils;
-import com.jflyfox.component.util.JFlyfoxUpload;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.modules.admin.image.model.TbImage;
 import com.jflyfox.modules.admin.image.model.TbImageTags;
 import com.jflyfox.modules.admin.image.service.ImageAlbumService;
 import com.jflyfox.modules.admin.site.TbSite;
+import com.jflyfox.system.file.util.FileUploadUtils;
 import com.jflyfox.util.StrUtils;
 
 /**
@@ -130,17 +130,15 @@ public class ImageController extends BaseProjectController {
 
 	public void save() {
 		TbSite site = getSessionSite().getBackModel();
-		UploadFile uploadImage = getFile("model.image_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
+		UploadFile uploadImage = getFile("model.image_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
 		
 		Integer pid = getParaToInt();
 		TbImage model = getModel(TbImage.class);
 		
 		// 图片附件
 		if (uploadImage != null) {
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "image"), uploadImage);
-			model.set("image_url", JFlyfoxUpload.getUploadPath(site, "image") + File.separator + fileName);
-			
-
+			String fileUrl = uploadHandler(site, uploadImage.getFile(), "image");
+			model.set("image_url", fileUrl);
 		}
 		
 		// 设置图片信息

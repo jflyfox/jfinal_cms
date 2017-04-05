@@ -143,7 +143,7 @@ var bodyContent = {
 					<input type="hidden" id="file_url_flag" class="form-control" name="file_url_flag" />
 					<% if(!strutil.isEmpty(model.file_url)){ %>
 					<div id="file_url_show" >
-						<a href="${model.file_url }" target="_blank" style="text-decoration:none;">
+						<a href="${flyfox.getFile(model,'file_url')}" target="_blank" style="text-decoration:none;">
 							${model.file_name}
 						</a>
 						<a href="javascript:void(0);"  

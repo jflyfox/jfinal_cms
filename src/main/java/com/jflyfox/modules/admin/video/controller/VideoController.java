@@ -1,18 +1,16 @@
 package com.jflyfox.modules.admin.video.controller;
 
-import java.io.File;
-
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
 import com.jflyfox.component.base.BaseProjectController;
-import com.jflyfox.component.util.JFlyfoxUpload;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.modules.admin.video.model.TbVideo;
 import com.jflyfox.modules.admin.video.model.TbVideoTags;
 import com.jflyfox.modules.admin.video.service.VideoAlbumService;
+import com.jflyfox.system.file.util.FileUploadUtils;
 import com.jflyfox.util.StrUtils;
 
 /**
@@ -132,15 +130,15 @@ public class VideoController extends BaseProjectController {
 
 	public void save() {
 		TbSite site = getSessionSite().getBackModel();
-		UploadFile uploadVideo = getFile("model.video_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
+		UploadFile uploadVideo = getFile("model.video_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
 		
 		Integer pid = getParaToInt();
 		TbVideo model = getModel(TbVideo.class);
 		
 		// 视频附件
 		if (uploadVideo != null) {
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "video"), uploadVideo);
-			model.set("video_url", JFlyfoxUpload.getUploadPath(site, "video") + File.separator + fileName);
+			String fileUrl = uploadHandler(site, uploadVideo.getFile(), "video");
+			model.set("video_url", fileUrl);
 		}
 		
 		// 设置图片信息

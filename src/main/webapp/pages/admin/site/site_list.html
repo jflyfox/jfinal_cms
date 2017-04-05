@@ -96,7 +96,10 @@ var bodyContent = {
 	<div class="col-sm-4">
 		<div class="thumbnail">
 			<a href="http://${item.domain_pc}" target="_blank"> 
-			<img src="${item.thumbnail!'static/images/video/no_image.jpg'}" height="240" style="height:240px;"
+			<% 
+			var img = isEmpty(item.thumbnail)?'static/images/video/no_image.jpg':flyfox.getFile(item,'thumbnail');
+			%>
+			<img src="${img}" height="240" style="height:240px;"
 				alt="${item.name}" class="img-responsive">
 			</a>
 			<div class="caption">

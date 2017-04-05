@@ -16,6 +16,7 @@
  */
 package com.jflyfox.component.base;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,9 @@ import com.jflyfox.modules.admin.site.SessionSite;
 import com.jflyfox.modules.admin.site.SiteConstant;
 import com.jflyfox.modules.admin.site.SiteService;
 import com.jflyfox.modules.admin.site.TbSite;
+import com.jflyfox.system.file.model.FileUploadBean;
+import com.jflyfox.system.file.service.FileUploadService;
+import com.jflyfox.system.file.util.FileUploadUtils;
 import com.jflyfox.system.log.SysLog;
 import com.jflyfox.system.menu.SysMenu;
 import com.jflyfox.system.user.SysUser;
@@ -141,7 +145,7 @@ public abstract class BaseProjectController extends BaseController {
 			setSessionAttr("menu", map);
 			// 不能访问的菜单
 			setSessionAttr("nomenu", new UserSvc().getNoAuthMap(map));
-			
+
 		}
 		return user;
 	}
@@ -246,13 +250,34 @@ public abstract class BaseProjectController extends BaseController {
 	/**
 	 * 是否是管理员
 	 * 
-	 * 2017年1月21日 下午11:55:16
-	 * flyfox 369191470@qq.com
+	 * 2017年1月21日 下午11:55:16 flyfox 369191470@qq.com
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public boolean isAdmin(SessionUser user){
+	public boolean isAdmin(SessionUser user) {
 		return user.getInt("usertype") == 1;
+	}
+
+	/**
+	 * 文件上传处理
+	 * 
+	 * 2017年4月5日 上午4:36:20 flyfox 369191470@qq.com
+	 * 
+	 * @param site
+	 * @param uploadFile
+	 * @param appendPath
+	 * @return
+	 */
+	public String uploadHandler(TbSite site, File uploadFile, String appendPath) {
+		String fileUrl = "";
+		String projectStorePath = FileUploadUtils.getUploadPath(site, appendPath);
+		FileUploadBean uploadBean = new FileUploadService().uploadHandle(projectStorePath, uploadFile, getSessionUser()
+				.getUserID());
+		if (uploadBean != null) {
+			fileUrl = projectStorePath + File.separator + uploadBean.getName();
+		}
+		return FileUploadUtils.rebuild(fileUrl);
 	}
 }

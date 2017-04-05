@@ -1,16 +1,14 @@
 package com.jflyfox.modules.admin.folderrollpicture;
 
-import java.io.File;
-
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.component.util.JFlyfoxUpload;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.modules.admin.folder.TbFolder;
 import com.jflyfox.modules.admin.site.TbSite;
+import com.jflyfox.system.file.util.FileUploadUtils;
 import com.jflyfox.util.StrUtils;
 
 /**
@@ -98,15 +96,15 @@ public class FolderrollpictureController extends BaseProjectController {
 
 	public void save() {
 		TbSite site = getSessionSite().getBackModel();
-		UploadFile uploadImage = getFile("model.image_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
+		UploadFile uploadImage = getFile("model.image_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
 
 		Integer pid = getParaToInt();
 		TbFolderRollPicture model = getModel(TbFolderRollPicture.class);
 
 		// 图片附件
 		if (uploadImage != null) {
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "roll_image"), uploadImage);
-			model.set("image_url", JFlyfoxUpload.getUploadPath(site, "roll_image") + File.separator + fileName);
+			String fileUrl = uploadHandler(site, uploadImage.getFile(), "roll_image");
+			model.set("image_url", fileUrl);
 		}
 
 		Integer userid = getSessionUser().getUserID();

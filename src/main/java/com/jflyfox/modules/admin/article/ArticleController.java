@@ -1,6 +1,5 @@
 package com.jflyfox.modules.admin.article;
 
-import java.io.File;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
@@ -8,7 +7,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxUtils;
-import com.jflyfox.component.util.JFlyfoxUpload;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.modules.admin.comment.CommentService;
@@ -16,6 +14,7 @@ import com.jflyfox.modules.admin.folder.FolderService;
 import com.jflyfox.modules.admin.folder.TbFolder;
 import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.modules.admin.tags.TbTags;
+import com.jflyfox.system.file.util.FileUploadUtils;
 import com.jflyfox.util.StrUtils;
 
 /**
@@ -116,25 +115,24 @@ public class ArticleController extends BaseProjectController {
 
 	public void save() {
 		TbSite site = getSessionSite().getBackModel();
-		UploadFile uploadImage = getFile("model.image_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
+		UploadFile uploadImage = getFile("model.image_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
 
-		UploadFile uploadFile = getFile("model.file_url", JFlyfoxUpload.getUploadTmpPath(site), JFlyfoxUpload.UPLOAD_MAX);
+		UploadFile uploadFile = getFile("model.file_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
 
 		Integer pid = getParaToInt();
 		TbArticle model = getModel(TbArticle.class);
 
 		// 图片附件
 		if (uploadImage != null) {
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "article_image"), uploadImage);
-			model.set("image_url", JFlyfoxUpload.getUploadPath(site, "article_image")+ File.separator + fileName);
-			// model.set("image_url", uploadFile.getFileName());
+			String fileUrl = uploadHandler(site, uploadImage.getFile(), "article_image");
+			model.set("image_url", fileUrl);
 		}
 
 		// 文件附件
 		if (uploadFile != null) {
 			String oldFileName = uploadFile.getFileName();
-			String fileName = JFlyfoxUpload.renameFile(JFlyfoxUpload.getUploadFilePath(site, "file_url"), uploadFile);
-			model.set("file_url", JFlyfoxUpload.getUploadPath(site, "file_url") + File.separator + fileName);
+			String fileUrl = uploadHandler(site, uploadFile.getFile(), "article_file");
+			model.set("file_url", fileUrl);
 			model.set("file_name", oldFileName); // 原文件名
 		} else {
 			// 删除标记
