@@ -13,12 +13,13 @@ import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.system.file.model.FileUploadBean;
 import com.jflyfox.system.file.service.FileUploadService;
 import com.jflyfox.system.file.util.FileUploadUtils;
+import com.jflyfox.util.StrUtils;
 
 public class UeditorService extends BaseService {
 
 	private static final Log log = Log.getLog(UeditorService.class);
 
-	public String uploadHandle(int actionCode, String outJsonString, TbSite site, int userid) {
+	public String uploadHandle(int actionCode, String outJsonString, String contextPath, TbSite site, int userid) {
 		switch (actionCode) {
 
 		case ActionMap.CONFIG:
@@ -28,7 +29,7 @@ public class UeditorService extends BaseService {
 		case ActionMap.UPLOAD_SCRAWL:
 		case ActionMap.UPLOAD_VIDEO:
 		case ActionMap.UPLOAD_FILE:
-			return uploadFileHandler(outJsonString, site, userid);
+			return uploadFileHandler(outJsonString, contextPath, site, userid);
 
 		case ActionMap.CATCH_IMAGE:
 			break;
@@ -53,8 +54,9 @@ public class UeditorService extends BaseService {
 	 * @param userid
 	 * @return
 	 */
-	protected String uploadFileHandler(String outJsonString, TbSite site, int userid) {
+	protected String uploadFileHandler(String outJsonString, String contextPath, TbSite site, int userid) {
 		State state = null;
+		String preContextPath = StrUtils.isEmpty(contextPath) ? "" : contextPath;
 		try {
 			JSONObject json = JSON.parseObject(outJsonString);
 			if (!"SUCCESS".equals(json.getString("state"))) {
@@ -64,6 +66,7 @@ public class UeditorService extends BaseService {
 			String webRootPath = FileUploadUtils.getRootPath();
 			String sitePath = FileUploadUtils.getSitePath(site); // 站点路径
 			String url = FileUploadUtils.rebuild(json.getString("url"));
+			url = url.replace(preContextPath, "");
 			String newPath = FileUploadUtils.getBasePath() + sitePath + url.replace(FileUploadUtils.getBasePath(), "");
 			newPath = newPath.replace(json.getString("title"), "");
 			if (newPath.endsWith("/")) {
@@ -78,7 +81,7 @@ public class UeditorService extends BaseService {
 				state = new BaseState(true);
 				state.putInfo("size", json.getString("size"));
 				state.putInfo("title", bean.getName());
-				state.putInfo("url", bean.getPath());
+				state.putInfo("url", preContextPath + bean.getPath());
 				state.putInfo("type", json.getString("type"));
 				state.putInfo("original", json.getString("original"));
 			} else {

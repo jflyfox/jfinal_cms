@@ -80,7 +80,8 @@ public class FileUploadBean implements Serializable {
 		String log = "";
 		log += "[id:" + getId() + "]";
 		log += "[name:" + getName() + "]";
-		log += "[path:" + getFactpath() + "]";
+		log += "[path:" + getPath() + "]";
+		log += "[factpath:" + getFactpath() + "]";
 		log += "[ext:" + getExt() + "]";
 		log += "[originalName:" + getOriginalName() + "]";
 		log += "[type:" + getType() + "]";

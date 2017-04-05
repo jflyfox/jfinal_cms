@@ -19,8 +19,9 @@ public class Ueditor extends BaseProjectController {
 		// 上传类型
 		String actionType = getPara("action");
 		int actionCode = ActionMap.getType(actionType);
+		String contextPath = getRequest().getContextPath();
 		// 文件处理
-		String handlerOut = new UeditorService().uploadHandle(actionCode, out, site, userid);
+		String handlerOut = new UeditorService().uploadHandle(actionCode, out, contextPath, site, userid);
 
 		renderText(handlerOut);
 	}
