@@ -24,6 +24,20 @@ jfinal cms
 > 9. 多站点需要设置各个站点对应的域名，通过域名解析到不同的站点模板。
 
 
+项目源码地址：
+------------------------
+
+github地址：https://github.com/jflyfox/jfinal_cms
+
+码云地址：https://git.oschina.net/flyfox/jfinal_cms
+
+API Clinet 项目源码地址：
+------------------------
+
+github地址：https://github.com/jflyfox/jfinal_cms_api_client
+
+码云地址：https://git.oschina.net/jflyfox/jfinal_cms_api_client
+
 其他说明
 ------------------------
 
@@ -31,6 +45,7 @@ jfinal cms
 
 源码地址：
 > http://git.oschina.net/flyfox/jflyfox_jfinal 
+
 > http://git.oschina.net/flyfox/jflyfox_base
 
 演示效果截图
