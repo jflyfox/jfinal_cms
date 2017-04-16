@@ -49,9 +49,9 @@ var bodyContent = {
 	<div style="height: 50px;clear: both;">&nbsp;</div>
 	<nav class="navbar navbar-default navbar-fixed-bottom">
 	  <div class="container" style="padding: 5px 0px 5px 0px;text-align: center;">
-			<button class="btn btn-primary" onclick="return oper_save();return false;">保 存</button>
+			<button class="btn btn-primary" onclick="oper_save();return false;">保 存</button>
 		<% if ((item.dict_id!0) > 0 ) {%>
-			<button class="btn btn-danger" onclick="return oper_del();">删 除</button>
+			<button class="btn btn-danger" onclick="oper_del();return false;">删 除</button>
 		<% } %>
 		<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
 	  </div>
