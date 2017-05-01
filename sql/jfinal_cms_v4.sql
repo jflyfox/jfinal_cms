@@ -310,8 +310,8 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '1RHFCLt64uOOViCTzgSaww==', '系统管理员', '1', '1', '10', null, null, 'zcool321@sina.com', '123', null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', 'flat', '5', '1', '2016-06-06 06:06:06', '1');
-INSERT INTO `sys_user` VALUES ('2', 'testapi', 'ldKI9edsQVM=', 'api测试', '1', '5', '10', null, null, null, null, null, null, null, 'default', '0', '1', '2017-03-19 20:41:25', '1');
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'Iuy8AguV5T7Vm08po+I4Gg==', '系统管理员', '1', '1', '10', null, null, 'zcool321@sina.com', '123', null, null, '时间是最好的老师，但遗憾的是——最后他把所有的学生都弄死了', 'flat', '5', '1', '2016-06-06 06:06:06', '1');
+INSERT INTO `sys_user` VALUES ('2', 'testapi', 'EY3JNDE7nu8=', 'api测试', '1', '5', '10', null, null, null, null, null, null, null, 'default', '0', '1', '2017-03-19 20:41:25', '1');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`

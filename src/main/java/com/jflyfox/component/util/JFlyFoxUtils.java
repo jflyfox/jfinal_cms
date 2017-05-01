@@ -1,11 +1,11 @@
 package com.jflyfox.component.util;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.jflyfox.util.Config;
 import com.jflyfox.util.StrUtils;
-import com.jflyfox.util.encrypt.DESUtils;
+import com.jflyfox.util.encrypt.DES3Utils;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class JFlyFoxUtils {
 
@@ -93,12 +93,17 @@ public class JFlyFoxUtils {
 	public static final int MATERIAL_TYPE_FOLDER = 106; // 栏目 
 	
 	
-	private static final DESUtils des = new DESUtils("flyfoxxx");
+	private static final DES3Utils des = new DES3Utils("flyoffox");
 
 	// admin:1RHFCLt64uOOViCTzgSaww== test:ldKI9edsQVM=
 	public static void main(String[] args) {
 		String password = "admin123";
 		String tmp = passwordEncrypt(password);
+		System.out.println(tmp);
+		System.out.println(passwordDecrypt(tmp));
+
+		password = "123456";
+		tmp = passwordEncrypt(password);
 		System.out.println(tmp);
 		System.out.println(passwordDecrypt(tmp));
 	}
@@ -124,6 +129,30 @@ public class JFlyFoxUtils {
 	 * @return
 	 */
 	public static String passwordDecrypt(String encryptPassword) {
+		return des.decryptString(encryptPassword);
+	}
+
+	/**
+	 * cookie编码
+	 *
+	 * 2015年2月25日 下午2:22:08 flyfox 369191470@qq.com
+	 *
+	 * @param password
+	 * @return
+	 */
+	public static String cookieEncrypt(String password) {
+		return des.encryptString(password);
+	}
+
+	/**
+	 * cookie解码
+	 *
+	 * 2015年2月25日 下午2:22:13 flyfox 369191470@qq.com
+	 *
+	 * @param encryptPassword
+	 * @return
+	 */
+	public static String cookieDecrypt(String encryptPassword) {
 		return des.decryptString(encryptPassword);
 	}
 

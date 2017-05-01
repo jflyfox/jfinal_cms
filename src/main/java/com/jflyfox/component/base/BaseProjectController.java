@@ -16,10 +16,6 @@
  */
 package com.jflyfox.component.base;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jflyfox.component.util.JFlyFoxUtils;
@@ -43,7 +39,10 @@ import com.jflyfox.util.NumberUtils;
 import com.jflyfox.util.StrUtils;
 import com.jflyfox.util.cache.Cache;
 import com.jflyfox.util.cache.CacheManager;
-import com.jflyfox.util.encrypt.DESUtils;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 项目BaseControler
@@ -53,8 +52,6 @@ import com.jflyfox.util.encrypt.DESUtils;
  * 
  */
 public abstract class BaseProjectController extends BaseController {
-
-	private static final DESUtils COOKIE_DES = new DESUtils("ffcookie");
 
 	public void renderAuto(String view) {
 		String path = getAutoPath(view);
@@ -102,7 +99,7 @@ public abstract class BaseProjectController extends BaseController {
 			if (sysUser == null) {
 				String cookieContent = getCookie(Attr.SESSION_NAME);
 				if (cookieContent != null) {
-					String key = COOKIE_DES.decryptString(cookieContent);
+					String key = JFlyFoxUtils.cookieDecrypt(cookieContent);
 					if (StrUtils.isNotEmpty(key) && key.split(",").length == 2) {
 						int userid = NumberUtils.parseInt(key.split(",")[0]);
 						String password = key.split(",")[1];
@@ -136,7 +133,7 @@ public abstract class BaseProjectController extends BaseController {
 		// 设置cookie，用id+password作为
 		SysUser sysUser = (SysUser) user;
 		String key = sysUser.getUserid() + "," + user.getStr("password");
-		String cookieContent = COOKIE_DES.encryptString(key);
+		String cookieContent = JFlyFoxUtils.cookieEncrypt(key);
 		setCookie(Attr.SESSION_NAME, cookieContent, 7 * 24 * 60 * 60);
 		// 如果是管理员 设置菜单权限
 		if (user.getInt("usertype") == 1 || user.getInt("usertype") == 2) {
