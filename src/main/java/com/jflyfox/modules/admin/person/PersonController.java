@@ -11,6 +11,8 @@ import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
 import com.jflyfox.util.NumberUtils;
 import com.jflyfox.util.StrUtils;
+import com.jflyfox.util.encrypt.Md5Utils;
+import com.jflyfox.util.extend.RandomStrUtils;
 
 /**
  * 个人信息
@@ -94,7 +96,48 @@ public class PersonController extends BaseProjectController {
 
 		renderJson(json.toJSONString());
 	}
-	
+
+
+	/**
+	 * 重置密码
+	 */
+	public void reset() {
+		JSONObject json = new JSONObject();
+		json.put("status", 2);// 失败
+
+		SysUser sessionUser = (SysUser) getSessionUser();
+		SysUser model = getModel(SysUser.class);
+
+		if (model.getInt("userid") <= 0) {
+			json.put("msg", "提交数据错误！");
+			renderJson(json.toJSONString());
+			return;
+		}
+
+		if (sessionUser.getInt("usertype")  != JFlyFoxUtils.USER_TYPE_ADMIN) {
+			json.put("msg", "没有权限重置密码！");
+			renderJson(json.toJSONString());
+			return;
+		}
+
+		// 第三方用户不需要密码
+		String password = RandomStrUtils.randomAlphabetic(6);
+		model.set("password", JFlyFoxUtils.passwordEncrypt(password));
+		// 日志添加
+		model.put("update_id", getSessionUser().getUserID());
+		model.put("update_time", getNow());
+
+		model.update();
+		UserCache.init(); // 设置缓存
+
+		String md5Password = new Md5Utils().getMD5(password).toLowerCase();
+		json.put("md5Pwd", md5Password);
+		json.put("pwd", password);
+		json.put("status", 1);// 成功
+
+		renderJson(json.toJSONString());
+	}
+
 	/**
 	 * 设置主题
 	 */

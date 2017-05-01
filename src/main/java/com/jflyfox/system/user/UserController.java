@@ -1,7 +1,5 @@
 package com.jflyfox.system.user;
 
-import java.util.List;
-
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.component.base.BaseProjectController;
@@ -11,6 +9,9 @@ import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.system.department.DepartmentSvc;
 import com.jflyfox.system.role.SysRole;
 import com.jflyfox.util.StrUtils;
+import com.jflyfox.util.encrypt.Md5Utils;
+
+import java.util.List;
 
 /**
  * 用户管理
@@ -66,6 +67,8 @@ public class UserController extends BaseProjectController {
 
 	public void view() {
 		SysUser model = SysUser.dao.findById(getParaToInt());
+		model.put("secretKey", new Md5Utils().getMD5(model.getStr("password")).toLowerCase());
+
 		// 部门名称
 		model.put("departname", new DepartmentSvc().getDepartName(model.getInt("departid")));
 		setAttr("model", model);
