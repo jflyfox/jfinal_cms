@@ -112,7 +112,7 @@ var bodyContent = {
 									if(isEmpty(userPic)){
 										userPic = BASE_PATH + 'static/images/user/user.png';
 									} else if(!strutil.startWith(userPic , 'http')) {
-										userPic = ASE_PATH + userPic;
+										userPic = BASE_PATH + userPic;
 									}
 								 %>
 								<a href="#"><img width="32" height="32" alt="头像" class="img_radius" src="${userPic }" /></a>
