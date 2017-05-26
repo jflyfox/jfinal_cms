@@ -68,7 +68,7 @@ public class ImagealbumController extends BaseProjectController {
 	public void delete() {
 		// 日志添加
 		TbImageAlbum model = new TbImageAlbum();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -93,7 +93,7 @@ public class ImagealbumController extends BaseProjectController {
 		
 		// 日志添加
 		TbImageAlbum model = new TbImageAlbum();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -116,7 +116,7 @@ public class ImagealbumController extends BaseProjectController {
 		Integer pid = getParaToInt();
 		TbImageAlbum model = getModel(TbImageAlbum.class);
 		
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

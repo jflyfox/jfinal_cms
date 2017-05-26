@@ -68,7 +68,6 @@ var paginator = function(page) {
 	oper.list();
 };
 
-
 var zTree;
 var demoIframe;
 
@@ -275,6 +274,7 @@ var bodyContent = {
 						<li><a href="javascript:void(0);" onclick="oper.view(${item.id});">查看内容</a></li>
 					  </ul>
 					</div>
+					
 					<a href="javascript:void(0);" class="btn btn-sm btn-primary" onclick="oper.edit(${item.id});">修改</a> 
 					<% if(item.id>1){ %>
 					<a href="javascript:void(0);" class="btn btn-sm btn-danger" onclick="oper.del(${item.id});">删除</a>

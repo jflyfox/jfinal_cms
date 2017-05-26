@@ -74,7 +74,7 @@ public class LogController extends BaseProjectController {
 			model.update();
 		} else { // 新增
 			model.remove("id");
-			model.put("create_id", getSessionUser().getUserID());
+			model.put("create_id", getSessionUser().getUserid());
 			model.put("create_time", getNow());
 			model.save();
 		}

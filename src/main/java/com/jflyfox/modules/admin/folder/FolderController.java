@@ -31,7 +31,7 @@ public class FolderController extends BaseProjectController {
 			sql.whereEquals("status", model.getInt("status"));
 		}
 		// 站点设置
-		int siteId = getSessionSite().getBackSiteId();
+		int siteId = getSessionUser().getBackSiteId();
 		sql.whereEquals("site_id", siteId);
 
 		// 排序
@@ -79,7 +79,7 @@ public class FolderController extends BaseProjectController {
 
 		// 日志添加
 		TbFolder model = new TbFolder();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -106,7 +106,7 @@ public class FolderController extends BaseProjectController {
 		TbFolder model = getModel(TbFolder.class);
 
 		// 日志添加
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -115,7 +115,7 @@ public class FolderController extends BaseProjectController {
 			model.update();
 		} else { // 新增
 			// 站点设置
-			model.setSiteId(getSessionSite().getBackSiteId());
+			model.setSiteId(getSessionUser().getBackSiteId());
 
 			model.remove("id");
 			model.put("create_id", userid);

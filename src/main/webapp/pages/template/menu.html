@@ -111,7 +111,7 @@ body { padding-top: 51px; }
        <% 
        		var siteName = 'default';
        		for(item in sites) {
-       			if(session.site.backSiteId==item.id)  siteName = item.name;
+       			if(session.session_user.backSiteId==item.id)  siteName = item.name;
        		}
        	%>
 		 <div class="dropdown" style="margin-top: 6px;">

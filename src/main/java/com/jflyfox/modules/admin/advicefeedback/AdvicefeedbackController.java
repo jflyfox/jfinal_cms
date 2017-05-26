@@ -58,7 +58,7 @@ public class AdvicefeedbackController extends BaseProjectController {
 
 	public void delete() {
 		TbAdviceFeedback model = new TbAdviceFeedback();
-		Integer userid= getSessionUser().getUserID();
+		Integer userid= getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -77,7 +77,7 @@ public class AdvicefeedbackController extends BaseProjectController {
 		Integer pid = getParaToInt();
 		TbAdviceFeedback model = getModel(TbAdviceFeedback.class);
 
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

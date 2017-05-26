@@ -86,7 +86,7 @@ public class VideoController extends BaseProjectController {
 	public void delete() {
 		// 日志添加
 		TbVideo model = new TbVideo();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -104,7 +104,7 @@ public class VideoController extends BaseProjectController {
 		int id = getParaToInt();
 		// 日志添加
 		TbVideo model = new TbVideo();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -129,7 +129,7 @@ public class VideoController extends BaseProjectController {
 	}
 
 	public void save() {
-		TbSite site = getSessionSite().getBackModel();
+		TbSite site = getBackSite();
 		UploadFile uploadVideo = getFile("model.video_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
 		
 		Integer pid = getParaToInt();
@@ -150,7 +150,7 @@ public class VideoController extends BaseProjectController {
 			model.setExt(file.substring(file.lastIndexOf(".") + 1));
 		}
 		
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -184,7 +184,7 @@ public class VideoController extends BaseProjectController {
 				TbVideoTags tag = new TbVideoTags();
 				tag.put("tagname", tagname);
 				tag.put("video_id", model.getInt("id"));
-				tag.put("create_id", getSessionUser().getUserID());
+				tag.put("create_id", getSessionUser().getUserid());
 				tag.put("create_time", getNow());
 				tag.save();
 

@@ -273,7 +273,7 @@ public class PersonController extends BaseProjectController {
 		if (pid != null && pid > 0) { // 更新
 			// 管理员或者自己才能修改
 			if (isAdmin(user) //
-					|| model.getCreateId().intValue() == user.getUserID().intValue()) {
+					|| model.getCreateId().intValue() == user.getUserid().intValue()) {
 				json.put("msg", "你没有权限修改博文！");
 				renderJson(json.toJSONString());
 				return;
@@ -293,7 +293,7 @@ public class PersonController extends BaseProjectController {
 			model.set("approve_status", ArticleConstant.APPROVE_STATUS_PASS); // 需要审核改为update
 			model.setPublishTime(DateUtils.getNow("yyyy-MM-dd")); // 发布时间
 			model.setPublishUser(user.getUserName()); // 发布人
-			model.setCreateId(getSessionUser().getUserID());
+			model.setCreateId(getSessionUser().getUserid());
 			model.setCreateTime(getNow());
 			model.save();
 		}
@@ -314,7 +314,7 @@ public class PersonController extends BaseProjectController {
 				TbTags tbTags = new TbTags();
 				tbTags.put("tagname", tagname);
 				tbTags.put("article_id", model.getInt("id"));
-				tbTags.put("create_id", getSessionUser().getUserID());
+				tbTags.put("create_id", getSessionUser().getUserid());
 				tbTags.put("create_time", getNow());
 				tbTags.save();
 

@@ -71,7 +71,7 @@ public class RoleController extends BaseProjectController {
 		Integer roleid = getParaToInt();
 		// 日志添加
 		SysRole model = new SysRole();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -94,7 +94,7 @@ public class RoleController extends BaseProjectController {
 		Integer pid = getParaToInt();
 		SysRole model = getModel(SysRole.class);
 		// 日志添加
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -144,7 +144,7 @@ public class RoleController extends BaseProjectController {
 		int roleid = getParaToInt("roleid");
 		String menus = getPara("menus");
 
-		new RoleSvc().saveAuth(roleid, menus, getSessionUser().getUserID());
+		new RoleSvc().saveAuth(roleid, menus, getSessionUser().getUserid());
 		renderMessage("保存成功");
 	}
 

@@ -26,16 +26,14 @@ import com.jflyfox.util.NumberUtils;
 /**
  * Model 优化修改
  * 
- * 2016年1月16日 下午4:57:39
- * flyfox 369191470@qq.com
+ * 2016年1月16日 下午4:57:39 flyfox 369191470@qq.com
  */
 public class BaseProjectModel<M extends Model<M>> extends BaseModel<M> {
 
 	private static final long serialVersionUID = 1L;
 
 	/****************************************** 加入公共日志 ******************************************/
-	@Override
-	public boolean save() {
+	public boolean saveLog() {
 		boolean flag = super.save();
 		String tableName = getTable().getName();
 		String[] keys = getTable().getPrimaryKey();
@@ -48,8 +46,7 @@ public class BaseProjectModel<M extends Model<M>> extends BaseModel<M> {
 		return flag;
 	}
 
-	@Override
-	public boolean delete() {
+	public boolean deleteLog() {
 		boolean flag = super.delete();
 		String tableName = getTable().getName();
 		String[] keys = getTable().getPrimaryKey();
@@ -62,8 +59,7 @@ public class BaseProjectModel<M extends Model<M>> extends BaseModel<M> {
 		return flag;
 	}
 
-	@Override
-	public boolean deleteById(Object id) {
+	public boolean deleteByIdLog(Object id) {
 		boolean flag = super.deleteById(id);
 		String tableName = getTable().getName();
 		Integer primaryId = (id != null) ? NumberUtils.parseInt(id) : null;
@@ -71,8 +67,7 @@ public class BaseProjectModel<M extends Model<M>> extends BaseModel<M> {
 		return flag;
 	}
 
-	@Override
-	public boolean update() {
+	public boolean updateLog() {
 		boolean flag = super.update();
 		String tableName = getTable().getName();
 		String[] keys = getTable().getPrimaryKey();

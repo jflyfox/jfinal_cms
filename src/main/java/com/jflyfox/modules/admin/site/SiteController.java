@@ -62,7 +62,7 @@ public class SiteController extends BaseProjectController {
 	public void delete() {
 		Integer pid = getParaToInt();
 		TbSite model = new TbSite();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -92,7 +92,7 @@ public class SiteController extends BaseProjectController {
 	}
 
 	public void save() {
-		TbSite site = getSessionSite().getBackModel();
+		TbSite site = getBackSite();
 		UploadFile thumbnailFile = getFile("thumbnail_file", FileUploadUtils.getUploadTmpPath(site),
 				FileUploadUtils.UPLOAD_MAX);
 
@@ -105,7 +105,7 @@ public class SiteController extends BaseProjectController {
 			model.set("thumbnail", fileUrl);
 		}
 
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

@@ -62,7 +62,7 @@ public class DictController extends BaseProjectController {
 	public void delete() {
 		// 日志添加
 		SysDictDetail model = new SysDictDetail();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -84,7 +84,7 @@ public class DictController extends BaseProjectController {
 
 		// 日志添加
 		SysDictDetail model = getModel(SysDictDetail.class);
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -110,7 +110,7 @@ public class DictController extends BaseProjectController {
 		if (pid != null && pid > 0) { // 更新
 			SysDict model = getModel(SysDict.class);
 			// 日志添加
-			Integer userid = getSessionUser().getUserID();
+			Integer userid = getSessionUser().getUserid();
 			String now = getNow();
 			model.put("update_id", userid);
 			model.put("update_time", now);
@@ -119,7 +119,7 @@ public class DictController extends BaseProjectController {
 			SysDict model = getModel(SysDict.class, "model");
 			model.remove("dict_id");
 			// 日志添加
-			Integer userid = getSessionUser().getUserID();
+			Integer userid = getSessionUser().getUserid();
 			String now = getNow();
 			model.put("update_id", userid);
 			model.put("update_time", now);
@@ -134,7 +134,7 @@ public class DictController extends BaseProjectController {
 	public void delete_dict() {
 		// 日志添加
 		SysDict model = new SysDict();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

@@ -65,7 +65,7 @@ public class MenuController extends BaseProjectController {
 	public void delete() {
 		// 日志添加
 		SysMenu model = new SysMenu();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -92,7 +92,7 @@ public class MenuController extends BaseProjectController {
 		}
 
 		// 日志添加
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

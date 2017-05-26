@@ -5,11 +5,8 @@ import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.CommonController;
-import com.jflyfox.modules.admin.site.SessionSite;
-import com.jflyfox.modules.admin.site.TbSite;
 import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
-import com.jflyfox.util.NumberUtils;
 import com.jflyfox.util.StrUtils;
 import com.jflyfox.util.encrypt.Md5Utils;
 import com.jflyfox.util.extend.RandomStrUtils;
@@ -85,9 +82,9 @@ public class PersonController extends BaseProjectController {
 		}
 
 		// 日志添加
-		model.put("update_id", getSessionUser().getUserID());
+		model.put("update_id", getSessionUser().getUserid());
 		model.put("update_time", getNow());
-		
+
 		model.update();
 		UserCache.init(); // 设置缓存
 		SysUser newUser = SysUser.dao.findById(userid);
@@ -96,7 +93,6 @@ public class PersonController extends BaseProjectController {
 
 		renderJson(json.toJSONString());
 	}
-
 
 	/**
 	 * 重置密码
@@ -124,7 +120,7 @@ public class PersonController extends BaseProjectController {
 		String password = RandomStrUtils.randomAlphabetic(6);
 		model.set("password", JFlyFoxUtils.passwordEncrypt(password));
 		// 日志添加
-		model.put("update_id", getSessionUser().getUserID());
+		model.put("update_id", getSessionUser().getUserid());
 		model.put("update_time", getNow());
 
 		model.update();
@@ -143,7 +139,7 @@ public class PersonController extends BaseProjectController {
 	 */
 	public void theme() {
 		String theme = getPara();
-		
+
 		JSONObject json = new JSONObject();
 		json.put("status", 2);// 失败
 
@@ -152,32 +148,31 @@ public class PersonController extends BaseProjectController {
 			renderJson(json.toJSONString());
 			return;
 		}
-		
+
 		SysUser user = (SysUser) getSessionUser();
 		int userid = user.getUserid();
 		SysUser model = SysUser.dao.findById(userid);
 
 		// 日志添加
-		model.put("update_id", getSessionUser().getUserID());
+		model.put("update_id", getSessionUser().getUserid());
 		model.put("update_time", getNow());
 		model.set("theme", theme);
 		model.update();
-		
+
 		UserCache.init(); // 设置缓存
-		
+
 		setSessionUser(model); // 设置session
-		
+
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
 	}
-	
-	
+
 	/**
 	 * 设置站点
 	 */
 	public void site() {
 		String site = getPara();
-		
+
 		JSONObject json = new JSONObject();
 		json.put("status", 2);// 失败
 
@@ -186,26 +181,23 @@ public class PersonController extends BaseProjectController {
 			renderJson(json.toJSONString());
 			return;
 		}
-		
+
 		// 更新后台数据
 		SysUser user = (SysUser) getSessionUser();
 		int userid = user.getUserid();
 		SysUser model = SysUser.dao.findById(userid);
 		// 日志添加
-		model.put("update_id", getSessionUser().getUserID());
+		model.put("update_id", getSessionUser().getUserid());
 		model.put("update_time", getNow());
 		model.set("back_site_id", site);
 		model.update();
-		
-		// 设置后台站点缓存
-		SessionSite sessionSite = getSessionSite();
-		int backSiteId = NumberUtils.parseInt(site);
-		sessionSite.setBackSiteId(backSiteId);
-		sessionSite.setBackModel(TbSite.dao.findById(backSiteId));
-		setSessionSite(sessionSite);
-		
+
+		UserCache.init(); // 设置缓存
+
+		setSessionUser(model); // 设置session
+
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
 	}
-	
+
 }

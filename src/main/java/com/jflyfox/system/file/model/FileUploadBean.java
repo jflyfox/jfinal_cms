@@ -35,7 +35,7 @@ public class FileUploadBean implements Serializable {
 	public String getPath() {
 		return factpath.replace(FileUploadUtils.getRootPath(), "");
 	}
-	
+
 	public String getFactpath() {
 		return factpath;
 	}

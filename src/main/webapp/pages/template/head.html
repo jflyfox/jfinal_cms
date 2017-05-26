@@ -34,14 +34,8 @@
 <link href="static/common/main.css" rel="stylesheet" type="text/css" />
 
 <!-- 系统样式 -->
-<% if(jflyfox_theme=='inverse') {
-		include("/static/theme/inverse.html"){}
-	}else if(jflyfox_theme=='flat-ui'){
-		include("/static/theme/flat-ui.html"){}
-	}else if(jflyfox_theme=='flat'){
-		include("/static/theme/flat.html"){}
-	}else{
-		include("/static/theme/default.html"){}
-	}
-
+<% 
+	var theme_file = "/static/theme/" + jflyfox_theme + ".html";
+	include(theme_file){}
+	// 需要调整分页样式，文件管理样式
 %>

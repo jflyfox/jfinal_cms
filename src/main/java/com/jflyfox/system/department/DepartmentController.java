@@ -76,7 +76,7 @@ public class DepartmentController extends BaseProjectController {
 
 		// 日志添加
 		SysDepartment model = new SysDepartment();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -100,7 +100,7 @@ public class DepartmentController extends BaseProjectController {
 		SysDepartment model = getModel(SysDepartment.class);
 
 		// 日志添加
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.set("update_id", userid);
 		model.set("update_time", now);

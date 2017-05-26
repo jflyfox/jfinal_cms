@@ -75,7 +75,7 @@ public class ConfigController extends BaseController {
 	public void delete() {
 		Integer pid = getParaToInt();
 		SysConfig model = new SysConfig();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -101,7 +101,7 @@ public class ConfigController extends BaseController {
 		Integer pid = getParaToInt();
 		SysConfig model = getModel(SysConfig.class);
 
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

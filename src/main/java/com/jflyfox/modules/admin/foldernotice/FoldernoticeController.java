@@ -30,7 +30,7 @@ public class FoldernoticeController extends BaseProjectController {
 			sql.whereEquals("folder_id", model.getInt("folder_id"));
 		}
 		// 站点设置
-		sql.append(" and site_id = " + getSessionSite().getBackSiteId());
+		sql.append(" and site_id = " + getSessionUser().getBackSiteId());
 
 		// 排序
 		String orderBy = getBaseForm().getOrderBy();
@@ -69,7 +69,7 @@ public class FoldernoticeController extends BaseProjectController {
 
 	public void delete() {
 		TbFolderNotice model = TbFolderNotice.dao.findById(getParaToInt());
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -93,7 +93,7 @@ public class FoldernoticeController extends BaseProjectController {
 		Integer pid = getParaToInt();
 		TbFolderNotice model = getModel(TbFolderNotice.class);
 
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

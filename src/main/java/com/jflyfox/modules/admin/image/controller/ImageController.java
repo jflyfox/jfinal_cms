@@ -85,7 +85,7 @@ public class ImageController extends BaseProjectController {
 	public void delete() {
 		// 日志添加
 		TbImage model = new TbImage();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -104,7 +104,7 @@ public class ImageController extends BaseProjectController {
 		int id = getParaToInt();
 		// 日志添加
 		TbImage model = new TbImage();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -129,7 +129,7 @@ public class ImageController extends BaseProjectController {
 	}
 
 	public void save() {
-		TbSite site = getSessionSite().getBackModel();
+		TbSite site = getBackSite();
 		UploadFile uploadImage = getFile("model.image_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
 		
 		Integer pid = getParaToInt();
@@ -160,7 +160,7 @@ public class ImageController extends BaseProjectController {
 			model.setLinkurl(linkUrl.replace("\\", "/"));
 		}
 		
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -194,7 +194,7 @@ public class ImageController extends BaseProjectController {
 				TbImageTags tag = new TbImageTags();
 				tag.put("tagname", tagname);
 				tag.put("image_id", model.getInt("id"));
-				tag.put("create_id", getSessionUser().getUserID());
+				tag.put("create_id", getSessionUser().getUserid());
 				tag.put("create_time", getNow());
 				tag.save();
 

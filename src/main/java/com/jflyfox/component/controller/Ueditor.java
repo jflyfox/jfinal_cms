@@ -15,7 +15,7 @@ public class Ueditor extends BaseProjectController {
 
 		// 路径处理
 		TbSite site = getSessionSite().getModel();
-		int userid = getSessionUser() == null ? 0 : getSessionUser().getUserID();
+		int userid = getSessionUser() == null ? 0 : getSessionUser().getUserid();
 		// 上传类型
 		String actionType = getPara("action");
 		int actionCode = ActionMap.getType(actionType);

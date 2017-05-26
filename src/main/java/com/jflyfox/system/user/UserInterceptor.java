@@ -37,13 +37,7 @@ public class UserInterceptor implements Interceptor {
 		}
 
 		String tmpPath = ai.getActionKey();
-
-		if (tmpPath.startsWith("/")) {
-			tmpPath = tmpPath.substring(1, tmpPath.length());
-		}
-		if (tmpPath.endsWith("/")) {
-			tmpPath = tmpPath.substring(0, tmpPath.length() - 1);
-		}
+		tmpPath = JFlyFoxUtils.handlerPath(tmpPath);
 
 		// 每次访问获取session，没有可以从cookie取~
 		SysUser user = null;

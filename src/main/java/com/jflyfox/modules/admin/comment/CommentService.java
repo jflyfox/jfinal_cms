@@ -48,7 +48,7 @@ public class CommentService extends BaseService {
 		int status;
 		if (comment.getInt("reply_userid") == 0) {
 			// 评论自己文章 标记为已读
-			status = (user.getUserID() == comment.getInt("create_id") ? CommentContants.STATUS_READ
+			status = (user.getUserid() == comment.getInt("create_id") ? CommentContants.STATUS_READ
 					: CommentContants.STATUS_NO_READ);
 			// 设置 回复人为文章创建者
 			comment.put("reply_userid", comment.getInt("create_id"));
@@ -58,7 +58,7 @@ public class CommentService extends BaseService {
 		comment.put("status", status);
 
 		// comment.put("fatherId", 0);
-		comment.put("create_id", user.getUserID());
+		comment.put("create_id", user.getUserid());
 		comment.put("create_time", DateUtils.getNow(DateUtils.DEFAULT_REGEX_YYYY_MM_DD_HH_MIN_SS));
 		comment.save();
 

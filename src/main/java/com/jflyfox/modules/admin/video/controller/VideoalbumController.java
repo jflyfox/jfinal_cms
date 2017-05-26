@@ -67,7 +67,7 @@ public class VideoalbumController extends BaseProjectController {
 	public void delete() {
 		// 日志添加
 		TbVideoAlbum model = new TbVideoAlbum();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -92,7 +92,7 @@ public class VideoalbumController extends BaseProjectController {
 		
 		// 日志添加
 		TbVideoAlbum model = new TbVideoAlbum();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -115,7 +115,7 @@ public class VideoalbumController extends BaseProjectController {
 		Integer pid = getParaToInt();
 		TbVideoAlbum model = getModel(TbVideoAlbum.class);
 
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

@@ -66,7 +66,7 @@ public class CommentController extends BaseProjectController {
 	public void delete() {
 		// 日志添加
 		TbComment model = new TbComment();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -88,7 +88,7 @@ public class CommentController extends BaseProjectController {
 		TbComment model = getModel(TbComment.class);
 
 		// 日志添加
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

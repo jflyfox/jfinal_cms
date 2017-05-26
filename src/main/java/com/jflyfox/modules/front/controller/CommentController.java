@@ -80,7 +80,7 @@ public class CommentController extends BaseProjectController {
 		json.put("title_url", user.getStr("title_url"));
 		json.put("reply_userid", comment.getInt("reply_userid"));
 		json.put("reply_username", UserCache.getUser(comment.getInt("reply_userid")).getUserName());
-		json.put("create_id", user.getUserID());
+		json.put("create_id", user.getUserid());
 		json.put("create_name", user.getUserName());
 		json.put("create_time", comment.getStr("create_time"));
 		json.put("status", 1);// 成功

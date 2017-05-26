@@ -55,7 +55,7 @@ public class ContactController extends BaseProjectController {
 
 	public void delete() {
 		TbContact model = new TbContact();
-		Integer userid= getSessionUser().getUserID();
+		Integer userid= getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -75,7 +75,7 @@ public class ContactController extends BaseProjectController {
 		TbContact model = getModel(TbContact.class);
 		
 		
-		Integer userid= getSessionUser().getUserID();
+		Integer userid= getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

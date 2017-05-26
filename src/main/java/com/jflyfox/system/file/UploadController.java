@@ -21,7 +21,7 @@ public class UploadController extends BaseProjectController {
 
 	// FTP上传到文件服务器
 	public void index() {
-		TbSite site = getSessionSite().getBackModel();
+		TbSite site = getBackSite();
 		List<UploadFile> list = getFiles(FileUploadUtils.getUploadTmpPath(site), 10 * 1024 * 1024);
 		// 上传路径设置
 		String uploadPath = getPara("uploadPath");

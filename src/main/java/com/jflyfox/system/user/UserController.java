@@ -81,7 +81,7 @@ public class UserController extends BaseProjectController {
 		// 日志添加
 		SysUser model = new SysUser();
 		String now = getNow();
-		model.put("update_id", getSessionUser().getUserID());
+		model.put("update_id", getSessionUser().getUserid());
 		model.put("update_time", now);
 
 		// 删除授权
@@ -107,7 +107,7 @@ public class UserController extends BaseProjectController {
 		SysUser model = getModel(SysUser.class);
 
 		// 日志添加
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -152,7 +152,7 @@ public class UserController extends BaseProjectController {
 		int userid = getParaToInt("userid");
 		String roleids = getPara("roleids");
 
-		new UserSvc().saveAuth(userid, roleids, getSessionUser().getUserID());
+		new UserSvc().saveAuth(userid, roleids, getSessionUser().getUserid());
 		renderMessage("保存成功");
 	}
 

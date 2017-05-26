@@ -190,9 +190,9 @@ public abstract class BaseProjectController extends BaseController {
 		// 获取用户设置的SITE对象，设置默认
 		if (sessionSite == null) {
 			sessionSite = new SessionSite();
-			int defaultSiteId = new SiteService().getDefaultId();
-			sessionSite.setBackSiteId(defaultSiteId);
-			sessionSite.setSiteId(defaultSiteId);
+			TbSite defaultSite = new SiteService().getDefaultSite();
+			sessionSite.setModel(defaultSite);
+			sessionSite.setSiteId(defaultSite.getId());
 			setSessionAttr(SiteConstant.getSessionSite(), sessionSite);
 		}
 		return sessionSite;
@@ -202,13 +202,24 @@ public abstract class BaseProjectController extends BaseController {
 		setSessionAttr(SiteConstant.getSessionSite(), sessionSite);
 		return sessionSite;
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public TbSite getBackSite() {
+		SessionUser user = getSessionUser();
+		if (user == null) {
+			return null;
+		}
+
+		TbSite site = new SiteService().getSite(user.getBackSiteId());
+		return site;
+	}
 
 	public String selectFolder(Integer selected) {
-		return new FolderService().selectFolder(selected, getSessionSite().getBackSiteId());
+		return new FolderService().selectFolder(selected, getSessionUser().getBackSiteId());
 	}
 
 	public String selectFolder(Integer selected, Integer selfId) {
-		return new FolderService().selectFolder(selected, selfId, getSessionSite().getBackSiteId());
+		return new FolderService().selectFolder(selected, selfId, getSessionUser().getBackSiteId());
 	}
 
 	/**
@@ -271,7 +282,7 @@ public abstract class BaseProjectController extends BaseController {
 		String fileUrl = "";
 		String projectStorePath = FileUploadUtils.getUploadPath(site, appendPath);
 		FileUploadBean uploadBean = new FileUploadService().uploadHandle(projectStorePath, uploadFile, getSessionUser()
-				.getUserID());
+				.getUserid());
 		if (uploadBean != null) {
 			fileUrl = projectStorePath + File.separator + uploadBean.getName();
 		}

@@ -55,7 +55,7 @@ public class FriendlylinkController extends BaseProjectController {
 
 	public void delete() {
 		TbFriendlylink model = new TbFriendlylink();
-		Integer userid= getSessionUser().getUserID();
+		Integer userid= getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -75,7 +75,7 @@ public class FriendlylinkController extends BaseProjectController {
 		Integer pid = getParaToInt();
 		TbFriendlylink model = getModel(TbFriendlylink.class);
 		
-		Integer userid= getSessionUser().getUserID();
+		Integer userid= getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

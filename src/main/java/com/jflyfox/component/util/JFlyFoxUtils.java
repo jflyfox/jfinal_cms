@@ -20,7 +20,7 @@ public class JFlyFoxUtils {
 	 * 文章是否需要审核
 	 */
 	public static final boolean ARTICLE_APPROVE = Config.getToBoolean("CMS.ARTICLE_APPROVE");
-	
+
 	/**
 	 * 承建部门ID
 	 */
@@ -35,12 +35,12 @@ public class JFlyFoxUtils {
 	 * 第三方Oauth2部门ID
 	 */
 	public static final int DEPART_THIRD_ID = 3;
-	
+
 	/**
 	 * 正常
 	 */
 	public static final int USER_STATE_NORMAL = 10;
-	
+
 	/**
 	 * 管理员
 	 */
@@ -65,7 +65,6 @@ public class JFlyFoxUtils {
 	 * 其他用户
 	 */
 	public static final int USER_TYPE_OTHER = 9;
-	
 
 	/**
 	 * session唯一Key
@@ -80,9 +79,9 @@ public class JFlyFoxUtils {
 	public static final int MENU_BLOG = 100;
 
 	public static final int IS_DELETED_NO = 1;
-	
+
 	public static final int IS_DELETED_YES = 2;
-	
+
 	/**
 	 * 目录类型
 	 */
@@ -186,7 +185,24 @@ public class JFlyFoxUtils {
 		return htmlStr.trim();
 	}
 
-	
+	/**
+	 * url处理
+	 * 
+	 * 2017年4月7日 下午4:40:26 flyfox 369191470@qq.com
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public static String handlerPath(String path) {
+		if (path.startsWith("/")) {
+			path = path.substring(1, path.length());
+		}
+		if (path.endsWith("/")) {
+			path = path.substring(0, path.length() - 1);
+		}
+		return path;
+	}
+
 	/**
 	 * 是否是后台请求地址
 	 * 
@@ -197,15 +213,17 @@ public class JFlyFoxUtils {
 	 */
 	public static boolean isBack(String path) {
 		// 后台不需要认证页面
-		if (path.startsWith("admin/login")  //
+		if (path.startsWith("admin/login") //
 				|| path.startsWith("admin/logout") //
 				|| path.startsWith("admin/trans")) {
 			return false;
 		}
-		
+
 		return StrUtils.isNotEmpty(path) // 空是首页
 				&& (path.startsWith("system/") // 系统管理
 				|| path.startsWith("admin/") // 后台管理
+				|| path.startsWith("report/") // 报表管理
+				|| path.startsWith("demo/") // 演示地址
 				);
 	}
 }

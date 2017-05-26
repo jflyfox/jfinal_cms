@@ -33,7 +33,7 @@ public class FolderrollpictureController extends BaseProjectController {
 			sql.whereEquals("folder_id", model.getInt("folder_id"));
 		}
 		// 站点设置
-		sql.append(" and site_id = " + getSessionSite().getBackSiteId());
+		sql.append(" and site_id = " + getSessionUser().getBackSiteId());
 
 		// 排序
 		String orderBy = getBaseForm().getOrderBy();
@@ -73,7 +73,7 @@ public class FolderrollpictureController extends BaseProjectController {
 
 	public void delete() {
 		TbFolderRollPicture model = TbFolderRollPicture.dao.findById(getParaToInt());
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -95,7 +95,7 @@ public class FolderrollpictureController extends BaseProjectController {
 	}
 
 	public void save() {
-		TbSite site = getSessionSite().getBackModel();
+		TbSite site = getBackSite();
 		UploadFile uploadImage = getFile("model.image_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
 
 		Integer pid = getParaToInt();
@@ -107,7 +107,7 @@ public class FolderrollpictureController extends BaseProjectController {
 			model.set("image_url", fileUrl);
 		}
 
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);

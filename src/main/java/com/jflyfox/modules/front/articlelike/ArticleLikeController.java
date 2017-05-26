@@ -39,15 +39,15 @@ public class ArticleLikeController extends BaseProjectController {
 
 		// 不存在就创建
 		TbArticleLike model = TbArticleLike.dao.findFirstByWhere(" where article_id = ? and create_id = ? " //
-				, articleId, user.getUserID());
+				, articleId, user.getUserid());
 		if (model == null) {
 			model = new TbArticleLike();
 			model.setArticleId(articleId);
-			model.setCreateId(getSessionUser().getUserID());
+			model.setCreateId(getSessionUser().getUserid());
 			model.setCreateTime(getNow());
 			model.save();
 			// 添加缓存
-			new ArticleLikeCache().add(user.getUserID(), articleId);
+			new ArticleLikeCache().add(user.getUserid(), articleId);
 		}
 
 		json.put("status", 1);// 成功
@@ -80,11 +80,11 @@ public class ArticleLikeController extends BaseProjectController {
 
 		// 存在删除对象
 		TbArticleLike model = TbArticleLike.dao.findFirstByWhere(" where article_id = ? and create_id = ? " //
-				, articleId, user.getUserID());
+				, articleId, user.getUserid());
 		if (model != null) {
 			model.delete();
 			// 删除缓存
-			new ArticleLikeCache().delete(user.getUserID(), articleId);
+			new ArticleLikeCache().delete(user.getUserid(), articleId);
 		}
 
 		json.put("status", 1);// 成功

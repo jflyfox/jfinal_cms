@@ -44,7 +44,7 @@ public class ArticleController extends BaseProjectController {
 			sql.whereEquals("status", model.getInt("status"));
 		}
 		// 站点设置
-		int siteId = getSessionSite().getBackSiteId();
+		int siteId = getSessionUser().getBackSiteId();
 		sql.append(" and site_id = " + siteId);
 
 		// 排序
@@ -94,7 +94,7 @@ public class ArticleController extends BaseProjectController {
 		new CommentService().deleteComment(id);
 		// 删除文章
 		TbArticle model = new TbArticle();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -114,7 +114,7 @@ public class ArticleController extends BaseProjectController {
 	}
 
 	public void save() {
-		TbSite site = getSessionSite().getBackModel();
+		TbSite site = getBackSite();
 		UploadFile uploadImage = getFile("model.image_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
 
 		UploadFile uploadFile = getFile("model.file_url", FileUploadUtils.getUploadTmpPath(site), FileUploadUtils.UPLOAD_MAX);
@@ -143,7 +143,7 @@ public class ArticleController extends BaseProjectController {
 			}
 		}
 
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -242,7 +242,7 @@ public class ArticleController extends BaseProjectController {
 				TbTags tbTags = new TbTags();
 				tbTags.put("tagname", tagname);
 				tbTags.put("article_id", model.getInt("id"));
-				tbTags.put("create_id", getSessionUser().getUserID());
+				tbTags.put("create_id", getSessionUser().getUserid());
 				tbTags.put("create_time", getNow());
 				tbTags.save();
 
@@ -268,7 +268,7 @@ public class ArticleController extends BaseProjectController {
 		}
 		
 		// 站点设置
-		int siteId = getSessionSite().getBackSiteId();
+		int siteId = getSessionUser().getBackSiteId();
 		sql.append(" and site_id = " + siteId);
 
 		// 排序
@@ -288,7 +288,7 @@ public class ArticleController extends BaseProjectController {
 		setAttr("page", page);
 		setAttr("attr", model);
 
-		List<TbFolder> folders = new FolderService().getFolders(getSessionSite().getBackSiteId());
+		List<TbFolder> folders = new FolderService().getFolders(getSessionUser().getBackSiteId());
 		setAttr("folders", folders);
 
 		render(path + "list_approve.html");
@@ -297,7 +297,7 @@ public class ArticleController extends BaseProjectController {
 	public void save_approve() {
 		TbArticle model = TbArticle.dao.findById(getParaToInt());
 		int approveStatus = getParaToInt("approve_status");
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
@@ -320,7 +320,7 @@ public class ArticleController extends BaseProjectController {
 
 	public void copy() {
 		int id = getParaToInt();
-		Integer userid = getSessionUser().getUserID();
+		Integer userid = getSessionUser().getUserid();
 		String folders = getPara("folders");
 		// 复制
 		new ArticleService().copy(id, userid, folders);
