@@ -178,10 +178,6 @@
 							<targetPath>WEB-INF/classes</targetPath>
 							<directory>src/main/resources</directory>
 						</resource>
-						<resource>
-							<targetPath>WEB-INF/lib</targetPath>
-							<directory>libs</directory>
-						</resource>
 					</webResources>
 				</configuration>
 			</plugin>
