@@ -4,7 +4,7 @@
 	<groupId>com.jflyfox</groupId>
 	<artifactId>jfinal_cms</artifactId>
 	<packaging>war</packaging>
-	<version>4.5.0</version>
+	<version>4.6.0</version>
 
 	<properties>
 		<!-- 文件拷贝时的编码 -->
