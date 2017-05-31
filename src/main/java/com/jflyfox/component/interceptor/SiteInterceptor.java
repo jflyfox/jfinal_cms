@@ -1,7 +1,5 @@
 package com.jflyfox.component.interceptor;
 
-import java.util.List;
-
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
@@ -10,6 +8,8 @@ import com.jflyfox.modules.admin.site.SessionSite;
 import com.jflyfox.modules.admin.site.SiteConstant;
 import com.jflyfox.modules.admin.site.SiteService;
 import com.jflyfox.modules.admin.site.TbSite;
+
+import java.util.List;
 
 /**
  * 站点认证拦截器
@@ -27,6 +27,10 @@ public class SiteInterceptor implements Interceptor {
 
 		SessionSite sessionSite = controller.getSessionAttr(SiteConstant.getSessionSite());
 		TbSite defaultSite = siteSvc.getDefaultSite();
+		if (defaultSite == null) {
+			throw new RuntimeException("nout set default site");
+		}
+
 		// 如果修改了默认站点，重新设置site session
 		if (sessionSite != null && defaultSite.getId() != sessionSite.getSiteDefalutId()) {
 			sessionSite = null;
@@ -76,7 +80,7 @@ public class SiteInterceptor implements Interceptor {
 			}
 
 			// 没有就用默认的,设置站点对象
-			if (siteId == 0 && defaultSite != null) {
+			if (siteId == 0) {
 				sessionSite.setSiteId(defaultSite.getId());
 				sessionSite.setModel(defaultSite);
 			}
@@ -86,16 +90,6 @@ public class SiteInterceptor implements Interceptor {
 		}
 
 		ai.invoke();
-	}
-
-	protected TbSite getSite(List<TbSite> sites, int siteId) {
-		// 设置站点对象
-		for (TbSite tmpSite : sites) {
-			if (siteId == tmpSite.getId()) {
-				return tmpSite;
-			}
-		}
-		return null;
 	}
 
 }
