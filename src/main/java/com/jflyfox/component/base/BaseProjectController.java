@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 package com.jflyfox.component.base;
 
@@ -46,10 +46,10 @@ import java.util.Map;
 
 /**
  * 项目BaseControler
- * 
+ *
  * @author flyfox
  * @date 2015-08-02
- * 
+ *
  */
 public abstract class BaseProjectController extends BaseController {
 
@@ -86,9 +86,9 @@ public abstract class BaseProjectController extends BaseController {
 
 	/**
 	 * 方法重写
-	 * 
+	 *
 	 * 2015年8月2日 下午3:17:29 flyfox 369191470@qq.com
-	 * 
+	 *
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
@@ -122,13 +122,19 @@ public abstract class BaseProjectController extends BaseController {
 
 	/**
 	 * 方法重写
-	 * 
+	 *
 	 * 2015年8月2日 下午3:17:29 flyfox 369191470@qq.com
-	 * 
+	 *
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
 	public SessionUser setSessionUser(SessionUser user) {
+		// 单站点设置
+		if (!SiteConstant.isMultiSite()) {
+			TbSite defaultSite = new SiteService().getDefaultSite();
+			user.set("back_site_id", defaultSite.getId());
+		}
+
 		setSessionAttr(Attr.SESSION_NAME, user);
 		// 设置cookie，用id+password作为
 		SysUser sysUser = (SysUser) user;
@@ -149,9 +155,9 @@ public abstract class BaseProjectController extends BaseController {
 
 	/**
 	 * 方法重写
-	 * 
+	 *
 	 * 2015年8月2日 下午3:17:29 flyfox 369191470@qq.com
-	 * 
+	 *
 	 * @return
 	 */
 	public void removeSessionUser() {
@@ -162,9 +168,9 @@ public abstract class BaseProjectController extends BaseController {
 
 	/**
 	 * 用户登录，登出记录
-	 * 
+	 *
 	 * 2015年10月16日 下午2:36:39 flyfox 369191470@qq.com
-	 * 
+	 *
 	 * @param user
 	 * @param operType
 	 */
@@ -202,7 +208,7 @@ public abstract class BaseProjectController extends BaseController {
 		setSessionAttr(SiteConstant.getSessionSite(), sessionSite);
 		return sessionSite;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public TbSite getBackSite() {
 		SessionUser user = getSessionUser();
@@ -224,9 +230,9 @@ public abstract class BaseProjectController extends BaseController {
 
 	/**
 	 * 公共文章查询sql
-	 * 
+	 *
 	 * 2016年3月19日 下午7:03:11 flyfox 369191470@qq.com
-	 * 
+	 *
 	 * @return
 	 */
 	public String getPublicWhere() {
@@ -257,9 +263,9 @@ public abstract class BaseProjectController extends BaseController {
 
 	/**
 	 * 是否是管理员
-	 * 
+	 *
 	 * 2017年1月21日 下午11:55:16 flyfox 369191470@qq.com
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -270,9 +276,9 @@ public abstract class BaseProjectController extends BaseController {
 
 	/**
 	 * 文件上传处理
-	 * 
+	 *
 	 * 2017年4月5日 上午4:36:20 flyfox 369191470@qq.com
-	 * 
+	 *
 	 * @param site
 	 * @param uploadFile
 	 * @param appendPath
