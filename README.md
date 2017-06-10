@@ -38,19 +38,8 @@ github地址：https://github.com/jflyfox/jfinal_cms_api_client
 
 码云地址：https://git.oschina.net/jflyfox/jfinal_cms_api_client
 
-其他说明
-------------------------
-
-两个依赖项目jflyfox_base，jflyfox_jfinal。前者是String，Number,Date等公共方法封装，后者是对jfinal和一些公用方法的简单封装
-
-源码地址：
-> http://git.oschina.net/flyfox/jflyfox_jfinal 
-
-> http://git.oschina.net/flyfox/jflyfox_base
-
 演示效果截图
 ------------------------
-
 
 #### 网站CMS地址：[http://mtg.jflyfox.com/](http://mtg.jflyfox.com/) ####
 ![网站](http://static.oschina.net/uploads/img/201601/21022316_Nk5M.gif "jfinal cms")
