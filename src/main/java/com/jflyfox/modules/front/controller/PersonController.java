@@ -272,8 +272,8 @@ public class PersonController extends BaseProjectController {
 		model.setUpdateTime(getNow());
 		if (pid != null && pid > 0) { // 更新
 			// 管理员或者自己才能修改
-			if (isAdmin(user) //
-					|| model.getCreateId().intValue() == user.getUserid().intValue()) {
+			if (!isAdmin(user) //
+					&& model.getCreateId().intValue() != user.getUserid().intValue()) {
 				json.put("msg", "你没有权限修改博文！");
 				renderJson(json.toJSONString());
 				return;
