@@ -52,7 +52,7 @@ public class ArticleController extends BaseProjectController {
 		if (StrUtils.isEmpty(orderBy)) {
 			sql.append(" order by t.folder_id,t.sort,t.create_time desc ");
 		} else {
-			sql.append(" order by ").append(orderBy);
+			sql.append(" order by t.").append(orderBy);
 		}
 
 		Page<TbArticle> page = TbArticle.dao.paginate(getPaginator(), "select t.*,f.name as folderName ", //
