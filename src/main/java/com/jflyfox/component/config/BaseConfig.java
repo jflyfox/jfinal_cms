@@ -205,32 +205,22 @@ public class BaseConfig extends JFinalConfig {
 	public void afterJFinalStart() {
 		super.afterJFinalStart();
 
-		JFlyFoxCache.init();
-		System.out.println("##################################");
-		System.out.println("############系统启动完成##########");
-		System.out.println("##################################");
-	}
-
-	@Override
-	public void beforeJFinalStop() {
-		super.afterJFinalStart();
-
 		// 初始化Cache为fst序列化
 		SerializerManage.add("fst", new FSTSerializer());
-		
+
 		// 设置序列化工具
 		String defaultKey = Config.getStr("CACHE.SERIALIZER.DEFAULT");
 		defaultKey = StrUtils.isEmpty(defaultKey) ? "java" : defaultKey;
 		SerializerManage.setDefaultKey(defaultKey);
 
-		
+
 		// 设置缓存
 		CacheManager.setCache(new ICacheManager() {
 
 			public Cache getCache() {
 				String cacheName = Config.getStr("CACHE.NAME");
-				cacheName = StrUtils.isEmpty(cacheName) ? "MemorySerializeCache" : cacheName; 
-				
+				cacheName = StrUtils.isEmpty(cacheName) ? "MemorySerializeCache" : cacheName;
+
 				if ("MemorySerializeCache".equals(cacheName)) {
 					return new MemorySerializeCache();
 				} else if ("MemoryCache".equals(cacheName)) {
@@ -243,8 +233,19 @@ public class BaseConfig extends JFinalConfig {
 			}
 		});
 
+		JFlyFoxCache.init();
+		System.out.println("##################################");
+		System.out.println("############系统启动完成##########");
+		System.out.println("##################################");
+	}
+
+	@Override
+	public void beforeJFinalStop() {
+
 		// 关闭模板
 		// BeetlRenderFactory.groupTemplate.close();
+
+		super.beforeJFinalStop();
 
 		System.out.println("##################################");
 		System.out.println("############系统停止完成##########");

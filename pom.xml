@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal</artifactId>
-			<version>3.0</version>
+			<version>3.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfinal</groupId>

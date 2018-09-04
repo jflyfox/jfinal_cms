@@ -239,7 +239,7 @@ public class BaseModel<M extends Model<M>> extends Model<M> {
 	}
 
 	public Map<String, Object> getAttrs() {
-		return super.getAttrs();
+		return super._getAttrs();
 	}
 
 	public Object[] getAttrValues() {
