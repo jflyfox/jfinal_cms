@@ -1,6 +1,10 @@
 Change Log 更新说明
 ------------------------------
 
+## 2018-09-04 jfinal cms4.7.1
+1. jfinal 改为最新3.4版本
+2. 修复启动缓存设置不生效bug
+
 ## 2017-06-11 jfinal cms4.7.0
 1. 去除jflyfox_jfinal和jflyfox_base项目依赖，将代码合并并重构
 
