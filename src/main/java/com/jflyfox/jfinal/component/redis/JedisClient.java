@@ -16,15 +16,15 @@ import com.jflyfox.util.StrUtils;
 import com.jflyfox.util.serializable.SerializerManage;
 
 /**
- * redis客户端
+ * redis瀹㈡埛绔�
  * 
- * 2016年5月10日 下午2:34:30 flyfox 330627517@qq.com
+ * 2016骞�5鏈�10鏃� 涓嬪崍2:34:30 flyfox 330627517@qq.com
  */
 public class JedisClient {
 
 	private static Log logger = Log.getLog(JedisClient.class);
 
-	private static JedisClient instance = null;
+	private static volatile JedisClient instance = null;
 
 	public static JedisClient getInstance() {
 		if (instance == null) {
@@ -209,7 +209,7 @@ public class JedisClient {
 	}
 
 	/**
-	 * 移除给定的key
+	 * 绉婚櫎缁欏畾鐨刱ey
 	 * 
 	 * @param key
 	 */
@@ -220,7 +220,7 @@ public class JedisClient {
 	}
 	
 	/**
-	 * 移除给定的key
+	 * 绉婚櫎缁欏畾鐨刱ey
 	 * 
 	 * @param key
 	 */
@@ -243,7 +243,7 @@ public class JedisClient {
 	}
 	
 	/**
-	 * 移除给定key的生存时间 将这个 key 从『易失的』(带生存时间 key )转换成『持久的』(一个不带生存时间、永不过期的 key )
+	 * 绉婚櫎缁欏畾key鐨勭敓瀛樻椂闂� 灏嗚繖涓� key 浠庛�庢槗澶辩殑銆�(甯︾敓瀛樻椂闂� key )杞崲鎴愩�庢寔涔呯殑銆�(涓�涓笉甯︾敓瀛樻椂闂淬�佹案涓嶈繃鏈熺殑 key )
 	 * 
 	 * @param key
 	 */
@@ -254,12 +254,12 @@ public class JedisClient {
 	}
 
 	/**
-	 * 批量将值插入sorted sets中，如果member对应的value不存在，则初始化，否则更新此member对应value
+	 * 鎵归噺灏嗗�兼彃鍏orted sets涓紝濡傛灉member瀵瑰簲鐨剉alue涓嶅瓨鍦紝鍒欏垵濮嬪寲锛屽惁鍒欐洿鏂版member瀵瑰簲value
 	 * 
 	 * @param key
-	 *            jedis中key
+	 *            jedis涓璳ey
 	 * @param scoreMembers
-	 *            添加(修改的)sets , key:score,value:member
+	 *            娣诲姞(淇敼鐨�)sets , key:score,value:member
 	 */
 	public void zadd(String key, Map<String, Double> scoreMembers, int validSecond) {
 		try (Jedis jedis = pool.getResource()) {
@@ -279,17 +279,17 @@ public class JedisClient {
 	}
 
 	/**
-	 * 将一个或多个member元素及其score值加入到有序集key当中。
-	 * 如果某个member已经是有序集的成员，那么更新这个member的score值
-	 * ，并通过重新插入这个member元素，来保证该member在正确的位置上。 score值可以是整数值或双精度浮点数。
-	 * 如果key不存在，则创建一个空的有序集并执行ZADD操作。 当key存在但不是有序集类型时，返回一个错误。
+	 * 灏嗕竴涓垨澶氫釜member鍏冪礌鍙婂叾score鍊煎姞鍏ュ埌鏈夊簭闆唊ey褰撲腑銆�
+	 * 濡傛灉鏌愪釜member宸茬粡鏄湁搴忛泦鐨勬垚鍛橈紝閭ｄ箞鏇存柊杩欎釜member鐨剆core鍊�
+	 * 锛屽苟閫氳繃閲嶆柊鎻掑叆杩欎釜member鍏冪礌锛屾潵淇濊瘉璇ember鍦ㄦ纭殑浣嶇疆涓娿�� score鍊煎彲浠ユ槸鏁存暟鍊兼垨鍙岀簿搴︽诞鐐规暟銆�
+	 * 濡傛灉key涓嶅瓨鍦紝鍒欏垱寤轰竴涓┖鐨勬湁搴忛泦骞舵墽琛孼ADD鎿嶄綔銆� 褰搆ey瀛樺湪浣嗕笉鏄湁搴忛泦绫诲瀷鏃讹紝杩斿洖涓�涓敊璇��
 	 * 
 	 * @param key
-	 *            jedis中对应的key
+	 *            jedis涓搴旂殑key
 	 * @param score
-	 *            分数，double
+	 *            鍒嗘暟锛宒ouble
 	 * @param member
-	 *            当前分数对应的对象
+	 *            褰撳墠鍒嗘暟瀵瑰簲鐨勫璞�
 	 */
 	public void zadd(String key, double score, String member, int validSecond) {
 		try (Jedis jedis = pool.getResource()) {
@@ -299,17 +299,17 @@ public class JedisClient {
 	}
 
 	/**
-	 * 将一个或多个member元素及其score值加入到有序集key当中。
-	 * 如果某个member已经是有序集的成员，那么更新这个member的score值
-	 * ，并通过重新插入这个member元素，来保证该member在正确的位置上。 score值可以是整数值或双精度浮点数。
-	 * 如果key不存在，则创建一个空的有序集并执行ZADD操作。 当key存在但不是有序集类型时，返回一个错误。
+	 * 灏嗕竴涓垨澶氫釜member鍏冪礌鍙婂叾score鍊煎姞鍏ュ埌鏈夊簭闆唊ey褰撲腑銆�
+	 * 濡傛灉鏌愪釜member宸茬粡鏄湁搴忛泦鐨勬垚鍛橈紝閭ｄ箞鏇存柊杩欎釜member鐨剆core鍊�
+	 * 锛屽苟閫氳繃閲嶆柊鎻掑叆杩欎釜member鍏冪礌锛屾潵淇濊瘉璇ember鍦ㄦ纭殑浣嶇疆涓娿�� score鍊煎彲浠ユ槸鏁存暟鍊兼垨鍙岀簿搴︽诞鐐规暟銆�
+	 * 濡傛灉key涓嶅瓨鍦紝鍒欏垱寤轰竴涓┖鐨勬湁搴忛泦骞舵墽琛孼ADD鎿嶄綔銆� 褰搆ey瀛樺湪浣嗕笉鏄湁搴忛泦绫诲瀷鏃讹紝杩斿洖涓�涓敊璇��
 	 * 
 	 * @param key
-	 *            jedis中对应的key
+	 *            jedis涓搴旂殑key
 	 * @param score
-	 *            分数，double
+	 *            鍒嗘暟锛宒ouble
 	 * @param member
-	 *            当前分数对应的对象
+	 *            褰撳墠鍒嗘暟瀵瑰簲鐨勫璞�
 	 */
 	public void zadd(String key, double score, String member) {
 		try (Jedis jedis = pool.getResource()) {
@@ -318,16 +318,16 @@ public class JedisClient {
 	}
 	
 	/**
-	 * 返回升序排名的用户名和分数的集合,即分数从最低到最高的排列，分数相等的两个member根据字典排序顺序返回。
-	 * 如果要获取降序排列，请使用Zrevrange接口。 start和stop的名次都是基于0的，也就是0是第一个元素，1是第二个元素，以此类推。
-	 * 他们也可以是负数，表示从sorted set最后开始定位，-1表示最后一个元素，-2表示倒数第二个，以此类推
-	 * 假如说越界了，不会产生错误。如果开始位（start）比整个sorted set都大，或者start大于stop，那么会返回一个空的list。
-	 * 如果stop比真个sorted sets都大，redis会把stop认为是此sorted set中的最后一个元素。
+	 * 杩斿洖鍗囧簭鎺掑悕鐨勭敤鎴峰悕鍜屽垎鏁扮殑闆嗗悎,鍗冲垎鏁颁粠鏈�浣庡埌鏈�楂樼殑鎺掑垪锛屽垎鏁扮浉绛夌殑涓や釜member鏍规嵁瀛楀吀鎺掑簭椤哄簭杩斿洖銆�
+	 * 濡傛灉瑕佽幏鍙栭檷搴忔帓鍒楋紝璇蜂娇鐢╖revrange鎺ュ彛銆� start鍜宻top鐨勫悕娆￠兘鏄熀浜�0鐨勶紝涔熷氨鏄�0鏄涓�涓厓绱狅紝1鏄浜屼釜鍏冪礌锛屼互姝ょ被鎺ㄣ��
+	 * 浠栦滑涔熷彲浠ユ槸璐熸暟锛岃〃绀轰粠sorted set鏈�鍚庡紑濮嬪畾浣嶏紝-1琛ㄧず鏈�鍚庝竴涓厓绱狅紝-2琛ㄧず鍊掓暟绗簩涓紝浠ユ绫绘帹
+	 * 鍋囧璇磋秺鐣屼簡锛屼笉浼氫骇鐢熼敊璇�傚鏋滃紑濮嬩綅锛坰tart锛夋瘮鏁翠釜sorted set閮藉ぇ锛屾垨鑰卻tart澶т簬stop锛岄偅涔堜細杩斿洖涓�涓┖鐨刲ist銆�
+	 * 濡傛灉stop姣旂湡涓猻orted sets閮藉ぇ锛宺edis浼氭妸stop璁や负鏄sorted set涓殑鏈�鍚庝竴涓厓绱犮��
 	 * 
 	 * @param key
-	 *            jedis中对应的key
+	 *            jedis涓搴旂殑key
 	 * @param start
-	 *            start index，start with 0,
+	 *            start index锛宻tart with 0,
 	 * @param stop
 	 */
 	public LinkedHashSet<String> zrange(String key, long start, long stop) {
@@ -338,9 +338,9 @@ public class JedisClient {
 	}
 
 	/**
-	 * 返回mem对应的排名(从低到高排名，假如这个哥们分数最低，则返回的是0而不是1) 假如需要获取分数从大到小的排名，请使用方法ZREVRANK
-	 * 假如对应member的在sorted set中存在，返回对应的rank。 如果member不存在，或者key对应的sorted
-	 * set不存在，返回null
+	 * 杩斿洖mem瀵瑰簲鐨勬帓鍚�(浠庝綆鍒伴珮鎺掑悕锛屽亣濡傝繖涓摜浠垎鏁版渶浣庯紝鍒欒繑鍥炵殑鏄�0鑰屼笉鏄�1) 鍋囧闇�瑕佽幏鍙栧垎鏁颁粠澶у埌灏忕殑鎺掑悕锛岃浣跨敤鏂规硶ZREVRANK
+	 * 鍋囧瀵瑰簲member鐨勫湪sorted set涓瓨鍦紝杩斿洖瀵瑰簲鐨剅ank銆� 濡傛灉member涓嶅瓨鍦紝鎴栬�卥ey瀵瑰簲鐨剆orted
+	 * set涓嶅瓨鍦紝杩斿洖null
 	 * 
 	 * @param key
 	 * @param member
@@ -353,9 +353,9 @@ public class JedisClient {
 	}
 
 	/**
-	 * 返回mem对应的排名(从高到低排名，假如这个哥们分数最高，则返回的是0而不是1) 假如需要获取分数从小到大的排名，请使用方法ZRANK
-	 * 假如对应member的在sorted set中存在，返回对应的rank。 如果member不存在，或者key对应的sorted
-	 * set不存在，返回null
+	 * 杩斿洖mem瀵瑰簲鐨勬帓鍚�(浠庨珮鍒颁綆鎺掑悕锛屽亣濡傝繖涓摜浠垎鏁版渶楂橈紝鍒欒繑鍥炵殑鏄�0鑰屼笉鏄�1) 鍋囧闇�瑕佽幏鍙栧垎鏁颁粠灏忓埌澶х殑鎺掑悕锛岃浣跨敤鏂规硶ZRANK
+	 * 鍋囧瀵瑰簲member鐨勫湪sorted set涓瓨鍦紝杩斿洖瀵瑰簲鐨剅ank銆� 濡傛灉member涓嶅瓨鍦紝鎴栬�卥ey瀵瑰簲鐨剆orted
+	 * set涓嶅瓨鍦紝杩斿洖null
 	 * 
 	 * @param key
 	 * @param member
@@ -369,11 +369,11 @@ public class JedisClient {
 	}
 
 	/**
-	 * 返回降序排名的用户名和分数的集合,即分数从最高到最低的排列，分数相等的两个member根据字典排序顺序返回。
-	 * 如果要获取升序排列，请使用Zrevrange接口。 start和stop的名次都是基于0的，也就是0是第一个元素，1是第二个元素，以此类推。
-	 * 他们也可以是负数，表示从sorted set最后开始定位，-1表示最后一个元素，-2表示倒数第二个，以此类推
-	 * 假如说越界了，不会产生错误。如果开始位（start）比整个sorted set都大，或者start大于stop，那么会返回一个空的list。
-	 * 如果stop比真个sorted sets都大，redis会把stop认为是此sorted set中的最后一个元素，即分数最低的元素。
+	 * 杩斿洖闄嶅簭鎺掑悕鐨勭敤鎴峰悕鍜屽垎鏁扮殑闆嗗悎,鍗冲垎鏁颁粠鏈�楂樺埌鏈�浣庣殑鎺掑垪锛屽垎鏁扮浉绛夌殑涓や釜member鏍规嵁瀛楀吀鎺掑簭椤哄簭杩斿洖銆�
+	 * 濡傛灉瑕佽幏鍙栧崌搴忔帓鍒楋紝璇蜂娇鐢╖revrange鎺ュ彛銆� start鍜宻top鐨勫悕娆￠兘鏄熀浜�0鐨勶紝涔熷氨鏄�0鏄涓�涓厓绱狅紝1鏄浜屼釜鍏冪礌锛屼互姝ょ被鎺ㄣ��
+	 * 浠栦滑涔熷彲浠ユ槸璐熸暟锛岃〃绀轰粠sorted set鏈�鍚庡紑濮嬪畾浣嶏紝-1琛ㄧず鏈�鍚庝竴涓厓绱狅紝-2琛ㄧず鍊掓暟绗簩涓紝浠ユ绫绘帹
+	 * 鍋囧璇磋秺鐣屼簡锛屼笉浼氫骇鐢熼敊璇�傚鏋滃紑濮嬩綅锛坰tart锛夋瘮鏁翠釜sorted set閮藉ぇ锛屾垨鑰卻tart澶т簬stop锛岄偅涔堜細杩斿洖涓�涓┖鐨刲ist銆�
+	 * 濡傛灉stop姣旂湡涓猻orted sets閮藉ぇ锛宺edis浼氭妸stop璁や负鏄sorted set涓殑鏈�鍚庝竴涓厓绱狅紝鍗冲垎鏁版渶浣庣殑鍏冪礌銆�
 	 * 
 	 * @param key
 	 * @param start
@@ -388,7 +388,7 @@ public class JedisClient {
 	}
 
 	/**
-	 * 返回指定member对应的分数 如果member不存在，或者key对应的sorted set不存在，则返回null
+	 * 杩斿洖鎸囧畾member瀵瑰簲鐨勫垎鏁� 濡傛灉member涓嶅瓨鍦紝鎴栬�卥ey瀵瑰簲鐨剆orted set涓嶅瓨鍦紝鍒欒繑鍥瀗ull
 	 * 
 	 * @param key
 	 * @param member
@@ -402,10 +402,10 @@ public class JedisClient {
 	}
 
 	/**
-	 * 删除key对应的sorted set中的指定members, 如果member不存在,则不进行任何操作,
-	 * 如果key所对应value不是set,返回错误<br>
+	 * 鍒犻櫎key瀵瑰簲鐨剆orted set涓殑鎸囧畾members, 濡傛灉member涓嶅瓨鍦�,鍒欎笉杩涜浠讳綍鎿嶄綔,
+	 * 濡傛灉key鎵�瀵瑰簲value涓嶆槸set,杩斿洖閿欒<br>
 	 * 
-	 * 返回：实际删除的member个数.P.S:1表示member被删除;0表示member不存在
+	 * 杩斿洖锛氬疄闄呭垹闄ょ殑member涓暟.P.S:1琛ㄧずmember琚垹闄�;0琛ㄧずmember涓嶅瓨鍦�
 	 * 
 	 * @param key
 	 * @param member
@@ -418,8 +418,8 @@ public class JedisClient {
 	}
 
 	/**
-	 * 删除指定key的sorted set中rank位于start和end之间的所有元素.start和end都是基于0的数字,其中rank=0
-	 * 是最低的分数. start和end都可以为负数,表示从最高rank起始的元素,例如:-1为最高分,-2为第二高分等.返回删除元素的个数.
+	 * 鍒犻櫎鎸囧畾key鐨剆orted set涓璻ank浣嶄簬start鍜宔nd涔嬮棿鐨勬墍鏈夊厓绱�.start鍜宔nd閮芥槸鍩轰簬0鐨勬暟瀛�,鍏朵腑rank=0
+	 * 鏄渶浣庣殑鍒嗘暟. start鍜宔nd閮藉彲浠ヤ负璐熸暟,琛ㄧず浠庢渶楂榬ank璧峰鐨勫厓绱�,渚嬪:-1涓烘渶楂樺垎,-2涓虹浜岄珮鍒嗙瓑.杩斿洖鍒犻櫎鍏冪礌鐨勪釜鏁�.
 	 * 
 	 * @param key
 	 * @param start
@@ -433,11 +433,11 @@ public class JedisClient {
 	}
 
 	/**
-	 * 向存于 key 的列表的尾部插入所有指定的值。 如果 key 不存在，那么会创建一个空的列表然后再进行 push 操作。 当 key
-	 * 保存的不是一个列表，那么会返回一个错误。
+	 * 鍚戝瓨浜� key 鐨勫垪琛ㄧ殑灏鹃儴鎻掑叆鎵�鏈夋寚瀹氱殑鍊笺�� 濡傛灉 key 涓嶅瓨鍦紝閭ｄ箞浼氬垱寤轰竴涓┖鐨勫垪琛ㄧ劧鍚庡啀杩涜 push 鎿嶄綔銆� 褰� key
+	 * 淇濆瓨鐨勪笉鏄竴涓垪琛紝閭ｄ箞浼氳繑鍥炰竴涓敊璇��
 	 * 
-	 * 可以使用一个命令把多个元素打入队列，只需要在命令后面指定多个参数。 元素是从左到右一个接一个从列表尾部插入。 比如命令 RPUSH mylist
-	 * a b c 会返回一个列表，其第一个元素是 a ，第二个元素是 b ，第三个元素是 c。
+	 * 鍙互浣跨敤涓�涓懡浠ゆ妸澶氫釜鍏冪礌鎵撳叆闃熷垪锛屽彧闇�瑕佸湪鍛戒护鍚庨潰鎸囧畾澶氫釜鍙傛暟銆� 鍏冪礌鏄粠宸﹀埌鍙充竴涓帴涓�涓粠鍒楄〃灏鹃儴鎻掑叆銆� 姣斿鍛戒护 RPUSH mylist
+	 * a b c 浼氳繑鍥炰竴涓垪琛紝鍏剁涓�涓厓绱犳槸 a 锛岀浜屼釜鍏冪礌鏄� b 锛岀涓変釜鍏冪礌鏄� c銆�
 	 * 
 	 * @param key
 	 * @param values
@@ -450,9 +450,9 @@ public class JedisClient {
 	}
 
 	/**
-	 * 返回存储在 key 的列表里指定范围内的元素。 start 和 end
-	 * 偏移量都是基于0的下标，即list的第一个元素下标是0（list的表头），第二个元素下标是1，以此类推。
-	 * 偏移量也可以是负数，表示偏移量是从list尾部开始计数。 例如， -1 表示列表的最后一个元素，-2 是倒数第二个，以此类推。
+	 * 杩斿洖瀛樺偍鍦� key 鐨勫垪琛ㄩ噷鎸囧畾鑼冨洿鍐呯殑鍏冪礌銆� start 鍜� end
+	 * 鍋忕Щ閲忛兘鏄熀浜�0鐨勪笅鏍囷紝鍗砽ist鐨勭涓�涓厓绱犱笅鏍囨槸0锛坙ist鐨勮〃澶达級锛岀浜屼釜鍏冪礌涓嬫爣鏄�1锛屼互姝ょ被鎺ㄣ��
+	 * 鍋忕Щ閲忎篃鍙互鏄礋鏁帮紝琛ㄧず鍋忕Щ閲忔槸浠巐ist灏鹃儴寮�濮嬭鏁般�� 渚嬪锛� -1 琛ㄧず鍒楄〃鐨勬渶鍚庝竴涓厓绱狅紝-2 鏄�掓暟绗簩涓紝浠ユ绫绘帹銆�
 	 * 
 	 * @param key
 	 * @param start
@@ -466,10 +466,10 @@ public class JedisClient {
 	}
 
 	/**
-	 * 修剪(trim)一个已存在的 list，这样 list 就会只包含指定范围的指定元素。 start 和 stop 都是由0开始计数的， 这里的 0
-	 * 是列表里的第一个元素（表头），1 是第二个元素，以此类推。
+	 * 淇壀(trim)涓�涓凡瀛樺湪鐨� list锛岃繖鏍� list 灏变細鍙寘鍚寚瀹氳寖鍥寸殑鎸囧畾鍏冪礌銆� start 鍜� stop 閮芥槸鐢�0寮�濮嬭鏁扮殑锛� 杩欓噷鐨� 0
+	 * 鏄垪琛ㄩ噷鐨勭涓�涓厓绱狅紙琛ㄥご锛夛紝1 鏄浜屼釜鍏冪礌锛屼互姝ょ被鎺ㄣ��
 	 * 
-	 * 例如： LTRIM foobar 0 2 将会对存储在 foobar 的列表进行修剪，只保留列表里的前3个元素。
+	 * 渚嬪锛� LTRIM foobar 0 2 灏嗕細瀵瑰瓨鍌ㄥ湪 foobar 鐨勫垪琛ㄨ繘琛屼慨鍓紝鍙繚鐣欏垪琛ㄩ噷鐨勫墠3涓厓绱犮��
 	 * 
 	 * @param key
 	 * @param start
@@ -483,8 +483,8 @@ public class JedisClient {
 	}
 
 	/**
-	 * 返回存储在 key 里的list的长度。 如果 key 不存在，那么就被看作是空list，并且返回长度为 0。 当存储在 key
-	 * 里的值不是一个list的话，会返回error。
+	 * 杩斿洖瀛樺偍鍦� key 閲岀殑list鐨勯暱搴︺�� 濡傛灉 key 涓嶅瓨鍦紝閭ｄ箞灏辫鐪嬩綔鏄┖list锛屽苟涓旇繑鍥為暱搴︿负 0銆� 褰撳瓨鍌ㄥ湪 key
+	 * 閲岀殑鍊间笉鏄竴涓猯ist鐨勮瘽锛屼細杩斿洖error銆�
 	 * 
 	 * @param key
 	 * @return
@@ -496,12 +496,12 @@ public class JedisClient {
 	}
 
 	/**
-	 * 为有序集key的成员member的score值加上增量increment。
-	 * 如果key中不存在member，就在key中添加一个member，score是increment（就好像它之前的score是0.0）。
-	 * 如果key不存在，就创建一个只含有指定member成员的有序集合。
-	 * score值必须是字符串表示的整数值或双精度浮点数，并且能接受double精度的浮点数。也有可能给一个负数来减少score的值。
+	 * 涓烘湁搴忛泦key鐨勬垚鍛榤ember鐨剆core鍊煎姞涓婂閲廼ncrement銆�
+	 * 濡傛灉key涓笉瀛樺湪member锛屽氨鍦╧ey涓坊鍔犱竴涓猰ember锛宻core鏄痠ncrement锛堝氨濂藉儚瀹冧箣鍓嶇殑score鏄�0.0锛夈��
+	 * 濡傛灉key涓嶅瓨鍦紝灏卞垱寤轰竴涓彧鍚湁鎸囧畾member鎴愬憳鐨勬湁搴忛泦鍚堛��
+	 * score鍊煎繀椤绘槸瀛楃涓茶〃绀虹殑鏁存暟鍊兼垨鍙岀簿搴︽诞鐐规暟锛屽苟涓旇兘鎺ュ彈double绮惧害鐨勬诞鐐规暟銆備篃鏈夊彲鑳界粰涓�涓礋鏁版潵鍑忓皯score鐨勫�笺��
 	 * 
-	 * 当key不是有序集类型时，返回一个错误。
+	 * 褰搆ey涓嶆槸鏈夊簭闆嗙被鍨嬫椂锛岃繑鍥炰竴涓敊璇��
 	 * 
 	 * @param key
 	 * @param score
@@ -647,7 +647,7 @@ public class JedisClient {
 	}
 	
 	/**
-	 * 获取数量
+	 * 鑾峰彇鏁伴噺
 	 * 
 	 * @param key
 	 */
@@ -658,7 +658,7 @@ public class JedisClient {
 	}
 	
 	/**
-	 * 移除hashmap所有Key
+	 * 绉婚櫎hashmap鎵�鏈塊ey
 	 * 
 	 * @param key
 	 */
