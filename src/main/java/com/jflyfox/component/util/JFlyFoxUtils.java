@@ -96,15 +96,18 @@ public class JFlyFoxUtils {
 
 	// admin:1RHFCLt64uOOViCTzgSaww== test:ldKI9edsQVM=
 	public static void main(String[] args) {
-		String password = "admin123";
-		String tmp = passwordEncrypt(password);
-		System.out.println(tmp);
-		System.out.println(passwordDecrypt(tmp));
+//		String password = "admin123";
+//		String tmp = passwordEncrypt(password);
+//		System.out.println(tmp);
+//		System.out.println(passwordDecrypt(tmp));
+//
+//		password = "123456";
+//		tmp = passwordEncrypt(password);
+//		System.out.println(tmp);
+//		System.out.println(passwordDecrypt(tmp));
 
-		password = "123456";
-		tmp = passwordEncrypt(password);
-		System.out.println(tmp);
-		System.out.println(passwordDecrypt(tmp));
+//		String a = "123123<>";
+//		System.out.println(StringEscapeUtils.escapeHtml(a));
 	}
 
 	/**

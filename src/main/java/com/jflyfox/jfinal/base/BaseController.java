@@ -28,6 +28,7 @@ import com.jflyfox.util.Config;
 import com.jflyfox.util.DateUtils;
 import com.jflyfox.util.HandlerUtils;
 import com.jflyfox.util.StrUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  * Controller 不能初始化
@@ -57,6 +58,8 @@ public abstract class BaseController extends Controller {
 		} else { // 直接执行JS
 			script = obj;
 		}
+
+		message = StringEscapeUtils.escapeHtml(message);
 		setAttr("msg", message);
 		setAttr("script", script);
 		render(page_message);

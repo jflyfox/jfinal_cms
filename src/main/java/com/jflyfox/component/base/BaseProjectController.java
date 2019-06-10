@@ -53,18 +53,21 @@ import java.util.Map;
  */
 public abstract class BaseProjectController extends BaseController {
 
+	@Override
 	public void renderAuto(String view) {
 		String path = getAutoPath(view);
 
 		super.render(path);
 	}
 
+	@Override
 	public void redirectAuto(String view) {
 		String path = getAutoPath(view);
 
 		super.redirect(path);
 	}
 
+	@Override
 	protected String getAutoPath(String view) {
 		String path = view;
 
@@ -91,6 +94,7 @@ public abstract class BaseProjectController extends BaseController {
 	 *
 	 * @return
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public SessionUser getSessionUser() {
 		SysUser sysUser = getSessionAttr(Attr.SESSION_NAME);
@@ -127,6 +131,7 @@ public abstract class BaseProjectController extends BaseController {
 	 *
 	 * @return
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public SessionUser setSessionUser(SessionUser user) {
 		// 单站点设置
@@ -160,6 +165,7 @@ public abstract class BaseProjectController extends BaseController {
 	 *
 	 * @return
 	 */
+	@Override
 	public void removeSessionUser() {
 		removeSessionAttr(Attr.SESSION_NAME);
 		// 删除cookie

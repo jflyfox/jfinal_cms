@@ -11,6 +11,7 @@ import com.jflyfox.system.user.SysUser;
 import com.jflyfox.util.DateUtils;
 import com.jflyfox.util.cache.Cache;
 import com.jflyfox.util.cache.CacheManager;
+import org.apache.commons.lang.StringEscapeUtils;
 
 public class CommentService extends BaseService {
 
@@ -42,6 +43,7 @@ public class CommentService extends BaseService {
 //		String content = HtmlUtils.delHTMLTag(comment.getStr("content"));
 //		content = HtmlUtils.changeTag(content);
 		String content = JFlyFoxUtils.delScriptTag(comment.getStr("content"));
+		content = StringEscapeUtils.escapeHtml(content);
 
 		comment.put("content", content);
 		// 评论
