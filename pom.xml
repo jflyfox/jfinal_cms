@@ -18,12 +18,12 @@
 		<dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal</artifactId>
-			<version>3.4</version>
+			<version>4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal</artifactId>
-			<version>3.0</version>
+			<version>4.2</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
