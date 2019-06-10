@@ -295,6 +295,12 @@ public class FileManager {
     public JSONObject rename() {
         String oldFile = this.get.get("old");
         String newFile = this.get.get("new");
+        String oldExtension = getFileExtension(oldFile);
+        if (!newFile.endsWith(oldExtension)) {
+            this.error("rename file error,[" + oldFile + " to " + newFile + "]");
+            return null;
+        }
+
         oldFile = getFilePath(oldFile);
 
         if (oldFile.endsWith("/")) {
