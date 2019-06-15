@@ -161,9 +161,11 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<encoding>utf8</encoding>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+					<!-- java8 保留参数名编译参数 -->
+					<compilerArgument>-parameters</compilerArgument>
 				</configuration>
 			</plugin>
 			<plugin>

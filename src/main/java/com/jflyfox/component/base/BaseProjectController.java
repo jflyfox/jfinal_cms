@@ -230,7 +230,7 @@ public abstract class BaseProjectController extends BaseController {
 		return new FolderService().selectFolder(selected, getSessionUser().getBackSiteId());
 	}
 
-	public String selectFolder(Integer selected, Integer selfId) {
+	public String selectFolderExcludeMe(Integer selected, Integer selfId) {
 		return new FolderService().selectFolder(selected, selfId, getSessionUser().getBackSiteId());
 	}
 

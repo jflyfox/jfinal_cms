@@ -56,7 +56,7 @@ public class FolderController extends BaseProjectController {
 	public void add() {
 		// 获取页面信息,设置目录传入
 		TbFolder model = TbFolder.dao.findById(getParaToInt());
-		setAttr("selectParentFolder", selectFolder(model == null ? 0 : model.getId(), 0));
+		setAttr("selectParentFolder", selectFolderExcludeMe(model == null ? 0 : model.getId(), 0));
 
 		render(path + "add.html");
 	}
@@ -96,7 +96,7 @@ public class FolderController extends BaseProjectController {
 		setAttr("model", model);
 
 		// 下拉框
-		setAttr("selectParentFolder", selectFolder(model.getParentId(), model.getId()));
+		setAttr("selectParentFolder", selectFolderExcludeMe(model.getParentId(), model.getId()));
 
 		render(path + "edit.html");
 	}
