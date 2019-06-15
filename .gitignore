@@ -12,4 +12,6 @@
 /.classpath
 /.project
 /bin
+/.idea
 .idea
+*.iml
