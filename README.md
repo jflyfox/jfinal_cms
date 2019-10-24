@@ -72,9 +72,9 @@ support
 - 项目的发展，离不开大家得支持~！~
 
 - [阿里云最新活动：双11最新活动，低至1折；还有新人礼包](https://www.aliyun.com/1111/2019/home?spm=5176.11533457.1089570.70.4fe277e3TKVLoB&userCode=c4hsn0gc)
-  1核2G1M40G盘，86元/1年， 
-  2核4G3M40G盘，799元/3年，
-  2核8G5M40G盘，1399元/3年。
+- 1核2G1M40G盘，86元/1年， 
+- 2核4G3M40G盘，799元/3年，
+- 2核8G5M40G盘，1399元/3年。
 
 - [阿里云：ECS云服务器2折起](https://www.aliyun.com/acts/limit-buy?spm=5176.11544616.khv0c5cu5.1.1d8e23e8XHvEIq&userCode=c4hsn0gc)
 - [阿里云：ECS云服务器新人优惠券](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=c4hsn0gc)
