@@ -79,11 +79,9 @@ support
 - [阿里云：ECS云服务器2折起；请点击这里](https://www.aliyun.com/acts/limit-buy?spm=5176.11544616.khv0c5cu5.1.1d8e23e8XHvEIq&userCode=c4hsn0gc)
 - [阿里云：ECS云服务器新人优惠券；请点击这里](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=c4hsn0gc)
 
+- 也可以请作者喝一杯咖啡:)
+
 ![jflyfox](https://raw.githubusercontent.com/jflyfox/jfinal_cms/master/doc/pay01.jpg "Open source support")
-
-![jflyfox](http://blog.jflyfox.com/static/images/common/pay_weixin.jpg "Open source support(alipay)")
-
-![jflyfox](http://blog.jflyfox.com/static/images/common/pay_alipay.jpg "Open source support(weixin)")
 
 
 捐赠名单
