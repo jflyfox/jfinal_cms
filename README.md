@@ -66,7 +66,7 @@ github地址：https://github.com/jflyfox/jfinal_cms_api_client
  2. [beetl](http://ibeetl.com/community/)
  3. [oschina](http://www.oschina.net/)
 
-support
+项目支持
 ------------------------
 
 - 项目的发展，离不开大家得支持~！~
