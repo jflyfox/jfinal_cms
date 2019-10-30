@@ -4,7 +4,7 @@
 	<groupId>com.jflyfox</groupId>
 	<artifactId>jfinal_cms</artifactId>
 	<packaging>war</packaging>
-	<version>5.0.1</version>
+	<version>5.1.0</version>
 
 	<properties>
 		<!-- 文件拷贝时的编码 -->
@@ -12,25 +12,35 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- 编译时的编码 -->
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<!-- 阿里连接池 -->
+		<druid.version>1.1.20</druid.version>
+		<!-- jfinal -->
+		<jfinal.version>4.7</jfinal.version>
+		<!-- mysql -->
+		<mysql.version>8.0.18</mysql.version>
+		<!-- beetl -->
+		<beetl.version>3.0.13.RELEASE</beetl.version>
+		<!-- fastjson -->
+		<fastjson.version>1.2.62</fastjson.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal</artifactId>
-			<version>4.2</version>
+			<version>${jfinal.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal</artifactId>
-			<version>4.2</version>
+			<version>${jfinal.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -70,11 +80,6 @@
 			<version>2.9.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.ibeetl</groupId>
-			<artifactId>beetl</artifactId>
-			<version>2.7.11</version>
-		</dependency>
-		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
@@ -88,7 +93,7 @@
 		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
-		    <version>1.2.28</version>
+		    <version>${fastjson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>de.ruedigermoeller</groupId>
@@ -101,17 +106,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-		    <groupId>com.ibeetl</groupId>
-		    <artifactId>beetl</artifactId>
-		    <version>2.7.11</version>
-		</dependency>
-		<dependency>
-			<groupId>org.antlr</groupId>
-			<artifactId>antlr4-runtime</artifactId>
-			<version>4.2</version>
-		</dependency>
-		
+
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -134,12 +129,27 @@
 			<artifactId>aliyun-sdk-oss</artifactId>
 			<version>2.0.6</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.ibeetl</groupId>
+			<artifactId>beetl</artifactId>
+			<version>${beetl.version}</version>
+		</dependency>
+<!--		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr4-runtime</artifactId>
+			<version>4.2</version>
+		</dependency>-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
 		<!-- 数据库 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.35</version>
+			<version>${mysql.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -199,8 +209,8 @@
 					<webAppConfig>
 						<contextPath>/${project.artifactId}</contextPath>
 					</webAppConfig>
-					<classesDirectory>${basedir}/target/${artifactId}/classes</classesDirectory>
-					<webAppSourceDirectory>${basedir}/target/${artifactId}</webAppSourceDirectory>
+					<classesDirectory>${basedir}/target/${project.artifactId}/classes</classesDirectory>
+					<webAppSourceDirectory>${basedir}/target/${project.artifactId}</webAppSourceDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -210,7 +220,7 @@
 				<configuration>
 					<port>80</port>
 					<path>/${project.artifactId}</path>
-                    <warSourceDirectory>${basedir}/target/${artifactId}</warSourceDirectory>
+<!--                    <warSourceDirectory>${basedir}/target/${project.artifactId}</warSourceDirectory>-->
 				</configuration>
 			</plugin>
 		</plugins>
