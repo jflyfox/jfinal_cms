@@ -258,7 +258,9 @@ public class PersonController extends BaseProjectController {
 		content = JFlyFoxUtils.delScriptTag(content);
 		title = HtmlUtils.delHTMLTag(title);
 		tags = HtmlUtils.delHTMLTag(tags);
-
+		model.setContent(content);
+		model.setTitle(title);
+		
 		// 这里没有必要提示太精准~因为前台有验证~绕过的都不是好人哦
 		if (content == null || HtmlUtils.delHTMLTag(content).length() > 2000 //
 				|| title == null || title.length() > 200 //
