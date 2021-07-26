@@ -946,7 +946,7 @@ public class FileManager {
         }
 
         if (path.startsWith(contextPath)) {
-            path = path.replaceFirst(contextPath, "");
+            path = path.substring(contextPath.length());
         }
         return path;
     }
