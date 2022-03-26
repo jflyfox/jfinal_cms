@@ -15,7 +15,7 @@
 		<!-- 阿里连接池 -->
 		<druid.version>1.1.20</druid.version>
 		<!-- jfinal -->
-		<jfinal.version>4.7</jfinal.version>
+		<jfinal.version>4.9.11</jfinal.version>
 		<!-- mysql -->
 		<mysql.version>8.0.18</mysql.version>
 		<!-- beetl -->
