@@ -17,7 +17,7 @@
 		<!-- jfinal -->
 		<jfinal.version>4.7</jfinal.version>
 		<!-- mysql -->
-		<mysql.version>8.0.18</mysql.version>
+		<mysql.version>8.0.28</mysql.version>
 		<!-- beetl -->
 		<beetl.version>3.0.13.RELEASE</beetl.version>
 		<!-- fastjson -->
