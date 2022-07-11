@@ -56,7 +56,7 @@ public class PersonController extends BaseProjectController {
 						+ " where " + getPublicWhere() //
 						+ " and t.create_id = ? and tf.site_id = ? " //
 						+ " order by t.sort,t.create_time desc", user.getUserid(), getSessionSite().getSiteId());
-		setAttr("page", articles);
+		setAttr("page", escapeHtmlInArticles(articles));
 
 		// 显示50个标签
 		if (articles.getTotalRow() > 0) {
@@ -95,7 +95,7 @@ public class PersonController extends BaseProjectController {
 						+ " where " + getPublicWhere() //
 						+ " and t.create_id = ? and tf.site_id = ? " //
 						+ " order by t.sort,t.create_time desc", user.getUserid(), getSessionSite().getSiteId());
-		setAttr("page", articles);
+		setAttr("page", escapeHtmlInArticles(articles));
 
 		// 显示50个标签
 		if (articles.getTotalRow() > 0) {
@@ -135,7 +135,7 @@ public class PersonController extends BaseProjectController {
 						+ " left join tb_articlelike al on al.article_id = t.id" + " where " + getPublicWhere() //
 						+ " and al.create_id = ? and tf.site_id = ? " //
 						+ " order by t.sort,t.create_time desc", user.getUserid(), getSessionSite().getSiteId());
-		setAttr("page", articles);
+		setAttr("page", escapeHtmlInArticles(articles));
 
 		// 显示50个标签
 		if (articles.getTotalRow() > 0) {
@@ -258,6 +258,12 @@ public class PersonController extends BaseProjectController {
 		content = JFlyFoxUtils.delScriptTag(content);
 		title = HtmlUtils.delHTMLTag(title);
 		tags = HtmlUtils.delHTMLTag(tags);
+
+		// Fix for CVE-2022-33113...
+		// HtmlUtils.escapeHtml() is applied for title and tags variable...
+		// This utility function helps to escape the characters in a String using HTML entities
+		title = HtmlUtils.escapeHtml(title);
+		tags = HtmlUtils.escapeHtml(tags);
 
 		// 这里没有必要提示太精准~因为前台有验证~绕过的都不是好人哦
 		if (content == null || HtmlUtils.delHTMLTag(content).length() > 2000 //
@@ -457,7 +463,7 @@ public class PersonController extends BaseProjectController {
 						+ " where  " + getPublicWhere() //
 						+ " and t.create_id = ? and tf.site_id = ? " //
 						+ " order by t.sort,t.create_time desc", userid, getSessionSite().getSiteId());
-		setAttr("page", articles);
+		setAttr("page", escapeHtmlInArticles(articles));
 
 		// 显示50个标签
 		if (articles.getTotalRow() > 0) {
@@ -474,6 +480,21 @@ public class PersonController extends BaseProjectController {
 
 		renderAuto(path + "view_person.html");
 
+	}
+
+	protected Page<TbArticle> escapeHtmlInArticles(Page<TbArticle> articles) {
+		// Fix for CVE-2022-33113...
+		// HtmlUtils.escapeHtml() is applied for title of all article elements...
+		// This utility function helps to escape the characters in a String using HTML entities
+		if (articles.getTotalRow() > 0) {
+			for (TbArticle article : articles.getList()) {
+				//for now, we have applied escape HTML only for title field... to be extended for other fields if required in future
+				if (article.getTitle().equals(HtmlUtils.unescapeHtml(article.getTitle()))) {
+					article.setTitle(HtmlUtils.escapeHtml(article.getTitle()));
+				}
+			}
+		}
+		return articles;
 	}
 
 	protected Page<TbTags> tags() {
