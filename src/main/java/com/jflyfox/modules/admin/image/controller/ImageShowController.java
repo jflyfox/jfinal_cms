@@ -33,7 +33,7 @@ public class ImageShowController extends BaseController {
 
 		// 排序
 		String orderBy = getBaseForm().getOrderBy();
-		if (StrUtils.isEmpty(orderBy)) {
+		if (StrUtils.isEmpty(orderBy) || orderBy.contains("(")) {
 			sql.append(" order by sort,id desc");
 		} else {
 			sql.append(" order by ").append(orderBy);
