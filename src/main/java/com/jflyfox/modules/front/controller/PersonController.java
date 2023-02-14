@@ -23,6 +23,9 @@ import com.jflyfox.util.DateUtils;
 import com.jflyfox.util.StrUtils;
 import com.jflyfox.util.extend.HtmlUtils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * 个人信息
  * 
@@ -415,7 +418,12 @@ public class PersonController extends BaseProjectController {
 			}
 		}
 
-		if (StrUtils.isNotEmpty(model.getStr("email")) && model.getStr("email").indexOf("@") < 0) {
+		String regEx1 = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+		Pattern p;
+		Matcher m;
+		p = Pattern.compile(regEx1);
+		m = p.matcher(model.getStr("email"));
+		if(!m.matches()){
 			json.put("msg", "email格式错误！");
 			renderJson(json.toJSONString());
 			return;

@@ -12,6 +12,9 @@ import com.jflyfox.system.user.SysUser;
 import com.jflyfox.system.user.UserCache;
 import com.jflyfox.util.StrUtils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @ControllerBind(controllerKey = "/front/regist")
 public class RegistController extends BaseProjectController {
 
@@ -62,7 +65,12 @@ public class RegistController extends BaseProjectController {
 			return;
 		}
 
-		if (StrUtils.isEmpty(key) || key.indexOf("@") < 0) {
+		String regEx1 = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+		Pattern p;
+		Matcher m;
+		p = Pattern.compile(regEx1);
+		m = p.matcher(key);
+		if(!m.matches()) {
 			json.put("msg", "email格式错误！");
 			renderJson(json.toJSONString());
 			return;
