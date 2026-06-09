@@ -71,7 +71,7 @@ github地址：https://github.com/jflyfox/jfinal_cms_api_client
 
 - 项目的发展，离不开大家得支持~！~
 - 也可以请作者喝一杯咖啡:)
-- docs/donate.md
+- 捐赠记录： docs/donate.md
 
 ![jflyfox](./docs/pay01.jpg "Open source support")
 
