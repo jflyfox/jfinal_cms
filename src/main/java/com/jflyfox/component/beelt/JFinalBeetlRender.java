@@ -2,7 +2,11 @@ package com.jflyfox.component.beelt;
 
 import com.jfinal.render.Render;
 import org.beetl.core.GroupTemplate;
-import org.beetl.ext.web.WebRender;
+import org.beetl.core.Template;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Enumeration;
 
 /**
  * beetl render
@@ -21,7 +25,21 @@ public class JFinalBeetlRender extends Render {
     @Override
     public void render() {
         this.response.setContentType("text/html; charset=" + getEncoding());
-        WebRender web = new WebRender(this.groupTemplate);
-        web.render(this.view, this.request, this.response, (Object[])null);
+        Template template = groupTemplate.getTemplate(this.view);
+        template.binding("request", this.request);
+        template.binding("response", this.response);
+        template.binding("session", this.request.getSession());
+        template.binding("requestParameters", this.request.getParameterMap());
+        template.binding("parameter", this.request.getParameterMap());
+        Enumeration<String> attrs = this.request.getAttributeNames();
+        while (attrs.hasMoreElements()) {
+            String name = attrs.nextElement();
+            template.binding(name, this.request.getAttribute(name));
+        }
+        try (Writer writer = this.response.getWriter()) {
+            template.renderTo(writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

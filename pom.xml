@@ -15,13 +15,14 @@
 		<!-- 阿里连接池 -->
 		<druid.version>1.1.20</druid.version>
 		<!-- jfinal -->
-		<jfinal.version>4.7</jfinal.version>
+		<jfinal.version>5.2.2</jfinal.version>
 		<!-- mysql -->
 		<mysql.version>8.0.18</mysql.version>
 		<!-- beetl -->
-		<beetl.version>3.0.13.RELEASE</beetl.version>
+		<beetl.version>3.16.2.RELEASE</beetl.version>
 		<!-- fastjson -->
 		<fastjson.version>1.2.62</fastjson.version>
+		<cos.version>2022.2</cos.version>
 	</properties>
 
 	<dependencies>
@@ -77,7 +78,7 @@
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>2.9.0</version>
+			<version>3.6.3</version>
 		</dependency>
 		<dependency>
 			<groupId>dom4j</groupId>
@@ -121,7 +122,7 @@
 		<dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>cos</artifactId>
-			<version>26Dec2008</version>
+			<version>2022.2</version>
 		</dependency>
 		<!-- aliyun oss -->
 		<dependency>
@@ -170,18 +171,19 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>21</source>
+					<target>21</target>
 					<encoding>UTF-8</encoding>
-					<!-- java8 保留参数名编译参数 -->
+					<!-- java21 保留参数名编译参数 -->
 					<compilerArgument>-parameters</compilerArgument>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
+				<version>3.4.0</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<webResources>
@@ -211,6 +213,12 @@
 					</webAppConfig>
 					<classesDirectory>${basedir}/target/${project.artifactId}/classes</classesDirectory>
 					<webAppSourceDirectory>${basedir}/target/${project.artifactId}</webAppSourceDirectory>
+					<systemProperties>
+						<systemProperty>
+							<name>file.encoding</name>
+							<value>UTF-8</value>
+						</systemProperty>
+					</systemProperties>
 				</configuration>
 			</plugin>
 			<plugin>
