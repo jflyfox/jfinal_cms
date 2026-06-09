@@ -79,8 +79,10 @@ github地址：https://github.com/jflyfox/jfinal_cms_api_client
 - [阿里云：ECS云服务器2折起；请点击这里](https://www.aliyun.com/acts/limit-buy?spm=5176.11544616.khv0c5cu5.1.1d8e23e8XHvEIq&userCode=c4hsn0gc)
 - [阿里云：ECS云服务器新人优惠券；请点击这里](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=c4hsn0gc)
 
-- 也可以请作者喝一杯咖啡:)
+也可以请作者喝一杯咖啡:)
 
-![jflyfox](https://raw.githubusercontent.com/jflyfox/jfinal_cms/master/docs/pay01.jpg "Open source support")
+![捐赠记录](./docs/donate.md)
 
-![捐赠记录](https://raw.githubusercontent.com/jflyfox/jfinal_cms/master/docs/donate.md "捐赠记录")
+![jflyfox](./docs/pay01.jpg "Open source support")
+
+
