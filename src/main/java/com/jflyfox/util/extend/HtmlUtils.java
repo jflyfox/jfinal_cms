@@ -20,6 +20,8 @@ package com.jflyfox.util.extend;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 /**
  * html处理
  * 
@@ -122,6 +124,28 @@ public class HtmlUtils {
 		content = content.replaceAll("'", "");
 		content = content.replaceAll("/", "");
 		return content;
+	}
+
+	/**
+	 * Escapes the characters in a String using HTML entities
+	 * For example: "bread" & "butter" becomes: &quot;bread&quot; &amp; &quot;butter&quot;.
+	 *
+	 * @param plainHtmlString (the String to escape, may be null)
+	 * @return a new escaped String, null if null string input
+	 */
+	public static String escapeHtml(String plainHtmlString) {
+		return StringEscapeUtils.escapeHtml(plainHtmlString);
+	}
+
+	/**
+	 * Unescapes a string containing entity escapes to a string containing the actual Unicode characters corresponding to the escapes.
+	 * For example, the string "&lt;Fran&ccedil;ais&gt;" will become "<Français>".
+	 *
+	 * @param escapedHtmlString (the String to unescape, may be null)
+	 * @return a new unescaped String, null if null string input
+	 */
+	public static String unescapeHtml(String escapedHtmlString) {
+		return StringEscapeUtils.unescapeHtml(escapedHtmlString);
 	}
 
 }

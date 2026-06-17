@@ -16,6 +16,7 @@ import com.jflyfox.modules.admin.tags.TbTags;
 import com.jflyfox.modules.front.interceptor.FrontInterceptor;
 import com.jflyfox.modules.front.service.FrontCacheService;
 import com.jflyfox.util.StrUtils;
+import com.jflyfox.util.extend.HtmlUtils;
 
 /**
  * 文章管理
@@ -61,6 +62,12 @@ public class ArticleController extends BaseProjectController {
 				new FrontCacheService().addArticleCount(article);
 			}
 
+			// Fix for CVE-2022-33113...
+			// HtmlUtils.escapeHtml() is applied for content and title...
+			// This utility function helps to escape the characters in a String using HTML entities
+			if (article.getTitle().equals(HtmlUtils.unescapeHtml(article.getTitle()))) {
+				article.setTitle(HtmlUtils.escapeHtml(article.getTitle()));
+			}
 			setAttr("item", article);
 
 			// seo：title优化
@@ -70,6 +77,14 @@ public class ArticleController extends BaseProjectController {
 			// List<TbTags> taglist = new FrontCacheService().getTagsByArticle(articleId);
 			List<TbTags> taglist = TbTags.dao.find("select * from tb_tags " //
 					+ "where article_id = ? order by  create_time desc ", articleId);
+			// Fix for CVE-2022-33113...
+			// HtmlUtils.escapeHtml() is applied for all keywords retrieved...
+			// This utility function helps to escape the characters in a String using HTML entities
+			for(TbTags tag: taglist) {
+				if (tag.getTagname().equals(HtmlUtils.unescapeHtml(tag.getTagname()))) {
+					tag.setTagname(HtmlUtils.escapeHtml(tag.getTagname()));
+				}
+			}
 			setAttr("taglist", taglist);
 
 			// 评论
