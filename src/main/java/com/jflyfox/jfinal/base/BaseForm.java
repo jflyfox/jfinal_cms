@@ -33,6 +33,9 @@ public class BaseForm {
 	private String orderAsc;
 	private boolean showCondition;
 
+	private static final java.util.regex.Pattern ORDER_COLUMN_PATTERN = java.util.regex.Pattern.compile("[A-Za-z0-9_., ]+");
+	private static final java.util.regex.Pattern ORDER_ASC_PATTERN = java.util.regex.Pattern.compile("(?i)asc|desc");
+
 	/**
 	 * 设置Where条件
 	 * 
@@ -68,6 +71,13 @@ public class BaseForm {
 
 	public String getOrderBy() {
 		if (StrUtils.isEmpty(getOrderColumn())) {
+			return "";
+		}
+		if (!ORDER_COLUMN_PATTERN.matcher(getOrderColumn()).matches()) {
+			return "";
+		}
+		String asc = getOrderAsc();
+		if (StrUtils.isNotEmpty(asc) && !ORDER_ASC_PATTERN.matcher(asc.trim()).matches()) {
 			return "";
 		}
 		return " " + getOrderColumn() + " " + getOrderAsc() + " ";
